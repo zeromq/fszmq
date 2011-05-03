@@ -1,6 +1,8 @@
-== fs-zmq
+fs-zmq
+======
+----------------------------------------------------------------------------
 
-#### An F# binding for the 0MQ light-weight messaging kernel.
+### An F# binding for the 0MQ light-weight messaging kernel.
 
 **This project is at an early stage of development.** Its stable, but requires more testing and polishing.
 
@@ -10,10 +12,11 @@ At this point in time, fs-zmq has been tested against the .NET runtime on 64-bit
 
 fs-zmq has three (3) pre-requisites:
   
-  1. Microsoft .NET runtime, version 4.0
-  2. Microsoft F# run-time for .NET 4.0
-  3. libzmq, version 2.1.6 
+   1. Microsoft .NET runtime, version 4.0
+   2. Microsoft F# run-time for .NET 4.0
+   3. libzmq, version 2.1.6 
 
 fs-zmq is distributed under the Apache License.
- 
-###### Copyright © Paulmichael Blasucci. All rights reserved.
+
+---------------------------------------------------------------------------- 
+###### Copyright &#169; Paulmichael Blasucci. All rights reserved.
