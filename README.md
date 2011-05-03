@@ -1,4 +1,5 @@
-== fs-zmq
+fs-zmq
+======
 
 #### An F# binding for the 0MQ light-weight messaging kernel.
 
@@ -16,4 +17,4 @@ fs-zmq has three (3) pre-requisites:
 
 fs-zmq is distributed under the Apache License.
  
-###### Copyright © Paulmichael Blasucci. All rights reserved.
+###### Copyright &#169; Paulmichael Blasucci. All rights reserved.
