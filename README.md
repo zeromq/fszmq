@@ -16,6 +16,8 @@ fs-zmq has three (3) pre-requisites:
    2. Microsoft F# run-time for .NET 4.0
    3. libzmq, version 2.1.6 
 
+Additionally, fs-zmq should be compiled with Visual Studio 2010 SP1, or the equivalent F# Free Tools Release (April 2011 CTP).
+
 fs-zmq is distributed under the Apache License.
 
 ---------------------------------------------------------------------------- 
