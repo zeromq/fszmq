@@ -169,7 +169,6 @@ module Socket =
               message
     | _ -> raise <| ZeroMQException()
     
-
   /// returns true if more message parts are available, false otherwise
   [<Extension;CompiledName("HasMore")>]
   let recvMore socket = get<bool> socket ZMQ.RCVMORE

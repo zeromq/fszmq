@@ -22,7 +22,7 @@ module internal NativeMemory =
   
     let mutable disposed  = false
     let mutable _memory   = Marshal.AllocHGlobal(size)
-  
+
     do if _memory = 0n then failwith "unable to initialize native memory"
      
     let release () =
