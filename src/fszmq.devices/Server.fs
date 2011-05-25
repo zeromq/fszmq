@@ -17,52 +17,59 @@ open fszmq
 open fszmq.Context
 open fszmq.Socket
 open System
+open System.Runtime.CompilerServices
 open System.Threading
+
+type private message  = Data of byte[][] | Quit
+type private agent    = MailboxProcessor<message>
 
 /// a basic router server, which runs the provided callback as a 
 /// separate async workflow per-incoming-request (or per-incoming-dealer)
 type Server (context  : Context,
-             handler  : (byte[][] -> byte[][]),
-             ?address : string, 
-             ?cancel  : CancellationToken) =
+             handler  : (CancellationToken -> byte[][] -> byte[][]),
+             ?address : string) =
   
   let mutable started = false
- 
   let mutable address = defaultArg address String.Empty
-  let mutable cancel  = defaultArg cancel Async.DefaultCancellationToken
 
+  let cancel = Async.DefaultCancellationToken
   let socket = route context
   let error  = new Event<System.Exception>() 
 
-  let getMessage() =
-    let buffer  = ResizeArray()
-    let hasMore = ref true
-    while !hasMore do
-      match tryRecv socket ZMQ.NOBLOCK with
-      | Some(m) -> buffer.Add(m)
-      | None    -> ()
-      hasMore := socket |> recvMore
-    buffer.ToArray()
+  let getMessage () =
+    try
+      let buffer  = ResizeArray()
+      let hasMore = ref true
+      while !hasMore do
+        match tryRecv socket ZMQ.NOBLOCK with
+        | Some(m) -> buffer.Add(m)
+        | None    -> ()
+        hasMore := socket |> recvMore
+      buffer.ToArray()
+    with
+      | x -> raise x
   
-  let runCallback (message:byte[][]) = async { 
-    try
-      (handler message) |> sendAll socket
-    with
-      | x ->  error.Trigger(x) }
-
-  let rec runLoop (kill:CancellationToken) = async {
-    if kill.IsCancellationRequested then return ()
-    try
-      let msg = getMessage()
-      if (msg |> Array.length) > 2 then
-        //  router messages *always* have at least 3 frames:
-        //  one identifying the sender, a delimiter (empty frame),
-        //  and one (or more (possibly empty)) frames for the body
-        let! runCallback = Async.StartChild(runCallback msg)
-        do!  runCallback
-    with
-      | x -> error.Trigger(x)
-    return! runLoop kill}
+  let server = new agent (fun inbox -> 
+    
+    let callback msg = 
+      async { try
+                inbox.Post (Data (handler cancel msg)) 
+              with 
+                | x -> error.Trigger x }
+    
+    let rec loop ()  = 
+      async { let raw = getMessage ()
+              if (raw |> Array.length) > 2 then Async.Start (callback raw)
+              let!  msg = inbox.TryReceive 2000
+              match msg with
+              | Some(m) ->  match m with
+                            | Data(d) ->  d |> sendAll socket
+                                          return! loop ()
+                            | Quit    ->  Async.CancelDefaultToken ()
+                                          return () // exit
+              | None    ->  return! loop () }
+    
+    loop ())
   
   [<CLIEvent>]
   member __.Error = error.Publish
@@ -70,26 +77,41 @@ type Server (context  : Context,
   member __.Address = address
   member __.Address with set v' = address <- v'
 
-  member self.Start(?blocking:bool) =
+  /// starts a basic router server, binding to the Address property
+  member self.Start () =
     if started 
       then invalidOp "already started"
       else 
         started <- true
         address |> bind socket
-        match (defaultArg blocking false) with
-        | false -> Async.Start(runLoop cancel, cancel)
-        | true  -> Async.StartImmediate(runLoop cancel, cancel)
+        server.Error.Add error.Trigger
+        server.Start ()
 
   interface IDisposable with
-    member __.Dispose() = (socket :> IDisposable).Dispose()
+    member self.Dispose() = 
+      server.Post Quit
+      (server :> IDisposable).Dispose ()
+      (socket :> IDisposable).Dispose ()
   
   /// starts a basic router server, bound to the given address, 
   /// which runs the provided callback as a separate async workflow 
   /// per-incoming-request (or per-incoming-dealer)
-  static member Start(context   : Context,
-                      handler   : (byte[][] -> byte[][]),
-                      address   : string,
-                      ?blocking : bool,
-                      ?cancel   : CancellationToken) =
-    let srv = new Server(context,handler,address,?cancel=cancel)
-    srv.Start(?blocking=blocking); srv
+  static member Start(context,handler,address) =
+    let srv = new Server(context,handler,address)
+    srv.Start(); srv
+
+
+/// contains methods for working with ZMQ Server instances
+[<Extension>]
+type Interop =
+
+  static member private toFSFunc(handler:Func<_,_,_>) = 
+    (fun a b -> handler.Invoke(a,b))
+    
+  /// starts a basic router server, bound to the given address,
+  /// which runs the provided callback as a separate async workflow 
+  /// per-incoming-request (or incoming per-incoming-dealer)
+  [<Extension>]  
+  static member StartServer(context,address,handler) =
+    let handler' = Interop.toFSFunc(handler)
+    Server.Start(context,handler',address)

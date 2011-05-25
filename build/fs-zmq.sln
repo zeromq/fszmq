@@ -23,6 +23,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "remote_lat", "..\perf\remot
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "remote_thr", "..\perf\remote_thr\remote_thr.fsproj", "{62216D5E-05C6-4955-8F94-1413C6EDC99A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.devices.tests.echo_client", "..\test\fszmq.devices.tests.echo_client\fszmq.devices.tests.echo_client.fsproj", "{40A73C9B-55BC-4C60-A508-B05C9B8A6696}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.devices.tests.echo_server", "..\test\fszmq.devices.tests.echo_server\fszmq.devices.tests.echo_server.fsproj", "{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,12 +127,34 @@ Global
 		{62216D5E-05C6-4955-8F94-1413C6EDC99A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{62216D5E-05C6-4955-8F94-1413C6EDC99A}.Release|x86.ActiveCfg = Release|x86
 		{62216D5E-05C6-4955-8F94-1413C6EDC99A}.Release|x86.Build.0 = Release|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Debug|x86.ActiveCfg = Debug|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Debug|x86.Build.0 = Debug|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Release|Any CPU.ActiveCfg = Release|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Release|Mixed Platforms.Build.0 = Release|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Release|x86.ActiveCfg = Release|x86
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696}.Release|x86.Build.0 = Release|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Debug|x86.ActiveCfg = Debug|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Debug|x86.Build.0 = Debug|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Release|Any CPU.ActiveCfg = Release|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Release|x86.ActiveCfg = Release|x86
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0FFB2501-646B-4FD2-A8F6-A7F2CDD0AC4D} = {B478FBF8-DAB8-4D42-91C6-11A947980B84}
+		{40A73C9B-55BC-4C60-A508-B05C9B8A6696} = {B478FBF8-DAB8-4D42-91C6-11A947980B84}
+		{CDBCF83B-707E-43D6-A5E6-8B67E42A6FAC} = {B478FBF8-DAB8-4D42-91C6-11A947980B84}
 		{E1D41B7A-C6F4-4B01-9429-548ED8493D41} = {F7739C3B-564D-4623-9424-6FFC09553C7D}
 		{B6E89882-4B49-4534-8A19-9B49BCB5E4C0} = {F7739C3B-564D-4623-9424-6FFC09553C7D}
 		{9906B570-539C-41A3-BA9A-3AB6E1DFBB46} = {F7739C3B-564D-4623-9424-6FFC09553C7D}
