@@ -1,8 +1,7 @@
-﻿#I @"C:\working\projects\ThirdParty\fs-zmq\lib\zeromq-2.1.6"
+﻿#I @"..\..\lib\zeromq-2.1.6"
 // NOTE:  changing the current directory is the easiest way to ensure
 //        the (native) libzmq.dll is available for use in the REPL 
-System.Environment.CurrentDirectory <- 
-  @"C:\working\projects\ThirdParty\fs-zmq\lib\zeromq-2.1.6"
+System.Environment.CurrentDirectory <- @"..\..\lib\zeromq-2.1.6"
 
 #load "Native.fs"
 open fszmq
