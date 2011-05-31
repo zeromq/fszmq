@@ -32,8 +32,7 @@ let main args =
     let mutable msg = prompt "enter a message and press <return>:"
     while not <| System.String.IsNullOrWhiteSpace msg do
       // send message to server
-      let msg' = msg |> encode
-      msg' |>> socket   
+      msg |> encode |>> socket   
       // display server's reply
       printfn "%s" (socket |> recv |> decode)
       // lather. rinse. repeat.
