@@ -60,7 +60,7 @@ type Server (context  : Context,
     let rec loop ()  = 
       async { let raw = getMessage ()
               if (raw |> Array.length) > 2 then Async.Start (callback raw)
-              let!  msg = inbox.TryReceive 2000
+              let!  msg = inbox.TryReceive 0 // don't wait... just go
               match msg with
               | Some(m) ->  match m with
                             | Data(d) ->  d |> sendAll socket

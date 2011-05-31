@@ -16,10 +16,10 @@ module private Utilities =
   let scanln = System.Console.ReadLine
   let encode = string >> System.Text.Encoding.ASCII.GetBytes
   let decode = System.Text.Encoding.ASCII.GetString
-
+  
   let echo _ message =
     // this is the actual "work" performed by the server on each request
-    System.Threading.Thread.Sleep 1000
+    System.Threading.Thread.Sleep 1
     message
 
 [<EntryPoint>]

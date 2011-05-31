@@ -7,7 +7,16 @@ open fszmq.Socket
 [<AutoOpen>]
 module private Utilities =
 
-   (* program return codes *)
+  (* timing functions *)
+  open System.Runtime.InteropServices
+
+  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
+  extern nativeint zmq_stopwatch_start()
+  
+  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
+  extern uint32 zmq_stopwatch_stop(nativeint watch)
+
+  (* program return codes *)
   let [<Literal>] OKAY = 0
   let [<Literal>] FAIL = 3
 
@@ -15,6 +24,7 @@ module private Utilities =
   let scanln = System.Console.ReadLine
   let encode = string >> System.Text.Encoding.ASCII.GetBytes
   let decode = System.Text.Encoding.ASCII.GetString
+
   let prompt msg = 
     printf "%s " msg
     scanln ()
@@ -29,13 +39,16 @@ let main args =
     use socket = req ctx
     connect socket args.[0]
     // gather user input
+    let mutable clock = 0n
     let mutable msg = prompt "enter a message and press <return>:"
     while not <| System.String.IsNullOrWhiteSpace msg do
       // send message to server
-      let msg' = msg |> encode
-      msg' |>> socket   
+      clock <- zmq_stopwatch_start()
+      msg |> encode |>> socket  
       // display server's reply
-      printfn "%s" (socket |> recv |> decode)
+      let reply = socket |> recv |> decode
+      let time  = float (zmq_stopwatch_stop clock)
+      printfn "(%3f ms) %s " (time / 1000.0) reply
       // lather. rinse. repeat.
       msg <- prompt "message?"
   with
