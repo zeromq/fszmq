@@ -35,6 +35,8 @@
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <DocumentationFile>bin\Release\fszmq.devices.tests.echo_server.XML</DocumentationFile>
+    <StartArguments>
+    </StartArguments>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" Condition="!Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
@@ -42,7 +44,7 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\lib\zeromq-2.1.6\libzmq.dll">
+    <None Include="..\..\lib\zeromq-2.1\libzmq.dll">
       <Link>libzmq.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>fszmq.devices</name></assembly>
+<members>
+<member name="M:fszmq.Devices.Queue(System.IntPtr,System.IntPtr)">
+<summary>
+ Queue is a generic request-reply broker
+</summary>
+</member>
+<member name="M:fszmq.Devices.Forwarder(System.IntPtr,System.IntPtr)">
+<summary>
+ Forwarder is a pub-sub proxy server
+</summary>
+</member>
+<member name="M:fszmq.Devices.Streamer(System.IntPtr,System.IntPtr)">
+<summary>
+ Streamer is a push-pull proxy server
+</summary>
+</member>
+<member name="M:fszmq.Devices.Create(System.Int32,System.IntPtr,System.IntPtr)">
+<summary>
+ starts a built-in ZMQ device running in the current thread 
+ and returns only if/when the associated context is closed
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Devices">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.devices.Interop.StartServer(fszmq.Context,System.String,System.Func{System.Threading.CancellationToken,System.Byte[][],System.Byte[][]})">
+<summary>
+ starts a basic router server, bound to the given address,
+ which runs the provided callback as a separate async workflow 
+ per-incoming-request (or incoming per-incoming-dealer)
+</summary>
+</member>
+<member name="T:fszmq.devices.Interop">
+<summary>
+ contains methods for working with ZMQ Server instances
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.devices.Server.Start(fszmq.Context,Microsoft.FSharp.Core.FSharpFunc`2{System.Threading.CancellationToken,Microsoft.FSharp.Core.FSharpFunc`2{System.Byte[][],System.Byte[][]}},System.String)">
+<summary>
+ starts a basic router server, bound to the given address, 
+ which runs the provided callback as a separate async workflow 
+ per-incoming-request (or per-incoming-dealer)
+</summary>
+</member>
+<member name="M:fszmq.devices.Server.Start">
+<summary>
+ starts a basic router server, binding to the Address property
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.devices.Server">
+<summary>
+ a basic router server, which runs the provided callback as a 
+ separate async workflow per-incoming-request (or per-incoming-dealer)
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.devices.C">
+
+</member>
+</members>
+</doc>

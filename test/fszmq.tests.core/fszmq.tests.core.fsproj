@@ -41,7 +41,7 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\lib\zeromq-2.1.6\libzmq.dll">
+    <None Include="..\..\lib\zeromq-2.1\libzmq.dll">
       <Link>libzmq.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
