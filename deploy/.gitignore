@@ -1,0 +1,6 @@
+# ignore deployment files, these are for local use only
+*.dll
+*.xml
+*.pdb
+*.exp
+*.lib
