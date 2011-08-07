@@ -37,11 +37,12 @@ module Polling =
   /// true when one or more callbacks have been invoked, false otherwise  
   [<CompiledName("Poll")>]
   let poll timeout items =
-    let items' = items |> Seq.map poller |> Array.ofSeq
+    let items  = items |> Array.ofSeq
+    let items' = items |> Array.map poller
     match C.zmq_poll(items',items'.Length,timeout) with
     | 0             ->  false (* pass *)
     | n when n > 0  ->  for i in 0 .. items'.Limit do
                           let e,r = items'.[i].events,items'.[i].revents
-                          if e &&& r = e then items |> Seq.nth i |> invoke
+                          if e &&& r = e then items.[i] |> invoke
                         true
     | _             ->  raise <| ZeroMQException()
