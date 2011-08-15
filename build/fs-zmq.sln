@@ -29,7 +29,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.devices.tests.echo_se
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build tools", "build tools", "{FC88F08E-FCDE-421F-8B35-B4F4A124A308}"
 	ProjectSection(SolutionItems) = preProject
-		deploy.bat = deploy.bat
+		Deploy.fsx = Deploy.fsx
 	EndProjectSection
 EndProject
 Global
