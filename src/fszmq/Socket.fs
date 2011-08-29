@@ -194,7 +194,6 @@ module Socket =
       match C.zmq_recv(socket.Handle,msg.Handle,ZMQ.BLOCK) with
       | Okay -> loop := socket |> recvMore
                 send' (if !loop then ZMQ.SNDMORE else ZMQ.NOBLOCK)
-                //TODO: maybe change previous call to ZMQ.BLOCK?
       | _ -> raise <| ZeroMQException()
 
   /// alias for 'Socket.transfer'

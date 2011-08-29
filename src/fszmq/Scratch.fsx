@@ -8,7 +8,7 @@ System.Environment.CurrentDirectory <-
 open fszmq
 #load "Core.fs"
 open fszmq
-#load "Memory.fs"
+#load "Memory.fs" 
 open fszmq.NativeMemory
 #load "Constants.fs"
 open fszmq

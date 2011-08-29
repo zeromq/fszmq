@@ -90,7 +90,7 @@ type Socket internal(context,socketType) =
       _socket <- 0n
       if okay <> 0 then raise <| ZeroMQException()
 
-  member internal __.Handle = _socket
+  member __.Handle = _socket
 
   override __.Finalize() = release ()
 
@@ -117,7 +117,7 @@ type Context(ioThreads) =
       _context <- 0n
       if okay <> 0 then raise <| ZeroMQException()
 
-  member internal __.Handle = _context
+  member __.Handle = _context
 
   override __.Finalize() = release ()
 

@@ -25,9 +25,11 @@ module Devices =
   /// starts a built-in ZMQ device running in the current thread 
   /// and returns only if/when the associated context is closed
   [<CompiledName("Create")>]
-  let create deviceType inputSocket outputSocket = 
+  let create deviceType (inputSocket:Socket) (outputSocket:Socket) = 
     // HACK: access to libzmq.dll (P/Invoke) will be removed in 3.x branch
-    fszmq.devices.C.zmq_device(deviceType,inputSocket,outputSocket)
+    fszmq.devices.C.zmq_device(deviceType,
+                               inputSocket.Handle,
+                               outputSocket.Handle)
 
   /// Streamer is a push-pull proxy server
   [<CompiledName("Streamer")>]
