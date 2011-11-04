@@ -1,4 +1,5 @@
 # ignore artifacts generated solely for use from Visual Studio 2010
+_ReSharper*/
 *.suo
 *.ReSharper.*
 *.docstates
