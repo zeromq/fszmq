@@ -123,6 +123,8 @@ module internal C =
                               fd      = 0n 
                               events  = events
                               revents = 0s }
+
+    //static member ofFD(fd,events) = zmq_pollitem_t(0n,events,fd=fd)
     end
 
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]

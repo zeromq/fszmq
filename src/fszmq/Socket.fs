@@ -16,18 +16,18 @@ namespace fszmq
 open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 
-/// contains methods for working with ZMQ Socket instances
+/// Contains methods for working with `Socket` instances
 [<Extension>]
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module Socket =
 
-  /// initializes an endpoint for accepting connections
+  /// Initializes an endpoint for accepting connections
   [<Extension;CompiledName("Bind")>]
   let bind (socket:Socket) address = 
     let okay = C.zmq_bind(socket.Handle,address) 
     if okay <> 0 then raise <| ZeroMQException()
 
-  /// connects to an endpoint at the given address
+  /// Connects to an endpoint at the given address
   [<Extension;CompiledName("Connect")>]
   let connect (socket:Socket) address = 
     let okay = C.zmq_connect(socket.Handle,address) 
@@ -36,7 +36,7 @@ module Socket =
 
 (* option getting/setting *)
 
-  /// retrieves the value of the given ZMQ socket option
+  /// Retrieves the value of the given ZeroMQ socket option
   [<Extension;CompiledName("GetOption")>]
   let get<'t> (socket:Socket) key : 't =
     
@@ -62,7 +62,7 @@ module Socket =
       | Int    -> (Marshal.ReadInt32 mem.Handle) |> box
       | _      -> invalidOp "argument 'value' has an invalid data type")
 
-  /// assigns a value to the given ZMQ socket option
+  /// Assigns a value to the given ZeroMQ socket option
   [<Extension;CompiledName("SetOption")>]
   let set (socket:Socket) (key,value:'t) =
     
@@ -78,7 +78,7 @@ module Socket =
     let okay = C.zmq_setsockopt(socket.Handle,key,mem.Handle,mem.Size) 
     if okay <> 0 then raise <| ZeroMQException()
 
-  /// assigns a value to the given ZMQ socket option, 
+  /// Assigns a value to the given ZeroMQ socket option, 
   /// returning updated socket instance
   [<CompiledName("ApplyOption")>]
   let apply input (socket:Socket) = input |> set socket; socket
@@ -97,8 +97,11 @@ module Socket =
             | C.EAGAIN  -> Busy
             | _         -> Fail
 
-  /// sends a message part, with the given flags, returning true 
-  /// if successful or false if the transmission should be re-tried
+  /// <summary>
+  /// Sends a message part, with the given flags, 
+  /// <para>returning true if successful</para>
+  /// <para>or false if the send should be re-tried</para>
+  /// </summary>
   [<Extension;CompiledName("TrySend")>]
   let trySend (socket:Socket) flags message =
     use msg = new Message(message)
@@ -114,28 +117,28 @@ module Socket =
       | false -> send'()
     send'()
 
-  /// sends a message part, indicating no more parts will follow
+  /// Sends a message part, indicating no more parts will follow
   [<Extension;CompiledName("Send")>]
   let send socket message = 
     message |> waitToSend socket ZMQ.BLOCK
   
-  /// sends a message part, indicating more parts will follow
+  /// Sends a message part, indicating more parts will follow
   [<Extension;CompiledName("SendMore")>]
   let sendMore (socket:Socket) message = 
     message |> waitToSend socket ZMQ.SNDMORE
     socket
   
-  /// alias for 'Socket.send'
+  /// Alias for `Socket.send`
   let (<<|) socket = send socket
-  /// alias for 'Socket.sendMore'
+  /// Alias for `Socket.sendMore`
   let (<~|) socket = sendMore socket
 
-  /// alias for 'Socket.send'
+  /// Alias for `Socket.send`
   let (|>>) data socket = socket <<| data
-  /// alias for 'Socket.sendMore'
+  /// Alias for `Socket.sendMore`
   let (|~>) data socket = socket <~| data
 
-  /// sends all parts of a given message
+  /// Sends all parts of a given message
   [<Extension;CompiledName("SendAll")>]
   let sendAll (socket:Socket) (message:#seq<_>) =
     let last = (message |> Seq.length) - 1
@@ -147,8 +150,11 @@ module Socket =
 
 (* message receiving *)
 
-  /// retrieves the next available message part from a socket, returning 
-  /// Some(<message>) if successful or None if it should be re-attempted
+  /// <summary>
+  /// Retrieves the next available message part from a socket, 
+  /// <para>returning Some(&lt;message&gt;) if successful</para> 
+  /// <para>or None if it should be re-attempted</para>
+  /// </summary>
   [<Extension;CompiledName("TryRecv")>]
   let tryRecv (socket:Socket) flags =
     use msg = new Message()
@@ -159,7 +165,7 @@ module Socket =
     | Busy -> None
     | Fail -> raise <| ZeroMQException()
 
-  /// retrieves the next available message part from a socket
+  /// Retrieves the next available message part from a socket
   [<Extension;CompiledName("Recv")>]
   let recv (socket:Socket) =
     use msg = new Message()
@@ -169,17 +175,17 @@ module Socket =
               message
     | _ -> raise <| ZeroMQException()
     
-  /// returns true if more message parts are available, false otherwise
+  /// Returns true if more message parts are available, false otherwise
   [<Extension;CompiledName("HasMore")>]
   let recvMore socket = get<bool> socket ZMQ.RCVMORE
 
-  /// retrieves all parts of the next available message
+  /// Retrieves all parts of the next available message
   [<Extension;CompiledName("RecvAll")>]
   let recvAll socket =
     [|  yield socket |> recv 
         while socket |> recvMore do yield socket |> recv  |]
   
-  /// copies a message part-wise from one socket to another without
+  /// Copies a message part-wise from one socket to another without
   /// first marshalling the message part into the managed code space
   [<Extension;CompiledName("Transfer")>]
   let transfer (socket:Socket) (target:Socket) =
@@ -196,19 +202,19 @@ module Socket =
                 send' (if !loop then ZMQ.SNDMORE else ZMQ.NOBLOCK)
       | _ -> raise <| ZeroMQException()
 
-  /// alias for 'Socket.transfer'
+  /// Alias for `Socket.transfer`
   let (>|<) socket target = target |> transfer socket
 
 
 (* subscription handling *)
 
-  /// adds one subscription for each of the given topics
+  /// Adds one subscription for each of the given topics
   [<Extension;CompiledName("Subscribe")>]
   let subscribe socket topics =
     let setter (t:byte[]) = set socket (ZMQ.SUBSCRIBE,t) |> ignore
     topics |> Seq.iter setter
 
-  /// removes one subscription for each of the given topics
+  /// Removes one subscription for each of the given topics
   [<Extension;CompiledName("Unsubscribe")>]
   let unsubscribe socket topics =
     let setter (t:byte[]) = set socket (ZMQ.UNSUBSCRIBE,t) |> ignore

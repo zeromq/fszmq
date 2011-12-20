@@ -17,8 +17,10 @@ open System
 open System.Runtime.InteropServices
 
 
-/// represents any error raised by the native ZMQ library, storage a 
-/// human-readable summary of said error in it's 'Message' property
+/// <summary>
+/// <para>Represents any error raised by the native ZeroMQ library.</para> 
+/// <para>Stores a human-readable summary in the `Message` property.</para>
+/// </summary> 
 type ZeroMQException private(errnum,errmsg) =
   
   inherit Exception(errmsg)
@@ -28,13 +30,13 @@ type ZeroMQException private(errnum,errmsg) =
     let msg = C.zmq_strerror(num)
     ZeroMQException(num,msg)
 
-  /// the ZMQ-defined, or OS-defined, error code reported by ZMQ
+  /// the ZeroMQ-defined, or OS-defined, error code reported by ZMQ
   member __.ErrorNumber = errnum
 
 
-/// provides a memory-managed wrapper over ZMQ message operations
+/// Provides a memory-managed wrapper over ZeroMQ message operations.
 type internal Message(?source:byte[]) =
-  // MAYBEL consider exposing this class to consumers?
+  //MAYBE: consider exposing this class to consumers?
     
   let mutable disposed = false
   let mutable _message = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
@@ -74,8 +76,8 @@ type internal Message(?source:byte[]) =
       GC.SuppressFinalize(self)
 
 
-/// an abstraction of an asynchronous message queue, with the exact 
-/// queueing semantics depending on the socket type in use
+/// An abstraction of an asynchronous message queue, 
+/// with the exact queuing semantics depending on the socket type in use.
 type Socket internal(context,socketType) =
 
   let mutable disposed  = false
@@ -100,9 +102,11 @@ type Socket internal(context,socketType) =
       self.Finalize()
       GC.SuppressFinalize(self)
 
-  
-/// the container for all sockets in a single process.
-/// typically, create and use exactly one context per process. 
+
+/// <summary> 
+/// <para>Represents the container for a group of sockets in a node.</para>
+/// <para>Typically, use exactly one context per logical process.</para>
+/// </summary>
 type Context(ioThreads) =
   
   let mutable disposed = false
@@ -116,6 +120,8 @@ type Context(ioThreads) =
       let okay = C.zmq_term(_context)
       _context <- 0n
       if okay <> 0 then raise <| ZeroMQException()
+  
+  new() = new Context(1)
 
   member __.Handle = _context
 

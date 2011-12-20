@@ -11,19 +11,20 @@ by the terms of the Apache License, Version 2.0.
                                                                            
 You must not remove this notice, or any other, from this software.         
 -------------------------------------------------------------------------*)
-namespace fszmq.devices
+namespace fszmq.extensions
 
-open System
-open System.Reflection
-open System.Runtime.CompilerServices
-open System.Runtime.InteropServices
+#nowarn "9" // possible unverifiable IL generation
 
-[<assembly: Guid("D833921A-8C9E-4EF0-A102-57A849FB1FF6")>]
-[<assembly: AssemblyTitle("fszmq.devices")>]
-[<assembly: AssemblyProduct("fszmq.devices.dll")>]
-[<assembly: AssemblyDescription("Re-usable components which extend and enhance fszmq")>]
-[<assembly: AssemblyCopyright("© Paulmichael Blasucci. All rights reserved.")>]
-[<assembly: AssemblyVersion("2.1.6")>]
-[<assembly: AssemblyFileVersion("2.1.6.*")>]
-[<assembly: AssemblyDelaySign(false)>]
-do((*nothing*))
+[<RequireQualifiedAccess>]
+module internal C =
+
+  open System
+  open System.Runtime.InteropServices
+
+  type HANDLE = nativeint
+  
+  // NOTE: this will be removed in ZeroMQ v3.x
+  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
+  extern int zmq_device (int    deviceType, 
+                         HANDLE inputScoket, 
+                         HANDLE outputSocket);

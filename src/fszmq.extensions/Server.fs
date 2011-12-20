@@ -11,7 +11,7 @@ by the terms of the Apache License, Version 2.0.
                                                                            
 You must not remove this notice, or any other, from this software.         
 -------------------------------------------------------------------------*)
-namespace fszmq.devices
+namespace fszmq.extensions
 
 open fszmq
 open fszmq.Context
@@ -23,7 +23,7 @@ open System.Threading
 type private message  = Data of byte[][] | Quit
 type private agent    = MailboxProcessor<message>
 
-/// a basic router server, which runs the provided callback as a 
+/// A basic router server, which runs the provided callback as a 
 /// separate async workflow per-incoming-request (or per-incoming-dealer)
 type Server (context  : Context,
              handler  : (CancellationToken -> byte[][] -> byte[][]),
@@ -77,7 +77,7 @@ type Server (context  : Context,
   member __.Address = address
   member __.Address with set v' = address <- v'
 
-  /// starts a basic router server, binding to the Address property
+  /// Starts a basic router server, binding to the Address property
   member self.Start () =
     if started 
       then invalidOp "already started"
@@ -93,7 +93,7 @@ type Server (context  : Context,
       (server :> IDisposable).Dispose ()
       (socket :> IDisposable).Dispose ()
   
-  /// starts a basic router server, bound to the given address, 
+  /// Starts a basic router server, bound to the given address, 
   /// which runs the provided callback as a separate async workflow 
   /// per-incoming-request (or per-incoming-dealer)
   static member Start(context,handler,address) =
@@ -101,14 +101,14 @@ type Server (context  : Context,
     srv.Start(); srv
 
 
-/// contains methods for working with ZMQ Server instances
+/// Contains methods for working with `Server` instances
 [<Extension>]
 type Interop =
 
   static member private toFSFunc(handler:Func<_,_,_>) = 
     (fun a b -> handler.Invoke(a,b))
     
-  /// starts a basic router server, bound to the given address,
+  /// Starts a basic router server, bound to the given address,
   /// which runs the provided callback as a separate async workflow 
   /// per-incoming-request (or incoming per-incoming-dealer)
   [<Extension>]  

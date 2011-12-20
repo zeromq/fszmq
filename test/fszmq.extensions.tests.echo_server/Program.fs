@@ -1,9 +1,9 @@
-﻿module fszmq.devices.tests.echo_server
+﻿module fszmq.extensions.tests.echo_server
 
 open fszmq
 open fszmq.Context
 open fszmq.Socket
-open fszmq.devices
+open fszmq.extensions
 
 [<AutoOpen>]
 module private Utilities =

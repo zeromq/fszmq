@@ -22,64 +22,6 @@ open fszmq.Polling
 
 #time "on"
 
-exception BadReply of string
-
-let [<Literal>] LOCAL  = "inproc://repl_tester"
-let [<Literal>] REMOTE = "tcp://127.0.0.1:1979"
-
-let scanln = System.Console.ReadLine
-let encode (s:string) = System.Text.Encoding.ASCII.GetBytes(s)
+let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let echoServer rep = 
-  let cancel = Async.DefaultCancellationToken
-  let rec serve () = async {
-    if cancel.IsCancellationRequested 
-      then  printfn "echo: goodbye"
-            return ()
-      else  let msg = rep |> recv
-            printfn "echo: %s" (msg |> decode)
-            msg |>> rep 
-            return! serve () }
-  serve ()
-
-let echo_remote () =
-  printfn "enter a message and press <return>."
-  printfn "press <return> without any message to exit."
-  
-  use ctx = new Context(1)
-  use req = ctx |> req
-  REMOTE |> connect req
-
-  let rec loop = function
-    | null | "" ->  printfn "done!"
-    | otherwise ->  otherwise |> encode |>> req
-                    let msg = req |> recv |> decode
-                    if otherwise <> msg 
-                      then raise (BadReply msg)
-                      else printfn "reply: %s" msg
-                    loop (scanln ())
-  loop (scanln ())
-
-let echo_local () =
-  printfn "enter a message and press <return>."
-  printfn "press <return> without any message to exit."
-  
-  use ctx = new Context(1)
-  use rep = ctx |> rep
-  use req = ctx |> req
-  LOCAL |> bind     rep
-  LOCAL |> connect  req
-  
-  Async.Start(echoServer rep)
-
-  let rec loop = function
-    | null | "" ->  Async.CancelDefaultToken()
-                    printfn "done!"
-    | otherwise ->  otherwise |> encode |>> req
-                    let msg = req |> recv |> decode
-                    if otherwise <> msg then raise (BadReply msg)
-                    loop (scanln ())
-  loop (scanln ())
-
-// TODO: figure out why the REPL session is lost after echo_local exits

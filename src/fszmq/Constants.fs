@@ -17,8 +17,12 @@ namespace fszmq
 
 open System
 
-/// a version of two possible states: a triple of integers representing 
-/// the major revision, minor revision, and patch number; or an "Unknown"
+/// <summary>
+/// A version of two possible states:
+/// <para>a triple of integers for the major revision, minor 
+/// revision and patch number</para>
+/// <para>or an "Unknown" indicator</para>
+/// </summary>
 [<StructuredFormatDisplay("v{show}")>]
 type Version = Version of int * int * int 
              | Unknown with 
@@ -28,11 +32,11 @@ type Version = Version of int * int * int
   override self.ToString() = self.show
 
 
-/// contains commonly-used pre-defined ZMQ values
+/// Contains commonly-used pre-defined ZeroMQ values
 [<RequireQualifiedAccess>]
 module ZMQ =
   
-  /// version of the native ZMQ library
+  /// Version of the native ZeroMQ library
   [<CompiledName("Version")>]
   let version =
     try
@@ -108,9 +112,10 @@ module ZMQ =
 
 (* polling *)
 
+  // events for `PollItem` instances
   let [<Literal>] POLLIN  = 1s
   let [<Literal>] POLLOUT = 2s
   let [<Literal>] POLLERR = 4s
-
-  let [<Literal>] IMMEDIATE =  0
-  let [<Literal>] INFINITE  = -1
+  // common timeout lengths for `Polling.poll`
+  let [<Literal>] IMMEDIATE =  0L
+  let [<Literal>] FOREVER   = -1L

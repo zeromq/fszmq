@@ -1,4 +1,4 @@
-﻿module fszmq.devices.tests.echo_client
+﻿module fszmq.extensions.tests.echo_client
 
 open fszmq
 open fszmq.Context
