@@ -55,7 +55,7 @@
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files\Microsoft F#\v4.0\fsi.exe" --exec "$(SolutionDir)deploy.fsx" -- "$(ProjectDir)bin\$(ConfigurationName)" "$(SolutionDir)..\lib\zeromq-2.1" "$(SolutionDir)..\deploy"</PostBuildEvent>
+    <PostBuildEvent>"%PROGRAMFILES%\Microsoft F#\v4.0\fsi.exe" --exec "$(SolutionDir)deploy.fsx" -- "$(ProjectDir)bin\$(ConfigurationName)" "$(SolutionDir)..\lib\zeromq-2.1" "$(SolutionDir)..\deploy"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	     Other similar extension points exist, see Microsoft.Common.targets.
