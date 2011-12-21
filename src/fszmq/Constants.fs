@@ -99,8 +99,11 @@ module ZMQ =
   let [<Literal>] RECOVERY_IVL_MSEC = 20
   /// (Int32) Total reconnect pause milliseconds
   let [<Literal>] RECONNECT_IVL_MAX = 21
+  /// (NativeInt) File descriptor associated with socket
   let [<Literal>] FD                = 14
+  /// (UInt32) Socket event state, see also: `Polling`
   let [<Literal>] EVENTS            = 15
+  /// (Int32) Socket type
   let [<Literal>] TYPE              = 16
 
 (* transmission options *)

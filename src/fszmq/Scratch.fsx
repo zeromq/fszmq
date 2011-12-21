@@ -24,4 +24,3 @@ open fszmq.Polling
 
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
-

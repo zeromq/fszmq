@@ -101,17 +101,13 @@ type Server (context  : Context,
     srv.Start(); srv
 
 
-/// Contains methods for working with `Server` instances
+/// Utilities for working with `Server` from C#,VB.NET,etc.
 [<Extension>]
-type Interop =
-
-  static member private toFSFunc(handler:Func<_,_,_>) = 
-    (fun a b -> handler.Invoke(a,b))
-    
+type ServerModule =
+  
   /// Starts a basic router server, bound to the given address,
   /// which runs the provided callback as a separate async workflow 
   /// per-incoming-request (or incoming per-incoming-dealer)
   [<Extension>]  
-  static member StartServer(context,address,handler) =
-    let handler' = Interop.toFSFunc(handler)
-    Server.Start(context,handler',address)
+  static member StartServer(context,address,handler:Func<_,_,_>) =
+    Server.Start(context,(fun a b -> handler.Invoke(a,b)),address)

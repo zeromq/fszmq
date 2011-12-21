@@ -15,6 +15,7 @@ namespace fszmq
 
 open System
 open System.Collections.Generic
+open System.Runtime.CompilerServices
 
 /// <summary>
 /// For use with the `Polling` module...
@@ -36,15 +37,18 @@ module Polling =
   
   /// Creates a `PollItem` for the socket which will 
   /// invoke the callback when the socket receives a message.
-  let pollIn  fn socket = Poll(ZMQ.POLLIN,socket,fn)
+  [<CompiledName("PollIn")>]
+  let pollIn fn socket = Poll(ZMQ.POLLIN,socket,fn)
   
   /// Creates a `PollItem` for the socket which will 
   /// invoke the callback when the socket sends a message.
+  [<CompiledName("PollOut")>]
   let pollOut fn socket = Poll(ZMQ.POLLOUT,socket,fn)
   
   /// Creates a `PollItem` for the socket which will 
   /// invoke the callback when the socket sends or receives messages.
-  let pollIO  fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
+  [<CompiledName("PollInOut")>]
+  let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
   type private System.Array with
     member self.Limit = self.GetUpperBound(0)
@@ -82,3 +86,25 @@ module Polling =
   /// effectively causing the polling loop to block indefinitely.
   [<CompiledName("PollForever")>]
   let pollForever items = poll ZMQ.FOREVER items
+
+/// Utilities for working with `Polling` from C#,VB.NET,etc.
+[<Extension>]
+type PollingModule =
+  
+  /// Creates a `PollItem` for the socket which will 
+  /// invoke the callback when the socket receives a message.
+  [<Extension>]
+  static member AsPollIn (socket,callback:Action<_>) =
+    socket |> Polling.pollIn (fun s -> callback.Invoke(s))
+
+  /// Creates a `PollItem` for the socket which will 
+  /// invoke the callback when the socket receives a message.
+  [<Extension>]
+  static member AsPollOut (socket,callback:Action<_>) =
+    socket |> Polling.pollIn (fun s -> callback.Invoke(s))
+
+  /// Creates a `PollItem` for the socket which will 
+  /// invoke the callback when the socket receives a message.
+  [<Extension>]
+  static member AsPollIO (socket,callback:Action<_>) =
+    socket |> Polling.pollIn (fun s -> callback.Invoke(s))
