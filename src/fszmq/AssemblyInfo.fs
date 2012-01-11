@@ -22,6 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyTitle("fszmq")>]
 [<assembly: AssemblyProduct("fszmq.dll")>]
 [<assembly: AssemblyDescription("An F# binding for the 0MQ lightweight messaging kernel")>]
+[<assembly: AssemblyCompany("Paulmichael Blasucci")>]
 [<assembly: AssemblyCopyright("© Paulmichael Blasucci. All rights reserved.")>]
 [<assembly: AssemblyVersion("2.1.10")>]
 [<assembly: AssemblyFileVersion("2.1.10.*")>]

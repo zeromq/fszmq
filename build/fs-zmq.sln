@@ -21,7 +21,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "remote_lat", "..\perf\remot
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "remote_thr", "..\perf\remote_thr\remote_thr.fsproj", "{62216D5E-05C6-4955-8F94-1413C6EDC99A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build tools", "build tools", "{FC88F08E-FCDE-421F-8B35-B4F4A124A308}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{FC88F08E-FCDE-421F-8B35-B4F4A124A308}"
 	ProjectSection(SolutionItems) = preProject
 		Deploy.fsx = Deploy.fsx
 	EndProjectSection

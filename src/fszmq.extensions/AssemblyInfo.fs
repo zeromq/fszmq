@@ -22,6 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyTitle("fszmq.devices")>]
 [<assembly: AssemblyProduct("fszmq.devices.dll")>]
 [<assembly: AssemblyDescription("Re-usable components which extend and enhance fszmq")>]
+[<assembly: AssemblyCompany("Paulmichael Blasucci")>]
 [<assembly: AssemblyCopyright("© Paulmichael Blasucci. All rights reserved.")>]
 [<assembly: AssemblyVersion("2.1.10")>]
 [<assembly: AssemblyFileVersion("2.1.10.*")>]
