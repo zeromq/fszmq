@@ -1,3 +1,3 @@
 # ignore 0MQ binaries: we need them for testing, 
 # but each build should use a platform-specific version
-zeromq-*/
+zeromq*/

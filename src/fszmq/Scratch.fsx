@@ -1,8 +1,8 @@
-﻿#I @"..\..\lib\zeromq-2.1"
+﻿#I @"..\..\lib\zeromq"
 // NOTE:  changing the current directory is the easiest way to ensure
 //        the (native) libzmq.dll is available for use in the REPL 
 System.Environment.CurrentDirectory <- 
-  __SOURCE_DIRECTORY__ + @"\..\..\lib\zeromq-2.1"
+  __SOURCE_DIRECTORY__ + @"\..\..\lib\zeromq"
 
 #load "Native.fs"
 open fszmq
@@ -24,3 +24,5 @@ open fszmq.Polling
 
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
+
+printfn "%A" ZMQ.version

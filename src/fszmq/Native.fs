@@ -25,7 +25,7 @@ module internal C =
   type size_t = unativeint
 
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
-  extern void zmq_version (int* major, int* minor, int* patch)
+  extern void zmq_version (int& major, int& minor, int& patch)
 
 (* error handling *)
 

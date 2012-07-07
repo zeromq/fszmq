@@ -41,7 +41,7 @@ module ZMQ =
   let version =
     try
       let mutable major,minor,patch = 0,0,0
-      C.zmq_version(&&major,&&minor,&&patch)
+      C.zmq_version(&major,&minor,&patch)
       match (major,minor,patch) with
       | 0,0,0 -> Unknown
       | m,n,b -> Version(m,n,b)
