@@ -14,6 +14,7 @@ You must not remove this notice, or any other, from this software.
 namespace fszmq
 
 #nowarn "9" // possible unverifiable IL generation
+//NOTE: warning is spurious, see zmq_pollitem_t for more information.
 
 [<RequireQualifiedAccess>]
 module internal C =
@@ -63,8 +64,9 @@ module internal C =
 (* socket *)
   
   [<Literal>]
-  let EAGAIN = 11 // WARN: this only works on recent Microsoft OSes
-                  // TODO: find the POSIX version for conditional compile
+  let EAGAIN = 11 //WARN: this only works on recent Microsoft OSes
+                  //TODO: find the POSIX version for conditional compile
+                  //TODO: verify previous WARN and TODO
 
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
   extern HANDLE zmq_socket (HANDLE context, int socket_type)
@@ -124,7 +126,17 @@ module internal C =
                               events  = events
                               revents = 0s }
 
-    //static member ofFD(fd,events) = zmq_pollitem_t(0n,events,fd=fd)
+    (* :: NOTE :: 
+      With the current F# compiler, any use of the StructLayout attribute 
+      produces the warning: "Uses of this construct may result in the 
+      generation of unverifiable .NET IL code". However, zmq_pollitem_t
+      does _not_ have "explicit packing and an object reference which  
+      overlaps a built-in value type or a part of another object 
+      reference". So, at least by the ECMA-355 specification, it should
+      still produce verifiable code. A quick pass of fszmq.dll through 
+      peverify.exe confirms this saftey assertion. Microsoft has 
+      acknowledged this bug, but considers it a low priority. Thus, a 
+      #nowarn pragma has been included near the top of the this file. *)
     end
 
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]

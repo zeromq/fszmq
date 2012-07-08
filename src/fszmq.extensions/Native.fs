@@ -13,8 +13,6 @@ You must not remove this notice, or any other, from this software.
 -------------------------------------------------------------------------*)
 namespace fszmq.extensions
 
-#nowarn "9" // possible unverifiable IL generation
-
 [<RequireQualifiedAccess>]
 module internal C =
 
