@@ -112,7 +112,6 @@ module internal C =
 
 (* polling *)
 
-  [<Struct>]
   [<StructLayout(LayoutKind.Sequential)>]
   type zmq_pollitem_t =
     struct
