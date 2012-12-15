@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>fszmq</id>
+        <version>3.2.0</version>
+        <title>fszmq</title>
+        <projectUrl>https://github.com/pblasucci/fs-zmq</projectUrl>
+        <iconUrl>https://raw.github.com/pblasucci/fs-zmq/master/nuget/zmq_logo.png</iconUrl>
+        <authors>Paulmichael Blasucci</authors>
+        <owners>Henrik Feldt,Paulmichael Blasucci</owners>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <licenseUrl>https://raw.github.com/pblasucci/fs-zmq/master/LICENSE.txt</licenseUrl>
+        <copyright>&#169; Paulmichael Blasucci. All rights reserved.</copyright>
+        <summary>An apache-licenced F# binding for the ØMQ concurrent programming library.</summary>
+        <description>An apache-licenced F# binding for the ØMQ concurrent programming library.</description>
+        <tags>fsharp zeromq zmq 0MQ concurrent distributed messaging transport</tags>
+        <frameworkAssemblies>
+          <frameworkAssembly assemblyName="FSharp.Core" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="..\deploy\fszmq.dll"         target="lib\net45\fszmq.dll"         />
+        <file src="..\deploy\fszmq.xml"         target="lib\net45\fszmq.xml"         />
+        <file src="..\deploy\fszmq.devices.dll" target="lib\net45\fszmq.devices.dll" />
+        <file src="..\deploy\fszmq.devices.xml" target="lib\net45\fszmq.devices.xml" />
+        <file src="..\deploy\libzmq.dll"        target="content\libzmq.dll"          />
+        <file src="Install.ps1"                 target="tools\Install.ps1"           />
+    </files>
+</package>

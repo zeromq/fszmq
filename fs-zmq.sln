@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E330EB0-BE55-4289-BF9B-38CA7B76BDFD}"
+	ProjectSection(SolutionItems) = preProject
+		deploy.cmd = deploy.cmd
+		deploy.fsx = deploy.fsx
+		nuget\fszmq.nuspec = nuget\fszmq.nuspec
+		nuget\Install.ps1 = nuget\Install.ps1
+		README.md = README.md
+		nuget\zmq_logo.png = nuget\zmq_logo.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FDB20CEC-1D7A-44EC-A45F-325FD5F24646}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compatability", "Compatability", "{E7E28F39-F8D1-4214-940C-C21035FBF8D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Performance", "Performance", "{35E68BE5-441C-4099-9EC4-A1F9CEE39E45}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq", "fszmq\fszmq.fsproj", "{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.devices", "fszmq.devices\fszmq.devices.fsproj", "{905FA738-7347-456A-BDA4-31513A132BB4}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.tester", "fszmq.tester\fszmq.tester.fsproj", "{F9161AE5-7FBC-44EC-A89B-3BBB5D560757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs", "fszmq.compat.cs\fszmq.compat.cs.csproj", "{E41153B1-DE3A-4808-8C29-5F21B11A2B47}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "fszmq.compat.vb", "fszmq.compat.vb\fszmq.compat.vb.vbproj", "{9E64DAD3-2227-4AE8-88E3-295C42464C47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9161AE5-7FBC-44EC-A89B-3BBB5D560757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9161AE5-7FBC-44EC-A89B-3BBB5D560757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9161AE5-7FBC-44EC-A89B-3BBB5D560757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E64DAD3-2227-4AE8-88E3-295C42464C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E64DAD3-2227-4AE8-88E3-295C42464C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E64DAD3-2227-4AE8-88E3-295C42464C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7E28F39-F8D1-4214-940C-C21035FBF8D8} = {FDB20CEC-1D7A-44EC-A45F-325FD5F24646}
+		{35E68BE5-441C-4099-9EC4-A1F9CEE39E45} = {FDB20CEC-1D7A-44EC-A45F-325FD5F24646}
+		{F9161AE5-7FBC-44EC-A89B-3BBB5D560757} = {FDB20CEC-1D7A-44EC-A45F-325FD5F24646}
+		{E41153B1-DE3A-4808-8C29-5F21B11A2B47} = {E7E28F39-F8D1-4214-940C-C21035FBF8D8}
+		{9E64DAD3-2227-4AE8-88E3-295C42464C47} = {E7E28F39-F8D1-4214-940C-C21035FBF8D8}
+	EndGlobalSection
+EndGlobal

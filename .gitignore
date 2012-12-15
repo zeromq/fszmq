@@ -1,0 +1,4 @@
+# ignore files and folders intended for local use only
+**/bin
+**/obj
+*.suo
