@@ -1,0 +1,5 @@
+# ignore zeromq files, these are for local use only
+*.???
+include/*.*
+
+
