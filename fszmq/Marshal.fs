@@ -1,5 +1,4 @@
 ﻿(*-------------------------------------------------------------------------
-                                                                           
 Copyright (c) Paulmichael Blasucci.                                        
                                                                            
 This source code is subject to terms and conditions of the Apache License, 

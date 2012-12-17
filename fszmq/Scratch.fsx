@@ -1,10 +1,18 @@
-﻿open System
-Environment.CurrentDirectory <- 
-  __SOURCE_DIRECTORY__ + @"..\..\..\lib\zeromq"
+﻿(*-------------------------------------------------------------------------
+Copyright (c) Paulmichael Blasucci.
 
-//#I @"..\..\lib\fseye"
-//#load "fseye.fsx"
-//eye.Show()
+This source code is subject to terms and conditions of the Apache License,
+Version 2.0. A copy of the license can be found in the License.html file
+at the root of this distribution.
+
+By using this source code in any fashion, you are agreeing to be bound
+by the terms of the Apache License, Version 2.0.
+
+You must not remove this notice, or any other, from this software.
+-------------------------------------------------------------------------*)
+open System
+Environment.CurrentDirectory <- 
+  __SOURCE_DIRECTORY__ + @"..\..\zeromq"
 
 #load "Native.fs"
 open fszmq
@@ -22,7 +30,7 @@ open fszmq
 open fszmq.Context
 #load "Polling.fs"
 open fszmq
-open fszmq.Poll
+open fszmq.Polling
 
 #time "on"
 

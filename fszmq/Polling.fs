@@ -1,5 +1,4 @@
 ﻿(*-------------------------------------------------------------------------
-                                                                           
 Copyright (c) Paulmichael Blasucci.                                        
                                                                            
 This source code is subject to terms and conditions of the Apache License, 
@@ -52,9 +51,6 @@ module Polling =
   [<CompiledName("PollInOut")>]
   let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
-  type private System.Array with
-    member self.Limit = self.GetUpperBound(0)
-
   let private poller (Poll(v,s,_)) = C.zmq_pollitem_t(s.Handle,v)
   let private invoke (Poll(_,s,f)) = f s
 
@@ -72,7 +68,7 @@ module Polling =
     let items' = items |> Array.map poller
     match C.zmq_poll(items',items'.Length,timeout) with
     | 0             ->  false (* pass *)
-    | n when n > 0  ->  for i in 0 .. items'.Limit do
+    | n when n > 0  ->  for i in 0 .. items'.GetUpperBound(0) do
                           let e,r = items'.[i].events,items'.[i].revents
                           if e &&& r = e then items.[i] |> invoke
                         true
