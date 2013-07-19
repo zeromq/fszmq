@@ -14,6 +14,6 @@ REM -----------------------------------------------------------------------
 REM this script assumes fsi.exe is in the PATH evironment variable
 
 set NUGET="C:\Program Files (x86)\NuGet Bootstrap\nuget.exe"
-set ROOT=C:\dev\fs-zmq
+set ROOT=D:\working\fs-zmq
 
 fsi deploy.fsx -- %ROOT% %NUGET%

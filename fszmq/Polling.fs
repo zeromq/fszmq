@@ -33,7 +33,8 @@ type Poll = Poll of events * Socket * (Socket -> unit) with
 and events = int16
 
 /// Contains methods for working with ZMQ's polling capabilities
-[<Extension>]
+[<Extension;
+  CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module Polling =
   
   /// Creates a Poll item for the socket which will 
@@ -86,7 +87,7 @@ module Polling =
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
-type PollingModule =
+type PollingExtensions =
 
   /// Creates a Poll item for the socket which will 
   /// invoke the callback when the socket receives a message

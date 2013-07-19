@@ -21,7 +21,7 @@ open System.Runtime.InteropServices
 module internal C =
 
   type HANDLE = nativeint
-  
+    
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
   extern int zmq_device (int    deviceType, 
                          HANDLE inputScoket, 
