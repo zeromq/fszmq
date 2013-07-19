@@ -23,7 +23,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyDescription("Devices for use with the 0MQ lightweight messaging kernel")>]
 [<assembly: AssemblyCompany("Paulmichael Blasucci")>]
 [<assembly: AssemblyCopyright("© Paulmichael Blasucci. All rights reserved.")>]
-[<assembly: AssemblyVersion("3.2.0")>]
-[<assembly: AssemblyFileVersion("3.2.0.*")>]
+[<assembly: AssemblyVersion("3.2.4")>]
+[<assembly: AssemblyFileVersion("3.2.4.*")>]
 [<assembly: AssemblyDelaySign(false)>]
 do((*nothing*))
