@@ -71,17 +71,18 @@ package()
                                                                                                        
 // compress intermediate files into archive
 let archive() =
-  let archiveName = outDir.GetFiles("*" + NUPACKEXT)
+  let archiveList = outDir.GetFiles("*" + NUPACKEXT)
                     |> Array.map (fun f -> f.FullName.Replace(NUPACKEXT
                                                              ,ARCHIVEXT))
-                    |> Seq.head
-  let sourceFiles = outDir.GetFiles()
-                    |> Array.filter (fun f -> f.Extension <> GITIGNORE
-                                           && f.Extension <> NUPACKEXT
-                                           && f.Extension <> ARCHIVEXT)
-  use zip = ZipFile.Open(archiveName,ZipArchiveMode.Update)
-  for file in sourceFiles do 
-    zip.CreateEntryFromFile(file.FullName,file.Name)  |> ignore
+  if Seq.length archiveList > 0 then
+    let archiveName = Seq.head archiveList
+    let sourceFiles = outDir.GetFiles()
+                      |> Array.filter (fun f -> f.Extension <> GITIGNORE
+                                             && f.Extension <> NUPACKEXT
+                                             && f.Extension <> ARCHIVEXT)
+    use zip = ZipFile.Open(archiveName,ZipArchiveMode.Update)
+    for file in sourceFiles do 
+      zip.CreateEntryFromFile(file.FullName,file.Name)  |> ignore
 
 archive()
                      

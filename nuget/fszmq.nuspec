@@ -31,11 +31,9 @@ You must not remove this notice, or any other, from this software.
         </frameworkAssemblies>
     </metadata>
     <files>
-        <file src="..\deploy\fszmq.dll"         target="lib\net45\fszmq.dll"         />
-        <file src="..\deploy\fszmq.xml"         target="lib\net45\fszmq.xml"         />
-        <file src="..\deploy\fszmq.devices.dll" target="lib\net45\fszmq.devices.dll" />
-        <file src="..\deploy\fszmq.devices.xml" target="lib\net45\fszmq.devices.xml" />
-        <file src="..\deploy\libzmq.dll"        target="content\libzmq.dll"          />
-        <file src="Install.ps1"                 target="tools\Install.ps1"           />
+        <file src="..\deploy\fszmq.dll"   target="lib\net45\fszmq.dll"  />
+        <file src="..\deploy\fszmq.xml"   target="lib\net45\fszmq.xml"  />
+        <file src="..\deploy\libzmq.dll"  target="content\libzmq.dll"   />
+        <file src="Install.ps1"           target="tools\Install.ps1"    />
     </files>
 </package>

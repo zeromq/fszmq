@@ -94,10 +94,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fszmq.devices\fszmq.devices.fsproj">
-      <Project>{905fa738-7347-456a-bda4-31513a132bb4}</Project>
-      <Name>fszmq.devices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\fszmq\fszmq.fsproj">
       <Project>{d0f2cdeb-3d9c-4fe6-bef9-27b9c7f0cf71}</Project>
       <Name>fszmq</Name>

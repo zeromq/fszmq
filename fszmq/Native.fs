@@ -185,8 +185,12 @@ module internal C =
                                  int              count, 
                                  int64            timeout)
 
-(* :: NOTE :: 
-   All devices have been moved to the `fszmq.devices` project. This
-   includes the (supposedly-soon-to-be-deprecated) in-the-box 0MQ devices
-   (i.e. QUEUE, STREAMER, and FORWARDER), as well as custom devices (e.g.
-   SERVER, LOGGER, and SWAP). *)
+(* proxy *)
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_proxy (HANDLE frontend, HANDLE backend, HANDLE capture)
+
+  (* :: NOTE ::
+    The zmq_proxy function replaces all previous "in the box" 0MQ devices. 
+    Said devices API has been deprecated and should no longer be used.     
+    Additionally, the (optional) capture socket on zmq_proxy is an good    
+    logging and auditing tool. *)

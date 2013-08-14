@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Performance", "Performance"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq", "fszmq\fszmq.fsproj", "{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.devices", "fszmq.devices\fszmq.devices.fsproj", "{905FA738-7347-456A-BDA4-31513A132BB4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs", "fszmq.compat.cs\fszmq.compat.cs.csproj", "{E41153B1-DE3A-4808-8C29-5F21B11A2B47}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "fszmq.compat.vb", "fszmq.compat.vb\fszmq.compat.vb.vbproj", "{9E64DAD3-2227-4AE8-88E3-295C42464C47}"
@@ -55,22 +53,6 @@ Global
 		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Release|x64.Build.0 = Release|x64
 		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Release|x86.ActiveCfg = Release|x86
 		{D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71}.Release|x86.Build.0 = Release|x86
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|x64.ActiveCfg = Debug|x64
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|x64.Build.0 = Debug|x64
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|x86.ActiveCfg = Debug|x86
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Debug|x86.Build.0 = Debug|x86
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|x64.ActiveCfg = Release|x64
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|x64.Build.0 = Release|x64
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|x86.ActiveCfg = Release|x86
-		{905FA738-7347-456A-BDA4-31513A132BB4}.Release|x86.Build.0 = Release|x86
 		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E41153B1-DE3A-4808-8C29-5F21B11A2B47}.Debug|Mixed Platforms.ActiveCfg = Debug|x64

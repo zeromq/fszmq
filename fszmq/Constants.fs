@@ -60,8 +60,6 @@ module ZMQ =
     with
     | _ -> Unknown
 
-
-  [<CompiledName("Error")>]
   let internal error() =
     let num = C.zmq_errno()
     let msg = Marshal.PtrToStringAnsi(C.zmq_strerror(num))

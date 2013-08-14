@@ -84,6 +84,7 @@
     <Compile Include="Socket.fs" />
     <Compile Include="Context.fs" />
     <Compile Include="Polling.fs" />
+    <Compile Include="Proxy.fs" />
     <None Include="Scratch.fsx" />
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,8 @@ by the terms of the Apache License, Version 2.0.
 You must not remove this notice, or any other, from this software.
 -------------------------------------------------------------------------*)
 open System
-Environment.CurrentDirectory <- 
-  __SOURCE_DIRECTORY__ + @"..\..\zeromq"
+
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + @"..\..\zeromq"
 
 #load "Native.fs"
 open fszmq
@@ -31,6 +31,9 @@ open fszmq.Context
 #load "Polling.fs"
 open fszmq
 open fszmq.Polling
+#load "Proxy.fs"
+open fszmq
+open fszmq.Proxying
 
 #time "on"
 
