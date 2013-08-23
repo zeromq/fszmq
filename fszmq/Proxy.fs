@@ -20,17 +20,13 @@ open System.Runtime.CompilerServices
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module Proxying =
 
-  //MAYBE: replace this with inline operator generalized to anything with get_Handle?
-  let private (|Handle|_|) = Option.map (fun (s:Socket) -> s.Handle)
-
   /// creates a proxy connection passing messages between two sockets, 
   /// with an (optional) third socket for supplemental data capture 
   [<CompiledName("Proxy")>]
-  let proxy (frontend:Socket) (backend:Socket) capture =
-    let frontend,backend = frontend.Handle,backend.Handle
+  let proxy (frontend:Socket) (backend:Socket) (capture:Socket option) =
     match capture with
-    | Handle(capture) -> C.zmq_proxy(frontend,backend,capture)
-    | _               -> C.zmq_proxy(frontend,backend,     0n)
+    | Some(capture) -> C.zmq_proxy(!!frontend,!!backend,!!capture)
+    | _             -> C.zmq_proxy(!!frontend,!!backend,       0n)
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]

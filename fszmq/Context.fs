@@ -40,7 +40,7 @@ module Context =
   /// Creates a Socket, of the given type, within the given context 
   [<Extension;CompiledName("Socket")>]
   let newSocket (context:Context) socketType = 
-    new Socket(context.Handle,socketType)
+    new Socket(!!context,socketType)
 
   /// <summary>
   /// Creates a peer connected to exactly one other peer.
@@ -134,13 +134,13 @@ module Context =
   /// Gets the value of the given option for the given Context
   [<Extension;CompiledName("GetOption")>]
   let get (context:Context) contextOption =
-    let okay = C.zmq_ctx_get(context.Handle,contextOption)
+    let okay = C.zmq_ctx_get(!!context,contextOption)
     if  okay = -1 then ZMQ.error()
 
    /// Sets the given option value for the given Context
   [<Extension;CompiledName("SetOption")>]
   let set (context:Context) (contextOption,value) =
-    let okay = C.zmq_ctx_set(context.Handle,contextOption,value)
+    let okay = C.zmq_ctx_set(!!context,contextOption,value)
     if  okay <> 0 then ZMQ.error()
 
   /// Sets the given block of option values for the given Context
@@ -161,5 +161,5 @@ module Context =
   [<Extension;CompiledName("SetMonitor")>]
   let monitor (context:Context) callback =
     let bind = (fun s e d -> ZMQEvent.Build(s,e,d) |> callback)
-    let okay = C.zmq_ctx_set_monitor(context.Handle,C.zmq_monitor_fn(bind))
+    let okay = C.zmq_ctx_set_monitor(!!context,C.zmq_monitor_fn(bind))
     if  okay <> 0 then ZMQ.error()

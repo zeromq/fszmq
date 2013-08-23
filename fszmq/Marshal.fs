@@ -18,6 +18,10 @@ open System.Runtime.InteropServices
 [<AutoOpen>]
 module internal Marshal =
 
+  //NOTE: this operator isn't really related to Marshaling, 
+  //      but this is a convenient location for it's definition
+  let inline (!!) (w : ^w) = (^w : (member Handle : nativeint) w)
+
 (* reading native values *)  
   let inline readInt32 pointer = Marshal.ReadInt32(pointer)
   let inline readInt64 pointer = Marshal.ReadInt64(pointer)

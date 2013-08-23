@@ -51,7 +51,7 @@ module Polling =
   [<CompiledName("PollInOut")>]
   let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
-  let private poller (Poll(v,s,_)) = C.zmq_pollitem_t(s.Handle,v)
+  let private poller (Poll(v,s,_)) = C.zmq_pollitem_t(!!s,v)
   let private invoke (Poll(_,s,f)) = f s
 
   /// <summary>
