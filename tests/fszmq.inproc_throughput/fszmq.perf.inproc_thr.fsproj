@@ -89,6 +89,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+<<<<<<< HEAD:tests/fszmq.inproc_throughput/fszmq.perf.inproc_thr.fsproj
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -113,6 +114,8 @@
     <Prefer32Bit>true</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+=======
+>>>>>>> 6e5b4709350a626a7594d197ce252399b3469ac0:fszmq.inproc_throughput/fszmq.perf.inproc_thr.fsproj
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '11.0'">
       <PropertyGroup>
