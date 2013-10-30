@@ -10,15 +10,12 @@ by the terms of the Apache License, Version 2.0.
 
 You must not remove this notice, or any other, from this software.
 -->
-fs-zmq
-======
+fszmq
+=======================
+
 ----------------------------------------------------------------------------
 
 ### An F# binding for the ZeroMQ light-weight messaging kernel.
-
-**This project is at an early stage of development.** Its stable, but requires more testing and polishing.
-
-It provides a complete binding to the 3.x branch of ZeroMQ. This library is primarily designed to be consumed from F#. However, where possible, the API has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam).
 
 More details to follow.
 
