@@ -10,10 +10,10 @@ Introducing your project
 Say more
 
 *)
-#r "FSharp.ProjectTemplate.dll"
-open FSharp.ProjectTemplate
+#r "fszmq.dll"
+open fszmq
 
-Library.hello 0
+printfn "%A" ZMQ.version
 (**
 Some more info
 *)

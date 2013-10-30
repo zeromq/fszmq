@@ -4,7 +4,7 @@
 #I "../../bin"
 
 (**
-F# Project Scaffold
+fszmq
 ===================
 
 Documentation
@@ -13,14 +13,14 @@ Documentation
   <div class="span1"></div>
   <div class="span6">
     <div class="well well-small" id="nuget">
-      The F# DataFrame library can be <a href="https://nuget.org/packages/FSharp.ProjectTemplate">installed from NuGet</a>:
-      <pre>PM> Install-Package FSharp.ProjectTemplate</pre>
+      The fszmq library can be <a href="https://nuget.org/packages/fszmq">installed from NuGet</a>:
+      <pre>PM> Install-Package fszmq</pre>
     </div>
   </div>
   <div class="span1"></div>
 </div>
 
-<img src="img/logo.png" alt="F# project" style="float:right;width:150px;margin:10px" />
+<img src="img/zmq_logo.png" alt="fszmq" style="float:right;width:150px;margin:10px" />
 
 Example
 -------
