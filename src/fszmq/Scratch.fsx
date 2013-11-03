@@ -10,10 +10,20 @@ by the terms of the Apache License, Version 2.0.
 
 You must not remove this notice, or any other, from this software.
 -------------------------------------------------------------------------*)
+
+// set up environment
 open System
 
-Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + @"..\..\..\lib\zeromq\x86"
+Environment.CurrentDirectory <- 
+  sprintf @"%s..\..\..\lib\zeromq\%s"
+          __SOURCE_DIRECTORY__
+          (if Environment.Is64BitProcess then "x64" else "x86")
 
+printfn "CurrentDirectory = %s" Environment.CurrentDirectory
+
+(*-----------------------------------------------------------------------*)
+
+// load working code
 #load "Native.fs"
 open fszmq
 #load "Constants.fs"
@@ -34,6 +44,8 @@ open fszmq.Polling
 #load "Proxy.fs"
 open fszmq
 open fszmq.Proxying
+
+(*-----------------------------------------------------------------------*)
 
 #time "on"
 
