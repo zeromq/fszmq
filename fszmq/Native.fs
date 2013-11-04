@@ -115,29 +115,78 @@ module internal C =
                             [<MarshalAs(UnmanagedType.AnsiBStr)>] 
                             string address)
 
-(* context *)
-  [<StructLayout(LayoutKind.Sequential
-                ,CharSet = CharSet.Ansi)>]
-  type zmq_event_data_t =
-    struct
-      val mutable address : string
-      val mutable details : int
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_socket_monitor(HANDLE socket,
+                                [<MarshalAs(UnmanagedType.AnsiBStr)>] 
+                                string address,
+                                int events)
 
-      (* :: NOTE :: 
-      With the current F# compiler, any use of the StructLayout attribute 
-      produces the warning: "Uses of this construct may result in the 
-      generation of unverifiable .NET IL code". However, zmq_event_data_t
-      does _not_ have "explicit packing and an object reference which  
-      overlaps a built-in value type or a part of another object 
-      reference". So, at least by the ECMA-355 specification, it should
-      still produce verifiable code. A quick pass of fszmq.dll through 
-      peverify.exe confirms this saftey assertion. Microsoft has 
-      acknowledged this bug, but considers it a low priority. Thus, a 
-      #nowarn pragma has been included near the top of the this file. *)
+  type [<StructLayout(LayoutKind.Explicit)>] zmq_event_t =
+    struct
+      [<FieldOffset(0)>] val event            : int
+      [<FieldOffset(4)>] val connected        : zmq_event_connected_t
+      [<FieldOffset(4)>] val connect_delayed  : zmq_event_connect_delayed_t
+      [<FieldOffset(4)>] val connect_retried  : zmq_event_connect_retried_t
+      [<FieldOffset(4)>] val listening        : zmq_event_listening_t
+      [<FieldOffset(4)>] val bind_failed      : zmq_event_bind_failed_t
+      [<FieldOffset(4)>] val accepted         : zmq_event_accepted_t
+      [<FieldOffset(4)>] val accept_failed    : zmq_event_accept_failed_t
+      [<FieldOffset(4)>] val closed           : zmq_event_closed_t
+      [<FieldOffset(4)>] val close_failed     : zmq_event_close_failed_t
+      [<FieldOffset(4)>] val disconnected     : zmq_event_disconnected_t
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_connected_t =
+    struct
+      val mutable addr  : string
+      val mutable fd    : HANDLE
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_connect_delayed_t =
+    struct
+      val mutable addr  : string
+      val mutable err   : int
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_connect_retried_t =
+    struct
+      val mutable addr      : string
+      val mutable interval  : int
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_listening_t =
+    struct
+      val mutable addr  : string
+      val mutable fd    : HANDLE
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_bind_failed_t =
+    struct
+      val mutable addr  : string
+      val mutable err   : int
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_accepted_t =
+    struct
+      val mutable addr  : string
+      val mutable fd    : HANDLE
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_accept_failed_t =
+    struct
+      val mutable addr  : string
+      val mutable err   : int
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_closed_t =
+    struct
+      val mutable addr  : string
+      val mutable fd    : HANDLE
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_close_failed_t =
+    struct
+      val mutable addr  : string
+      val mutable err   : int
+    end
+  and [<StructLayout(LayoutKind.Sequential)>] zmq_event_disconnected_t =
+    struct
+      val mutable addr  : string
+      val mutable fd    : HANDLE
     end
 
-  type zmq_monitor_fn = delegate of HANDLE * int * zmq_event_data_t -> unit
-
+(* context *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_ctx_new()
 
@@ -150,9 +199,6 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_ctx_get(HANDLE context, int option)
 
-  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_ctx_set_monitor (HANDLE context, zmq_monitor_fn monitor)
-  
 (* polling *)
   [<StructLayout(LayoutKind.Sequential)>]
   type zmq_pollitem_t =

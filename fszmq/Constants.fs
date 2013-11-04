@@ -95,6 +95,17 @@ module ZMQ =
   let [<Literal>] EVENT_CLOSE_FAILED    = 256
   let [<Literal>] EVENT_DISCONNECTED    = 512
 
+  let EVENT_ALL = EVENT_CONNECTED      
+              ||| EVENT_CONNECT_DELAYED
+              ||| EVENT_CONNECT_RETRIED
+              ||| EVENT_LISTENING      
+              ||| EVENT_BIND_FAILED    
+              ||| EVENT_ACCEPTED       
+              ||| EVENT_ACCEPT_FAILED  
+              ||| EVENT_CLOSED         
+              ||| EVENT_CLOSE_FAILED   
+              ||| EVENT_DISCONNECTED   
+
 (* socket types *)
   let [<Literal>] PAIR    =  0
   let [<Literal>] PUB     =  1

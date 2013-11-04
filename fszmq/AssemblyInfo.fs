@@ -23,7 +23,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyDescription("An F# binding for the 0MQ lightweight messaging kernel")>]
 [<assembly: AssemblyCompany("Paulmichael Blasucci")>]
 [<assembly: AssemblyCopyright("© Paulmichael Blasucci. All rights reserved.")>]
-[<assembly: AssemblyVersion("3.2.4")>]
-[<assembly: AssemblyFileVersion("3.2.4.*")>]
+[<assembly: AssemblyVersion("3.2.7")>]
+[<assembly: AssemblyFileVersion("3.2.7.*")>]
 [<assembly: AssemblyDelaySign(false)>]
 do((*nothing*))

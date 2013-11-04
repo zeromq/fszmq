@@ -14,7 +14,7 @@ You must not remove this notice, or any other, from this software.
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>fszmq</id>
-        <version>3.2.4</version>
+        <version>3.2.7</version>
         <title>fszmq</title>
         <projectUrl>https://github.com/pblasucci/fs-zmq</projectUrl>
         <iconUrl>https://raw.github.com/pblasucci/fs-zmq/master/nuget/zmq_logo.png</iconUrl>
