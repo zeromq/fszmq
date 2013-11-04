@@ -25,9 +25,7 @@ Documentation
 Example
 -------
 
-Assume we loaded [Titanic data set](http://www.kaggle.com/c/titanic-gettingStarted) 
-into a data frame called `titanic` (the data frame has numerous columns including string 
-`Sex` and Boolean `Survived`). Now we can calculate the survival rates for males and females:
+TODO: put an example here.
 
 *)
 #r "FSharp.ProjectTemplate.dll"
@@ -62,9 +60,9 @@ The library is available under **INSERT** license, which allows modification and
 redistribution for both commercial and non-commercial purposes. For more information see the 
 [License file][license] in the GitHub repository. 
 
-  [samples]: https://github.com/fsharp/FSharp.ProjectScaffold/tree/master/samples
-  [gh]: https://github.com/fsharp/FSharp.ProjectScaffold
-  [issues]: https://github.com/fsharp/FSharp.ProjectScaffold/issues
-  [readme]: https://github.com/fsharp/FSharp.ProjectScaffold/blob/master/README.md
-  [license]: https://github.com/fsharp/FSharp.ProjectScaffold/blob/master/LICENSE.md
+  [samples]: https://github.com/pblasucci/fszmq/tree/master/samples
+  [gh]: https://github.com/pblasucci/fszmq
+  [issues]: https://github.com/pblasucci/fszmq/issues
+  [readme]: https://github.com/pblasucci/fszmq/blob/master/README.md
+  [license]: https://github.com/pblasucci/fszmq/blob/master/LICENSE.md
 *)

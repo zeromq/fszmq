@@ -25,16 +25,16 @@ let project = "fszmq"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "An Apache-licenced F# binding for the ØMQ concurrent programming library."
+let summary = "An Apache-licenced F# binding for the ØMQ distributed programming library."
 
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = """An Apache-licenced F# binding for the ØMQ concurrent programming library."""
+let description = """An Apache-licenced F# binding for the ØMQ distributed programming library."""
 
 // List of author names (for NuGet package)
 let authors = [ "Paulmichael Blasucci" ]
 // Tags for your project (for NuGet package)
-let tags = "F# fsharp zeromq zmq 0MQ concurrent distributed messaging transport"
+let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport"
 
 // File system information 
 // (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
