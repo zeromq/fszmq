@@ -25,8 +25,8 @@ module Proxying =
   [<CompiledName("Proxy")>]
   let proxy (frontend:Socket) (backend:Socket) (capture:Socket option) =
     match capture with
-    | Some(capture) -> C.zmq_proxy(!!frontend,!!backend,!!capture)
-    | _             -> C.zmq_proxy(!!frontend,!!backend,       0n)
+    | Some(capture) -> C.zmq_proxy(frontend.Handle,backend.Handle,capture.Handle)
+    | _             -> C.zmq_proxy(frontend.Handle,backend.Handle,            0n)
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]

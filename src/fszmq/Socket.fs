@@ -27,26 +27,26 @@ module Socket =
   /// connections at the given address
   [<Extension;CompiledName("Bind")>]
   let bind (socket:Socket) address =
-    let okay = C.zmq_bind(!!socket,address)
+    let okay = C.zmq_bind(socket.Handle,address)
     if  okay <> 0 then ZMQ.error()
 
   /// Causes an endpoint to stop accepting
   /// connections at the given address
   [<Extension;CompiledName("Unbind")>]
   let unbind (socket:Socket) address =
-    let okay = C.zmq_unbind(!!socket,address)
+    let okay = C.zmq_unbind(socket.Handle,address)
     if  okay <> 0 then ZMQ.error()
 
   /// Connects to an endpoint to the given address
   [<Extension;CompiledName("Connect")>]
   let connect (socket:Socket) address =
-    let okay = C.zmq_connect(!!socket,address)
+    let okay = C.zmq_connect(socket.Handle,address)
     if  okay <> 0 then ZMQ.error()
 
   /// Disconnects to an endpoint from the given address
   [<Extension;CompiledName("Disconnect")>]
   let disconnect (socket:Socket) address =
-    let okay = C.zmq_disconnect(!!socket,address)
+    let okay = C.zmq_disconnect(socket.Handle,address)
     if  okay <> 0 then ZMQ.error()
 
 (* socket options *)
@@ -66,7 +66,7 @@ module Socket =
     let buffer = Marshal.AllocHGlobal(size)
     try
       let mutable size' = unativeint size
-      let okay = C.zmq_getsockopt(!!socket,socketOption,buffer,&size')
+      let okay = C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size')
       if  okay <> 0 then ZMQ.error()
       downcast read (size',buffer)
     finally
@@ -87,7 +87,7 @@ module Socket =
     let buffer = Marshal.AllocHGlobal(size)
     try
       write(buffer)
-      let okay = C.zmq_setsockopt(!!socket
+      let okay = C.zmq_setsockopt(socket.Handle
                                  ,socketOption
                                  ,buffer
                                  ,unativeint size)
@@ -126,7 +126,7 @@ module Socket =
   [<Extension;CompiledName("TrySend")>]
   let trySend (socket:Socket) flags frame =
     use frame = new Frame(frame)
-    match C.zmq_msg_send(!!frame,!!socket,flags) with
+    match C.zmq_msg_send(frame.Handle,socket.Handle,flags) with
     | Okay -> true
     | Busy -> false
     | Fail -> ZMQ.error()
@@ -176,7 +176,7 @@ module Socket =
   [<Extension;CompiledName("TryRecv")>]
   let tryRecv (socket:Socket) flags =
     use frame = new Frame()
-    match C.zmq_msg_recv(!!frame,!!socket,flags) with
+    match C.zmq_msg_recv(frame.Handle,socket.Handle,flags) with
     | Okay -> let mutable frame' = Array.empty
               frame' <- frame.Data
               Some(frame')
@@ -203,13 +203,13 @@ module Socket =
   let transfer (socket:Socket) (target:Socket) =
     use frame = new Frame()
     let rec send' flags =
-      match C.zmq_msg_send(!!frame,!!target,flags) with
+      match C.zmq_msg_send(frame.Handle,target.Handle,flags) with
       | Okay -> ((* pass *))
       | Busy -> send' flags
       | Fail -> ZMQ.error()
     let loop = ref true
     while !loop do
-      match C.zmq_msg_recv(!!frame,!!socket,ZMQ.WAIT) with
+      match C.zmq_msg_recv(frame.Handle,socket.Handle,ZMQ.WAIT) with
       | Okay -> loop := socket |> recvMore
                 send' (if !loop then ZMQ.SNDMORE else ZMQ.DONTWAIT)
       | _ -> ZMQ.error()
