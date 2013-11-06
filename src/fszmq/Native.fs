@@ -16,7 +16,7 @@ open System
 open System.Runtime.InteropServices
 
 #nowarn "9" // possible unverifiable IL generation
-//NOTE: spurious warning, see `zmq_event_data_t`,`zmq_pollitem_t` for info
+//NOTE: spurious warning, see `zmq_event_t`,`zmq_pollitem_t` for info
 
 [<RequireQualifiedAccess>]
 module internal C =
@@ -69,12 +69,14 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_set(zmq_msg_t msg, int option, int optval)
 
-  (* :: NOTE ::
-    The functions `zmq_msg_init_data`, `zmq_msg_move`, and `zmq_msg_copy` 
-    have NOT been implemented because they make no real sense in a 
-    memory-managed environment. If you find yourself needing the 
-    nano-second speed-ups those methods offer, you should be working 
-    directly in the native library -- and NOT in a higher-level binding *)
+  (* :: MAYBE ::
+    Does it make sense to implement the functions 
+      `zmq_msg_init_data`
+      `zmq_msg_move`
+      `zmq_msg_copy` 
+    in a memory-managed environment? 
+    If you find yourself needing the nano-second speed-ups those methods offer, 
+    shouldn't you be working directly in the native library? *)
 
 (* socket *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
@@ -84,106 +86,94 @@ module internal C =
   extern int zmq_close(HANDLE socket)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_setsockopt(HANDLE  socket
-                           ,int     option
-                           ,HANDLE  value
-                           ,size_t  size)
+  extern int zmq_setsockopt(HANDLE socket, int option, HANDLE value, size_t size)
    
    [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_getsockopt(HANDLE  socket
-                           ,int     option
-                           ,HANDLE  value
-                           ,size_t& size)
+  extern int zmq_getsockopt(HANDLE socket, int option, HANDLE value, size_t& size)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_bind(HANDLE socket,
-                      [<MarshalAs(UnmanagedType.AnsiBStr)>] 
-                      string address)
+  extern int zmq_bind(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_connect(HANDLE socket,
-                         [<MarshalAs(UnmanagedType.AnsiBStr)>] 
-                         string address)
+  extern int zmq_connect(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_unbind(HANDLE socket,
-                        [<MarshalAs(UnmanagedType.AnsiBStr)>] 
-                        string address)
+  extern int zmq_unbind(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_disconnect(HANDLE socket,
-                            [<MarshalAs(UnmanagedType.AnsiBStr)>] 
-                            string address)
+  extern int zmq_disconnect(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
+  
+  (* :: MAYBE ::
+    Does it make sense to implement the functions 
+      `zmq_send`
+      `zmq_recv`
+      `zmq_send_const` 
+    in a memory-managed environment? 
+    These functions have overlap with several `zmq_msg_*` functions,
+    and might not be feasible without direct buffer access. *)
 
+  [<Struct;StructLayout(LayoutKind.Sequential)>]
+  type zmq_event_t =
+    val mutable event : uint16  // ID of the event as bit-field
+    val mutable value : int     // value is either error code, FD, or reconnect interval
+    
+    (* :: NOTE :: 
+    With the current F# compiler, any use of the StructLayout attribute 
+    produces the warning: "Uses of this construct may result in the 
+    generation of unverifiable .NET IL code". However, zmq_event_t
+    does _not_ have "explicit packing and an object reference which  
+    overlaps a built-in value type or a part of another object 
+    reference". So, at least by the ECMA-355 specification, it should
+    still produce verifiable code. A quick pass of fszmq.dll through 
+    peverify.exe confirms this safety assertion. Microsoft has 
+    acknowledged this bug, but considers it a low priority. Thus, a 
+    #nowarn pragma has been included near the top of the this file. *)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_socket_monitor(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address, int events)
+    
 (* context *)
-  [<StructLayout(LayoutKind.Sequential
-                ,CharSet = CharSet.Ansi)>]
-  type zmq_event_data_t =
-    struct
-      val mutable address : string
-      val mutable details : int
-
-      (* :: NOTE :: 
-      With the current F# compiler, any use of the StructLayout attribute 
-      produces the warning: "Uses of this construct may result in the 
-      generation of unverifiable .NET IL code". However, zmq_event_data_t
-      does _not_ have "explicit packing and an object reference which  
-      overlaps a built-in value type or a part of another object 
-      reference". So, at least by the ECMA-355 specification, it should
-      still produce verifiable code. A quick pass of fszmq.dll through 
-      peverify.exe confirms this saftey assertion. Microsoft has 
-      acknowledged this bug, but considers it a low priority. Thus, a 
-      #nowarn pragma has been included near the top of the this file. *)
-    end
-
-  type zmq_monitor_fn = delegate of HANDLE * int * zmq_event_data_t -> unit
-
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_ctx_new()
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_ctx_destroy(HANDLE context)
+  extern int zmq_ctx_term(HANDLE context)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_ctx_shutdown(HANDLE context)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_ctx_set(HANDLE context, int option, int value)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_ctx_get(HANDLE context, int option)
-
-  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_ctx_set_monitor (HANDLE context, zmq_monitor_fn monitor)
-  
+ 
 (* polling *)
-  [<StructLayout(LayoutKind.Sequential)>]
+  [<Struct;StructLayout(LayoutKind.Sequential)>]
   type zmq_pollitem_t =
-    struct
-      val mutable socket  : HANDLE
-      val mutable fd      : HANDLE
-      val mutable events  : int16
-      val mutable revents : int16
+    val mutable socket  : HANDLE  // if socket _and_ fd are set, socket takes precedence
+    val mutable fd      : HANDLE
+    val mutable events  : int16
+    val mutable revents : int16
 
-      new(socket,events) = {  socket  = socket
-                              fd      = 0n 
-                              events  = events
-                              revents = 0s }
-
-    (* :: NOTE :: 
-      With the current F# compiler, any use of the StructLayout attribute 
-      produces the warning: "Uses of this construct may result in the 
-      generation of unverifiable .NET IL code". However, zmq_pollitem_t
-      does _not_ have "explicit packing and an object reference which  
-      overlaps a built-in value type or a part of another object 
-      reference". So, at least by the ECMA-355 specification, it should
-      still produce verifiable code. A quick pass of fszmq.dll through 
-      peverify.exe confirms this saftey assertion. Microsoft has 
-      acknowledged this bug, but considers it a low priority. Thus, a 
-      #nowarn pragma has been included near the top of the this file. *)
-    end
-
+    new(socket,events) = {  socket  = socket
+                            fd      = 0n 
+                            events  = events
+                            revents = 0s }
+  (* :: NOTE :: 
+    With the current F# compiler, any use of the StructLayout attribute 
+    produces the warning: "Uses of this construct may result in the 
+    generation of unverifiable .NET IL code". However, zmq_pollitem_t
+    does _not_ have "explicit packing and an object reference which  
+    overlaps a built-in value type or a part of another object 
+    reference". So, at least by the ECMA-355 specification, it should
+    still produce verifiable code. A quick pass of fszmq.dll through 
+    peverify.exe confirms this safety assertion. Microsoft has 
+    acknowledged this bug, but considers it a low priority. Thus, a 
+    #nowarn pragma has been included near the top of the this file. *)
+    
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_poll ([<In;Out>]zmq_pollitem_t[] items, 
-                                 int              count, 
-                                 int64            timeout)
+  extern int zmq_poll ([<In;Out>] zmq_pollitem_t[] items, int count, int64 timeout)
 
 (* proxy *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
@@ -194,3 +184,10 @@ module internal C =
     Said devices API has been deprecated and should no longer be used.     
     Additionally, the (optional) capture socket on zmq_proxy is an good    
     logging and auditing tool. *)
+
+(* authentication *)
+//TODO:
+//  /*  Encode a binary key as printable text using ZMQ RFC 32  */
+//  ZMQ_EXPORT char *zmq_z85_encode (char *dest, uint8_t *data, size_t size);
+//  /*  Encode a binary key from printable text per ZMQ RFC 32  */
+//  ZMQ_EXPORT uint8_t *zmq_z85_decode (uint8_t *dest, char *string);

@@ -48,6 +48,9 @@ type ZMQError internal(errnum,errmsg) =
 [<RequireQualifiedAccess>]
 module ZMQ =
   
+  /// Occurs when trying to build a ZMQEvent instance from non-event data
+  exception NotAnEvent of Message:byte[][]
+
   /// Version of the underlying (native) ZMQ library
   [<CompiledName("Version")>]
   let version =
@@ -60,14 +63,14 @@ module ZMQ =
     with
     | _ -> Unknown
 
-  let internal error() =
-    let num = C.zmq_errno()
-    let msg = Marshal.PtrToStringAnsi(C.zmq_strerror(num))
-    raise <| ZMQError(num,msg)
+  // helper function for build native-to-managed errors
+  let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
+  // constructs and raises native-to-managed errors
+  let inline internal error() = (buildError >> raise) <| C.zmq_errno() 
 
 
 (* error codes *)
-  let [<Literal>] EAGAIN = 11 //TODO: is this cross-platform (WIN + POSIX)?
+  let [<Literal>] EAGAIN = 11 //TODO: is this cross-platform (WIN + POSIX)? what about 35?
 
   let [<Literal>] private HAUSNUMERO = 156384712
   
@@ -83,17 +86,29 @@ module ZMQ =
   let [<Literal>] IO_THREADS_DFLT   =    1
   let [<Literal>] MAX_SOCKETS_DFLT  = 1024
 
+
 (* event codes *)
-  let [<Literal>] EVENT_CONNECTED       =   1
-  let [<Literal>] EVENT_CONNECT_DELAYED =   2
-  let [<Literal>] EVENT_CONNECT_RETRIED =   4
-  let [<Literal>] EVENT_LISTENING       =   8
-  let [<Literal>] EVENT_BIND_FAILED     =  16
-  let [<Literal>] EVENT_ACCEPTED        =  32
-  let [<Literal>] EVENT_ACCEPT_FAILED   =  64
-  let [<Literal>] EVENT_CLOSED          = 128
-  let [<Literal>] EVENT_CLOSE_FAILED    = 256
-  let [<Literal>] EVENT_DISCONNECTED    = 512
+  let EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int>
+
+  let [<Literal>] EVENT_CONNECTED       =    1us
+  let [<Literal>] EVENT_CONNECT_DELAYED =    2us
+  let [<Literal>] EVENT_CONNECT_RETRIED =    4us
+  let [<Literal>] EVENT_LISTENING       =    8us
+  let [<Literal>] EVENT_BIND_FAILED     =   16us
+  let [<Literal>] EVENT_ACCEPTED        =   32us
+  let [<Literal>] EVENT_ACCEPT_FAILED   =   64us
+  let [<Literal>] EVENT_CLOSED          =  128us
+  let [<Literal>] EVENT_CLOSE_FAILED    =  256us
+  let [<Literal>] EVENT_DISCONNECTED    =  512us
+  let [<Literal>] EVENT_MONITOR_STOPPED = 1024us
+  
+  let [<Literal>] EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
+                          ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
+                          ||| EVENT_ACCEPTED  ||| EVENT_ACCEPT_FAILED
+                          ||| EVENT_CLOSED    ||| EVENT_CLOSE_FAILED
+                          ||| EVENT_DISCONNECTED
+                          ||| EVENT_MONITOR_STOPPED
+
 
 (* socket types *)
   let [<Literal>] PAIR    =  0
@@ -107,9 +122,15 @@ module ZMQ =
   let [<Literal>] PUSH    =  8
   let [<Literal>] XPUB    =  9
   let [<Literal>] XSUB    = 10
-  // deprecated socket types
+  let [<Literal>] STREAM  = 11
+
+  (* deprecated socket types *)
+  
+  /// Deprecated. Use ZMQ.DEALER
   let [<Obsolete;Literal>] XREQ = DEALER
+  /// Deprecated. Use ZMQ.ROUTER
   let [<Obsolete;Literal>] XREP = ROUTER
+
 
 (* socket options *)
 
@@ -157,12 +178,10 @@ module ZMQ =
   let [<Literal>] RCVTIMEO                = 27
   /// (Int32) Timeout period for outbound messages in milliseconds
   let [<Literal>] SNDTIMEO                = 28
-  /// (Int32) 1 restricts native socket to IPv4 only, 0 also allows IPv6
-  let [<Literal>] IPV4ONLY                = 31
   /// (String) Last address bound to endpoint
   let [<Literal>] LAST_ENDPOINT           = 32
-  /// (Int32) 1 causes failure on unroutable message, 0 silently ignores
-  let [<Literal>] ROUTER_BEHAVIOR         = 33
+  /// (Int32) 1 to error on unroutable messages, 0 to silently ignore
+  let [<Literal>] ROUTER_MANDATORY        = 33
   /// (Int32) Override OS-level TCP keep-alive
   let [<Literal>] TCP_KEEPALIVE           = 34
   /// (Int32) Override OS-level TCP keep-alive
@@ -173,15 +192,54 @@ module ZMQ =
   let [<Literal>] TCP_KEEPALIVE_INTVL     = 37
   /// (Byte[]) TCP/IP filters
   let [<Literal>] TCP_ACCEPT_FILTER       = 38
-  /// (Int32) 1 will deplay pipe attachmet until underlying connection completes
-  let [<Literal>] DELAY_ATTACH_ON_CONNECT = 39
+  /// (Int32) 1 to limit queuing to only completed connections, 0 otherwise
+  let [<Literal>] IMMEDIATE               = 39
   /// (Int32) 1 will resend duplicate messages
   let [<Literal>] XPUB_VERBOSE            = 40
+  /// (Int32) 1 to enable IPv6 on the socket, 0 to restrict to only IPv4
+  let [<Literal>] IPV6                    = 42
+  /// (Int32) 1 to make socket act as server for PLAIN security, 0 otherwise
+  let [<Literal>] PLAIN_SERVER            = 44
+  /// (String) Sets the user name for outgoing connections over TCP or IPC
+  let [<Literal>] PLAIN_USERNAME          = 45
+  /// (String) Sets the password for outgoing connections over TCP or IPC
+  let [<Literal>] PLAIN_PASSWORD          = 46
+  /// (Int32) 1 to make socket act as server for CURVE security, 0 otherwise
+  let [<Literal>] CURVE_SERVER            = 47
+  /// (String or Byte[]) sets the long-term public key on a client or server socket
+  let [<Literal>] CURVE_PUBLICKEY         = 48
+  /// (String or Byte[]) sets the long-term secret key on a client socket
+  let [<Literal>] CURVE_SECRETKEY         = 49
+  /// (String or Byte[]) sets the long-term server key on a client socket
+  let [<Literal>] CURVE_SERVERKEY         = 50
+  /// (Int32) 1 to automatically send an empty message on new connection, 0 otherwise
+  let [<Literal>] PROBE_ROUTER            = 51
+  /// (Int32) 1 to prefix messages with explicit request ID, 0 otherwise
+  let [<Literal>] REQ_CORRELATE           = 52
+  /// (Int32) 1 to relax strict alternation between ZMQ.REQ and ZMQ.REP, 0 otherwise
+  let [<Literal>] REQ_RELAXED             = 53
+  /// (Int32) 1 to keep last message in queue (ignores high-water mark options), 0 otherwise
+  let [<Literal>] CONFLATE                = 54
+  /// (String) Sets authentication domain
+  let [<Literal>] ZAP_DOMAIN              = 55
 
+  (* deprecated socket options *)
+
+  /// Deprecated. Do not use.
+  let [<Obsolete;Literal>] IPV4ONLY = 31
+  /// Deprecated. Use ZMQ.IMMEDAITE
+  let [<Obsolete;Literal>] DELAY_ATTACH_ON_CONNECT = IMMEDIATE
+  /// Deprecated. Use ZMQ.ROUTER_MANDATORY
+  let [<Obsolete;Literal>] FAIL_UNROUTABLE = ROUTER_MANDATORY
+  /// Deprecated. Use ZMQ.ROUTER_MANDATORY
+  let [<Obsolete;Literal>] ROUTER_BEHAVIOR = ROUTER_MANDATORY
+
+  
 (* message options *)
   
   /// (Int32) 1 if more message frames are available, 0 otherwise
   let [<Literal>] MORE = 1
+
 
 (* transmission options *)
   
@@ -192,10 +250,15 @@ module ZMQ =
   /// More message frames will follow the current frame
   let [<Literal>] SNDMORE   =   2
 
+  (* deprecated transmission options *)
+  /// Deprecated. Use ZMQ.DONTWAIT
+  let [<Obsolete;Literal>] NOBLOCK = DONTWAIT
+  
+
 (* polling *)
   let [<Literal>] POLLIN  = 1s
   let [<Literal>] POLLOUT = 2s
   let [<Literal>] POLLERR = 4s
   // common timeout lengths for polling
-  let [<Literal>] IMMEDIATE =  0L
-  let [<Literal>] FOREVER   = -1L
+  let [<Literal>] NOW     =  0L
+  let [<Literal>] FOREVER = -1L

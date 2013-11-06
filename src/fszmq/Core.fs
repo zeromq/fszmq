@@ -89,7 +89,7 @@ type Socket internal(context,socketType) =
       GC.SuppressFinalize(self)
 
 
-/// Represents the container for a group of sockets in a node</para>
+/// Represents the container for a group of sockets in a node
 type Context() =
 
   let mutable disposed = false
@@ -106,9 +106,11 @@ type Context() =
   override __.Finalize() = 
     if not disposed then
       disposed <- true
-      let okay = C.zmq_ctx_destroy(_context)
-      _context <- 0n
-      if okay <> 0 then ZMQ.error()
+      if C.zmq_ctx_shutdown(_context) = 0
+        then  let okay = C.zmq_ctx_term(_context)
+              _context <- 0n
+              if okay <> 0 then ZMQ.error()
+        else  ZMQ.error()
 
   interface IDisposable with
 

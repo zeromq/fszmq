@@ -14,6 +14,7 @@ namespace fszmq
 
 open System
 open System.Runtime.InteropServices
+open System.Text
 
 [<AutoOpen>]
 module internal Marshal =
@@ -22,11 +23,8 @@ module internal Marshal =
   let inline readInt32 pointer = Marshal.ReadInt32(pointer)
   let inline readInt64 pointer = Marshal.ReadInt64(pointer)
 
-  let inline readBool pointer  =
-    (Marshal.ReadInt32 >> Convert.ToBoolean) pointer
-
-  let inline readUInt64 pointer =
-    (Marshal.ReadInt64 >> Convert.ToUInt64) pointer
+  let inline readBool   pointer = (readInt32 >> Convert.ToBoolean) pointer
+  let inline readUInt64 pointer = (readInt64 >> Convert.ToUInt64 ) pointer
 
   let inline readBytes (length,pointer) =
     let length = int length
@@ -34,22 +32,17 @@ module internal Marshal =
     Marshal.Copy(pointer,value,0,length)
     value
 
-  let inline readString (length,pointer) =
-    System.Text.Encoding.UTF8.GetString(readBytes (length,pointer))
+  let inline readString (length,pointer) = Encoding.UTF8.GetString(readBytes (length,pointer))
 
 (* writing native values *)
   let inline writeInt32 value pointer = Marshal.WriteInt32(pointer,value)
   let inline writeInt64 value pointer = Marshal.WriteInt64(pointer,value)
 
-  let inline writeBool value pointer =
-    Marshal.WriteInt32(pointer,if value then 1 else 0)
-
-  let inline writeUInt64 (value:UInt64) pointer =
-    Marshal.WriteInt64(pointer,int64 value)
+  let inline writeBool value pointer = writeInt32 (if value then 1 else 0) pointer
+  let inline writeUInt64 (value:UInt64) pointer = writeInt64 (int64 value) pointer
+  
+  let inline writeBytes (value:byte[]) pointer = Marshal.Copy(value,0,pointer,value.Length)
 
   let inline writeString value pointer =
     let bytes = System.Text.Encoding.UTF8.GetBytes(string value) 
     Marshal.Copy(bytes,0,pointer,bytes.Length)
-
-  let inline writeBytes (value:byte[]) pointer =
-    Marshal.Copy(value,0,pointer,value.Length)

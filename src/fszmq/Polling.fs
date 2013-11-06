@@ -77,7 +77,7 @@ module Polling =
   /// Calls Polling.poll with the given sequence of 
   /// Poll items and 0 microseconds timeout
   [<CompiledName("PollNow")>]
-  let pollNow items = poll ZMQ.IMMEDIATE items
+  let pollNow items = poll ZMQ.NOW items
 
   /// Calls Polling.poll with the given sequence of Poll items and no timeout,
   /// effectively causing the polling loop to block indefinitely.

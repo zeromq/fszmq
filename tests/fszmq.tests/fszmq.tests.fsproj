@@ -76,6 +76,8 @@
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\src\fszmq\fszmq.fsproj">
       <Name>fszmq</Name>
       <Project>{d0f2cdeb-3d9c-4fe6-bef9-27b9c7f0cf71}</Project>
