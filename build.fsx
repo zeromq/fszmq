@@ -91,21 +91,19 @@ Target "Build" (fun _ ->
       Includes = [ solutionFile +       ".sln"
                    solutionFile + ".Tests.sln" ]
       Excludes = [] } 
-    |> Scan
     |> MSBuildRelease "" "Rebuild"
     |> ignore
 )
 
 // --------------------------------------------------------------------------------------
-// Run the unit tests using test runner & kill test runner when complete
+// Run the unit tests using test runner
 
 Target "RunTests" (fun _ ->
     let xunitVersion = GetPackageVersion "packages" "xunit.runners"
-    let xunitPath = sprintf "packages/xunit.runners.%s/tools/xunit.console.clr4.exe" xunitVersion
+    let xunitPath = sprintf "packages/xunit.runners.%s/tools/xunit.console.clr4.x86.exe" xunitVersion
     { BaseDirectories = [__SOURCE_DIRECTORY__]
       Includes = testAssemblies
       Excludes = [] } 
-    |> Scan
     |> xUnit (fun p ->
         { p with
             ToolPath    = xunitPath
