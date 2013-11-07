@@ -55,8 +55,16 @@
   <ItemGroup>
     <Compile Include="UnitTests.fs" />
     <None Include="packages.config" />
+    <None Include="..\..\lib\zeromq\x86\libzmq.dll">
+      <Link>libzmq.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ExtCore">
+      <HintPath>..\..\packages\ExtCore.0.8.36\lib\net40\ExtCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FsCheck">
       <HintPath>..\..\packages\FsCheck.0.9.1.0\lib\net40-Client\FsCheck.dll</HintPath>
       <Private>True</Private>

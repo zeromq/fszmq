@@ -24,10 +24,11 @@ module internal C =
   type HANDLE     =  nativeint
   type zmq_msg_t  =  nativeint
   type size_t     = unativeint
+  type strBuffer  = System.Text.StringBuilder
   
 (* version *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern void zmq_version(int& major, int& minor, int& patch)
+  extern void zmq_version([<Out>] int& major,[<Out>] int& minor,[<Out>] int& patch)
 
 (* error handling *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
@@ -89,7 +90,7 @@ module internal C =
   extern int zmq_setsockopt(HANDLE socket, int option, HANDLE value, size_t size)
    
    [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_getsockopt(HANDLE socket, int option, HANDLE value, size_t& size)
+  extern int zmq_getsockopt(HANDLE socket, int option, HANDLE value, [<Out>] size_t& size)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_bind(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
@@ -186,8 +187,12 @@ module internal C =
     logging and auditing tool. *)
 
 (* authentication *)
-//TODO:
-//  /*  Encode a binary key as printable text using ZMQ RFC 32  */
-//  ZMQ_EXPORT char *zmq_z85_encode (char *dest, uint8_t *data, size_t size);
-//  /*  Encode a binary key from printable text per ZMQ RFC 32  */
-//  ZMQ_EXPORT uint8_t *zmq_z85_decode (uint8_t *dest, char *string);
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_curve_keypair ([<Out>] strBuffer z85_public_key, [<Out>] strBuffer z85_secret_key)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern [<return: MarshalAs(UnmanagedType.AnsiBStr)>] 
+         string zmq_z85_encode (strBuffer dest, [<Out>] byte[] data, size_t size)
+  
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern HANDLE zmq_z85_decode ([<In;Out>] byte[] dest, [<MarshalAs(UnmanagedType.AnsiBStr)>] string value)

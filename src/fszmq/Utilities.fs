@@ -15,6 +15,7 @@ namespace fszmq
 open System
 open System.Collections.Generic
 open System.Runtime.CompilerServices
+open System.Text
 
 /// Contains methods for working with ZMQ's proxying capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
@@ -41,3 +42,27 @@ type ProxyingExtensions =
   [<Extension>]
   static member Proxy(frontend,backend,capture) = Proxying.proxy frontend backend (Some capture)
 
+[<RequireQualifiedAccess>]
+module Z85 =
+    
+  let [<Literal>] private KEY_SIZE = 41 //TODO: should this be hard-coded?
+
+  [<CompiledName("MakeCurveKeyPair")>]
+  let curveKeyPair () = 
+    let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
+    if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
+    publicKey,secretKey
+
+  [<CompiledName("Encode")>]
+  let encode data =
+    let datalen = Array.length data // size must be divisible by 4
+    let buffer  = StringBuilder (int ((float datalen * 1.25) + 1.0))
+    C.zmq_z85_encode(buffer,data,unativeint datalen) |> ignore
+    string buffer
+
+  [<CompiledName("Encode")>]
+  let decode data =
+    let datalen = String.length data // size must be divisible by 5
+    let buffer  = Array.zeroCreate (int (float datalen * 0.8))
+    C.zmq_z85_decode(buffer,data) |> ignore
+    buffer
