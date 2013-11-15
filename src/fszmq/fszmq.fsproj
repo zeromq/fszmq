@@ -95,6 +95,7 @@
     <Compile Include="Constants.fs" />
     <Compile Include="Core.fs" />
     <Compile Include="Marshal.fs" />
+    <Compile Include="Message.fs" />
     <Compile Include="Socket.fs" />
     <Compile Include="Context.fs" />
     <Compile Include="Polling.fs" />

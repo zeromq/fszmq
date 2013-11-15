@@ -18,9 +18,9 @@ open System.Runtime.InteropServices
 /// <summary>
 /// Provides a memory-managed wrapper over ZMQ message operations
 /// </summary>
-type Frame(?source:byte array) =
+type Message(?source:byte array) =
   let mutable disposed  = false
-  let mutable _memory   = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
+  let mutable memory    = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
 
   let (|Source|_|) = function
     | None 
@@ -30,26 +30,19 @@ type Frame(?source:byte array) =
   do (* ctor *) 
     let okay,size,data = 
       match source with
-      | Source(size,data) -> C.zmq_msg_init_size(_memory,size),size,data
-      | _                 -> C.zmq_msg_init     (_memory     ), 0un,[||]
+      | Source(size,data) -> C.zmq_msg_init_size(memory,size),size,data
+      | _                 -> C.zmq_msg_init     (memory     ), 0un,[||]
     if okay <> 0 then ZMQ.error()
-    Marshal.Copy(data,0,C.zmq_msg_data(_memory),int size)
+    Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
 
-  member __.Handle = _memory
+  member __.Handle = memory
 
-  member __.Data =  let size = C.zmq_msg_size(_memory) |> int 
-                    let data = C.zmq_msg_data(_memory)
-                    let output = Array.zeroCreate<byte> size
-                    Marshal.Copy(data,output,0,size) 
-                    output
-  member __.Size =  C.zmq_msg_size(_memory) |> int
-                
   override __.Finalize() = 
     if not disposed then
       disposed <- true
-      let okay = C.zmq_msg_close(_memory)
-      Marshal.FreeHGlobal(_memory)
-      _memory <- 0n
+      let okay = C.zmq_msg_close(memory)
+      Marshal.FreeHGlobal(memory)
+      memory <- 0n
       if okay <> 0 then ZMQ.error()
 
   interface IDisposable with

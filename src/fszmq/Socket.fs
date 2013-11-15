@@ -164,38 +164,25 @@ module Socket =
     Seq.iter (fun (t:byte[]) -> setOption socket (ZMQ.UNSUBSCRIBE,t)) topics
 
 (* message sending *)
-  let private (|Okay|Busy|Fail|) = function 
-    | -1 -> match C.zmq_errno() with 
-            | ZMQ.EAGAIN  -> Busy
-            | _           -> Fail
-    | _  ->  Okay 
-
+  
   /// Sends a frame, with the given flags, returning true (or false) 
   /// if the send was successful (or should be re-tried)
   [<Extension;CompiledName("TrySend")>]
-  let trySend (socket:Socket) flags frame =
-    use frame = new Frame(frame)
-    match C.zmq_msg_send(frame.Handle,socket.Handle,flags) with
-    | Okay -> true
-    | Busy -> false
-    | Fail -> ZMQ.error()
-
-  let private waitToSend socket flags frame =
-    let rec send' ()  =
-      match trySend socket flags frame with
-      | true  -> ((* okay *))
-      | false -> send'()
-    send'()
+  let trySend socket flags frame =
+    use msg = new Message(frame)
+    Message.trySend msg socket flags
 
   /// Sends a frame, indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
-  let send socket frame = waitToSend socket ZMQ.WAIT frame
+  let send socket frame = 
+    use msg = new Message(frame)
+    Message.send msg socket
   
-  /// Sends a frame, indicating more frames will follow, 
-  /// and returning the given socket
+  /// Sends a frame, indicating more frames will follow, and returning the given socket
   [<Extension;CompiledName("SendMore")>]
   let sendMore socket frame : Socket = 
-    waitToSend socket ZMQ.SNDMORE frame
+    use msg = new Message(frame)
+    Message.sendMore msg socket
     socket
   
   /// Operator equivalent to Socket.send
@@ -218,18 +205,16 @@ module Socket =
 
 (* message receiving *)
 
-  /// Gets the next available frame from a socket, returning option<frame> 
+  /// Gets the next available frame from a socket, returning a frame option
   /// where None indicates the operation should be re-attempted
   [<Extension;CompiledName("TryRecv")>]
-  let tryRecv (socket:Socket) flags =
-    use frame = new Frame()
-    match C.zmq_msg_recv(frame.Handle,socket.Handle,flags) with
-    | Okay -> let mutable frame' = Array.empty
-              frame' <- frame.Data
-              Some(frame')
-    | Busy -> None
-    | Fail -> ZMQ.error()
-
+  let tryRecv socket flags =
+    Message.tryRecv socket flags 
+    |> Option.map (fun msg -> let mutable frame' = Array.empty
+                              frame' <- Message.data msg
+                              (msg :> IDisposable).Dispose()
+                              frame')
+    
   /// Waits for (and returns) the next available frame from a socket
   [<Extension;CompiledName("Recv")>]
   let recv socket = Option.get (tryRecv socket ZMQ.WAIT)
@@ -248,7 +233,7 @@ module Socket =
   /// first marshaling the message part into the managed code space
   [<Extension;CompiledName("Transfer")>]
   let transfer (socket:Socket) (target:Socket) =
-    use frame = new Frame()
+    use frame = new Message()
     let rec send' flags =
       match C.zmq_msg_send(frame.Handle,target.Handle,flags) with
       | Okay -> ((* pass *))

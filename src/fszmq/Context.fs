@@ -118,7 +118,9 @@ module Context =
   /// Gets the value of the given option for the given Context
   [<Extension;CompiledName("GetOption")>]
   let getOption (context:Context) contextOption =
-    if C.zmq_ctx_get(context.Handle,contextOption) = -1 then ZMQ.error()
+    match C.zmq_ctx_get(context.Handle,contextOption) with
+    |    -1 -> ZMQ.error()
+    | value -> value
 
    /// Sets the given option value for the given Context
   [<Extension;CompiledName("SetOption")>]

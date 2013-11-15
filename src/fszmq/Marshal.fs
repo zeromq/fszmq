@@ -19,6 +19,10 @@ open System.Text
 [<AutoOpen>]
 module internal Marshal =
 
+  //NOTE: this isn't really a native/managed marshalling function.
+  //      this was just a convenient place to define it.
+  let inline bool (v:^T) = Convert.ToBoolean(v)
+   
 (* reading native values *)  
   let inline readInt32 pointer = Marshal.ReadInt32(pointer)
   let inline readInt64 pointer = Marshal.ReadInt64(pointer)
