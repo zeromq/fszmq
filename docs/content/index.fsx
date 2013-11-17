@@ -28,10 +28,10 @@ Example
 TODO: put an example here.
 
 *)
-#r "FSharp.ProjectTemplate.dll"
-open FSharp.ProjectTemplate
+#r "fszmq.dll"
+open fszmq
 
-Library.hello 0
+printfn "%A" ZMQ.version
 (**
 Some more info
 
@@ -56,7 +56,7 @@ the project and submit pull requests. If you're adding new public API, please al
 consider adding [samples][samples] that can be turned into a documentation. You might
 also want to read [library design notes](design.html) to understand how it works.
 
-The library is available under **INSERT** license, which allows modification and 
+The library is available under the Apache license, which allows modification and 
 redistribution for both commercial and non-commercial purposes. For more information see the 
 [License file][license] in the GitHub repository. 
 

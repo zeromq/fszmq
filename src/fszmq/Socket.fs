@@ -228,6 +228,9 @@ module Socket =
   let recvAll socket =
     [|  yield socket |> recv 
         while socket |> recvMore do yield socket |> recv  |]
+
+(*
+TODO: evaluate this commented-out block of code after closing issue #12 (https://github.com/pblasucci/fszmq/issues/12)
   
   /// Copies a message frame-wise from one socket to another without
   /// first marshaling the message part into the managed code space
@@ -248,6 +251,7 @@ module Socket =
 
   /// Operator equivalent to Socket.transfer
   let (>|<) socket target = target |> transfer socket
+*)
 
 (* monitoring *)
   /// Creates a ZMQ.PAIR socket, bound to the given address, which broadcasts 

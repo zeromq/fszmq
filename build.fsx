@@ -103,7 +103,7 @@ Target "RunTests" (fun _ ->
     let xunitPath = sprintf "packages/xunit.runners.%s/tools/xunit.console.clr4.x86.exe" xunitVersion
     { BaseDirectories = [__SOURCE_DIRECTORY__]
       Includes = testAssemblies
-      Excludes = [] } 
+      Excludes = [] }
     |> xUnit (fun p ->
         { p with
             ToolPath    = xunitPath

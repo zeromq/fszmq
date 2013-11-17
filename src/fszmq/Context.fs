@@ -113,6 +113,18 @@ module Context =
   [<Extension;CompiledName("SubscribeEx")>]
   let xsub context = newSocket context ZMQ.XSUB
 
+  /// <summary>
+  /// Creates a socket which can, asynchronously, send data to or 
+  /// receive data from an non-ZeroMQ peer (via the TCP transport).
+  /// <para>NOTE: each message should begin with a peer identity.</para>
+  /// <para>NOTE: a STREAM socket can act as client or a server. 
+  /// When acting as a server, the socket MUST set the SENDMORE flag.
+  /// When acting as a client, the SENDMORE flag is ignored.
+  /// Sending an identity followed by an empty frame, closes the connection.</para>
+  /// </summary>
+  [<Extension;CompiledName("Stream")>]
+  let stream context = newSocket context ZMQ.STREAM
+
 (* context options *)
   
   /// Gets the value of the given option for the given Context
