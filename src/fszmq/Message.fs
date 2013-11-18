@@ -51,12 +51,50 @@ module Message =
   [<Extension;CompiledName("HasMore")>]
   let more (message:Message) = C.zmq_msg_more(message.Handle) |> bool
 
+(* message manipulation *)
+
+  [<Extension;CompiledName("CopyTo")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let copy (source:Message) (target:Message) =
+    if C.zmq_msg_copy(target.Handle,source.Handle) <> 0 then ZMQ.error()
+  
+  [<Extension;CompiledName("MoveTo")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let move (source:Message) (target:Message) =
+    if C.zmq_msg_move(target.Handle,source.Handle) <> 0 then ZMQ.error()
+  
+  [<CompiledName("DataInit")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let dataInit (data,length) (cleanup,hint) =
+    let ffn = C.zmq_free_fn(cleanup)
+    let msg = new Message()
+    match C.zmq_msg_init_data(msg.Handle,data,length,ffn,hint) with
+    | 0 -> msg
+    | _ -> ZMQ.error()
+
+  [<Extension;CompiledName("Clone")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let clone (source:Message) = 
+    let target  = new Message()
+    let length  = size source
+    let dest    = [| C.zmq_msg_data(target.Handle) |]
+    let src     = C.zmq_msg_data(source.Handle)
+    Marshal.Copy(src,dest,0,size source)
+    target
+      
 (* message sending *)
-  let private (|Okay|Busy|Fail|) = function 
+  let internal (|Okay|Busy|Fail|) = function 
     | -1  ->  match C.zmq_errno() with 
               | ZMQ.EAGAIN  -> Busy
               | _           -> Fail
     | _   ->  Okay
+
+  let internal waitForOkay fn socket flags =
+    let rec send' ()  =
+      match fn socket flags with
+      | true  -> ((* okay *))
+      | false -> send'()
+    send'()
 
   /// Sends a frame, with the given flags, returning true (or false) 
   /// if the send was successful (or should be re-tried)
@@ -67,26 +105,19 @@ module Message =
     | Busy  -> false
     | Fail  -> ZMQ.error()
 
-  let private waitToSend message socket flags =
-    let rec send' ()  =
-      match trySend message socket flags with
-      | true  -> ((* okay *))
-      | false -> send'()
-    send'()
-
   /// Sends a frame, indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
-  let send message socket = waitToSend message socket ZMQ.WAIT
+  let send message socket = waitForOkay (trySend message) socket ZMQ.WAIT
 
   /// Sends a frame, indicating more frames will follow, 
   [<Extension;CompiledName("SendMore")>]
-  let sendMore message socket = waitToSend message socket ZMQ.SNDMORE
+  let sendMore message socket = waitForOkay (trySend message) socket (ZMQ.WAIT ||| ZMQ.SNDMORE)
 
 (* message receiving *)
 
   /// Gets the next available frame from a socket, returning a Message option 
   /// where None indicates the operation should be re-attempted
-  [<Extension;CompiledName("TryRecv")>]
+  [<CompiledName("TryRecv")>]
   let tryRecv (socket:Socket) flags =
     let frame = new Message()
     match C.zmq_msg_recv(frame.Handle,socket.Handle,flags) with
@@ -95,5 +126,5 @@ module Message =
     | Fail -> ZMQ.error()
 
   /// Waits for (and returns) the next available Message from a socket
-  [<Extension;CompiledName("Recv")>]
+  [<CompiledName("Recv")>]
   let recv socket = Option.get (tryRecv socket ZMQ.WAIT)

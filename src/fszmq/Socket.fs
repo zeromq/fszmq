@@ -168,23 +168,51 @@ module Socket =
   /// Sends a frame, with the given flags, returning true (or false) 
   /// if the send was successful (or should be re-tried)
   [<Extension;CompiledName("TrySend")>]
-  let trySend socket flags frame =
-    use msg = new Message(frame)
-    Message.trySend msg socket flags
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let trySend (socket:Socket) (frame:byte[]) flags =
+    match C.zmq_send(socket.Handle,frame,unativeint frame.Length,flags) with
+    | Message.Okay -> true
+    | Message.Busy -> false
+    | Message.Fail -> ZMQ.error()
 
-  /// Sends a frame, indicating no more frames will follow
+  /// Sends a frame (blocking), indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
-  let send socket frame = 
-    use msg = new Message(frame)
-    Message.send msg socket
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let send socket frame = Message.waitForOkay (trySend socket) frame ZMQ.WAIT
   
-  /// Sends a frame, indicating more frames will follow, and returning the given socket
+  /// Sends a frame (blocking), indicating more frames will follow, and returning the given socket
   [<Extension;CompiledName("SendMore")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let sendMore socket frame : Socket = 
-    use msg = new Message(frame)
-    Message.sendMore msg socket
+    Message.waitForOkay (trySend socket) frame (ZMQ.WAIT ||| ZMQ.SNDMORE)
     socket
   
+  /// Sends the number of bytes, given by length, from the raw memory, given by data,
+  /// returning true (or false) if the data was successfully queued (or should be re-tried)
+  [<Extension;CompiledName("TrySendConst")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let trySendConst (socket:Socket) (data:nativeint,length) flags =
+    match C.zmq_send_const(socket.Handle,data,length,flags) with
+    | Message.Okay -> true
+    | Message.Busy -> false
+    | Message.Fail -> ZMQ.error()
+
+  /// Sends the number of bytes, given by length, 
+  /// from the raw memory, given by data (blocking),
+  /// indicating that no more data will follow
+  [<Extension;CompiledName("SendConst")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let sendConst socket bufferInfo = 
+    Message.waitForOkay (trySendConst socket) bufferInfo ZMQ.WAIT
+
+  /// Sends the number of bytes, given by length, 
+  /// from the raw memory, given by data (blocking),
+  /// indicating that more data will follow
+  [<Extension;CompiledName("SendMoreConst")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let sendMoreConst socket bufferInfo = 
+    Message.waitForOkay (trySendConst socket) bufferInfo (ZMQ.WAIT ||| ZMQ.SNDMORE)
+
   /// Operator equivalent to Socket.send
   let (<<|) socket = send socket
   /// Operator equivalent to Socket.sendMore
@@ -197,6 +225,7 @@ module Socket =
 
   /// Sends all frames of a given message
   [<Extension;CompiledName("SendAll")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let sendAll socket message =
     message
     |> Seq.take (Seq.length message - 1)
@@ -208,15 +237,17 @@ module Socket =
   /// Gets the next available frame from a socket, returning a frame option
   /// where None indicates the operation should be re-attempted
   [<Extension;CompiledName("TryRecv")>]
-  let tryRecv socket flags =
-    Message.tryRecv socket flags 
-    |> Option.map (fun msg -> let mutable frame' = Array.empty
-                              frame' <- Message.data msg
-                              (msg :> IDisposable).Dispose()
-                              frame')
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
+  let tryRecv (socket:Socket) flags =
+    let buffer = Array.empty<byte>
+    match C.zmq_recv(socket.Handle,buffer,unativeint buffer.Length,flags) with
+    | Message.Okay -> Some(buffer)
+    | Message.Busy -> None
+    | Message.Fail -> ZMQ.error()
     
   /// Waits for (and returns) the next available frame from a socket
   [<Extension;CompiledName("Recv")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let recv socket = Option.get (tryRecv socket ZMQ.WAIT)
   
   /// Returns true if more message frames are available
@@ -225,33 +256,10 @@ module Socket =
 
   /// Retrieves all frames of the next available message
   [<Extension;CompiledName("RecvAll")>]
+  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let recvAll socket =
     [|  yield socket |> recv 
         while socket |> recvMore do yield socket |> recv  |]
-
-(*
-TODO: evaluate this commented-out block of code after closing issue #12 (https://github.com/pblasucci/fszmq/issues/12)
-  
-  /// Copies a message frame-wise from one socket to another without
-  /// first marshaling the message part into the managed code space
-  [<Extension;CompiledName("Transfer")>]
-  let transfer (socket:Socket) (target:Socket) =
-    use frame = new Message()
-    let rec send' flags =
-      match C.zmq_msg_send(frame.Handle,target.Handle,flags) with
-      | Okay -> ((* pass *))
-      | Busy -> send' flags
-      | Fail -> ZMQ.error()
-    let loop = ref true
-    while !loop do
-      match C.zmq_msg_recv(frame.Handle,socket.Handle,ZMQ.WAIT) with
-      | Okay -> loop := socket |> recvMore
-                send' (if !loop then ZMQ.SNDMORE else ZMQ.DONTWAIT)
-      | _ -> ZMQ.error()
-
-  /// Operator equivalent to Socket.transfer
-  let (>|<) socket target = target |> transfer socket
-*)
 
 (* monitoring *)
   /// Creates a ZMQ.PAIR socket, bound to the given address, which broadcasts 

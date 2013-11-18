@@ -40,11 +40,22 @@ module internal C =
 (* message *)
   let [<Literal>] ZMQ_MSG_T_SIZE = 32
 
+  type zmq_free_fn = delegate of data:HANDLE * hint:HANDLE -> unit
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init(zmq_msg_t msg)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init_size(zmq_msg_t msg, size_t size)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_msg_init_data(zmq_msg_t msg, HANDLE data, size_t size, zmq_free_fn ffn, HANDLE hint)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_msg_move(zmq_msg_t target, zmq_msg_t source)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_msg_copy(zmq_msg_t target, zmq_msg_t source)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_send(zmq_msg_t msg, HANDLE socket, int flags)
@@ -69,15 +80,6 @@ module internal C =
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_set(zmq_msg_t msg, int option, int optval)
-
-  (* :: MAYBE ::
-    Does it make sense to implement the functions 
-      `zmq_msg_init_data`
-      `zmq_msg_move`
-      `zmq_msg_copy` 
-    in a memory-managed environment? 
-    If you find yourself needing the nano-second speed-ups those methods offer, 
-    shouldn't you be working directly in the native library? *)
 
 (* socket *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
@@ -104,14 +106,14 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_disconnect(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
   
-  (* :: MAYBE ::
-    Does it make sense to implement the functions 
-      `zmq_send`
-      `zmq_recv`
-      `zmq_send_const` 
-    in a memory-managed environment? 
-    These functions have overlap with several `zmq_msg_*` functions,
-    and might not be feasible without direct buffer access. *)
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_send(HANDLE socket, byte[] buffer, size_t length, int flags)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_send_const(HANDLE socket, HANDLE buffer, size_t length, int flags)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_recv(HANDLE socket,[<Out>] byte[] buffer, size_t length, int flags)
 
   [<Struct;StructLayout(LayoutKind.Sequential)>]
   type zmq_event_t =

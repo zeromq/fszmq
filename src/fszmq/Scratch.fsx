@@ -32,6 +32,9 @@ open fszmq
 open fszmq
 #load "Marshal.fs"
 open fszmq
+#load "Message.fs"
+open fszmq
+open fszmq.Message
 #load "Socket.fs"
 open fszmq
 open fszmq.Socket
@@ -41,7 +44,7 @@ open fszmq.Context
 #load "Polling.fs"
 open fszmq
 open fszmq.Polling
-#load "Proxy.fs"
+#load "Utilities.fs"
 open fszmq
 open fszmq.Proxying
 
