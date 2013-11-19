@@ -12,7 +12,7 @@ let website = "http://pblasucci.github.io/fszmq"
 let info =
   [ "project-name", "fszmq"
     "project-author", "Paulmichael Blasucci"
-    "project-summary", "An Apache-licenced F# binding for the ØMQ distributed programming library."
+    "project-summary", "An LGPLv3-licenced F# binding for the ZeroMQ distributed programming library."
     "project-github", "http://github.com/pblasucci/fszmq"
     "project-nuget", "http://nuget.com/packages/fszmq" ]
 
