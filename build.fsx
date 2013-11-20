@@ -117,6 +117,10 @@ Target "Build" (fun _ ->
       Excludes = [] } 
     |> MSBuildRelease "" "Rebuild"
     |> ignore
+    // .fsproj outputs will automatically wind up in the right locations, 
+    // but native libraries need to be moved manually
+    CopyDir "bin/zeromq/x86" "lib/zeromq/x86" (fun _ -> true)
+    CopyDir "bin/zeromq/x64" "lib/zeromq/x64" (fun _ -> true)
 )
 
 // --------------------------------------------------------------------------------------
@@ -167,7 +171,8 @@ Target "NuGet" (fun _ ->
 // Generate the documentation
 
 Target "GenerateDocs" (fun _ ->
-    executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:RELEASE"] [] |> ignore
+    let fsiArgs = if hasBuildParam "Release" then ["--define:RELEASE"] else []
+    executeFSIWithArgs "docs/tools" "generate.fsx" fsiArgs [] |> ignore
 )
 
 // --------------------------------------------------------------------------------------
@@ -188,6 +193,11 @@ Target "ReleaseDocs" (fun _ ->
 Target "Release" DoNothing
 
 // --------------------------------------------------------------------------------------
+// Display a list of available targets. Useful if you haven't seen this project in a while
+
+Target "List" (fun _ -> PrintTargets())
+
+// --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
@@ -196,13 +206,13 @@ Target "All" DoNothing
   ==> "RestorePackages"
   ==> "AssemblyInfo"
   ==> "Build"
-  ==> "RunTests"
+  =?> ("RunTests",(hasBuildParam "Release" || hasBuildParam "RunTests"))
   ==> "All"
 
 "All" 
   ==> "CleanDocs"
   ==> "GenerateDocs"
-  ==> "ReleaseDocs"
+  =?> ("ReleaseDocs",hasBuildParam "Release")
   ==> "NuGet"
   ==> "Release"
 

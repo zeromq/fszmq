@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="360"
+   height="120"
+   id="svg4350"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="zmq_logo.svg">
+  <defs
+     id="defs4352" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.7222222"
+     inkscape:cx="147.89552"
+     inkscape:cy="60"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1478"
+     inkscape:window-height="1035"
+     inkscape:window-x="260"
+     inkscape:window-y="260"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4355">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-932.36218)">
+    <path
+       id="path3901-8"
+       style="fill:#ff0000;fill-opacity:1;stroke:none"
+       d="m 124.32585,937.42596 54.9099,54.7828 54.6563,-54.5293 0,106.52254 -20.6705,0 -0.1267,-56.17824 -34.1127,33.22504 -33.8589,-33.73214 0.1268,56.68534 -20.9241,-0.1275 z m 174.9692,0.031 c -30.3401,0 -54.9193,24.579 -54.9193,54.9191 0,30.34014 24.5792,54.94824 54.9193,54.94824 12.0568,0 23.1909,-3.8938 32.2528,-10.4814 l 10.1639,9.9905 13.8886,-14.5817 -10.1638,-10.0772 c 5.5563,-8.5865 8.8067,-18.8131 8.8067,-29.79864 0,-30.3399 -24.6081,-54.9189 -54.9482,-54.9189 z m -0.6352,20.7317 c 18.8506,0 34.1296,15.2788 34.1296,34.1298 0,5.076 -1.1311,9.87644 -3.1184,14.20624 l -19.8079,-19.66374 -14.5816,14.23534 20.8474,20.5297 c -5.1122,3.0536 -11.0811,4.822 -17.4691,4.822 -18.8507,0 -34.1297,-15.279 -34.1297,-34.12954 0,-18.8508 15.279,-34.1296 34.1297,-34.1296 z m -239.312,-20.7886 c -30.34,0 -54.9481996,24.5789 -54.9481996,54.9191 0,11.41504 3.4805,22.02204 9.4419996,30.80894 l -7.7383996,7.6807 14.2351996,14.5818 7.8538,-7.8252 c 8.8567,6.1115 19.5844,9.7018 31.1556,9.7018 30.3401,0 54.9482,-24.6081 54.9482,-54.94804 0,-11.4964 -3.547,-22.1642 -9.5863,-30.9825 l 7.6517,-7.6225 -14.2062,-14.2064 -7.6518,7.5941 c -8.8566,-6.1063 -19.5843,-9.7018 -31.1556,-9.7018 z m 0.087,20.7029 c 5.7758,0 11.1992,1.4489 15.9676,3.9845 l -46.2858,45.88164 c -2.4497,-4.7051 -3.8403,-10.03784 -3.8403,-15.70774 0,-18.8506 15.3079,-34.1584 34.1585,-34.1584 z m 30.2027,18.2485 c 2.502,4.7503 3.927,10.1708 3.927,15.9099 0,18.85054 -15.2791,34.12974 -34.1297,34.12974 -5.7849,0 -11.2477,-1.4451 -16.0254,-3.9847 l 46.2281,-46.05494 z"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Development\fszmq\docs\files\img\zmq_logo.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>
