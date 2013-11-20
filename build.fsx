@@ -8,6 +8,7 @@ open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open System
+open System.IO
 
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
@@ -25,11 +26,11 @@ let project = "fszmq"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "An Apache-licenced F# binding for the ØMQ distributed programming library."
+let summary = "An LGPLv3-licenced F# binding for the ZeroMQ distributed computing library"
 
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = """An Apache-licenced F# binding for the ØMQ distributed programming library."""
+let description = """An LGPLv3-licensed F# binding for the ØMQ distributed computing library."""
 
 // List of author names (for NuGet package)
 let authors = [ "Paulmichael Blasucci" ]
@@ -55,16 +56,39 @@ let gitName = "fszmq"
 // Read additional information from the release notes document
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 let release = parseReleaseNotes (IO.File.ReadAllLines "RELEASE_NOTES.md")
+let license = 
+  [|"(* ------------------------------------------------------------------------"
+    "This file is part of fszmq."
+    ""
+    "fszmq is free software: you can redistribute it and/or modify"
+    "it under the terms of the GNU Lesser General Public License as published "
+    "by the Free Software Foundation, either version 3 of the License, or"
+    "(at your option) any later version."
+    ""
+    "fszmq is distributed in the hope that it will be useful,"
+    "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the"
+    "GNU Lesser General Public License for more details."
+    ""
+    "You should have received a copy of the GNU Lesser General Public License"
+    "along with fszmq. If not, see <http://www.gnu.org/licenses/>."
+    ""
+    "Copyright (c) 2011-2013 Paulmichael Blasucci"
+    "------------------------------------------------------------------------ *)"|]
 
 // Generate assembly info files with the right version & up-to-date information
 Target "AssemblyInfo" (fun _ ->
   let fileName = "src/" + project + "/AssemblyInfo.fs"
-  CreateFSharpAssemblyInfo fileName
+  CreateFSharpAssemblyInfoWithConfig fileName
       [ Attribute.Title project
         Attribute.Product project
         Attribute.Description summary
         Attribute.Version release.AssemblyVersion
         Attribute.FileVersion release.AssemblyVersion ] 
+        { GenerateClass = false
+          UseNamespace  = project }
+  // prepend licensing header to start of AssemblyInfo file
+  File.WriteAllLines (fileName,Array.append license (File.ReadAllLines fileName))
 )
 
 // --------------------------------------------------------------------------------------
