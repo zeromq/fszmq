@@ -23,7 +23,7 @@ fszmq
 
 ### An F# binding for the ZeroMQ distributed computing library.
 
-It provides a stable well-used feature-complete binidng to 95% of the ZeroMQ library.
+It provides a stable, well-used, feature-complete binidng to 95% of the ZeroMQ library.
 The remaining feature-bindings are _experimentally_ complete. 
 This binding is primarily designed to be consumed from F#. 
 However, where possible, the library has been designed to appear "friendly" when consumed by other CLR (ie: .NET, Mono) languages (C#, et aliam).
@@ -42,13 +42,16 @@ Other platform/architecture/runtime combinations will be tested in due course.
 
 #### A note about versions
 
-The master branch of fszmq is usual tracked against the latest stable branch of ZeroMQ.
-Seperate (inactive) branches are created for major changes and usually align with stable branches of ZeroMQ.
-Specifically, for versions prior to 4, the major and minor version (eg: 2.1, 3.2) of fszmq correspond to the major and minor version of ZeroMQ.
-Starting with versin 4, the major, minor, and build version of fszmq corresponds to a stable branch of ZeroMQ.
-For example, version 3.2.5 and version 3.2.7 of fszmq is meant to be used with _any_ 3.2.x version of ZeroMQ.
+The master branch of fszmq is usually tracked against the latest stable branch of ZeroMQ.
+Separate (inactive) branches are created for major changes, and usually align with stable branches of ZeroMQ.
+
+However, for versions prior to 4.x, the major and minor version (eg: 2.1, 3.2) of fszmq correspond to the major and minor version of ZeroMQ.
+Starting with version 4.x, the major, minor, and build version of fszmq corresponds to a stable branch of ZeroMQ.
+
+For example, version 3.2.5 and version 3.2.7 of fszmq are meant to be used with _any_ 3.2.x version of ZeroMQ.
 However, _any_ 4.0.1.x version of fszmq is meant to be used with _any_ 4.0.1.x version of ZeroMQ. 
-This change is intended to allow fszmq release to track more naturally with ZeroMQ releases.
+
+This change is intended to allow fszmq releases to track more naturally with ZeroMQ releases.
 
 ---------------------------------------------------------------------------
 
