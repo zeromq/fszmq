@@ -5,21 +5,22 @@
 
 type ENV = System.Environment
 
-ENV.CurrentDirectory <- sprintf "%s../../bin/zeromq/%s" 
-                                __SOURCE_DIRECTORY__ 
-                                (if ENV.Is64BitProcess then "x64" else "x86")
+let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
+ENV.CurrentDirectory <- sprintf "%s../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 
 (**
-F# Project Scaffold
+fszmq
 ===================
 
 Documentation
 
 <div class="row">
-  <div class="span1"></div>
+  <div class="span2">
+    <img src="img/fszmq_logo.png" alt="fszmq" style="height:137px;margin:1.4em 0 0 2em;" />
+  </div>
   <div class="span6">
     <div class="well well-small" id="nuget">
-      The F# ProjectTemplate library can be <a href="https://nuget.org/packages/fszmq">installed from NuGet</a>:
+      The fszmq library can be <a href="https://nuget.org/packages/fszmq">installed from NuGet</a>:
       <pre>PM> Install-Package fszmq</pre>
     </div>
   </div>
@@ -32,12 +33,10 @@ Example
 This example demonstrates using a function defined in this sample library.
 
 *)
-
 #r "fszmq.dll"
 open fszmq
 
 printfn "%A" ZMQ.version
-
 (**
 Some more info
 
@@ -50,9 +49,9 @@ The API reference is automatically generated from Markdown comments in the libra
 
  * [Tutorial](tutorial.html) contains a further explanation of this sample library.
 
- * [API Reference](reference/index.html) contains automatically generated documentation for 
-   all public types, modules, and functions in the library. 
-   This includes additional brief samples on using most of the functions.
+ * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
+   and functions in the library. This includes additional brief samples on using most of the
+   functions.
  
 Contributing and copyright
 --------------------------

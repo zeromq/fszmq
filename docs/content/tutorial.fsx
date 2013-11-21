@@ -5,10 +5,8 @@
 
 type ENV = System.Environment
 
-ENV.CurrentDirectory <- 
-  sprintf @"%s../../bin/zeromq/%s"
-          __SOURCE_DIRECTORY__
-          (if ENV.Is64BitProcess then "x64" else "x86")
+let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
+ENV.CurrentDirectory <- sprintf "%s../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 
 (**
 Introducing your project
@@ -17,12 +15,10 @@ Introducing your project
 Say more
 
 *)
-
 #r "fszmq.dll"
 open fszmq
 
 printfn "%A" ZMQ.version
-
 (**
 Some more info
 *)
