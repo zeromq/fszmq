@@ -18,49 +18,73 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 namespace fszmq.tests
 
-open ExtCore
-open FsUnit
-open fszmq
-open NUnit.Framework
 open System
 
+#if INTERACTIVE
+#I "./bin/Debug"
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + "/bin/Debug"
+printfn "CurrentDirectory = %s" Environment.CurrentDirectory
+#r "fszmq.dll"
+#endif
+
 module Miscellany =
-    
-  [<Test>]
+
   let ``scratch`` () =
-    printfn "This is a test." //TODO: is there a more idiomatically NUnit way to do logging?
-    true |> should equal true
+    printfn "This is a test"
+    assert (true = true)
 
 module Z85 =
 
-  [<Test>]
-  let ``keypair generation requires sodium`` () =
-    
-    let HAUSNUMERO = 156384712
+  open fszmq
+
+  let [<Literal>] HAUSNUMERO = 156384712
   
-    let POSIX_ENOTSUP = 129
-    let WINXX_ENOTSUP = HAUSNUMERO ||| 1
-    
-    let err = Assert.Throws<ZMQError>(fun () -> Z85.curveKeyPair() |> ignore)
-    [POSIX_ENOTSUP;WINXX_ENOTSUP;] |> should contain err.ErrorNumber 
-    "Not supported" |> should equal err.Message
+  let [<Literal>] POSIX_ENOTSUP = 129
+  let [<Literal>] WINXX_ENOTSUP = HAUSNUMERO ||| 1
+  
+  let BINARY = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
+  let STRING = "HelloWorld"
+
+  let inline isIn items v = Seq.exists ((=) v) items
+
+  let ``keypair generation requires sodium`` () =
+    let errorCodes = [ POSIX_ENOTSUP; WINXX_ENOTSUP; ]
+    try
+      Z85.curveKeyPair() |> ignore
+    with
+    | :? ZMQError as x -> 
+            assert (x.ErrorNumber |> isIn errorCodes)
+            assert (x.Message = "Not supported"     )
+            printfn "keypair generation requires sodium"
 
   //TODO: write passing tests, once you figure out libsodium installation
 
-  [<Test>]
   let ``can encode (binary-to-string)`` () =
-    let BINARY  = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
     let encoded = Z85.encode(BINARY)
+    assert (encoded = STRING)
     printfn "%s" encoded
-    encoded |> should equal "HelloWorld"
   
   //TODO: add more tests (mostly failing) for Z85.encode
 
-  [<Test>]
   let ``can decode (string-to-binary)`` () =
-    let STRING  = "HelloWorld"
     let decoded = Z85.decode(STRING)
+    assert (decoded = BINARY)
     printfn "%A" decoded
-    decoded |> should equal [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
   
   //TODO: add more tests (mostly failing) for Z85.decode
+
+module Program =
+  
+  let [<Literal>] OKAY = 0
+
+  [<EntryPoint>]
+  let main _ =
+    printfn "%A" fszmq.ZMQ.version
+
+    Miscellany.scratch()
+
+    Z85.``keypair generation requires sodium``()
+    Z85.``can encode (binary-to-string)``()
+    Z85.``can decode (string-to-binary)``()
+     
+    OKAY
