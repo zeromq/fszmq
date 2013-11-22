@@ -41,7 +41,7 @@ let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging t
 // (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
 let solutionFile  = "fszmq"
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = ["tests/*/bin/*/fszmq*tests*.exe"]
+let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.exe"]
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted 
@@ -108,8 +108,7 @@ Target "CleanDocs" (fun _ -> CleanDirs ["docs/output"])
 
 Target "Build" (fun _ ->
   { BaseDirectories = [__SOURCE_DIRECTORY__]
-    Includes = [ solutionFile +       ".sln"
-                 solutionFile + ".Tests.sln" ]
+    Includes = [ solutionFile + ".sln" ]
     Excludes = [] } 
   |> MSBuildRelease "" "Rebuild"
   |> ignore
@@ -137,9 +136,9 @@ Target "RunTests" (fun _ ->
 
 Target "NuGet" (fun _ ->
   // Format the description to fit on a single line (remove \r\n and double-spaces)
-  let description = description.Replace("\r", "")
-                                .Replace("\n", "")
-                                .Replace("  ", " ")
+  let description = description.Replace("\r", "" )
+                               .Replace("\n", "" )
+                               .Replace("  ", " ")
   let nugetPath = ".nuget/nuget.exe"
   NuGet (fun p -> 
       { p with   
@@ -151,6 +150,7 @@ Target "NuGet" (fun _ ->
           ReleaseNotes = String.Join(Environment.NewLine, release.Notes)
           Tags = tags
           OutputPath = "bin"
+          WorkingDir = "nuget"
           ToolPath = nugetPath
           AccessKey = getBuildParamOrDefault "nugetkey" ""
           Publish = hasBuildParam "nugetkey"
@@ -203,7 +203,7 @@ Target "All" DoNothing
 "All" 
   ==> "CleanDocs"
   ==> "GenerateDocs"
-//  ==> "ReleaseDocs"
+//==> "ReleaseDocs"
   ==> "NuGet"
   ==> "Release"
 

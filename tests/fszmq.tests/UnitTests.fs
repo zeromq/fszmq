@@ -27,12 +27,6 @@ printfn "CurrentDirectory = %s" Environment.CurrentDirectory
 #r "fszmq.dll"
 #endif
 
-module Miscellany =
-
-  let ``scratch`` () =
-    printfn "This is a test"
-    assert (true = true)
-
 module Z85 =
 
   open fszmq
@@ -55,21 +49,21 @@ module Z85 =
     | :? ZMQError as x -> 
             assert (x.ErrorNumber |> isIn errorCodes)
             assert (x.Message = "Not supported"     )
-            printfn "keypair generation requires sodium"
+            printfn "TEST: keypair generation requires sodium"
 
   //TODO: write passing tests, once you figure out libsodium installation
 
   let ``can encode (binary-to-string)`` () =
     let encoded = Z85.encode(BINARY)
     assert (encoded = STRING)
-    printfn "%s" encoded
+    printfn "TEST: %s = %s" STRING encoded
   
   //TODO: add more tests (mostly failing) for Z85.encode
 
   let ``can decode (string-to-binary)`` () =
     let decoded = Z85.decode(STRING)
     assert (decoded = BINARY)
-    printfn "%A" decoded
+    printfn "TEST: %A = %A" BINARY decoded
   
   //TODO: add more tests (mostly failing) for Z85.decode
 
@@ -79,9 +73,7 @@ module Program =
 
   [<EntryPoint>]
   let main _ =
-    printfn "%A" fszmq.ZMQ.version
-
-    Miscellany.scratch()
+    printfn "TEST: %A" fszmq.ZMQ.version
 
     Z85.``keypair generation requires sodium``()
     Z85.``can encode (binary-to-string)``()
