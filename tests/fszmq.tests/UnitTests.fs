@@ -16,21 +16,40 @@ along with fszmq. If not, see <http://www.gnu.org/licenses/>.
 
 Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
-namespace fszmq.tests
-
-open System
-
 #if INTERACTIVE
+open System
+#I "../../packages/ExtCore.0.8.36/nib/net40"
+#I "../../packages/FsCheck.0.9.2.0/lib/net40-client"
+#I "../../packages/FsUnit.1.2.1.0/Lib/Net40"
+#I "../../packages/NUnit.2.6.3/lib"
 #I "./bin/Debug"
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + "/bin/Debug"
 printfn "CurrentDirectory = %s" Environment.CurrentDirectory
+#r "ExtCore.dll"
+#r "FsCheck.dll"
+#r "FsUnit.NUnit.dll"
 #r "fszmq.dll"
+#r "nunit.framework.dll"
+#else
+namespace fszmq.tests
 #endif
 
-module Z85 =
+open ExtCore
+open FsCheck
+open FsUnit
+open fszmq
+open NUnit.Framework
 
-  open fszmq
+[<AutoOpen;TestFixture>]
+module UnitTest = 
 
+  [<Test;Category("Miscellany")>]
+  let ``version should be 4.0.1``() =
+    let vsn = ZMQ.version
+    printfn "%A" vsn
+    vsn |> should equal (Version(4,0,1))
+
+(* ZCURVE & Z85 Tests *)
   let [<Literal>] HAUSNUMERO = 156384712
   
   let [<Literal>] POSIX_ENOTSUP = 129
@@ -41,42 +60,25 @@ module Z85 =
 
   let inline isIn items v = Seq.exists ((=) v) items
 
+  [<Test;Category("ZCURVE")>]
   let ``keypair generation requires sodium`` () =
-    let errorCodes = [ POSIX_ENOTSUP; WINXX_ENOTSUP; ]
-    try
-      Z85.curveKeyPair() |> ignore
-    with
-    | :? ZMQError as x -> 
-            assert (x.ErrorNumber |> isIn errorCodes)
-            assert (x.Message = "Not supported"     )
-            printfn "TEST: keypair generation requires sodium"
+    let codes = [ POSIX_ENOTSUP; WINXX_ENOTSUP; ]
+    let error = Assert.Throws<ZMQError> (fun () -> Z85.curveKeyPair() |> ignore)
+    error.Message |> should equal "Not supported"
+    codes |> should contain error.ErrorNumber
 
   //TODO: write passing tests, once you figure out libsodium installation
 
+  [<Test;Category("Z85")>]
   let ``can encode (binary-to-string)`` () =
     let encoded = Z85.encode(BINARY)
-    assert (encoded = STRING)
-    printfn "TEST: %s = %s" STRING encoded
+    encoded |> should equal STRING
   
   //TODO: add more tests (mostly failing) for Z85.encode
 
+  [<Test;Category("Z85")>]
   let ``can decode (string-to-binary)`` () =
     let decoded = Z85.decode(STRING)
-    assert (decoded = BINARY)
-    printfn "TEST: %A = %A" BINARY decoded
-  
+    decoded |> should equal BINARY
+      
   //TODO: add more tests (mostly failing) for Z85.decode
-
-module Program =
-  
-  let [<Literal>] OKAY = 0
-
-  [<EntryPoint>]
-  let main _ =
-    printfn "TEST: %A" fszmq.ZMQ.version
-
-    Z85.``keypair generation requires sodium``()
-    Z85.``can encode (binary-to-string)``()
-    Z85.``can decode (string-to-binary)``()
-     
-    OKAY

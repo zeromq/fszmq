@@ -101,16 +101,16 @@ module internal C =
   extern int zmq_getsockopt(HANDLE socket, int option, HANDLE value, [<Out>] size_t& size)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_bind(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
+  extern int zmq_bind(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_connect(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
+  extern int zmq_connect(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_unbind(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
+  extern int zmq_unbind(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_disconnect(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address)
+  extern int zmq_disconnect(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_send(HANDLE socket, byte[] buffer, size_t length, int flags)
@@ -139,7 +139,7 @@ module internal C =
     #nowarn pragma has been included near the top of the this file. *)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_socket_monitor(HANDLE socket, [<MarshalAs(UnmanagedType.AnsiBStr)>] string address, int events)
+  extern int zmq_socket_monitor(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address, int events)
     
 (* context *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
@@ -199,8 +199,7 @@ module internal C =
   extern int zmq_curve_keypair ([<Out>] strBuffer z85_public_key, [<Out>] strBuffer z85_secret_key)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern [<return: MarshalAs(UnmanagedType.AnsiBStr)>] 
-         string zmq_z85_encode (strBuffer dest, [<Out>] byte[] data, size_t size)
+  extern HANDLE zmq_z85_encode ([<Out>] strBuffer dest, byte[] data, size_t size)
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern HANDLE zmq_z85_decode ([<In;Out>] byte[] dest, [<MarshalAs(UnmanagedType.AnsiBStr)>] string value)
+  extern HANDLE zmq_z85_decode ([<Out>] byte[] dest, [<MarshalAs(UnmanagedType.LPStr)>] string value)

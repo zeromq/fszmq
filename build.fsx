@@ -41,7 +41,7 @@ let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging t
 // (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
 let solutionFile  = "fszmq"
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.exe"]
+let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.dll"]
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted 
@@ -110,7 +110,8 @@ Target "Build" (fun _ ->
   { BaseDirectories = [__SOURCE_DIRECTORY__]
     Includes = [ solutionFile + ".sln" ]
     Excludes = [] } 
-  |> MSBuildRelease "" "Rebuild"
+  |> MSBuild "" "Rebuild" [ "Configuration","Release"
+                            "Platform"     ,"x86" ]
   |> ignore
   // .fsproj outputs will automatically wind up in the right locations, 
   // but native libraries need to be moved manually
@@ -122,13 +123,25 @@ Target "Build" (fun _ ->
 // Run the unit tests
 
 Target "RunTests" (fun _ ->
-  if not <|({ BaseDirectories = [__SOURCE_DIRECTORY__]
-              Includes = testAssemblies
-              Excludes = [] } 
-            |> Seq.map (fun testBlock -> { defaultParams with Program = testBlock })
-            |> Seq.map shellExec
-            |> Seq.forall ((=) 0))
-  then failwith "one or more tests failed"
+    let nunitVersion = GetPackageVersion "packages" "NUnit.Runners"
+    let nunitPath = sprintf "packages/NUnit.Runners.%s/Tools" nunitVersion
+    ActivateFinalTarget "CloseTestRunner"
+
+    { BaseDirectories = [__SOURCE_DIRECTORY__]
+      Includes = testAssemblies
+      Excludes = [] } 
+    |> NUnit (fun p ->
+        { p with
+            ToolPath = nunitPath
+            ToolName = "nunit-console-x86.exe"
+            Framework = "net-4.5"
+            DisableShadowCopy = true
+            TimeOut = TimeSpan.FromMinutes 20.
+            OutputFile = "TestResults.xml" })
+)
+
+FinalTarget "CloseTestRunner" (fun _ ->  
+    ProcessHelper.killProcess "nunit-agent-x86.exe"
 )
 
 // --------------------------------------------------------------------------------------
