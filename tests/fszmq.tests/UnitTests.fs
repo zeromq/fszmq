@@ -18,7 +18,7 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 #if INTERACTIVE
 open System
-#I "../../packages/ExtCore.0.8.36/nib/net40"
+#I "../../packages/ExtCore.0.8.36/lib/net40"
 #I "../../packages/FsCheck.0.9.2.0/lib/net40-client"
 #I "../../packages/FsUnit.1.2.1.0/Lib/Net40"
 #I "../../packages/NUnit.2.6.3/lib"
