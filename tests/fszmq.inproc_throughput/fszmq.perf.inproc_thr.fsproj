@@ -50,8 +50,9 @@
     <Compile Include="Native.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
-    <None Include="..\..\lib\zeromq\x64\libzmq.dll">
+    <None Include="..\..\lib\zeromq\x86\libzmq.dll">
       <Link>libzmq.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
