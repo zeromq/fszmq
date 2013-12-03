@@ -45,13 +45,7 @@ Other platform/architecture/runtime combinations will be tested in due course.
 The master branch of fszmq is usually tracked against the latest stable branch of ZeroMQ.
 Separate (inactive) branches are created for major changes, and usually align with stable branches of ZeroMQ.
 
-However, for versions prior to 4.x, the major and minor version (eg: 2.1, 3.2) of fszmq correspond to the major and minor version of ZeroMQ.
-Starting with version 4.x, the major, minor, and build version of fszmq corresponds to a stable branch of ZeroMQ.
-
-For example, version 3.2.5 and version 3.2.7 of fszmq are meant to be used with _any_ 3.2.x version of ZeroMQ.
-However, _any_ 4.0.1.x version of fszmq is meant to be used with _any_ 4.0.1.x version of ZeroMQ. 
-
-This change is intended to allow fszmq releases to track more naturally with ZeroMQ releases.
+_TODO: provide further details about the versioning process_
 
 ---------------------------------------------------------------------------
 
