@@ -113,11 +113,21 @@ module Message =
 
   /// Sends a frame, indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
-  let send message socket = waitForOkay (trySend message) socket ZMQ.WAIT
+  let send socket message = waitForOkay (trySend message) socket ZMQ.WAIT
 
   /// Sends a frame, indicating more frames will follow, 
   [<Extension;CompiledName("SendMore")>]
-  let sendMore message socket = waitForOkay (trySend message) socket (ZMQ.WAIT ||| ZMQ.SNDMORE)
+  let sendMore socket message = waitForOkay (trySend message) socket (ZMQ.WAIT ||| ZMQ.SNDMORE)
+
+  /// Operator equivalent to Message.send
+  let (<<-) socket = send socket
+  /// Operator equivalent to Message.sendMore
+  let (<<+) socket = sendMore socket
+
+  /// Operator equivalent to Message.send (with arguments reversed)
+  let (->>) message socket = socket <<- message
+  /// Operator equivalent to Message.sendMore (with arguments reversed)
+  let (+>>) message socket = socket <<+ message
 
 (* message receiving *)
 
