@@ -96,6 +96,7 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
     <Compile Include="UnitTests.fs" />
+    <Compile Include="MessageTests.fs" />
     <None Include="packages.config" />
     <None Include="app.config" />
     <None Include="..\..\lib\zeromq\x86\libzmq.dll">

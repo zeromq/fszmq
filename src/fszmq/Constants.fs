@@ -28,15 +28,16 @@ open System.Runtime.InteropServices
 /// patch number</para>
 /// <para>or an `Unknown` indicator</para>
 /// </summary>
-[<StructuredFormatDisplay("{show}")>]
+[<StructuredFormatDisplay("{Text}")>]
 type Version = Version of int * int * int 
              | Unknown with 
 
-    member private V.show = match V with
-                            | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
-                            | Unknown        -> "<unknown>"
+    /// textual representation of Verison
+    member V.Text = match V with
+                    | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
+                    | Unknown        -> "<unknown>"
 
-    override V.ToString() = V.show
+    override V.ToString() = V.Text
 
 
 /// <summary>
@@ -76,39 +77,57 @@ module ZMQ =
 
 
 (* error codes *)
+  /// Non-blocking mode was requested and the message cannot be sent at the moment
   let [<Literal>] EAGAIN = 11 //TODO: is this cross-platform (WIN + POSIX)? what about 35?
 
   let [<Literal>] private HAUSNUMERO = 156384712
   
-  let EFSM            = HAUSNUMERO + 51
-  let ENOCOMPATPROTO  = HAUSNUMERO + 52
-  let ETERM           = HAUSNUMERO + 53
-  let EMTHREAD        = HAUSNUMERO + 54
+  let internal EFSM            = HAUSNUMERO + 51
+  let internal ENOCOMPATPROTO  = HAUSNUMERO + 52
+  let internal ETERM           = HAUSNUMERO + 53
+  let internal EMTHREAD        = HAUSNUMERO + 54
 
 
 (* context options *)
+  /// (Int32) Set number of OS-level I/O threads
   let [<Literal>] IO_THREADS  = 1
+  /// (Int32) Set maximum number of sockets for a context
   let [<Literal>] MAX_SOCKETS = 2
-  // default for new contexts
+
+  (* default for new contexts *)
+  /// default number of OS-level I/O threads (1)
   let [<Literal>] IO_THREADS_DFLT   =    1
+  /// default maximum number of sockets (1024)
   let [<Literal>] MAX_SOCKETS_DFLT  = 1024
 
 
 (* event codes *)
-  let EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int>
+  let internal EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int>
 
+  /// Socket connection established
   let [<Literal>] EVENT_CONNECTED       =    1us
+  /// Synchronous connection failed; socket is being polled
   let [<Literal>] EVENT_CONNECT_DELAYED =    2us
+  /// Asynchronous (re)connection attempt
   let [<Literal>] EVENT_CONNECT_RETRIED =    4us
+  /// Socket bound to address; ready to accept connections
   let [<Literal>] EVENT_LISTENING       =    8us
+  /// Socket could not bind to address
   let [<Literal>] EVENT_BIND_FAILED     =   16us
+  /// Connection accepted to bound interface
   let [<Literal>] EVENT_ACCEPTED        =   32us
+  /// Could not accept client connection
   let [<Literal>] EVENT_ACCEPT_FAILED   =   64us
+  /// Socket connection closed
   let [<Literal>] EVENT_CLOSED          =  128us
+  /// Connection could not be closed (only for ipc transport)
   let [<Literal>] EVENT_CLOSE_FAILED    =  256us
+  /// Broken session (specific to ipc and tcp transports)
   let [<Literal>] EVENT_DISCONNECTED    =  512us
+  /// Event monitoring has been disabled
   let [<Literal>] EVENT_MONITOR_STOPPED = 1024us
   
+  /// Monitor all possible events
   let [<Literal>] EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
                           ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
                           ||| EVENT_ACCEPTED  ||| EVENT_ACCEPT_FAILED
@@ -118,17 +137,29 @@ module ZMQ =
 
 
 (* socket types *)
+  /// An exclusive pair of two sockets (primarily for use with inproc transport)
   let [<Literal>] PAIR    =  0
+  /// A publisher which broadcasts topic-prefixed messages
   let [<Literal>] PUB     =  1
+  /// A subscribe which receives topic-prefixed messages
   let [<Literal>] SUB     =  2
+  /// Makes synchronous requests of a server (i.e. ZMQ.REP, ZMQ.ROUTER), awaits replies
   let [<Literal>] REQ     =  3
+  /// Awaits synchronous requests of a client (i.e. ZMQ.REQ, ZMQ.DEALER), makes replies
   let [<Literal>] REP     =  4
+  /// Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REP, ZMQ.DEALER, ZMQ.ROUTER)
   let [<Literal>] DEALER  =  5
+  /// Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REQ, ZMQ.DEALER, ZMQ.ROUTER)
   let [<Literal>] ROUTER  =  6
+  /// Collects messages in a fair-queued fashion from across all upstream (i.e. ZMQ.PUSH) nodes
   let [<Literal>] PULL    =  7
+  /// Delivers messages in a round-robin fashion to across all downstream (i.e. ZMQ.PULL) nodes
   let [<Literal>] PUSH    =  8
+  /// A publisher like ZMQ.PUB, but does not automatically receive forwarded topic subscriptions
   let [<Literal>] XPUB    =  9
+  /// A publisher like ZMQ.SUB, but does not automatically forward topic subscriptions
   let [<Literal>] XSUB    = 10
+  /// Exchanges raw data with a non-ZeroMQ peer via the tcp transport
   let [<Literal>] STREAM  = 11
 
   (* deprecated socket types *)
@@ -230,6 +261,10 @@ module ZMQ =
   /// (String) Sets authentication domain
   let [<Literal>] ZAP_DOMAIN              = 55
 
+  (* common values *)
+  /// (Int32) the value needed to disable lingering on a socket's outbound queue
+  let [<Literal>] NO_LINGER = 0
+
   (* deprecated socket options *)
 
   /// Deprecated. Do not use.
@@ -263,9 +298,15 @@ module ZMQ =
   
 
 (* polling *)
+  /// poll for inbound messages
   let [<Literal>] POLLIN  = 1s
+  /// poll for outbound messages
   let [<Literal>] POLLOUT = 2s
+  /// poll for messages on stderr (for use with file descriptors)
   let [<Literal>] POLLERR = 4s
-  // common timeout lengths for polling
+  
+  (* common timeout lengths for polling *)
+  /// indicates polling should exit immediately
   let [<Literal>] NOW     =  0L
+  /// indicates polling should wait indefinitely 
   let [<Literal>] FOREVER = -1L

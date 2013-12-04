@@ -93,8 +93,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Native.fs" />
     <Compile Include="Constants.fs" />
-    <Compile Include="Core.fs" />
     <Compile Include="Marshal.fs" />
+    <Compile Include="Core.fs" />
     <Compile Include="Message.fs" />
     <Compile Include="Socket.fs" />
     <Compile Include="Context.fs" />

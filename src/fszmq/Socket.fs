@@ -49,6 +49,7 @@ type ZMQEvent =
       match ZMQEvent.TryBuild(message) with
       | Some zmqEvent -> zmqEvent
       | None          -> raise <| ZMQ.NotAnEvent message
+/// Provides more-granular information about a ZMQEvent
 and ZMQEventDetails =
   | Connected       of handle   : int
   | ConnectDelayed
@@ -145,12 +146,10 @@ module Socket =
       | :? (string) as v  -> v.Length     ,(writeString v)
       | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
       | _                 -> invalidOp "Invalid data type"
-    let buffer = Marshal.AllocHGlobal(size)
-    try
-      write(buffer)
-      if C.zmq_setsockopt(socket.Handle,socketOption,buffer,unativeint size) <> 0 then ZMQ.error()
-    finally
-      Marshal.FreeHGlobal(buffer)
+    useBuffer (fun (size,buffer) -> write buffer
+                                    let okay = C.zmq_setsockopt(socket.Handle,socketOption,buffer,size)
+                                    if  okay <> 0 then ZMQ.error())
+              size
 
   /// Sets the given block of option values for the given Socket
   [<Extension;CompiledName("Configure")>]
@@ -190,29 +189,6 @@ module Socket =
     Message.waitForOkay (trySend socket) frame (ZMQ.WAIT ||| ZMQ.SNDMORE)
     socket
   
-  /// Sends the number of bytes, given by length, from the raw memory, given by data,
-  /// returning true (or false) if the data was successfully queued (or should be re-tried)
-  [<Extension;CompiledName("TrySendConst")>]
-  let trySendConst (socket:Socket) (data:nativeint,length) flags =
-    match C.zmq_send_const(socket.Handle,data,length,flags) with
-    | Message.Okay -> true
-    | Message.Busy -> false
-    | Message.Fail -> ZMQ.error()
-
-  /// Sends the number of bytes, given by length, 
-  /// from the raw memory, given by data (blocking),
-  /// indicating that no more data will follow
-  [<Extension;CompiledName("SendConst")>]
-  let sendConst socket bufferInfo = 
-    Message.waitForOkay (trySendConst socket) bufferInfo ZMQ.WAIT
-
-  /// Sends the number of bytes, given by length, 
-  /// from the raw memory, given by data (blocking),
-  /// indicating that more data will follow
-  [<Extension;CompiledName("SendMoreConst")>]
-  let sendMoreConst socket bufferInfo = 
-    Message.waitForOkay (trySendConst socket) bufferInfo (ZMQ.WAIT ||| ZMQ.SNDMORE)
-
   /// Operator equivalent to Socket.send
   let (<<|) socket = send socket
   /// Operator equivalent to Socket.sendMore

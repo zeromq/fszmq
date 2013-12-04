@@ -28,6 +28,14 @@ module internal Marshal =
   //NOTE: this isn't really a native/managed marshalling function.
   //      this was just a convenient place to define it.
   let inline bool (v:^T) = Convert.ToBoolean(v)
+
+(* general-purpose helpers *)
+  let inline useBuffer fn (size:int) =
+    let buffer = Marshal.AllocHGlobal(size)
+    try
+      fn (unativeint size,buffer)
+    finally
+      Marshal.FreeHGlobal(buffer)
    
 (* reading native values *)  
   let inline readInt32 pointer = Marshal.ReadInt32(pointer)

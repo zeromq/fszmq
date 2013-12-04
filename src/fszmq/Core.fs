@@ -30,17 +30,20 @@ type Message(?source:byte array) =
 
   let (|Source|_|) = function
     | None 
-    | Some null -> None
-    | Some data -> Some(data |> Array.length |> unativeint,data)
+    | Some null ->  None
+    | Some data ->  let size = (Array.length >> unativeint) data
+                    Some(size,data)
 
   do (* ctor *) 
-    let okay,size,data = 
-      match source with
-      | Source(size,data) -> C.zmq_msg_init_size(memory,size),size,data
-      | _                 -> C.zmq_msg_init     (memory     ), 0un,[||]
-    if okay <> 0 then ZMQ.error()
-    Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
+    match source with
+    | Source(size,data) ->  if C.zmq_msg_init_size(memory,size) <> 0 then ZMQ.error()
+                            Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
+    | _                 ->  if C.zmq_msg_init(memory) <> 0 then ZMQ.error()
 
+  /// <summary>
+  /// Pointer to underlying (native) ZMQ context
+  /// <remarks>NOTE: For internal use only.</remarks>
+  /// </summary>
   member __.Handle = memory
 
   override __.Finalize() = 
@@ -66,6 +69,12 @@ type Socket internal(context,socketType) =
   let mutable disposed  = false
   let mutable _socket   = C.zmq_socket(context,socketType)
 
+  let cancelLinger () =
+    useBuffer (fun (size,buffer) -> writeInt32 ZMQ.NO_LINGER buffer
+                                    let okay = C.zmq_setsockopt(_socket,ZMQ.LINGER,buffer,unativeint size)
+                                    if  okay <> 0 then ZMQ.error()) 
+              sizeof<Int32>
+
   do if _socket = 0n then ZMQ.error()
 
   /// <summary>
@@ -77,6 +86,7 @@ type Socket internal(context,socketType) =
   override __.Finalize() =
     if not disposed then
       disposed <- true
+      cancelLinger ()
       let okay = C.zmq_close(_socket)
       _socket <- 0n
       if okay <> 0 then ZMQ.error()

@@ -59,33 +59,35 @@ module Message =
 
 (* message manipulation *)
 
+  /// <summary>
+  /// Copies the content from one message to another message.
+  /// <para>Avoid modifying message content after a message has been copied, as this can result in undefined behavior. 
+  /// If what you need is an actual hard copy, see `Message.clone()`</para>
+  /// </summary>
+  [<Experimental("The function may lead to unstable code or may be removed in a future version. Use with caution.")>]
   [<Extension;CompiledName("CopyTo")>]
-  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let copy (source:Message) (target:Message) =
     if C.zmq_msg_copy(target.Handle,source.Handle) <> 0 then ZMQ.error()
   
+  /// <summary>
+  /// Moves the content from one message to another message.
+  /// <para>No actual copying of message content is performed, `target` is simply updated to reference the new content. 
+  /// `source` becomes an empty message after calling `Message.move()`. 
+  /// The original content of `target`, if any, shall be released.</para>
+  /// </summary>
+  [<Experimental("The function may lead to unstable code or may be removed in a future version. Use with caution.")>]
   [<Extension;CompiledName("MoveTo")>]
-  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let move (source:Message) (target:Message) =
     if C.zmq_msg_move(target.Handle,source.Handle) <> 0 then ZMQ.error()
-  
-  [<CompiledName("DataInit")>]
-  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
-  let dataInit (data,length) (cleanup,hint) =
-    let ffn = C.zmq_free_fn(cleanup)
-    let msg = new Message()
-    match C.zmq_msg_init_data(msg.Handle,data,length,ffn,hint) with
-    | 0 -> msg
-    | _ -> ZMQ.error()
 
+  /// Makes a new instance of the `Message` type, with an independent copy of the `source` content.
   [<Extension;CompiledName("Clone")>]
-  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let clone (source:Message) = 
-    let target  = new Message()
-    let length  = size source
-    let dest    = [| C.zmq_msg_data(target.Handle) |]
-    let src     = C.zmq_msg_data(source.Handle)
-    Marshal.Copy(src,dest,0,size source)
+    let target = new Message()
+    Marshal.Copy(data source
+                ,0 // start from the very beginning... a fine place to start
+                ,C.zmq_msg_data(target.Handle)
+                ,size source)
     target
       
 (* message sending *)

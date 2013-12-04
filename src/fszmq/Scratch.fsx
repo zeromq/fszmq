@@ -34,9 +34,9 @@ printfn "CurrentDirectory = %s" Environment.CurrentDirectory
 open fszmq
 #load "Constants.fs"
 open fszmq
-#load "Core.fs"
-open fszmq
 #load "Marshal.fs"
+open fszmq
+#load "Core.fs"
 open fszmq
 #load "Message.fs"
 open fszmq

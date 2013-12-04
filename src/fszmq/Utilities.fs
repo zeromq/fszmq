@@ -48,17 +48,14 @@ type ProxyingExtensions =
   [<Extension>]
   static member Proxy(frontend,backend,capture) = Proxying.proxy frontend backend (Some capture)
 
+/// Utilities for working with ZeroMQ Base-85 Encoding
 [<RequireQualifiedAccess>]
 module Z85 =
     
-  let [<Literal>] private KEY_SIZE = 41 //TODO: should this be hard-coded?
-
-  [<CompiledName("MakeCurveKeyPair")>]
-  let curveKeyPair () = 
-    let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
-    if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
-    publicKey,secretKey
-
+  /// <summary>
+  /// Encodes a binary block into a string using ZeroMQ Base-85 Encoding.
+  /// <para>Note: the size of the binary block MUST be divisible be 4.</para>
+  /// </summary>
   [<CompiledName("Encode")>]
   let encode data =
     let datalen = Array.length data // size must be divisible by 4
@@ -66,9 +63,28 @@ module Z85 =
     if C.zmq_z85_encode(buffer,data,unativeint datalen) = 0n then ZMQ.error()
     string buffer
 
+  /// <summary>
+  /// Decodes ZeroMQ Base-85 encoded string to a binary block.
+  /// <para>Note: the size of the string MUST be divisible be 5.</para>
+  /// </summary>
   [<CompiledName("Decode")>]
   let decode data =
     let datalen = String.length data // size must be divisible by 5
     let buffer  = Array.zeroCreate (datalen * 4 / 5)
     if C.zmq_z85_decode(buffer,data) = 0n then ZMQ.error()
     buffer
+
+/// Utilities for working with the CurveZMQ security protocol
+module Curve =
+    
+  let [<Literal>] private KEY_SIZE = 41 //TODO: should this be hard-coded?
+  
+  /// <summary>
+  /// Returns a newly generated random keypair consisting of a public key and a secret key.
+  /// <para>The keys are encoded using ZeroMQ Base-85 Encoding.</para>
+  /// </summary>
+  [<CompiledName("MakeCurveKeyPair")>]
+  let curveKeyPair () = 
+    let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
+    if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
+    (string publicKey),(string secretKey)

@@ -46,17 +46,16 @@ module internal C =
 (* message *)
   let [<Literal>] ZMQ_MSG_T_SIZE = 32
 
-  type zmq_free_fn = delegate of data:HANDLE * hint:HANDLE -> unit
-
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init(zmq_msg_t msg)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init_size(zmq_msg_t msg, size_t size)
 
-  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_msg_init_data(zmq_msg_t msg, HANDLE data, size_t size, zmq_free_fn ffn, HANDLE hint)
-
+  (* :: NOTE ::
+  No binding is given for libzmq.zmq_msg_init_data(...), as it is a micro-optimization function.
+  For such low-level performance tuning, code should be written in a native (i.e. unmanaged) language. *)
+  
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_move(zmq_msg_t target, zmq_msg_t source)
 
@@ -115,8 +114,9 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_send(HANDLE socket, byte[] buffer, size_t length, int flags)
 
-  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
-  extern int zmq_send_const(HANDLE socket, HANDLE buffer, size_t length, int flags)
+  (* :: NOTE ::
+  No binding is given for libzmq.zmq_send_const(...), as it is a micro-optimization function.
+  For such low-level performance tuning, code should be written in a native (i.e. unmanaged) language. *)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_recv(HANDLE socket,[<Out>] byte[] buffer, size_t length, int flags)
