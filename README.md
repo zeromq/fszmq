@@ -42,8 +42,6 @@ Further, many of the module functions are extensions when used from CLR language
 (i.e. they present as member functions on instances of `Context`, `Socket`, or `Message`). 
 Finally, many relevant constant values are defined in the `fszmq.ZMQ` module.
 
----------------------------------------------------------------------------
-
 #### A note about versions
 
 The master branch of fszmq is tracked against the latest stable branch of ZeroMQ.
@@ -55,6 +53,12 @@ However, the third segment of fszmq's version is _in no way correlated_ to any p
 semanitcally minor changes to the actual fszmq codebase. The practical take-away from all this is: 
 so long as the major versions agree, you're not likely to have no problems between fszmq and libzmq. If you do, 
 open an [issue](http://github.com/pblasucci/fszmq/issues) and it'll get sorted.
+
+#### Testing
+
+_Please note: a full testing suite is under development, but is (woefully) incomplete at this time._
+
+_Please note: comprehensive documentation is under development, but is incomplete at this time._
 
 ---------------------------------------------------------------------------
 
@@ -86,14 +90,6 @@ the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or 
 **Be Advised** 
 The ZeroMQ library file (libzmq) will need to be made available for the 2.1.x and 3.2.x branches to run. 
 Starting with the current Master (targeting the 4.0.x release of 0MQ), copies of libzmq are included with the project source.
-
----------------------------------------------------------------------------
-
-#### Testing
-
-_Please note: a full testing suite is under development, but is (woefully) incomplete at this time._
-
-_Please note: comprehensive documentation is under development, but is incomplete at this time._
 
 ---------------------------------------------------------------------------
 
