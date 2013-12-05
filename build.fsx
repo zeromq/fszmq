@@ -26,11 +26,16 @@ let project = "fszmq"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "An LGPLv3-licenced F# binding for the ZeroMQ distributed computing library"
+let summary = "An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library."
 
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = """An LGPLv3-licensed F# binding for the ØMQ distributed computing library."""
+let description = """
+fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library. 
+It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ 
+(Note: each binding is a separate branch in git, as there are some non-compatible differences). 
+This library is primarily designed to be consumed from F#. However, where possible, 
+the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam)."""
 
 // List of author names (for NuGet package)
 let authors = [ "Paulmichael Blasucci" ]

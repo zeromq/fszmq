@@ -6,13 +6,17 @@
 type ENV = System.Environment
 
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+ENV.CurrentDirectory <- sprintf "%s../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 
 (**
 fszmq
 ===================
 
-Documentation
+fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library. 
+It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ 
+(Note: each binding is a separate branch in git, as there are some non-compatible differences). 
+This library is primarily designed to be consumed from F#. However, where possible, the library has been designed 
+to appear "friendly" when consumed by other CLR languages (C#, et aliam).
 
 <div class="row">
   <div class="span2">
@@ -20,38 +24,58 @@ Documentation
   </div>
   <div class="span6">
     <div class="well well-small" id="nuget">
-      The fszmq library can be <a href="https://nuget.org/packages/fszmq">installed from NuGet</a>:
+      The fszmq library can be <a href="https://www.nuget.org/packages/fszmq">installed from NuGet</a>:
       <pre>PM> Install-Package fszmq</pre>
     </div>
   </div>
   <div class="span1"></div>
 </div>
 
-Example
+Getting Started
 -------
 
-This example demonstrates using a function defined in this sample library.
+The simplest thing we can do with fszmq is print the ZeroMQ version. That is, we can display the version, 
+which is not fixed at compile-time, of the native library (i.e. libzmq) against which fszmq.dll is current bound.
+_(Note: the version of fszmq.dll, itself, may be retrieved via the normal mechanisms for CLR libraries.)_
 
 *)
 #r "fszmq.dll"
 open fszmq
 
-printfn "%A" ZMQ.version
-(**
-Some more info
+printfn "libzmq version: %A" ZMQ.version
 
-Samples & documentation
+(**
+Running this code should produce something like the following (the actual numbers may be different on your machine):
+
+<table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span></pre>
+</td>
+<td class="snippet"><pre class="fssnip"><span class="i">&gt;</span>
+<span class="i">libzmq version: 4.0.1</span>
+<span class="i">&gt;</span></pre>
+</td>
+</tr>
+</tbody></table>
+*)
+
+(**
+Samples & Documentation
 -----------------------
 
-The library comes with comprehensible documentation. 
-It can include a tutorials automatically generated from `*.fsx` files in [the content folder][content]. 
-The API reference is automatically generated from Markdown comments in the library implementation.
+This library features API documentation, and an ever-growing collection of samples. Most of these narrative-style examples
+are also executable F# scripts, and may be found in [the content folder][content] (Hint: look for files ending in `.fsx`).
 
- * [Tutorial](tutorial.html) contains a further explanation of this sample library.
+In particular, please review:
 
- * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
-   and functions in the library. This includes additional brief samples on using most of the
-   functions.
+ * [Hello, World](tutorial.html) ... contains a more complete, but simplistic, example of fszmq in action.
+
+ * [API Reference](reference/index.html) ... contains automatically generated documentation for all types, modules, 
+   and functions in the library. This includes additional brief samples on using some of the functionality.
+
+Additionally, general information about ZeroMQ maybe found at [http://zero.mq](http://zeromq.org). 
+And [the zguide][zguide] is a well-written, exhaustive explanation of the library.
+While the zguide features examples in many languages, there are [F#-specific zguide code samples](http://pblasucci.github.io/fszmq).
  
 Contributing and copyright
 --------------------------
@@ -76,4 +100,5 @@ For more information see the [documentation license file][docslicense] in the Gi
   [readme]: https://github.com/pblasucci/fszmq/blob/master/README.md
   [license]: https://github.com/pblasucci/fszmq/blob/master/COPYING.lesser
   [docslicense]: https://github.com/pblasucci/fszmq/blob/master/docs/files/LICENSE.txt
+  [zguide]: http://zguide.zeromq.org/page:all
 *)
