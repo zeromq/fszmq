@@ -22,14 +22,13 @@ open System
 open System.Collections.Generic
 open System.Runtime.CompilerServices
 
-/// <summary>
 /// For use with the Poll module...
-/// <para>Associates a callback with a Socket instance and one or more 
-/// events, such that the callback is invoked when the event(s) occurs on 
-/// the Socket instance</para>
-/// <remarks>NOTE: all sockets passed to Polling.poll MUST share the 
-/// same context and belong to the thread calling Polling.poll</remarks>
-/// </summary>
+/// 
+/// Associates a callback with a Socket instance and one or more events, 
+/// such that the callback is invoked when the event(s) occurs on the Socket instance
+/// 
+/// ** Note: all sockets passed to Polling.poll MUST share the same context 
+/// and belong to the thread calling `Polling.poll`. **
 type Poll = Poll of events:int16 * Socket * (Socket -> unit) with  
 
   /// Creates a poll item in a way friendly to languages other then F#
@@ -58,14 +57,12 @@ module Polling =
   let private poller (Poll(v,s,_)) = C.zmq_pollitem_t(s.Handle,v)
   let private invoke (Poll(_,s,f)) = f s
 
-  /// <summary>
-  /// Performs a single polling run across the give sequence of 
-  /// Poll items, waiting up to the given timeout. 
-  /// <para>Returns true when one or more callbacks have been invoked, 
-  /// returns false otherwise</para>
-  /// <remarks>NOTE: All items passed to Polling.poll MUST share the same
-  /// context and belong to the thread calling Polling.poll</remarks>
-  /// </summary>
+  /// Performs a single polling run 
+  /// across the given sequence of Poll items, waiting up to the given timeout. 
+  /// Returns true when one or more callbacks have been invoked, returns false otherwise.
+  ///
+  /// ** Note: All items passed to Polling.poll MUST share the same context 
+  /// and belong to the thread calling `Polling.poll`. **
   [<CompiledName("Poll")>]
   let poll timeout items =
     let items  = items |> Array.ofSeq

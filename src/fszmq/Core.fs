@@ -21,9 +21,7 @@ namespace fszmq
 open System
 open System.Runtime.InteropServices
 
-/// <summary>
 /// Provides a memory-managed wrapper over ZMQ message operations
-/// </summary>
 type Message(?source:byte array) =
   let mutable disposed  = false
   let mutable memory    = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
@@ -40,10 +38,9 @@ type Message(?source:byte array) =
                             Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
     | _                 ->  if C.zmq_msg_init(memory) <> 0 then ZMQ.error()
 
-  /// <summary>
-  /// Pointer to underlying (native) ZMQ context
-  /// <remarks>NOTE: For internal use only.</remarks>
-  /// </summary>
+  /// Pointer to underlying (native) ZMQ message
+  /// 
+  /// ** Note: For internal use only. **
   member __.Handle = memory
 
   override __.Finalize() = 
@@ -77,10 +74,9 @@ type Socket internal(context,socketType) =
 
   do if _socket = 0n then ZMQ.error()
 
-  /// <summary>
   /// Pointer to underlying (native) ZMQ socket
-  /// <remarks>NOTE: For internal use only.</remarks>
-  /// </summary>
+  /// 
+  /// ** Note: For internal use only. **
   member __.Handle = _socket
 
   override __.Finalize() =
@@ -106,10 +102,9 @@ type Context() =
   
   do if _context = 0n then ZMQ.error()
   
-  /// <summary>
   /// Pointer to underlying (native) ZMQ context
-  /// <remarks>NOTE: For internal use only.</remarks>
-  /// </summary>
+  /// 
+  /// ** Note: For internal use only. **
   member __.Handle  = _context
 
   override __.Finalize() = 
