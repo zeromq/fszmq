@@ -48,7 +48,7 @@ The master branch of fszmq is tracked against the latest stable branch of ZeroMQ
 Separate (inactive) branches are created for major changes, and usually align with stable branches of ZeroMQ.
 As a rule, the first segment of fszmq's versioning scheme _always_ matches the first segment of libzmq's versioning scheme
 (e.g. fszmq version 3.x.y is tracked against libzmq version 3.x.y). Further, in practice, the second segement of fszmq's
-versioning scheme _usually_ matches the equivalent in libzmq. While this can not be guaranteed, it has not be invalided yet.
+versioning scheme _usually_ matches the equivalent in libzmq. While this can not be guaranteed, it has not been invalided yet.
 However, the third segment of fszmq's version is _in no way correlated_ to any part of libzmq. The third segment tracks 
 semanitcally minor changes to the actual fszmq codebase. The practical take-away from all this is: 
 so long as the major versions agree, you're not likely to have no problems between fszmq and libzmq. If you do, 
