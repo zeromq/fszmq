@@ -76,6 +76,14 @@ there is a native libzmq port) and will be tested in due course..
 
 _Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
 
+### NuGet
+
+The fszmq library can be [installed from NuGet](https://www.nuget.org/packages/fszmq):
+
+<pre>PM> Install-Package fszmq</pre>
+
+_Please note: the fszmq NuGet package will attempt to include a version of libzmq (either x86 or x64/AnyCPU, depending on configuration) with your project._
+
 ### Building
 
 fszmq (for the 2.1.x branch) should be compiled with Visual Studio 2010 SP1, 
