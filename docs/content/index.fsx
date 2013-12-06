@@ -52,7 +52,7 @@ Running this code should produce something like the following (the actual number
 <span class="l"> 3: </span></pre>
 </td>
 <td class="snippet"><pre class="fssnip"><span class="i">&gt;</span>
-<span class="i">libzmq version: 4.0.1</span>
+<span class="i">libzmq version: 4.0.4</span>
 <span class="i">&gt;</span></pre>
 </td>
 </tr>

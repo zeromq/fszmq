@@ -47,7 +47,7 @@ module UnitTest =
   let ``version should be 4.0.1``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
-    vsn |> should equal (Version(4,0,1))
+    vsn |> should equal (Version(4,0,4))
 
 (* ZCURVE & Z85 Tests *)
   let [<Literal>] HAUSNUMERO = 156384712
