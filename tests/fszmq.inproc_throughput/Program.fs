@@ -60,6 +60,7 @@ let runTest messageSize messageCount =
                             checkSize' message)
   thread.Join()
 
+  //TODO: double-check the following calculations
   let throughput = 
     int64 ((float messageCount) / (float microsecs) * 1000000.0)
   let megabits = 

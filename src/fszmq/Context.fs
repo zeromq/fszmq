@@ -35,7 +35,7 @@ module Context =
   /// <summary>
   /// Creates a peer connected to exactly one other peer. 
   /// <para>This socket type is used primarily for inter-thread 
-  /// communication across the "inproc" transport.</para>
+  /// communication across the `inproc` transport.</para>
   /// </summary>
   [<Extension;CompiledName("Pair")>]
   let pair context = newSocket context ZMQ.PAIR
@@ -61,7 +61,7 @@ module Context =
   /// <summary>
   /// Creates an advanced socket type used for extending the request/reply 
   /// pattern. 
-  /// <para>When a ZMQ.DEALER socket is connected to a ZMQ.REP socket,
+  /// <para>When a `ZMQ.DEALER` socket is connected to a `ZMQ.REP` socket,
   /// each message sent must consist of an empty message part, the 
   /// delimiter, followed by one or more body parts.</para>
   /// </summary>
@@ -71,19 +71,19 @@ module Context =
   /// <summary>
   /// Creates an advanced socket type used for extending the request/reply 
   /// pattern. 
-  /// <para>When receiving messages a ZMQ.ROUTER socket prepends a 
+  /// <para>When receiving messages a `ZMQ.ROUTER` socket prepends a 
   /// message part containing the identity of the originating peer. </para>
-  /// <para>When sending messages a ZMQ.ROUTER socket removes the first 
+  /// <para>When sending messages a `ZMQ.ROUTER` socket removes the first 
   /// part of the message and uses it to determine the identity of the recipient.</para>
   /// </summary>
   [<Extension;CompiledName("Router")>]
   let route context = newSocket context ZMQ.ROUTER
   
-  /// Creates a pipeline node to receive messages from upstream (PUSH) nodes.
+  /// Creates a pipeline node to receive messages from upstream (`ZMQ.PUSH`) nodes.
   [<Extension;CompiledName("Pull")>]
   let pull context = newSocket context ZMQ.PULL
   
-  /// Creates a pipeline node to send messages to downstream (PULL) nodes.
+  /// Creates a pipeline node to send messages to downstream (`ZMQ.PULL`) nodes.
   [<Extension;CompiledName("Push")>]
   let push context = newSocket context ZMQ.PUSH
   
@@ -96,7 +96,7 @@ module Context =
   
   /// <summary>
   /// Creates a subscriber to receive to data distributed by a publisher. 
-  /// <para>Initially a ZMQ.SUB socket is not subscribed to any messages 
+  /// <para>Initially a `ZMQ.SUB` socket is not subscribed to any messages 
   /// (i.e. one, or more, subscriptions must be manually applied before 
   /// any messages will be received).</para>
   /// </summary>
@@ -120,11 +120,11 @@ module Context =
 
   /// <summary>
   /// Creates a socket which can, asynchronously, send data to or 
-  /// receive data from an non-ZeroMQ peer (via the TCP transport). 
+  /// receive data from an non-ZeroMQ peer (via the `TCP` transport). 
   /// <para>Note: each message should begin with a peer identity. </para>
-  /// <para>Additionally, a STREAM socket can act as client or a server. 
-  /// When acting as a server, the socket MUST set the SENDMORE flag. 
-  /// When acting as a client, the SENDMORE flag is ignored. 
+  /// <para>Additionally, a `ZMQ.STREAM` socket can act as client or a server. 
+  /// When acting as a server, the socket MUST set the `ZMQ.SENDMORE` flag. 
+  /// When acting as a client, the `ZMQ.SENDMORE` flag is ignored. 
   /// Sending an identity followed by an empty frame, closes the connection.</para>
   /// </summary>
   [<Extension;CompiledName("Stream")>]

@@ -126,13 +126,12 @@ module Socket =
       elif  t = typeof<string>  then 255,(       readString >> box)
       elif  t = typeof<byte[]>  then 255,(       readBytes  >> box)
                                 else invalidOp "Invalid data type"
-    let buffer = Marshal.AllocHGlobal(size)
-    try
+    let getter (size,buffer) = 
       let mutable size' = unativeint size
-      if C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') <> 0 then ZMQ.error()
-      downcast read (size',buffer)
-    finally
-      Marshal.FreeHGlobal(buffer)
+      match C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') with 
+      | 0 -> downcast read (size',buffer)
+      | _ -> ZMQ.error()
+    useBuffer getter size
 
   /// Sets the given option value for the given Socket
   [<Extension;CompiledName("SetOption")>]
@@ -146,10 +145,11 @@ module Socket =
       | :? (string) as v  -> v.Length     ,(writeString v)
       | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
       | _                 -> invalidOp "Invalid data type"
-    useBuffer (fun (size,buffer) -> write buffer
-                                    let okay = C.zmq_setsockopt(socket.Handle,socketOption,buffer,size)
-                                    if  okay <> 0 then ZMQ.error())
-              size
+    let setter (size,buffer) =
+      write buffer
+      let okay = C.zmq_setsockopt(socket.Handle,socketOption,buffer,size)
+      if  okay <> 0 then ZMQ.error()
+    useBuffer setter size
 
   /// Sets the given block of option values for the given Socket
   [<Extension;CompiledName("Configure")>]
@@ -201,7 +201,6 @@ module Socket =
 
   /// Sends all frames of a given message
   [<Extension;CompiledName("SendAll")>]
-  [<Microsoft.FSharp.Core.Experimental("WARNING: Experimental function!")>]
   let sendAll socket message =
     message
     |> Seq.take (Seq.length message - 1)
@@ -238,8 +237,8 @@ module Socket =
         while socket |> recvMore do yield socket |> recv  |]
 
 (* monitoring *)
-  /// Creates a ZMQ.PAIR socket, bound to the given address, which broadcasts 
-  /// events for the given socket. These events should be consumed by another ZMQ.PAIR socket 
+  /// Creates a `ZMQ.PAIR` socket, bound to the given address, which broadcasts 
+  /// events for the given socket. These events should be consumed by another `ZMQ.PAIR` socket 
   /// connected to the given address (preferably on a background thread). 
   [<Extension;CompiledName("CreateMonitor")>]
   let monitor (socket:Socket) address events =

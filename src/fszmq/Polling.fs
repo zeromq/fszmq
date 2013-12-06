@@ -32,8 +32,7 @@ open System.Runtime.CompilerServices
 type Poll = Poll of events:int16 * Socket * (Socket -> unit) with  
 
   /// Creates a poll item in a way friendly to languages other then F#
-  static member Create(events,socket,callback:Action<Socket>) =
-    Poll(events,socket,fun s -> callback.Invoke(s))
+  static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
 
 /// Contains methods for working with ZMQ's polling capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
@@ -54,9 +53,6 @@ module Polling =
   [<CompiledName("PollInOut")>]
   let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
-  let private poller (Poll(v,s,_)) = C.zmq_pollitem_t(s.Handle,v)
-  let private invoke (Poll(_,s,f)) = f s
-
   /// Performs a single polling run 
   /// across the given sequence of Poll items, waiting up to the given timeout. 
   /// Returns true when one or more callbacks have been invoked, returns false otherwise.
@@ -66,12 +62,13 @@ module Polling =
   [<CompiledName("Poll")>]
   let poll timeout items =
     let items  = items |> Array.ofSeq
-    let items' = items |> Array.map poller
+    let items' = items |> Array.map (fun (Poll(v,s,_)) -> C.zmq_pollitem_t(s.Handle,v))
     match C.zmq_poll(items',items'.Length,timeout) with
     | 0             ->  false (* pass *)
     | n when n > 0  ->  for i in 0 .. items'.GetUpperBound(0) do
-                          let e,r = items'.[i].events,items'.[i].revents
-                          if e &&& r = e then items.[i] |> invoke
+                          let e,r = items'.[i].events
+                                   ,items'.[i].revents
+                          if e &&& r = e then items.[i] |> (fun (Poll(_,s,f)) -> f s)
                         true
     | _             ->  ZMQ.error()
 

@@ -57,7 +57,8 @@ module Z85 =
   /// ** Note: the size of the binary block MUST be divisible be 4. **
   [<CompiledName("Encode")>]
   let encode data =
-    let datalen = Array.length data // size must be divisible by 4
+    let datalen = Array.length data 
+    assert (datalen % 4 = 0) // size must be divisible by 4
     let buffer  = StringBuilder (datalen * 5 / 4 + 1)
     if C.zmq_z85_encode(buffer,data,unativeint datalen) = 0n then ZMQ.error()
     string buffer
@@ -67,7 +68,8 @@ module Z85 =
   /// ** Note: the size of the string MUST be divisible be 5. **
   [<CompiledName("Decode")>]
   let decode data =
-    let datalen = String.length data // size must be divisible by 5
+    let datalen = String.length data 
+    assert (datalen % 5 = 0) // size must be divisible by 5
     let buffer  = Array.zeroCreate (datalen * 4 / 5)
     if C.zmq_z85_decode(buffer,data) = 0n then ZMQ.error()
     buffer

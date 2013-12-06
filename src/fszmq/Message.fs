@@ -84,10 +84,7 @@ module Message =
   [<Extension;CompiledName("Clone")>]
   let clone (source:Message) = 
     let target = new Message()
-    Marshal.Copy(data source
-                ,0 // start from the very beginning... a fine place to start
-                ,C.zmq_msg_data(target.Handle)
-                ,size source)
+    Marshal.Copy(data source,0,C.zmq_msg_data(target.Handle),size source)
     target
       
 (* message sending *)
