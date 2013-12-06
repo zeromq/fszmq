@@ -37,9 +37,12 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="../bin/fszmq.dll"             target="lib\net45\fszmq.dll"  />
-    <file src="../bin/fszmq.xml"             target="lib\net45\fszmq.xml"  />
-    <file src="../bin/zeromq/x86/libzmq.dll" target="content\libzmq.dll"   />
-    <file src="Install.ps1"                  target="tools\Install.ps1"    />
+    <file src="..\bin\fszmq.dll"        target="lib\net40\fszmq.dll"/>
+    <file src="..\bin\fszmq.xml"        target="lib\net40\fszmq.xml"/>
+    <file src="..\bin\fszmq.dll"        target="lib\net45\fszmq.dll"/>
+    <file src="..\bin\fszmq.xml"        target="lib\net45\fszmq.xml"/>
+    <file src="..\bin\zeromq\**\*.dll"  target="tools\zeromq"       />
+    <file src="Install.ps1"             target="tools\Install.ps1"  />
+    <file src="Uninstall.ps1"           target="tools\Uninstall.ps1"/>
   </files>
 </package>

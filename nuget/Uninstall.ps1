@@ -19,33 +19,11 @@
 
 param($installPath, $toolsPath, $package, $project)
 
-# build path to appropriate version of native library
-$libzmqPath = $toolsPath + "\zeromq\"
-if ($project.ConfigurationManager.ActiveConfiguration.PlatformName -eq "x86")
-{
-  # use 32-bit native library
-  $libzmqPath = $libzmqPath + "x86\libzmq.dll"
-}
-else
-{
-  # use 64-bit native library
-  $libzmqPath = $libzmqPath + "x64\libzmq.dll"
-}
+# get native library
+$libzmq = $project.ProjectItems.Item("libzmq.dll")
 
-$libzmqFile = $project.ProjectItems.AddFromFileCopy($libzmqPath)
-if ($libzmqFile -ne $null)
+if ($libzmq -ne $null)
 {
-  # BuildAction syntax varies by project type
-  if ($project.Type -eq "F#")
-  {
-    $libzmqFile.Properties.Item("BuildAction").Value = 
-      ([Microsoft.VisualStudio.FSharp.ProjectSystem.BuildAction]::None)
-  }
-  else
-  {
-    $libzmqFile.Properties.Item("BuildAction").Value = 0 # None
-  }
-
-  # CopyToOuptutDirectory is the same across project types
-  $libzmqFile.Properties.Item("CopyToOutputDirectory").Value = 1 # CopyAlways
+  # remove file
+  $libzmq.Delete()
 }
