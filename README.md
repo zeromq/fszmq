@@ -93,7 +93,9 @@ DO NOT USE THE BINARY DISTRIBUTION. Instead, compile fszmq from source with the 
 In an IDE (e.g. Visual Studio, Xamarin Studio), this can be set in the project properties for fszmq. 
 If you are using fsc.exe to compile from the command-line, include `--define:BSD_EAGAIN` as part of your command.
 
-### Building
+### Pre-requisites
+
+fszmq targets version 4.0, and above, of the .NET runtime, or the equivalent version of the Mono run-time (although it's been known to run on early versions). 
 
 fszmq (for the 2.1.x branch) should be compiled with Visual Studio 2010 SP1, 
 the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or Xamarin Studio.
