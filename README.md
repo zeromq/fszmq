@@ -73,6 +73,8 @@ At this point in time, fszmq has been tested against the CLR on the following pl
 Other platform/architecture/runtime combinations should work (so long as the .NET or Mono are supported and 
 there is a native libzmq port) and will be tested in due course..
 
+_Please note: comprehensive Mac OS X testing has NOT been conducted, due to resource constraints._
+_Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
 _Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
 
 ### NuGet
