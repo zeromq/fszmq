@@ -69,7 +69,6 @@ At this point in time, fszmq has been tested against the CLR on the following pl
 * 64-bit Windows Server 2008 R2 (running against .NET)
 * 32-bit and 64-bit Windows 7 (running against .NET or Mono)
 * 32-bit and 64-bit Windows 8 (running against .NET or Mono)
-* 32-bit and 64-bit OS X Snow Leopard (running agains Mono)
 
 Other platform/architecture/runtime combinations should work (so long as the .NET or Mono are supported and 
 there is a native libzmq port) and will be tested in due course..
