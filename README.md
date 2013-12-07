@@ -95,7 +95,7 @@ If you are using fsc.exe to compile from the command-line, include `--define:BSD
 
 ### Pre-requisites
 
-fszmq targets version 4.0, and above, of the .NET runtime, or the equivalent version of the Mono run-time (although it's been known to run on early versions). 
+fszmq targets version 4.0, and above, of the .NET runtime, or the equivalent version of the Mono run-time (although it's been known to run on earlier versions). 
 
 fszmq (for the 2.1.x branch) should be compiled with Visual Studio 2010 SP1, 
 the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or Xamarin Studio.
