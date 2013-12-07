@@ -46,7 +46,7 @@ namespace fszmq.compat.cs
             Debug.WriteLine("{0} ({1})", evt.Details, evt.Address);
             if (evt.Details.IsMonitorStopped) break;
           }
-          catch (ZMQ.NotAnEvent x)
+          catch (ZMQError x)
           { 
             Debug.WriteLine("ERROR: {0}", x.Message);
           }
@@ -62,9 +62,9 @@ namespace fszmq.compat.cs
         socket.CreateMonitor(MONITOR_ADDRESS,ZMQ.EVENT_ALL);
         (new Thread(Monitor)).Start(context);
         socket.Bind(REQUEST_ADDRESS);
+        
         var doLoop = true;
-        Console.CancelKeyPress += (_,e) => { doLoop   = false;
-                                             e.Cancel = false; };
+        Console.CancelKeyPress += (_,e) => { doLoop = false; e.Cancel = false; };
         while (doLoop)
         {
           Thread.Sleep(ONE_SECOND / 2);

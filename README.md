@@ -81,7 +81,15 @@ The fszmq library can be [installed from NuGet](https://www.nuget.org/packages/f
 
 <pre>PM> Install-Package fszmq</pre>
 
-_Please note: the fszmq NuGet package will attempt to include a version of libzmq (either x86 or x64/AnyCPU, depending on configuration) with your project._
+_Please note: the fszmq NuGet package will attempt to include a version of libzmq (either x86 or x64/AnyCPU, 
+depending on configuration) with your project._
+
+**Be Advised**
+Several popular Unix-based operating systems (e.g. FreeBSD, Mac OSX) may exhibit strange behavior when sending and receiving 
+(via the `Message` and `Socket` modules). This is due to alternate OS-level values for EAGAIN (and EWOULDBLOCK). To remedy this,
+DO NOT USE THE BINARY DISTRIBUTION. Instead, compile fszmq from source with the conditional-compilation symbol `BSD_EAGAIN`.
+In an IDE (e.g. Visual Studio, Xamarin Studio), this can be set in the project properties for fszmq. 
+If you are using fsc.exe to compile from the command-line, include `--define:BSD_EAGAIN` as part of your command.
 
 ### Building
 

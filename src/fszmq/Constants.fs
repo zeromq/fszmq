@@ -55,9 +55,6 @@ type ZMQError internal(errnum,errmsg) =
 [<RequireQualifiedAccess>]
 module ZMQ =
   
-  /// Occurs when trying to build a ZMQEvent instance from non-event data
-  exception NotAnEvent of Message:byte[][]
-
   /// Version of the underlying (native) ZMQ library
   [<CompiledName("Version")>]
   let version =
@@ -74,19 +71,21 @@ module ZMQ =
   let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
   // constructs and raises native-to-managed errors
   let inline internal error() = (buildError >> raise) <| C.zmq_errno() 
-
+  // helper for "faking" native errors
+  let inline internal einval() = raise <| ZMQError(22,"Invalid argument")
 
 (* error codes *)
+  #if BSD_EAGAIN
   /// Non-blocking mode was requested and the message cannot be sent at the moment
-  let [<Literal>] EAGAIN = 11 //TODO: is this cross-platform (WIN + POSIX)? what about 35?
-
-  let [<Literal>] private HAUSNUMERO = 156384712
-  
-  let internal EFSM            = HAUSNUMERO + 51
-  let internal ENOCOMPATPROTO  = HAUSNUMERO + 52
-  let internal ETERM           = HAUSNUMERO + 53
-  let internal EMTHREAD        = HAUSNUMERO + 54
-
+  let [<Literal>] EAGAIN = 35 // popular Unix systems like FreeBSD, OpenBSD, and Mac OSX
+  #else
+  /// Non-blocking mode was requested and the message cannot be sent at the moment
+  let [<Literal>] EAGAIN = 11 // all version of Windows, anything running the Linux kernel
+  #endif
+  (* :: NOTE :: 
+    Binary distributions of fszmq will likely fail on systems using BSD-style EAGAIN and/or EWOULDBLOCK 
+    (most commonly FreeBSD, OpenBSD, or Mac OSX). If you are targeting such an OS, please compile fszmq 
+    from source after defining the appropriate pragma value (e.g. `--define:BSD_EAGAIN`). *)
 
 (* context options *)
   /// (Int32) Set number of OS-level I/O threads

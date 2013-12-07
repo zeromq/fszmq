@@ -48,7 +48,7 @@ type ZMQEvent =
     static member Build(message) =
       match ZMQEvent.TryBuild(message) with
       | Some zmqEvent -> zmqEvent
-      | None          -> raise <| ZMQ.NotAnEvent message
+      | None          -> ZMQ.einval()
 /// Provides more-granular information about a ZMQEvent
 and ZMQEventDetails =
   | Connected       of handle   : int

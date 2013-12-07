@@ -58,7 +58,7 @@ module Z85 =
   [<CompiledName("Encode")>]
   let encode data =
     let datalen = Array.length data 
-    assert (datalen % 4 = 0) // size must be divisible by 4
+    if  datalen = 0 then ZMQ.einval()
     let buffer  = StringBuilder (datalen * 5 / 4 + 1)
     if C.zmq_z85_encode(buffer,data,unativeint datalen) = 0n then ZMQ.error()
     string buffer
@@ -69,7 +69,7 @@ module Z85 =
   [<CompiledName("Decode")>]
   let decode data =
     let datalen = String.length data 
-    assert (datalen % 5 = 0) // size must be divisible by 5
+    if  datalen = 0 then ZMQ.einval()
     let buffer  = Array.zeroCreate (datalen * 4 / 5)
     if C.zmq_z85_decode(buffer,data) = 0n then ZMQ.error()
     buffer

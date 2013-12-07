@@ -97,7 +97,6 @@
   <ItemGroup>
     <Compile Include="UnitTests.fs" />
     <Compile Include="MessageTests.fs" />
-    <Compile Include="SocketTests.fs" />
     <None Include="packages.config" />
     <None Include="app.config" />
     <None Include="..\..\lib\zeromq\x86\libzmq.dll">

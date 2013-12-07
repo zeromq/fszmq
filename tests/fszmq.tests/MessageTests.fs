@@ -37,8 +37,56 @@ namespace fszmq.tests
 open FsUnit
 open fszmq
 open NUnit.Framework
+open NUnit.Framework.Constraints
+open System
 
 [<AutoOpen;TestFixture>]
 module MessageTest = 
-  begin (* TODO: ??? *) end
   
+  open fszmq.Message
+
+  [<Test;Category("Message Manipulation")>]
+  let ``clone returns a distinct instance with identical content`` () =
+    use msg1 = new Message("test"B)
+    use msg2 = Message.clone msg1
+    msg2 |> should not' (equal msg1)
+    (size msg2) |> should equal (size msg1)
+    (data msg2) |> should equal (data msg1)
+
+  [<Test;Category("Message Manipulation")>]
+  let ``both message should have the same content after copying`` () =
+    use msg1 = new Message("test"B)
+    use msg2 = new Message("sample"B)
+    (data msg2) |> should not' (equal (data msg1))
+    Message.copy msg1 msg2
+    (data msg2) |> should equal (data msg1)
+
+  [<Test;Category("Message Manipulation")>]
+  let ``copy requires two distinct message instances`` () =
+    let error = Assert.Throws<ZMQError> (fun () -> use msg = new Message()
+                                                   Message.copy msg msg)
+    error.Message |> should equal "Invalid argument"
+
+  [<Test;Category("Message Manipulation")>]
+  let ``after moving, target content should equal original content`` () =
+    use source = new Message("test"B)
+    use target = new Message("sample"B)
+    let srcData = data source
+    (data target) |> should not' (equal srcData)
+    Message.move source target
+    (data target) |> should equal srcData
+
+  [<Test;Category("Message Manipulation")>]
+  let ``after moving, source message content should be empty`` () =
+    use source = new Message("test"B)
+    use target = new Message()
+    (data target) |> should not' (equal (data source))
+    Message.move source target
+    (size source) |> should equal 0
+    (data source) |> should not' (equal (data target))
+
+  [<Test;Category("Message Manipulation")>]
+  let ``move requires two distinct message instances`` () =
+    let error = Assert.Throws<ZMQError> (fun () -> use msg = new Message()
+                                                   Message.move msg msg)
+    error.Message |> should equal "Invalid argument"

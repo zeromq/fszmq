@@ -34,8 +34,6 @@ printfn "CurrentDirectory = %s" Environment.CurrentDirectory
 namespace fszmq.tests
 #endif
 
-open ExtCore
-open FsCheck
 open FsUnit
 open fszmq
 open NUnit.Framework
@@ -44,17 +42,12 @@ open NUnit.Framework
 module UnitTest = 
 
   [<Test;Category("Miscellany")>]
-  let ``version should be 4.0.1``() =
+  let ``major version should be 4.0.4``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
     vsn |> should equal (Version(4,0,4))
 
 (* ZCURVE & Z85 Tests *)
-  let [<Literal>] HAUSNUMERO = 156384712
-  
-  let [<Literal>] POSIX_ENOTSUP = 129
-  let [<Literal>] WINXX_ENOTSUP = HAUSNUMERO ||| 1
-  
   let BINARY = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
   let STRING = "HelloWorld"
 
@@ -62,23 +55,39 @@ module UnitTest =
 
   [<Test;Category("ZCURVE")>]
   let ``keypair generation requires sodium`` () =
-    let codes = [ POSIX_ENOTSUP; WINXX_ENOTSUP; ]
     let error = Assert.Throws<ZMQError> (fun () -> Curve.curveKeyPair() |> ignore)
     error.Message |> should equal "Not supported"
-    codes |> should contain error.ErrorNumber
-
+    
   //TODO: write passing tests, once you figure out libsodium installation
 
   [<Test;Category("Z85")>]
   let ``can encode (binary-to-string)`` () =
     let encoded = Z85.encode(BINARY)
     encoded |> should equal STRING
-  
-  //TODO: add more tests (mostly failing) for Z85.encode
+    
+  [<Test;Category("Z85")>]
+  let ``unencoded binary must be divisible by 4`` () =
+    let binary = BINARY.[1 ..] // 7 bytes shouldn't be divisible by 4
+    let error  = Assert.Throws<ZMQError> (fun () -> Z85.encode(binary) |> ignore)
+    error.Message |> should equal "Invalid argument"
+
+  [<Test;Category("Z85")>]
+  let ``unencoded binary must not be zero-length`` () =
+    let error = Assert.Throws<ZMQError> (fun () -> Z85.encode([||]) |> ignore)
+    error.Message |> should equal "Invalid argument"
 
   [<Test;Category("Z85")>]
   let ``can decode (string-to-binary)`` () =
     let decoded = Z85.decode(STRING)
     decoded |> should equal BINARY
       
-  //TODO: add more tests (mostly failing) for Z85.decode
+  [<Test;Category("Z85")>]
+  let ``encoded string must be divisible by 5`` () =
+    let string = STRING + "!" // 11 bytes shouldn't be divisible by 5
+    let error  = Assert.Throws<ZMQError> (fun () -> Z85.decode(string) |> ignore)
+    error.Message |> should equal "Invalid argument"
+
+  [<Test;Category("Z85")>]
+  let ``encoded string must not be zero-length`` () =
+    let error = Assert.Throws<ZMQError> (fun () -> Z85.decode("") |> ignore)
+    error.Message |> should equal "Invalid argument"

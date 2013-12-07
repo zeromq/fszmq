@@ -62,30 +62,27 @@ module Message =
   /// <summary>
   /// Copies the content from one message to another message.
   /// <para>Avoid modifying message content after a message has been copied, as this can result in undefined behavior. 
-  /// If what you need is an actual hard copy, see `Message.clone()`</para>
+  /// If what you need is an actual hard copy, see `Message.clone()`.</para>
   /// </summary>
-  [<Experimental("The function may lead to unstable code or may be removed in a future version. Use with caution.")>]
   [<Extension;CompiledName("CopyTo")>]
   let copy (source:Message) (target:Message) =
+    if source.Handle = target.Handle then ZMQ.einval()
     if C.zmq_msg_copy(target.Handle,source.Handle) <> 0 then ZMQ.error()
   
   /// <summary>
   /// Moves the content from one message to another message.
   /// <para>No actual copying of message content is performed, `target` is simply updated to reference the new content. 
-  /// `source` becomes an empty message after calling `Message.move()`. 
-  /// The original content of `target`, if any, shall be released.</para>
+  /// `source` becomes an empty message after calling `Message.move()`. The original content of `target`, if any, 
+  /// shall be released. To preseve the content of source, see `Message.copy()`.</para>
   /// </summary>
-  [<Experimental("The function may lead to unstable code or may be removed in a future version. Use with caution.")>]
   [<Extension;CompiledName("MoveTo")>]
   let move (source:Message) (target:Message) =
+    if source.Handle = target.Handle then ZMQ.einval()
     if C.zmq_msg_move(target.Handle,source.Handle) <> 0 then ZMQ.error()
 
   /// Makes a new instance of the `Message` type, with an independent copy of the `source` content.
   [<Extension;CompiledName("Clone")>]
-  let clone (source:Message) = 
-    let target = new Message()
-    Marshal.Copy(data source,0,C.zmq_msg_data(target.Handle),size source)
-    target
+  let clone (source:Message) = new Message(data source)
       
 (* message sending *)
   let internal (|Okay|Busy|Fail|) = function 
