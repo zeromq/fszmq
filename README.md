@@ -23,7 +23,7 @@ fszmq
 
 ### An F# binding for the ZeroMQ distributed computing library.
 
-fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library. 
+fszmq is an LGPLv3-licensed F# binding for the ZeroMQ distributed computing library. 
 It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ 
 (Note: each binding is a separate branch in git, as there are some non-compatible differences). 
 This library is primarily designed to be consumed from F#. However, where possible, the library has been designed 

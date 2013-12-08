@@ -47,7 +47,6 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Native.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <None Include="..\..\lib\zeromq\x86\libzmq.dll">

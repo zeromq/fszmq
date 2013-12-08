@@ -16,58 +16,57 @@ along with fszmq. If not, see <http://www.gnu.org/licenses/>.
 
 Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
-module fszmq.perf.inproc_thr.Program
+module fszmq.perf.inproc_lat.Program
 
 open fszmq
 open fszmq.Context
+open fszmq.Message
 open fszmq.Socket
+open fszmq.Timing
 open System.Diagnostics
 open System.Threading
 
 (* _ zeromq ____________________________________________________________ *)
 
-let [<Literal>] ENDPOINT = "inproc://thr_test"
+let [<Literal>] ENDPOINT = "inproc://lat_test"
 
 let worker (state:obj) =
-  let messageSize,messageCount,context = downcast state
-  use socket = push context
+  let roundtripCount,context = downcast state
+  use socket = rep context
   connect socket ENDPOINT
   
-  for _ in 1L .. messageCount do
-    let message = Array.zeroCreate messageSize
-    message |>> socket
+  for _ in 1L .. roundtripCount do
+    let message = Message.recv socket
+    message ->> socket
 
 let checkSize messageSize message =
-  if Array.length message <> messageSize 
-        then failwith "message of incorrect size received"
+  if size message <> messageSize then failwith "message of incorrect size received"
 
-let runTest messageSize messageCount =
-  let checkSize' = checkSize messageSize
+let processMessages messageSize roundtripCount socket =
+  use message  = new Message(Array.zeroCreate messageSize)
+  for i in 1L .. roundtripCount do
+    use msgOut = clone message
+    msgOut ->> socket
+    use msgIn = Message.recv socket
+    checkSize messageSize msgIn
 
+let runTest messageSize roundtripCount =
   use context = new Context()
-  use socket  = pull context
+  use socket  = req context
   bind socket ENDPOINT
   
   let thread = Thread(ParameterizedThreadStart(worker))
-  thread.Start((messageSize,messageCount,context))
+  thread.Start((roundtripCount,context))
   
-  let message = recv socket
-  checkSize' message
-
-  let microsecs = 
-    execTimed (fun () ->  for _ in 1L .. (messageCount - 1L) do
-                            let message = recv socket
-                            checkSize' message)
+  printfn "message size: %i [B]" messageSize
+  printfn "roundtrip count: %i" roundtripCount
+  
+  let elapsed = execTimed (fun () -> processMessages messageSize roundtripCount socket)
+  let latency = (float elapsed) / (float roundtripCount * 2.0)
+  
   thread.Join()
 
-  //TODO: double-check the following calculations
-  let throughput = 
-    int64 ((float messageCount) / (float microsecs) * 1000000.0)
-  let megabits = 
-    float ((throughput * (int64 messageSize) * 8L) / 1000000L)
-
-  printfn "mean throughput: %d [msg/s]" throughput
-  printfn "mean throughput: %.3f [Mb/s]" megabits 
+  printfn "average latency: %.3f [us]" latency
 
 (* _ program ___________________________________________________________ *)
 
@@ -82,5 +81,5 @@ let (|SizeCount|_|) = function
 let main = function
   | SizeCount(size,count) ->  runTest size count
                               OKAY
-  | _ -> printfn "usage: inproc_thr <message-size> <message-count>"
+  | _ -> printfn "usage: inproc_lat <message-size> <roundtrip-count>"
          FAIL
