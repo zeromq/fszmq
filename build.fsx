@@ -210,7 +210,7 @@ Target "CopyGuide" (fun _ ->
 // Generate the documentation
 
 Target "GenerateDocs" (fun _ ->
-  executeFSIWithArgs "docs/tools" "generate.fsx" fsiArgs ["--define:RELEASE"] |> ignore
+  executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:RELEASE"] [] |> ignore
 )
 
 // --------------------------------------------------------------------------------------
