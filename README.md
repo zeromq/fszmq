@@ -34,7 +34,7 @@ to appear "friendly" when consumed by other CLR languages (C#, et aliam).
 #### Library design
 
 fszmq mostly follows the ZeroMQ guidelines for language bindings, and uses an approach similar to many C libraries.
-Specifically, the three core ZeroMQ ""concepts" (`Context`, `Socket`, and `Message`) are each modelled as a type 
+Specifically, the three core ZeroMQ "concepts" (`Context`, `Socket`, and `Message`) are each modelled as a type 
 with a definite lifetime (i.e. must be instantiated and implements `System.IDisposable`), which wraps a native resource.
 However, all non-lifecycle operations are defined as functions in various modules (e.g. `fszmq.Socket`, `fszmq.Polling`).
 Nearly all of these module functions expect an instance of (at least) one of the core types as input. 
