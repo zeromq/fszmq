@@ -118,4 +118,6 @@ More information about ZeroMQ is available at http://zero.mq.
 
 ---------------------------------------------------------------------------
 
-###### Copyright &#169; 2011-2013 Paulmichael Blasucci. This project is released under the LGPL (v3) [license](COPYING.lesser).
+###### Copyright &#169; 2011-2013 Paulmichael Blasucci. 
+###### This project is released under the LGPL (v3) [license](COPYING.lesser).
+###### This project's documentation is released under the MIT [license](docs/files/LICENSE.txt).

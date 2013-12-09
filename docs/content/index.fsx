@@ -1,6 +1,4 @@
 (*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
 #I "../../bin"
 
 type ENV = System.Environment
@@ -68,15 +66,16 @@ are also executable F# scripts, and may be found in [the content folder][content
 
 In particular, please review:
 
- * [Hello, World](tutorial.html) ... contains a more complete, but simplistic, example of fszmq in action.
+ * [Client/Server Tutorial](tutorial.html) ... contains a more complete, but simplistic, example of fszmq in action.
 
  * [API Reference](reference/index.html) ... contains automatically generated documentation for all types, modules, 
    and functions in the library. This includes additional brief samples on using some of the functionality.
 
-Additionally, general information about ZeroMQ maybe found at [http://zero.mq](http://zeromq.org). 
-And [the zguide][zguide] is a well-written, exhaustive explanation of the library.
-While the zguide features examples in many languages, there are [F#-specific zguide code samples](http://pblasucci.github.io/fszmq).
- 
+Additionally, general information about ZeroMQ maybe found at [http://zero.mq](http://zero.mq). 
+And [the zguide][zguide] is a well-written, exhaustive explanation of the library. 
+It should definitely be read. And then read again. Also, while the zguide features examples in many languages, 
+the [F#-specific zguide code samples][zguidefs] have been [collected here as a convenience][localguide].
+
 Contributing and copyright
 --------------------------
 
@@ -101,4 +100,6 @@ For more information see the [documentation license file][docslicense] in the Gi
   [license]: https://github.com/pblasucci/fszmq/blob/master/COPYING.lesser
   [docslicense]: https://github.com/pblasucci/fszmq/blob/master/docs/files/LICENSE.txt
   [zguide]: http://zguide.zeromq.org/page:all
+  [zguidefs]: https://github.com/imatix/zguide/tree/master/examples/F%23
+  [localguide]: zguide/index.html
 *)

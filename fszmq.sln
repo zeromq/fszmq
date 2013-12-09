@@ -57,6 +57,14 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.inproc_lat", "te
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.inproc_thr", "tests\fszmq.perf.inproc_thr\fszmq.perf.inproc_thr.fsproj", "{267CB036-120C-4457-9193-65DAA3CB34AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC0D-6A3C-4E1A-AE8E-EC0571296A2A}"
+	ProjectSection(SolutionItems) = preProject
+		docs\content\zguide\hwclient.fsx = docs\content\zguide\hwclient.fsx
+		docs\content\zguide\hwserver.fsx = docs\content\zguide\hwserver.fsx
+		index.fsx = index.fsx
+		TODO.txt = TODO.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -164,6 +172,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
+		{072EAC0D-6A3C-4E1A-AE8E-EC0571296A2A} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
 		{0563B220-C3FD-4D3A-AF3A-04388C817AFE} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 		{7B19DF26-F8A5-49F1-B7E2-5CF4C5C6DD92} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}

@@ -75,6 +75,7 @@ module Z85 =
     buffer
 
 /// Utilities for working with the CurveZMQ security protocol
+[<Experimental("WARNING: Functionality in the Curve module requires more testing.")>]
 module Curve =
     
   let [<Literal>] private KEY_SIZE = 41 //TODO: should this be hard-coded?

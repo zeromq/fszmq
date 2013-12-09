@@ -1,6 +1,21 @@
-// --------------------------------------------------------------------------------------
-// FAKE build script 
-// --------------------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
+This file is part of fszmq.
+
+fszmq is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published 
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+fszmq is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with fszmq. If not, see <http://www.gnu.org/licenses/>.
+
+Copyright (c) 2011-2013 Paulmichael Blasucci
+------------------------------------------------------------------------ *)
 
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake 
@@ -10,9 +25,7 @@ open Fake.ReleaseNotesHelper
 open System
 open System.IO
 
-// --------------------------------------------------------------------------------------
-// START TODO: Provide project-specific details below
-// --------------------------------------------------------------------------------------
+(* ------------------------------------------------------------------------ *)
 
 // Information about the project are used
 //  - for version and project name in generated AssemblyInfo file
@@ -54,9 +67,10 @@ let gitHome = "https://github.com/pblasucci"
 // The name of the project on GitHub
 let gitName = "fszmq"
 
-// --------------------------------------------------------------------------------------
-// END TODO: The rest of the file includes standard build steps 
-// --------------------------------------------------------------------------------------
+// Path to zguide examples (can be deployed with docs)
+let zguide = "/../zguide/examples/F#"
+
+(* ------------------------------------------------------------------------ *)
 
 // Read additional information from the release notes document
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
@@ -107,6 +121,8 @@ Target "RestorePackages" (fun _ ->
 Target "Clean" (fun _ -> CleanDirs ["bin"; "temp"])
 
 Target "CleanDocs" (fun _ -> CleanDirs ["docs/output"])
+
+Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
 
 // --------------------------------------------------------------------------------------
 // Build library & test project
@@ -177,6 +193,20 @@ Target "NuGet" (fun _ ->
 )
 
 // --------------------------------------------------------------------------------------
+// Clone examples from zguide
+Target "CopyGuide" (fun _ ->
+  let currentGuide = DirectoryInfo(__SOURCE_DIRECTORY__ + "/docs/content/zguide")
+  let sourceGuide  = DirectoryInfo(__SOURCE_DIRECTORY__ + zguide)
+  let current = filesInDirMatching "*.fsx" currentGuide
+  printfn "%s: %i files" currentGuide.FullName current.Length
+  let source  = filesInDirMatching "*.fsx" sourceGuide 
+                |> Seq.filter (fun f -> not <| isInFolder currentGuide f)
+                |> Seq.map    (fun f -> f.FullName)
+  printfn "%s: %i files" sourceGuide.FullName (Seq.length source)
+  CopyFiles currentGuide.FullName source
+)
+
+// --------------------------------------------------------------------------------------
 // Generate the documentation
 
 Target "GenerateDocs" (fun _ ->
@@ -221,7 +251,7 @@ Target "All" DoNothing
 "All" 
   ==> "CleanDocs"
   ==> "GenerateDocs"
-//==> "ReleaseDocs"
+  ==> "ReleaseDocs"
   ==> "NuGet"
   ==> "Release"
 
