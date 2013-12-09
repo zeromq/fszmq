@@ -1,95 +1,106 @@
-[ ] asyncsrv.fsx
-[ ] bstar.fsx
-[ ] bstarcli.fsx
+[-] zguide.fsx
+Chapter 1
+[x] hwclient.fsx
+[x] hwserver.fsx
+--------------------
+[-] version.fsx
+[-] wuserver.fsx
+[-] wuclient.fsx
+[-] taskwork.fsx
+[-] taskvent.fsx
+[-] tasksink.fsx
+Chapter 2
+[-] msreader.fsx
+[-] mspoller.fsx
+[-] rrclient.fsx
+[-] rrworker.fsx
+[-] rrbroker.fsx
+[-] msgqueue.fsx
+[-] wuproxy.fsx
+[-] taskwork2.fsx
+[-] tasksink2.fsx
+[ ] interrupt.fsx
+[-] mtserver.fsx
+[-] mtrelay.fsx
+[-] syncpub.fsx
+[-] syncsub.fsx
+[-] psenvpub.fsx
+[-] psenvsub.fsx
+Chapter 3
+[-] identity.fsx
+[-] rtreq.fsx
+[-] rtdealer.fsx
+[-] lbbroker.fsx
+[ ] lbbroker2.fsx
+[ ] lbbroker3.fsx
+[-] asyncsrv.fsx
+[-] peering1.fsx
+[-] peering2.fsx
+[-] peering3.fsx
+Chapter 4
+[-] lpclient.fsx
+[-] lpserver.fsx
+[-] spqueue.fsx
+[-] spworker.fsx
+[-] ppqueue.fsx
+[-] ppworker.fsx
+[ ] mdcliapi.fsx
+[ ] mdclient.fsx
+[ ] mdwrkapi.fsx
+[ ] mdworker.fsx
+[ ] mdbroker.fsx
+[ ] tripping.fsx
+[ ] mdcliapi2.fsx
+[ ] mdclient2.fsx
+[ ] mmiecho.fsx
+[ ] ticlient.fsx
+[ ] titanic.fsx
 [ ] bstarsrv.fsx
+[ ] bstarcli.fsx
+[ ] bstar.fsx
 [ ] bstarsrv2.fsx
-[ ] clone.fsx
-[ ] clonecli1.fsx
-[ ] clonecli2.fsx
-[ ] clonecli3.fsx
-[ ] clonecli4.fsx
-[ ] clonecli5.fsx
-[ ] clonecli6.fsx
+[ ] flserver1.fsx
+[ ] flclient1.fsx
+[ ] flserver2.fsx
+[ ] flclient2.fsx
+[ ] flserver3.fsx
+[ ] flclient3.fsx
+[ ] flcliapi.fsx
+Chapter 5
+[ ] espresso.fsx
+[ ] pathopub.fsx
+[ ] pathosub.fsx
+[ ] lvcache.fsx
+[ ] suisnail.fsx
 [ ] clonesrv1.fsx
+[ ] clonecli1.fsx
+[ ] kvsimple.fsx
 [ ] clonesrv2.fsx
+[ ] clonecli2.fsx
 [ ] clonesrv3.fsx
+[ ] clonecli3.fsx
 [ ] clonesrv4.fsx
+[ ] clonecli4.fsx
+[ ] kvmsg.fsx
 [ ] clonesrv5.fsx
 [ ] clonesrv6.fsx
-[ ] dechat.fsx
-[ ] eagain.fsx
-[ ] espresso.fsx
+[ ] clonecli6.fsx
+[ ] clone.fsx
+Chapter 6
+Chapter 7
 [ ] fileio1.fsx
 [ ] fileio2.fsx
 [ ] fileio3.fsx
-[ ] flcliapi.fsx
-[ ] flclient1.fsx
-[ ] flclient2.fsx
-[ ] flclient3.fsx
-[ ] flserver1.fsx
-[ ] flserver2.fsx
-[ ] flserver3.fsx
-[x] hwclient.fsx
-[x] hwserver.fsx
-[ ] identity.fsx
-[ ] interface.fsx
-[ ] interrupt.fsx
-[ ] kvmsg.fsx
-[ ] kvsimple.fsx
-[ ] lbbroker.fsx
-[ ] lbbroker2.fsx
-[ ] lbbroker3.fsx
-[ ] lpclient.fsx
-[ ] lpserver.fsx
-[ ] lvcache.fsx
-[ ] mdbroker.fsx
-[ ] mdcliapi.fsx
-[ ] mdcliapi2.fsx
-[ ] mdclient.fsx
-[ ] mdclient2.fsx
-[ ] mdworker.fsx
-[ ] mdwrkapi.fsx
-[ ] mmiecho.fsx
-[ ] msgqueue.fsx
-[ ] mspoller.fsx
-[ ] msreader.fsx
-[ ] mtrelay.fsx
-[ ] mtserver.fsx
-[ ] pathopub.fsx
-[ ] pathosub.fsx
-[ ] peering1.fsx
-[ ] peering2.fsx
-[ ] peering3.fsx
-[ ] ppqueue.fsx
-[ ] ppworker.fsx
-[ ] psenvpub.fsx
-[ ] psenvsub.fsx
-[ ] rrbroker.fsx
-[ ] rrclient.fsx
-[ ] rrworker.fsx
-[ ] rtdealer.fsx
-[ ] rtreq.fsx
-[ ] rtrouter.fsx
-[ ] spqueue.fsx
-[ ] spworker.fsx
-[ ] suisnail.fsx
-[ ] syncpub.fsx
-[ ] syncsub.fsx
-[ ] tasksink.fsx
-[ ] tasksink2.fsx
-[ ] taskvent.fsx
-[ ] taskwork.fsx
-[ ] taskwork2.fsx
-[ ] ticlient.fsx
-[ ] titanic.fsx
-[ ] tripping.fsx
-[ ] tstkvmsg.fsx
-[ ] tstkvsimple.fsx
-[ ] udplib.fsx
+Chapter 8
+[ ] dechat.fsx
 [ ] udpping1.fsx
 [ ] udpping2.fsx
+[ ] udplib.fsx
 [ ] udpping3.fsx
-[ ] wuclient.fsx
-[ ] wuproxy.fsx
-[ ] wuserver.fsx
-[ ] zguide.fsx
+[ ] interface.fsx
+[ ] eagain.fsx
+Unknown
+[?] clonecli5.fsx
+[?] rtrouter.fsx
+[?] tstkvmsg.fsx
+[?] tstkvsimple.fsx
