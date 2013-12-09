@@ -88,9 +88,10 @@ module Curve =
     if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
     (string publicKey),(string secretKey)
 
+/// Utilities to assist with high-resolution time calculations
 module Timing =
 
-  // starts the stopwatch; returns the handle to the watch
+  /// starts the stopwatch; returns the handle to the watch
   [<CompiledName("StartWatch")>]
   let startWatch () = C.zmq_stopwatch_start()
 
@@ -99,7 +100,7 @@ module Timing =
   let stopWatch watch = C.zmq_stopwatch_stop(watch)
 
   /// executes given function, returning elapsed microseconds
-  [<CompiledName("ExecuteTimed")>]
+  [<CompiledName("ExecTimed")>]
   let execTimed action = 
     let watch = startWatch()
     action()
