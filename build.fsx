@@ -210,8 +210,7 @@ Target "CopyGuide" (fun _ ->
 // Generate the documentation
 
 Target "GenerateDocs" (fun _ ->
-  let fsiArgs = if hasBuildParam "Release" then ["--define:RELEASE"] else []
-  executeFSIWithArgs "docs/tools" "generate.fsx" fsiArgs [] |> ignore
+  executeFSIWithArgs "docs/tools" "generate.fsx" fsiArgs ["--define:RELEASE"] |> ignore
 )
 
 // --------------------------------------------------------------------------------------
