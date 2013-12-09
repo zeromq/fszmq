@@ -6,7 +6,7 @@
 // Binaries that have XML documentation (in a corresponding generated XML file)
 let referenceBinaries = [ "fszmq.dll" ]
 // Web site location for the generated documentation
-let website = "http://pblasucci.github.io/fszmq"
+let website = "/fszmq"
 
 // Specify more information about your project
 let info =

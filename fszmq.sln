@@ -61,8 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC
 	ProjectSection(SolutionItems) = preProject
 		docs\content\zguide\hwclient.fsx = docs\content\zguide\hwclient.fsx
 		docs\content\zguide\hwserver.fsx = docs\content\zguide\hwserver.fsx
-		index.fsx = index.fsx
-		TODO.txt = TODO.txt
+		docs\content\zguide\index.fsx = docs\content\zguide\index.fsx
+		docs\content\zguide\TODO.txt = docs\content\zguide\TODO.txt
 	EndProjectSection
 EndProject
 Global
