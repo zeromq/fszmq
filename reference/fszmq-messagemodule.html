@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Message - fszmq</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Paulmichael Blasucci">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="file://d:\Working\fszmq\docs\tools\../output/content/style.css" />
+    <script type="text/javascript" src="file://d:\Working\fszmq\docs\tools\../output/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://zeromq.org/" target="_blank">zeromq.org</a></li>
+          <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
+          <li><a href="http://github.com/pblasucci/fszmq">github page</a></li>
+        </ul>
+        <h3 class="muted">fszmq</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Message</h1>
+<div class="xmldoc">
+<p>Contains methods for working with Message instances</p>
+</div>
+
+<!-- TODO: Refactor me - copy & paste from 'namespaces.cshtml' -->
+
+
+
+<!-- END TODO -->
+
+
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
+            ( +&gt;&gt; ) message socket
+          </code>
+          <div class="tip" id="5">
+            <strong>Signature:</strong>message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Operator equivalent to Message.sendMore (with arguments reversed)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
+            ( &lt;&lt;- ) socket
+          </code>
+          <div class="tip" id="10">
+            <strong>Signature:</strong>socket:Socket -&gt; Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Operator equivalent to Message.send</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+            ( &lt;&lt;+ ) socket
+          </code>
+          <div class="tip" id="13">
+            <strong>Signature:</strong>socket:Socket -&gt; Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Operator equivalent to Message.sendMore</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+            ( -&gt;&gt; ) message socket
+          </code>
+          <div class="tip" id="15">
+            <strong>Signature:</strong>message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Operator equivalent to Message.send (with arguments reversed)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
+            clone source
+          </code>
+          <div class="tip" id="17">
+            <strong>Signature:</strong>source:Message -&gt; Message<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Makes a new instance of the <code>Message</code> type, with an independent copy of the <code>source</code> content.</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
+            copy source target
+          </code>
+          <div class="tip" id="19">
+            <strong>Signature:</strong>source:Message -&gt; target:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Copies the content from one message to another message.
+Avoid modifying message content after a message has been copied, as this can result in undefined behavior. 
+If what you need is an actual hard copy, see <code>Message.clone()</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            data message
+          </code>
+          <div class="tip" id="21">
+            <strong>Signature:</strong>message:Message -&gt; byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Returns the content of the given Message</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+            getOption message messageOption
+          </code>
+          <div class="tip" id="23">
+            <strong>Signature:</strong>message:Message -&gt; messageOption:int -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Gets the value of the given option for the given Message</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+            more message
+          </code>
+          <div class="tip" id="25">
+            <strong>Signature:</strong>message:Message -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Returns true if the given message is a frame in a multi-part message and more frames are available</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
+            move source target
+          </code>
+          <div class="tip" id="27">
+            <strong>Signature:</strong>source:Message -&gt; target:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Moves the content from one message to another message.
+No actual copying of message content is performed, <code>target</code> is simply updated to reference the new content. 
+<code>source</code> becomes an empty message after calling <code>Message.move()</code>. The original content of <code>target</code>, if any, 
+shall be released. To preseve the content of source, see <code>Message.copy()</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            recv socket
+          </code>
+          <div class="tip" id="29">
+            <strong>Signature:</strong>socket:Socket -&gt; Message<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Waits for (and returns) the next available Message from a socket</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '33', 33)" onmouseover="showTip(event, '33', 33)">
+            send socket message
+          </code>
+          <div class="tip" id="33">
+            <strong>Signature:</strong>socket:Socket -&gt; message:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Sends a frame, indicating no more frames will follow</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
+            sendMore socket message
+          </code>
+          <div class="tip" id="35">
+            <strong>Signature:</strong>socket:Socket -&gt; message:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Sends a frame, indicating more frames will follow,</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
+            setOption message (messageOption, value)
+          </code>
+          <div class="tip" id="37">
+            <strong>Signature:</strong>message:Message -&gt; (messageOption:int * value:int) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Sets the given option value for the given Socket</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
+            size message
+          </code>
+          <div class="tip" id="39">
+            <strong>Signature:</strong>message:Message -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Returns the size (in bytes) of the given Message</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
+            tryRecv socket flags
+          </code>
+          <div class="tip" id="41">
+            <strong>Signature:</strong>socket:Socket -&gt; flags:int -&gt; Message option<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Gets the next available frame from a socket, returning a Message option 
+where None indicates the operation should be re-attempted</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
+            trySend message socket flags
+          </code>
+          <div class="tip" id="43">
+            <strong>Signature:</strong>message:Message -&gt; socket:Socket -&gt; flags:int -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Sends a frame, with the given flags, returning true (or false) 
+if the send was successful (or should be re-tried)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">fszmq</li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/LICENSE.txt">License</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+            <li class="divider"></li>
+            <li class="nav-header">Documenation</li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/pblasucci/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>

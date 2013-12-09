@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ZMQ - fszmq</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Paulmichael Blasucci">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="file://d:\Working\fszmq\docs\tools\../output/content/style.css" />
+    <script type="text/javascript" src="file://d:\Working\fszmq\docs\tools\../output/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://zeromq.org/" target="_blank">zeromq.org</a></li>
+          <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
+          <li><a href="http://github.com/pblasucci/fszmq">github page</a></li>
+        </ul>
+        <h3 class="muted">fszmq</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>ZMQ</h1>
+<div class="xmldoc">
+<p>Contains commonly-used pre-defined ZMQ values</p>
+</div>
+
+<!-- TODO: Refactor me - copy & paste from 'namespaces.cshtml' -->
+
+
+
+<!-- END TODO -->
+
+
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+            ZMQ.AFFINITY
+          </code>
+          <div class="tip" id="4">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(UInt64) I/O thread affinity bit-mask</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '8', 8)" onmouseover="showTip(event, '8', 8)">
+            ZMQ.BACKLOG
+          </code>
+          <div class="tip" id="8">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Maximum number of queued peers</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
+            ZMQ.CONFLATE
+          </code>
+          <div class="tip" id="9">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to keep last message in queue (ignores high-water mark options), 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
+            ZMQ.CURVE_PUBLICKEY
+          </code>
+          <div class="tip" id="11">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String or Byte[]) sets the long-term public key on a client or server socket</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            ZMQ.CURVE_SECRETKEY
+          </code>
+          <div class="tip" id="12">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String or Byte[]) sets the long-term secret key on a client socket</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            ZMQ.CURVE_SERVER
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to make socket act as server for CURVE security, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            ZMQ.CURVE_SERVERKEY
+          </code>
+          <div class="tip" id="16">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String or Byte[]) sets the long-term server key on a client socket</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
+            ZMQ.DEALER
+          </code>
+          <div class="tip" id="18">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REP, ZMQ.DEALER, ZMQ.ROUTER)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+            ZMQ.DELAY_ATTACH_ON_CONNECT
+          </code>
+          <div class="tip" id="20">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.IMMEDAITE</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            ZMQ.DONTWAIT
+          </code>
+          <div class="tip" id="22">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Queue message frame for sending (return immediately)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+            ZMQ.EAGAIN
+          </code>
+          <div class="tip" id="24">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Non-blocking mode was requested and the message cannot be sent at the moment</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
+            ZMQ.EVENT_ACCEPT_FAILED
+          </code>
+          <div class="tip" id="26">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Could not accept client connection</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
+            ZMQ.EVENT_ACCEPTED
+          </code>
+          <div class="tip" id="28">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Connection accepted to bound interface</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
+            ZMQ.EVENT_ALL
+          </code>
+          <div class="tip" id="30">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Monitor all possible events</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '31', 31)" onmouseover="showTip(event, '31', 31)">
+            ZMQ.EVENT_BIND_FAILED
+          </code>
+          <div class="tip" id="31">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Socket could not bind to address</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
+            ZMQ.EVENT_CLOSE_FAILED
+          </code>
+          <div class="tip" id="32">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Connection could not be closed (only for ipc transport)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '34', 34)" onmouseover="showTip(event, '34', 34)">
+            ZMQ.EVENT_CLOSED
+          </code>
+          <div class="tip" id="34">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Socket connection closed</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
+            ZMQ.EVENT_CONNECT_DELAYED
+          </code>
+          <div class="tip" id="36">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Synchronous connection failed; socket is being polled</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '38', 38)" onmouseover="showTip(event, '38', 38)">
+            ZMQ.EVENT_CONNECT_RETRIED
+          </code>
+          <div class="tip" id="38">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Asynchronous (re)connection attempt</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
+            ZMQ.EVENT_CONNECTED
+          </code>
+          <div class="tip" id="40">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Socket connection established</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
+            ZMQ.EVENT_DISCONNECTED
+          </code>
+          <div class="tip" id="42">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Broken session (specific to ipc and tcp transports)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
+            ZMQ.EVENT_LISTENING
+          </code>
+          <div class="tip" id="44">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Socket bound to address; ready to accept connections</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
+            ZMQ.EVENT_MONITOR_STOPPED
+          </code>
+          <div class="tip" id="45">
+            <strong>Signature:</strong>uint16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Event monitoring has been disabled</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '46', 46)" onmouseover="showTip(event, '46', 46)">
+            ZMQ.EVENTS
+          </code>
+          <div class="tip" id="46">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Socket event state, see all: Polling</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
+            ZMQ.FAIL_UNROUTABLE
+          </code>
+          <div class="tip" id="47">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.ROUTER_MANDATORY</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
+            ZMQ.FD
+          </code>
+          <div class="tip" id="48">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(IntPtr) native file descriptor</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
+            ZMQ.FOREVER
+          </code>
+          <div class="tip" id="49">
+            <strong>Signature:</strong>int64<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>indicates polling should wait indefinitely</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '50', 50)" onmouseover="showTip(event, '50', 50)">
+            ZMQ.IDENTITY
+          </code>
+          <div class="tip" id="50">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Byte[]) Socket identifier</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '51', 51)" onmouseover="showTip(event, '51', 51)">
+            ZMQ.IMMEDIATE
+          </code>
+          <div class="tip" id="51">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to limit queuing to only completed connections, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
+            ZMQ.IO_THREADS
+          </code>
+          <div class="tip" id="52">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Set number of OS-level I/O threads</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '53', 53)" onmouseover="showTip(event, '53', 53)">
+            ZMQ.IO_THREADS_DFLT
+          </code>
+          <div class="tip" id="53">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>default number of OS-level I/O threads (1)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '54', 54)" onmouseover="showTip(event, '54', 54)">
+            ZMQ.IPV4ONLY
+          </code>
+          <div class="tip" id="54">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Do not use.</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '55', 55)" onmouseover="showTip(event, '55', 55)">
+            ZMQ.IPV6
+          </code>
+          <div class="tip" id="55">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to enable IPv6 on the socket, 0 to restrict to only IPv4</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
+            ZMQ.LAST_ENDPOINT
+          </code>
+          <div class="tip" id="56">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String) Last address bound to endpoint</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
+            ZMQ.LINGER
+          </code>
+          <div class="tip" id="57">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Pause before shutdown in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
+            ZMQ.MAX_SOCKETS
+          </code>
+          <div class="tip" id="58">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Set maximum number of sockets for a context</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
+            ZMQ.MAX_SOCKETS_DFLT
+          </code>
+          <div class="tip" id="59">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>default maximum number of sockets (1024)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
+            ZMQ.MAXMSGSIZE
+          </code>
+          <div class="tip" id="60">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int64) Maximum inbound message size in bytes</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
+            ZMQ.MORE
+          </code>
+          <div class="tip" id="61">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 if more message frames are available, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '62', 62)" onmouseover="showTip(event, '62', 62)">
+            ZMQ.MULTICAST_HOPS
+          </code>
+          <div class="tip" id="62">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Time-to-live for each multicast packet in network-hops</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '63', 63)" onmouseover="showTip(event, '63', 63)">
+            ZMQ.NO_LINGER
+          </code>
+          <div class="tip" id="63">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) the value needed to disable lingering on a socket's outbound queue</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '64', 64)" onmouseover="showTip(event, '64', 64)">
+            ZMQ.NOBLOCK
+          </code>
+          <div class="tip" id="64">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.DONTWAIT</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '65', 65)" onmouseover="showTip(event, '65', 65)">
+            ZMQ.NOW
+          </code>
+          <div class="tip" id="65">
+            <strong>Signature:</strong>int64<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>indicates polling should exit immediately</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '66', 66)" onmouseover="showTip(event, '66', 66)">
+            ZMQ.PAIR
+          </code>
+          <div class="tip" id="66">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>An exclusive pair of two sockets (primarily for use with inproc transport)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '67', 67)" onmouseover="showTip(event, '67', 67)">
+            ZMQ.PLAIN_PASSWORD
+          </code>
+          <div class="tip" id="67">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String) Sets the password for outgoing connections over TCP or IPC</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '68', 68)" onmouseover="showTip(event, '68', 68)">
+            ZMQ.PLAIN_SERVER
+          </code>
+          <div class="tip" id="68">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to make socket act as server for PLAIN security, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
+            ZMQ.PLAIN_USERNAME
+          </code>
+          <div class="tip" id="69">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String) Sets the user name for outgoing connections over TCP or IPC</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
+            ZMQ.POLLERR
+          </code>
+          <div class="tip" id="70">
+            <strong>Signature:</strong>int16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>poll for messages on stderr (for use with file descriptors)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
+            ZMQ.POLLIN
+          </code>
+          <div class="tip" id="71">
+            <strong>Signature:</strong>int16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>poll for inbound messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+            ZMQ.POLLOUT
+          </code>
+          <div class="tip" id="72">
+            <strong>Signature:</strong>int16<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>poll for outbound messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
+            ZMQ.PROBE_ROUTER
+          </code>
+          <div class="tip" id="73">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to automatically send an empty message on new connection, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
+            ZMQ.PUB
+          </code>
+          <div class="tip" id="74">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>A publisher which broadcasts topic-prefixed messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
+            ZMQ.PULL
+          </code>
+          <div class="tip" id="75">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Collects messages in a fair-queued fashion from across all upstream (i.e. ZMQ.PUSH) nodes</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
+            ZMQ.PUSH
+          </code>
+          <div class="tip" id="76">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Delivers messages in a round-robin fashion to across all downstream (i.e. ZMQ.PULL) nodes</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
+            ZMQ.RATE
+          </code>
+          <div class="tip" id="77">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Multicast data rate in kilobits per second</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '78', 78)" onmouseover="showTip(event, '78', 78)">
+            ZMQ.RCVBUF
+          </code>
+          <div class="tip" id="78">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Receive-message buffer size in bytes</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '80', 80)" onmouseover="showTip(event, '80', 80)">
+            ZMQ.RCVHWM
+          </code>
+          <div class="tip" id="80">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Maximum number of inbound queued messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '81', 81)" onmouseover="showTip(event, '81', 81)">
+            ZMQ.RCVMORE
+          </code>
+          <div class="tip" id="81">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 if more message frames are available, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
+            ZMQ.RCVTIMEO
+          </code>
+          <div class="tip" id="82">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Timeout period for inbound messages in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '83', 83)" onmouseover="showTip(event, '83', 83)">
+            ZMQ.RECONNECT_IVL
+          </code>
+          <div class="tip" id="83">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Pause before reconnect in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
+            ZMQ.RECONNECT_IVL_MAX
+          </code>
+          <div class="tip" id="84">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Maximum reconnection interval in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '85', 85)" onmouseover="showTip(event, '85', 85)">
+            ZMQ.RECOVERY_IVL
+          </code>
+          <div class="tip" id="85">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Multicast recovery period in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '89', 89)" onmouseover="showTip(event, '89', 89)">
+            ZMQ.REP
+          </code>
+          <div class="tip" id="89">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Awaits synchronous requests of a client (i.e. ZMQ.REQ, ZMQ.DEALER), makes replies</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '90', 90)" onmouseover="showTip(event, '90', 90)">
+            ZMQ.REQ
+          </code>
+          <div class="tip" id="90">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Makes synchronous requests of a server (i.e. ZMQ.REP, ZMQ.ROUTER), awaits replies</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
+            ZMQ.REQ_CORRELATE
+          </code>
+          <div class="tip" id="91">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to prefix messages with explicit request ID, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+            ZMQ.REQ_RELAXED
+          </code>
+          <div class="tip" id="92">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to relax strict alternation between ZMQ.REQ and ZMQ.REP, 0 otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+            ZMQ.ROUTER
+          </code>
+          <div class="tip" id="93">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REQ, ZMQ.DEALER, ZMQ.ROUTER)</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+            ZMQ.ROUTER_BEHAVIOR
+          </code>
+          <div class="tip" id="94">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.ROUTER_MANDATORY</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+            ZMQ.ROUTER_MANDATORY
+          </code>
+          <div class="tip" id="95">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 to error on unroutable messages, 0 to silently ignore</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+            ZMQ.SNDBUF
+          </code>
+          <div class="tip" id="96">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Send-message buffer size in bytes</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+            ZMQ.SNDHWM
+          </code>
+          <div class="tip" id="97">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Maximum number of outbound queued messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
+            ZMQ.SNDMORE
+          </code>
+          <div class="tip" id="98">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>More message frames will follow the current frame</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
+            ZMQ.SNDTIMEO
+          </code>
+          <div class="tip" id="99">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Timeout period for outbound messages in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
+            ZMQ.STREAM
+          </code>
+          <div class="tip" id="100">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Exchanges raw data with a non-ZeroMQ peer via the tcp transport</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
+            ZMQ.SUB
+          </code>
+          <div class="tip" id="101">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>A subscribe which receives topic-prefixed messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
+            ZMQ.SUBSCRIBE
+          </code>
+          <div class="tip" id="102">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Byte[]) Add subscription filter</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
+            ZMQ.TCP_ACCEPT_FILTER
+          </code>
+          <div class="tip" id="103">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Byte[]) TCP/IP filters</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
+            ZMQ.TCP_KEEPALIVE
+          </code>
+          <div class="tip" id="104">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Override OS-level TCP keep-alive</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+            ZMQ.TCP_KEEPALIVE_CNT
+          </code>
+          <div class="tip" id="105">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Override OS-level TCP keep-alive</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+            ZMQ.TCP_KEEPALIVE_IDLE
+          </code>
+          <div class="tip" id="106">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Override OS-level TCP keep-alive</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
+            ZMQ.TCP_KEEPALIVE_INTVL
+          </code>
+          <div class="tip" id="107">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Override OS-level TCP keep-alive</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
+            ZMQ.TYPE
+          </code>
+          <div class="tip" id="108">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) Socket type</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '109', 109)" onmouseover="showTip(event, '109', 109)">
+            ZMQ.UNSUBSCRIBE
+          </code>
+          <div class="tip" id="109">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Byte[]) Remove subscription filter</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
+            ZMQ.version
+          </code>
+          <div class="tip" id="110">
+            <strong>Signature:</strong>Version<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Version of the underlying (native) ZMQ library</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
+            ZMQ.WAIT
+          </code>
+          <div class="tip" id="111">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Block thread until message frame is sent</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
+            ZMQ.XPUB
+          </code>
+          <div class="tip" id="112">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>A publisher like ZMQ.PUB, but does not automatically receive forwarded topic subscriptions</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
+            ZMQ.XPUB_VERBOSE
+          </code>
+          <div class="tip" id="113">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(Int32) 1 will resend duplicate messages</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
+            ZMQ.XREP
+          </code>
+          <div class="tip" id="114">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.ROUTER</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '115', 115)" onmouseover="showTip(event, '115', 115)">
+            ZMQ.XREQ
+          </code>
+          <div class="tip" id="115">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>Deprecated. Use ZMQ.DEALER</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '116', 116)" onmouseover="showTip(event, '116', 116)">
+            ZMQ.XSUB
+          </code>
+          <div class="tip" id="116">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>A publisher like ZMQ.SUB, but does not automatically forward topic subscriptions</p>
+</td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '117', 117)" onmouseover="showTip(event, '117', 117)">
+            ZMQ.ZAP_DOMAIN
+          </code>
+          <div class="tip" id="117">
+            <strong>Signature:</strong>int<br />
+                      </div>
+        </td>
+        <td class="xmldoc"><p>(String) Sets authentication domain</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">fszmq</li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/LICENSE.txt">License</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+            <li class="divider"></li>
+            <li class="nav-header">Documenation</li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="file://d:\Working\fszmq\docs\tools\../output/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/pblasucci/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>
