@@ -12,8 +12,8 @@
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="http://pblasucci.github.io/fszmq/content/style.css" />
-    <script type="text/javascript" src="http://pblasucci.github.io/fszmq/content/tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
+    <script type="text/javascript" src="/fszmq/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,7 +27,7 @@
           <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
           <li><a href="http://github.com/pblasucci/fszmq">github page</a></li>
         </ul>
-        <h3 class="muted">fszmq</h3>
+        <h3 class="muted"><a href="/fszmq/index.html">fszmq</a></h3>
       </div>
       <hr />
       <div class="row">
@@ -58,10 +58,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
             poll timeout items
           </code>
-          <div class="tip" id="13">
+          <div class="tip" id="100">
             <strong>Signature:</strong>timeout:int64 -&gt; items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
@@ -76,10 +76,10 @@ and belong to the thread calling <code>Polling.poll</code>. </strong></p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
+          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
             pollForever items
           </code>
-          <div class="tip" id="82">
+          <div class="tip" id="101">
             <strong>Signature:</strong>items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
@@ -90,10 +90,10 @@ effectively causing the polling loop to block indefinitely.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
             pollIn fn socket
           </code>
-          <div class="tip" id="84">
+          <div class="tip" id="102">
             <strong>Signature:</strong>fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -104,10 +104,10 @@ invoke the callback when the socket receives a message</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '86', 86)" onmouseover="showTip(event, '86', 86)">
+          <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
             pollIO fn socket
           </code>
-          <div class="tip" id="86">
+          <div class="tip" id="103">
             <strong>Signature:</strong>fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -118,10 +118,10 @@ invoke the callback when the socket sends or receives messages</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '87', 87)" onmouseover="showTip(event, '87', 87)">
+          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
             pollNow items
           </code>
-          <div class="tip" id="87">
+          <div class="tip" id="104">
             <strong>Signature:</strong>items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
@@ -132,10 +132,10 @@ Poll items and 0 microseconds timeout</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '89', 89)" onmouseover="showTip(event, '89', 89)">
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
             pollOut fn socket
           </code>
-          <div class="tip" id="89">
+          <div class="tip" id="105">
             <strong>Signature:</strong>fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -150,7 +150,7 @@ invoke the callback when the socket sends a message</p>
         <div class="span3">
           <ul class="nav nav-list" id="menu">
             <li class="nav-header">fszmq</li>
-            <li><a href="http://pblasucci.github.io/fszmq/index.html">Home page</a></li>
+            <li><a href="/fszmq/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
             <li><a href="http://github.com/pblasucci/fszmq">Source Code on GitHub</a></li>
@@ -158,9 +158,9 @@ invoke the callback when the socket sends a message</p>
             <li><a href="http://github.com/pblasucci/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
             <li class="divider"></li>
             <li class="nav-header">Documenation</li>
-            <li><a href="http://pblasucci.github.io/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
-            <li><a href="http://pblasucci.github.io/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
-            <li><a href="http://pblasucci.github.io/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+            <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+            <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
           </ul>
         </div>
       </div>
