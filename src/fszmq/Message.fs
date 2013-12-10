@@ -92,11 +92,11 @@ module Message =
     | _   ->  Okay
 
   let internal waitForOkay fn socket flags =
-    let rec send' ()  =
+    let rec loop ()  =
       match fn socket flags with
       | true  -> ((* okay *))
-      | false -> send'()
-    send'()
+      | false -> loop ()
+    loop ()
 
   /// Sends a frame, with the given flags, returning true (or false) 
   /// if the send was successful (or should be re-tried)

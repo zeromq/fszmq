@@ -19,9 +19,7 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 module fszmq.perf.inproc_lat.Program
 
 open fszmq
-open fszmq.Context
 open fszmq.Message
-open fszmq.Socket
 open fszmq.Timing
 open System.Diagnostics
 open System.Threading
@@ -32,15 +30,10 @@ let [<Literal>] ENDPOINT = "inproc://lat_test"
 
 let worker (state:obj) =
   let roundtripCount,context = downcast state
-  use socket = rep context
-  connect socket ENDPOINT
+  use socket = Context.rep context
+  Socket.connect socket ENDPOINT
   
-  for _ in 1L .. roundtripCount do
-    let message = Message.recv socket
-    message ->> socket
-
-let checkSize messageSize message =
-  if size message <> messageSize then failwith "message of incorrect size received"
+  for _ in 1L .. roundtripCount do Message.recv socket ->> socket
 
 let processMessages messageSize roundtripCount socket =
   use message  = new Message(Array.zeroCreate messageSize)
@@ -48,12 +41,12 @@ let processMessages messageSize roundtripCount socket =
     use msgOut = clone message
     msgOut ->> socket
     use msgIn = Message.recv socket
-    checkSize messageSize msgIn
+    if size msgIn <> messageSize then failwith "message of incorrect size received"
 
 let runTest messageSize roundtripCount =
   use context = new Context()
-  use socket  = req context
-  bind socket ENDPOINT
+  use socket  = Context.req context
+  Socket.bind socket ENDPOINT
   
   let thread = Thread(ParameterizedThreadStart(worker))
   thread.Start((roundtripCount,context))

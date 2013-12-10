@@ -19,7 +19,6 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 module fszmq.perf.inproc_thr.Program
 
 open fszmq
-open fszmq.Context
 open fszmq.Socket
 open fszmq.Timing
 open System.Diagnostics
@@ -31,22 +30,20 @@ let [<Literal>] ENDPOINT = "inproc://thr_test"
 
 let worker (state:obj) =
   let messageSize,messageCount,context = downcast state
-  use socket = push context
+  use socket = Context.push context
   connect socket ENDPOINT
   let frame = Array.zeroCreate messageSize
-  for _ in 1L .. messageCount do frame |>> socket
+  for _ in 1L .. messageCount do frame |>> socket 
 
-let checkSize messageSize message = 
-  if Array.length message <> messageSize then failwith "message of incorrect size received"
-
-let recvMessages messageSize messageCount socket =
-  for _ in 1L .. (messageCount - 1L) do
-    let message = recv socket
-    checkSize messageSize message
+let recvMsg messageSize socket =
+    let msg = Option.get <| tryRecv socket messageSize ZMQ.WAIT
+    //HACK: _technically_ we shouldn't assume tryRecv will always return some. 
+    //      But when using the ZMQ.DONTWAIT flag, its a pretty safe bet.
+    if Array.length msg <> messageSize then failwith "message of incorrect size received"
 
 let runTest messageSize messageCount =
   use context = new Context()
-  use socket  = pull context
+  use socket  = Context.pull context
   bind socket ENDPOINT
   
   printfn "message size: %i [B]"  messageSize
@@ -55,15 +52,13 @@ let runTest messageSize messageCount =
   let thread = Thread(ParameterizedThreadStart(worker))
   thread.Start((messageSize,messageCount,context))
   
-  let message = recv socket
-  checkSize messageSize message
-
-  let elapsed = execTimed (fun () -> recvMessages messageSize messageCount socket)
+  recvMsg messageSize socket
+  let elapsed = execTimed (fun () -> for _ in 1L .. (messageCount - 1L) do recvMsg messageSize socket)
 
   thread.Join()
 
   let throughput  = uint32 ((float messageCount) / (float elapsed) * 1000000.0)
-  let megabits    = float  ((throughput * (uint32 messageSize) * 8u) / 1000000u)
+  let megabits    = (float (throughput * (uint32 messageSize) * 8u)) / 1000000.0
 
   printfn "mean throughput: %d [msg/s]"  throughput
   printfn "mean throughput: %.3f [Mb/s]" megabits 
