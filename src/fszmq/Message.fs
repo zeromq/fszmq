@@ -61,8 +61,8 @@ module Message =
 
   /// <summary>
   /// Copies the content from one message to another message.
-  /// <para>Avoid modifying message content after a message has been copied, as this can result in undefined behavior. 
-  /// If what you need is an actual hard copy, see `Message.clone()`.</para>
+  /// <para>Avoid modifying message content after a message has been copied, 
+  /// as this can result in undefined behavior.</para>
   /// </summary>
   [<Extension;CompiledName("CopyTo")>]
   let copy (source:Message) (target:Message) =
@@ -82,7 +82,10 @@ module Message =
 
   /// Makes a new instance of the `Message` type, with an independent copy of the `source` content.
   [<Extension;CompiledName("Clone")>]
-  let clone (source:Message) = new Message(data source)
+  let clone (source:Message) = 
+    let target = new Message()
+    copy source target
+    target
       
 (* message sending *)
   let internal (|Okay|Busy|Fail|) = function 
