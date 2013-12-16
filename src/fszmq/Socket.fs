@@ -212,12 +212,9 @@ module Socket =
   /// Gets the next available frame from a socket, returning a frame option
   /// where None indicates the operation should be re-attempted
   [<Extension;CompiledName("TryRecv")>]
-  let tryRecv (socket:Socket) length flags =
-    let buffer = Array.zeroCreate length
-    match C.zmq_recv(socket.Handle,buffer,unativeint length,flags) with
-    | Message.Okay -> Some(buffer)
-    | Message.Busy -> None
-    | Message.Fail -> ZMQ.error()
+  let tryRecv socket = 
+    Message.tryRecv socket ZMQ.DONTWAIT
+    |> Option.map Message.data
     
   /// Waits for (and returns) the next available frame from a socket
   [<Extension;CompiledName("Recv")>]
