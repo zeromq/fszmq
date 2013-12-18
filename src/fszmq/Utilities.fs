@@ -95,7 +95,7 @@ module Timing =
   [<CompiledName("Clock")>]
   let clock () = 
     let now = DateTime.UtcNow
-    (int64 now.Second) * 1000L + (int64 now.Millisecond)
+    (uint64 now.Second) * 1000UL + (uint64 now.Millisecond)
 
   /// starts the stopwatch; returns the handle to the watch
   [<CompiledName("StartWatch")>]
