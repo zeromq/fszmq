@@ -91,6 +91,12 @@ module Curve =
 /// Utilities to assist with high-resolution time calculations
 module Timing =
 
+  /// returns the current system clock as milliseconds
+  [<CompiledName("Clock")>]
+  let clock () = 
+    let now = DateTime.UtcNow
+    (uint64 now.Second) * 1000UL + (uint64 now.Millisecond)
+
   /// starts the stopwatch; returns the handle to the watch
   [<CompiledName("StartWatch")>]
   let startWatch () = C.zmq_stopwatch_start()
