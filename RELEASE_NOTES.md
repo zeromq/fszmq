@@ -19,3 +19,7 @@
 * Refactored performance tests
 * NuGet package now installs either x86 or x64 version of libzmq.dll (based on project configuration)
 * NuGet package now has proper uninstaller
+
+### New in 4.0.5 (unreleased)
+* Fixed bug in stopwatch function
+* Added high-resolution `clock` function (analagous to `CZMQ::zclock()`)
