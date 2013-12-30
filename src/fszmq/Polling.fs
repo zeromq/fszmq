@@ -60,10 +60,10 @@ module Polling =
   /// ** Note: All items passed to Polling.poll MUST share the same context 
   /// and belong to the thread calling `Polling.poll`. **
   [<CompiledName("Poll")>]
-  let poll timeout items =
+  let poll<[<Measure>]'u> (timeout:int64<'u>) items =
     let items  = items |> Array.ofSeq
     let items' = items |> Array.map (fun (Poll(v,s,_)) -> C.zmq_pollitem_t(s.Handle,v))
-    match C.zmq_poll(items',items'.Length,timeout) with
+    match C.zmq_poll(items',items'.Length,int64 timeout) with
     | 0             ->  false (* pass *)
     | n when n > 0  ->  for i in 0 .. items'.GetUpperBound(0) do
                           let e,r = items'.[i].events

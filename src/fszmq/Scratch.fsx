@@ -58,9 +58,72 @@ open fszmq.Proxying
 
 #time "on"
 
-let encode = string >> System.Text.Encoding.ASCII.GetBytes
-let decode = System.Text.Encoding.ASCII.GetString
-
 printfn "%A" ZMQ.version
 
 (*-----------------------------------------------------------------------*)
+
+module Frame =
+  
+  open System.Text
+
+  let encode data = Encoding.ASCII.GetBytes(string data)
+  let decode data = Encoding.ASCII.GetString(data)
+  
+  let hexstr frame =
+    frame
+    |> Array.fold (fun (b:StringBuilder) (f:byte) -> b.AppendFormat("{0:2X}",f))
+                  (StringBuilder(2 * Array.length frame))
+    |> string
+
+(*-----------------------------------------------------------------------*)
+
+[<AutoOpen>] 
+module Msg =
+
+  type frame    = byte[]
+  type message  = list<frame>
+
+//  open Frame
+//
+//  let push msg frame = frame :: msg
+//  
+//  let append msg frame = msg @ [ frame ]
+//  
+//  let pop msg = 
+//    match msg with 
+//    | []    -> None 
+//    | h::t  -> Some (h,t)
+//  
+//  let pushstr msg str = push msg (encode str)
+//  
+//  let appendstr msg str = append msg (encode str)
+//  
+//  let popstr msg = 
+//    pop msg |> Option.map (fun (h,t) -> (decode h),t)
+//  
+//  let wrap msg frame = frame :: [||] :: msg
+//  
+//  let unwrap msg =  
+//    match msg with 
+//    | []    ->  None 
+//    | h::t  ->  match t with 
+//                | []      -> Some (h,t)
+//                | [||]::t -> Some (h,t)
+//                | _::_    -> Some (h,t)
+
+  type MsgBuilder() =
+    member self.Yield(data) : message = [data]
+    
+    member self.YieldFrom(msg) : message = msg
+
+    member self.Bind(msg,fn:frame -> message) = List.collect fn msg
+    
+    member self.Combine (msg1,msg2) : message = List.concat [msg1;msg2;]
+    
+    member self.For(msg,fn) = self.Bind(msg,fn)
+    
+    member self.Delay(fn) : message = fn()
+    
+    member self.Zero() : message = []
+    
+  let msg = MsgBuilder()
