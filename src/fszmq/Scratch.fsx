@@ -21,7 +21,7 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 open System
 
 Environment.CurrentDirectory <- 
-  sprintf @"%s..\..\..\lib\zeromq\%s"
+  sprintf @"%s/../../lib/zeromq/%s"
           __SOURCE_DIRECTORY__
           (if Environment.Is64BitProcess then "x64" else "x86")
 
