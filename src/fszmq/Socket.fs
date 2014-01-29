@@ -51,16 +51,16 @@ type ZMQEvent =
       | None          -> ZMQ.einval()
 /// Provides more-granular information about a ZMQEvent
 and ZMQEventDetails =
-  | Connected       of handle
+  | Connected       of handle   : int
   | ConnectDelayed
-  | ConnectRetried  of interval
-  | Listening       of handle
-  | BindFailed      of ZMQError
-  | Accepted        of handle
-  | AcceptFailed    of ZMQError
-  | Closed          of handle
-  | CloseFailed     of ZMQError
-  | Disconnected    of handle
+  | ConnectRetried  of interval : int
+  | Listening       of handle   : int
+  | BindFailed      of error    : ZMQError
+  | Accepted        of handle   : int
+  | AcceptFailed    of error    : ZMQError
+  | Closed          of handle   : int
+  | CloseFailed     of error    : ZMQError
+  | Disconnected    of handle   : int
   | MonitorStopped
   | Unknown
   with
@@ -83,8 +83,6 @@ and ZMQEventDetails =
       | ZMQ.EVENT_CONNECT_DELAYED -> ConnectDelayed
       | ZMQ.EVENT_MONITOR_STOPPED -> MonitorStopped
       | _                         -> Unknown
-and handle    = int
-and interval  = int
 
 /// Contains methods for working with Socket instances
 [<Extension;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
