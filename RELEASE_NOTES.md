@@ -23,3 +23,4 @@
 ### New in 4.0.5 (unreleased)
 * Fixed bug in stopwatch function
 * Added high-resolution `clock` function (analagous to `CZMQ::zclock()`)
+* Fixed working-directory pathing in `Scratch.fsx` to be properly relative
