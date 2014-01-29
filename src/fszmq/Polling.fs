@@ -29,10 +29,11 @@ open System.Runtime.CompilerServices
 /// 
 /// ** Note: all sockets passed to Polling.poll MUST share the same context 
 /// and belong to the thread calling `Polling.poll`. **
-type Poll = Poll of events:int16 * Socket * (Socket -> unit) with  
+type Poll = Poll of int16 * Socket * (Socket -> unit) with  
 
   /// Creates a poll item in a way friendly to languages other then F#
   static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
+and events = int16
 
 /// Contains methods for working with ZMQ's polling capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]

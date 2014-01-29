@@ -127,12 +127,12 @@ module ZMQ =
   let [<Literal>] EVENT_MONITOR_STOPPED = 1024us
   
   /// Monitor all possible events
-  let [<Literal>] EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
-                          ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
-                          ||| EVENT_ACCEPTED  ||| EVENT_ACCEPT_FAILED
-                          ||| EVENT_CLOSED    ||| EVENT_CLOSE_FAILED
-                          ||| EVENT_DISCONNECTED
-                          ||| EVENT_MONITOR_STOPPED
+  let EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
+              ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
+              ||| EVENT_ACCEPTED  ||| EVENT_ACCEPT_FAILED
+              ||| EVENT_CLOSED    ||| EVENT_CLOSE_FAILED
+              ||| EVENT_DISCONNECTED
+              ||| EVENT_MONITOR_STOPPED
 
 
 (* socket types *)
