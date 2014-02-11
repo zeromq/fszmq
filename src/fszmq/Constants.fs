@@ -25,8 +25,6 @@ open System
 open System.Globalization
 open System.Runtime.InteropServices
 
-[<MeasureAnnotatedAbbreviation>] type uint64<[<Measure>] 'Measure> = uint64
-
 /// <summary>
 /// A version of two possible states:
 /// <para>a triple of integers for the major revision, minor revision and 
@@ -311,6 +309,6 @@ module ZMQ =
   
   (* common timeout lengths for polling *)
   /// indicates polling should exit immediately
-  let [<Literal>] NOW     =  0UL
+  let [<Literal>] NOW     =  0L
   /// indicates polling should wait indefinitely 
   let [<Literal>] FOREVER = -1L

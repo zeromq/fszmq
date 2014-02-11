@@ -248,10 +248,10 @@ Target "All" DoNothing
   ==> "All"
 
 "All" 
+  ==> "NuGet"
   ==> "CleanDocs"
   ==> "GenerateDocs"
   ==> "ReleaseDocs"
-  ==> "NuGet"
   ==> "Release"
 
 RunTargetOrDefault "All"
