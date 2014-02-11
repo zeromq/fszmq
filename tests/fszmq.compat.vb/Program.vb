@@ -18,22 +18,45 @@
 ' -------------------------------------------------------------------------
 Imports fszmq.ContextModule
 Imports fszmq.SocketModule
+Imports fszmq.PollingExtensions
+Imports fszmq.PollingModule
+
 Imports System.Threading
 
 Module Program
 
   Const REQUEST_ADDR = "tcp://127.0.0.1:1979"
 
-  Sub Main()
+  Dim Frame   As Byte()   = {0}
+  Dim Message As Byte()() = {Frame,Frame,Frame}
+  
+  Sub MainPoll()
+
     Using context As New Context(), socket = context.Request()
       
       socket.Connect(REQUEST_ADDR)
       
-      Dim frame   As Byte()   = {0}
-      Dim message As Byte()() = {frame,frame,frame}
+      socket.SendAll(Message)
+      Console.WriteLine("Message sent, awaiting reply")      
+
+      While DoPoll(500,New Poll() { socket.AsPollIn(Sub (__) socket.RecvAll()) } )
+        Console.WriteLine("Received reply")
+        socket.SendAll(Message)
+        Console.WriteLine("Message sent, awaiting reply")      
+      End While
+
+    End Using
+
+  End Sub
+
+  Sub Main()
+
+    Using context As New Context(), socket = context.Request()
+      
+      socket.Connect(REQUEST_ADDR)
       
       For counter = 1 to 10
-        socket.SendAll(message)   
+        socket.SendAll(Message)   
         Console.WriteLine("Message sent, awaiting reply")
         socket.RecvAll() ' ignore
         Console.WriteLine("Received reply")

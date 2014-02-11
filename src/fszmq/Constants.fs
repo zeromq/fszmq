@@ -18,9 +18,14 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
+open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
+open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
+
 open System
 open System.Globalization
 open System.Runtime.InteropServices
+
+[<MeasureAnnotatedAbbreviation>] type uint64<[<Measure>] 'Measure> = uint64
 
 /// <summary>
 /// A version of two possible states:
@@ -306,6 +311,6 @@ module ZMQ =
   
   (* common timeout lengths for polling *)
   /// indicates polling should exit immediately
-  let [<Literal>] NOW     =  0L
+  let [<Literal>] NOW     =  0UL
   /// indicates polling should wait indefinitely 
   let [<Literal>] FOREVER = -1L

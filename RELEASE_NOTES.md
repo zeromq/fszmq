@@ -24,3 +24,5 @@
 * Fixed bug in stopwatch function
 * Added high-resolution `clock` function (analagous to `CZMQ::zclock()`)
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
+* Changed poll function to use UInt64 timeouts, marked with Units-of-Measure 
+* Changed poll function to DoPoll when called from other CLR languages

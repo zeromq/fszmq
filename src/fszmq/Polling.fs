@@ -59,8 +59,8 @@ module Polling =
   ///
   /// ** Note: All items passed to Polling.poll MUST share the same context 
   /// and belong to the thread calling `Polling.poll`. **
-  [<CompiledName("Poll")>]
-  let poll<[<Measure>]'u> (timeout:int64<'u>) items =
+  [<CompiledName("DoPoll")>]
+  let poll<[<Measure>]'u> (timeout:uint64<'u>) items =
     let items  = items |> Array.ofSeq
     let items' = items |> Array.map (fun (Poll(v,s,_)) -> C.zmq_pollitem_t(s.Handle,v))
     match C.zmq_poll(items',items'.Length,int64 timeout) with
@@ -80,7 +80,7 @@ module Polling =
   /// Calls Polling.poll with the given sequence of Poll items and no timeout,
   /// effectively causing the polling loop to block indefinitely.
   [<CompiledName("PollForever")>]
-  let pollForever items = poll ZMQ.FOREVER items
+  let pollForever items = poll (uint64 ZMQ.FOREVER) items
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
