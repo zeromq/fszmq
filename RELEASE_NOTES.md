@@ -21,7 +21,6 @@
 * NuGet package now has proper uninstaller
 
 ### New in 4.0.5 (unreleased)
-* Fixed bug in stopwatch function
-* Added high-resolution `clock` function (analagous to `CZMQ::zclock()`)
+* Removed Timing module
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
 * Changed poll function to DoPoll when called from other CLR languages
