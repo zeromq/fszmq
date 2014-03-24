@@ -30,7 +30,7 @@ Module Program
   Dim Frame   As Byte()   = {0}
   Dim Message As Byte()() = {Frame,Frame,Frame}
   
-  Sub MainPoll()
+  Sub Main()
 
     Using context As New Context(), socket = context.Request()
       
@@ -39,7 +39,8 @@ Module Program
       socket.SendAll(Message)
       Console.WriteLine("Message sent, awaiting reply")      
 
-      While DoPoll(500,New Poll() { socket.AsPollIn(Sub (__) socket.RecvAll()) } )
+      Dim msg(0)() As Byte
+      While TryGetInput(socket,2500,msg)
         Console.WriteLine("Received reply")
         socket.SendAll(Message)
         Console.WriteLine("Message sent, awaiting reply")      
@@ -47,24 +48,6 @@ Module Program
 
     End Using
 
-  End Sub
-
-  Sub Main()
-
-    Using context As New Context(), socket = context.Request()
-      
-      socket.Connect(REQUEST_ADDR)
-      
-      For counter = 1 to 10
-        socket.SendAll(Message)   
-        Console.WriteLine("Message sent, awaiting reply")
-        socket.RecvAll() ' ignore
-        Console.WriteLine("Received reply")
-        Thread.Sleep(500)
-      Next
-    
-    End Using
-  
   End Sub
 
 End Module
