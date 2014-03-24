@@ -18,7 +18,10 @@ Expects "Hello" from client, replies with "World"
 #r @"fszmq.dll"
 open fszmq
 open fszmq.Socket
-open fszmq.Timing
+
+open System.Threading
+
+let ONE_SEC = 1000 // msecs
 
 let main () = 
   // socket to talk to clients
@@ -31,7 +34,7 @@ let main () =
     let _buffer = Socket.recv responder
     printfn "Received Hello"
     
-    sleep 1 // do some work
+    Thread.Sleep (ONE_SEC / 2) // do some work
 
     // send reply back to client
     Socket.send responder "World"B
