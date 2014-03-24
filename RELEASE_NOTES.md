@@ -24,3 +24,4 @@
 * Removed Timing module
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
 * Changed poll function to DoPoll when called from other CLR languages
+* Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)

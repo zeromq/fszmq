@@ -21,6 +21,7 @@ namespace fszmq
 open System
 open System.Collections.Generic
 open System.Runtime.CompilerServices
+open System.Runtime.InteropServices
 
 /// For use with the Poll module...
 /// 
@@ -82,6 +83,16 @@ module Polling =
   [<CompiledName("PollForever")>]
   let pollForever items = poll ZMQ.FOREVER items
 
+  /// Polls the given socket, up to the given timeout, for an input message.
+  /// Returns a byte[][] option, where None indicates no message was received.
+  [<CompiledName("TryPollInput")>]
+  let tryPollInput timeout socket =
+    let msg   = ref Array.empty
+    let items = [socket |> pollIn (Socket.recvAll >> ((:=) msg))]
+    match poll timeout items with
+    | true  -> Some !msg
+    | false -> None
+
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
 type PollingExtensions =
@@ -103,3 +114,11 @@ type PollingExtensions =
   [<Extension>]
   static member AsPollIO (socket,callback:Action<_>) =
     socket |> Polling.pollIO (fun s -> callback.Invoke(s))
+
+  /// Polls the given socket, up to the given timeout, for an input message.
+  /// Retuns true if input was received, in which case the message is assigned to the out parameter.
+  [<Extension>]
+  static member TryGetInput (socket,timeout,[<Out>]message:byref<byte[][]>) =
+    match Polling.tryPollInput timeout socket with
+    | Some msg  -> message <- msg;  true
+    | None      -> message <- [||]; false
