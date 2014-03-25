@@ -62,7 +62,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC
 		docs\content\zguide\hwclient.fsx = docs\content\zguide\hwclient.fsx
 		docs\content\zguide\hwserver.fsx = docs\content\zguide\hwserver.fsx
 		docs\content\zguide\index.fsx = docs\content\zguide\index.fsx
+		docs\content\zguide\tasksink.fsx = docs\content\zguide\tasksink.fsx
+		docs\content\zguide\taskvent.fsx = docs\content\zguide\taskvent.fsx
+		docs\content\zguide\taskwork.fsx = docs\content\zguide\taskwork.fsx
 		docs\content\zguide\TODO.txt = docs\content\zguide\TODO.txt
+		docs\content\zguide\version.fsx = docs\content\zguide\version.fsx
+		docs\content\zguide\wuclient.fsx = docs\content\zguide\wuclient.fsx
+		docs\content\zguide\wuserver.fsx = docs\content\zguide\wuserver.fsx
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.local_lat", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"

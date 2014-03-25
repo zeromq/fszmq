@@ -2,13 +2,13 @@
 Chapter 1
 [x] hwclient.fsx
 [x] hwserver.fsx
+[x] version.fsx
+[x] wuserver.fsx
+[x] wuclient.fsx
+[x] taskwork.fsx
+[x] taskvent.fsx
+[x] tasksink.fsx
 --------------------
-[-] version.fsx
-[-] wuserver.fsx
-[-] wuclient.fsx
-[-] taskwork.fsx
-[-] taskvent.fsx
-[-] tasksink.fsx
 Chapter 2
 [-] msreader.fsx
 [-] mspoller.fsx

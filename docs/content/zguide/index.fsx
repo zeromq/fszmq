@@ -10,7 +10,16 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
 
  * [Hello World server](hwserver.html) ... Expects "Hello" from client, replies with "World"
  * [Hello World client](hwclient.html) ... Sends "Hello" to server, expects "World" back
+ 
+ * [0MQ Version](version.html) ... Displays the version of 0MQ currently being used
+ 
+ * [Weather Update server](wuserver.html) ... Publishes random weather updates
+ * [Weather Update client](wuclient.html) ... Collects weather updates and finds avg temp in zipcode
 
+ * [Task worker](taskwork.html) ... Collects workloads from ventilator and sends results to sink
+ * [Task ventillator](taskvent.html) ... Sends batch of tasks to workers
+ * [Task sink](tasksink.html) ... Collects results from workers
+ 
  * more to come
 
 --------------------

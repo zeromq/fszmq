@@ -194,6 +194,7 @@ Target "NuGet" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Clone examples from zguide
+
 Target "CopyGuide" (fun _ ->
   let currentGuide = DirectoryInfo(__SOURCE_DIRECTORY__ + "/docs/content/zguide")
   let sourceGuide  = DirectoryInfo(__SOURCE_DIRECTORY__ + zguide)
