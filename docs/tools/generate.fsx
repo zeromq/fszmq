@@ -7,21 +7,23 @@
 let referenceBinaries = [ "fszmq.dll" ]
 // Web site location for the generated documentation
 let website = "/fszmq"
+let srcsite = "http://github.com/pblasucci/fszmq"
 
 // Specify more information about your project
 let info =
-  [ "project-name", "fszmq"
-    "project-author", "Paulmichael Blasucci"
-    "project-summary", "An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library."
-    "project-github", "http://github.com/pblasucci/fszmq"
-    "project-nuget", "http://www.nuget.org/packages/fszmq" ]
+  [ "project-name"    , "fszmq"
+    "project-author"  , "Paulmichael Blasucci"
+    "project-summary" , "An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library."
+    "project-github"  , srcsite
+    "project-nuget"   , "http://www.nuget.org/packages/fszmq" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below
 // --------------------------------------------------------------------------------------
 
-#I "../../packages/FSharp.Formatting.2.1.6/lib/net40"
+#I "../../packages/FSharp.Formatting.2.4.2/lib/net40"
 #I "../../packages/RazorEngine.3.3.0/lib/net40/"
+#I "../../packages/FSharp.Compiler.Service.0.0.36/lib/net40"
 #r "../../packages/Microsoft.AspNet.Razor.2.0.30506.0/lib/net40/System.Web.Razor.dll"
 #r "../../packages/FAKE/tools/FakeLib.dll"
 #r "RazorEngine.dll"
@@ -48,7 +50,7 @@ let content    = __SOURCE_DIRECTORY__ @@ "../content"
 let output     = __SOURCE_DIRECTORY__ @@ "../output"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"
 let templates  = __SOURCE_DIRECTORY__ @@ "templates"
-let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting.2.1.6/"
+let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting.2.4.2/"
 let docTemplate = formatting @@ "templates/docpage.cshtml"
 
 // Where to look for *.csproj templates (in this order)
@@ -60,7 +62,7 @@ let layoutRoots =
 let copyFiles () =
   CopyRecursive files output true |> Log "Copying file: "
   ensureDirectory (output @@ "content")
-  CopyRecursive (formatting @@ "content") (output @@ "content") true 
+  CopyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Log "Copying styles and scripts: "
 
 // Build API reference from XML comments
@@ -69,7 +71,10 @@ let buildReference () =
   for lib in referenceBinaries do
     MetadataFormat.Generate
       ( bin @@ lib, output @@ "reference", layoutRoots, 
-        parameters = ("root", root)::info )
+        parameters = ("root", root)::info,
+        sourceRepo = srcsite @@ "tree/master",
+        sourceFolder = __SOURCE_DIRECTORY__ @@ ".." @@ "..",
+        publicOnly = true )
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
@@ -80,7 +85,31 @@ let buildDocumentation () =
       ( dir, docTemplate, output @@ sub, replacements = ("root", root)::info,
         layoutRoots = layoutRoots )
 
+// Remove `FSharp.Core` from `bin` directory.
+// Otherwise, version conflict can break code tips.
+let execute pipeline =
+    // Cache `FSharp.Core.*` files
+    let files = 
+        !! (bin @@ "FSharp.Core.*")
+        |> Seq.toArray
+        |> Array.map (fun file ->
+            (file, File.ReadAllBytes file))
+    if (files.Length > 0) then
+        TraceHelper.traceError "Consider setting CopyLocal to False for FSharp.Core in all *.fsproj files"
+    // Remove `FSharp.Core.*` files
+    files |> Seq.iter (fun (file,_) ->
+        TraceHelper.traceImportant <| sprintf  "Removing '%s'" file
+        File.Delete file)
+    // Execute document generation pipeline
+    pipeline()
+    // Restore `FSharp.Core.*` files
+    files |> Seq.iter (fun (file, bytes) ->
+        TraceHelper.traceImportant <| sprintf "Restoring '%s'" file
+        File.WriteAllBytes(file, bytes))
+
+
 // Generate
-copyFiles()
-buildDocumentation()
-buildReference()
+execute(
+  copyFiles 
+  >> buildDocumentation
+  >> buildReference)

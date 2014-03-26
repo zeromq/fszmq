@@ -214,6 +214,10 @@ Target "GenerateDocs" (fun _ ->
   executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:RELEASE"] [] |> ignore
 )
 
+Target "GenerateLocalDocs" (fun _ ->
+  executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:DEBUG"] [] |> ignore
+)
+
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
