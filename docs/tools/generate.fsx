@@ -23,17 +23,19 @@ let info =
 
 #I "../../packages/FSharp.Formatting.2.4.2/lib/net40"
 #I "../../packages/RazorEngine.3.3.0/lib/net40/"
-#I "../../packages/FSharp.Compiler.Service.0.0.36/lib/net40"
+#I "../../packages/FSharp.Compiler.Service.0.0.40/lib/net40"
 #r "../../packages/Microsoft.AspNet.Razor.2.0.30506.0/lib/net40/System.Web.Razor.dll"
 #r "../../packages/FAKE/tools/FakeLib.dll"
 #r "RazorEngine.dll"
 #r "FSharp.Literate.dll"
 #r "FSharp.CodeFormat.dll"
+#r "FSharp.Markdown.dll"
 #r "FSharp.MetadataFormat.dll"
 open Fake
 open System.IO
 open Fake.FileHelper
 open FSharp.Literate
+open FSharp.Markdown
 open FSharp.MetadataFormat
 
 // When called from 'build.fsx', use the public project URL as <root>
@@ -82,7 +84,8 @@ let buildDocumentation () =
   for dir in Seq.append [content] subdirs do
     let sub = if dir.Length > content.Length then dir.Substring(content.Length + 1) else "."
     Literate.ProcessDirectory
-      ( dir, docTemplate, output @@ sub, replacements = ("root", root)::info,
+      ( dir, docTemplate, output @@ sub, 
+        replacements = ("root", root)::info,
         layoutRoots = layoutRoots )
 
 // Remove `FSharp.Core` from `bin` directory.

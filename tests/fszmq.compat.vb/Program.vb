@@ -32,7 +32,7 @@ Module Program
   
   Sub Main()
 
-    Using context As New Context(), socket = context.Request()
+    Using context As New Context(), socket = context.Req()
       
       socket.Connect(REQUEST_ADDR)
       

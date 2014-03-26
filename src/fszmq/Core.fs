@@ -41,7 +41,7 @@ type Message(?source:byte array) =
   /// Pointer to underlying (native) ZMQ message
   /// 
   /// ** Note: For internal use only. **
-  member __.Handle = memory
+  member __.Handle :nativeint = memory
 
   override __.Finalize() = 
     if not disposed then
@@ -77,7 +77,7 @@ type Socket internal(context,socketType) =
   /// Pointer to underlying (native) ZMQ socket
   /// 
   /// ** Note: For internal use only. **
-  member __.Handle = _socket
+  member __.Handle :nativeint = _socket
 
   override __.Finalize() =
     if not disposed then
@@ -105,7 +105,7 @@ type Context() =
   /// Pointer to underlying (native) ZMQ context
   /// 
   /// ** Note: For internal use only. **
-  member __.Handle  = _context
+  member __.Handle :nativeint = _context
 
   override __.Finalize() = 
     if not disposed then

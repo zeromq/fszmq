@@ -27,12 +27,11 @@ open System.Runtime.InteropServices
 
 /// <summary>
 /// A version of two possible states:
-/// <para>a triple of integers for the major revision, minor revision and 
-/// patch number</para>
-/// <para>or an `Unknown` indicator</para>
+/// <para>a triple of integers for the major revision, minor revision, and patch number </para>
+/// <para>or an Unknown indicator</para>
 /// </summary>
 [<StructuredFormatDisplay("{Text}")>]
-type Version = Version of int * int * int 
+type Version = Version of major:int * minor:int * revision:int 
              | Unknown with 
 
     /// textual representation of Verison
@@ -44,13 +43,13 @@ type Version = Version of int * int * int
 
 
 /// <summary>
-/// <para>Represents any error raised by the native ZMQ library.</para> 
-/// <para>Stores a human-readable summary in the `Message` property.</para>
+/// Represents any error raised by the native ZMQ library,
+/// with a human-readable summary in the Message property.
 /// </summary> 
 type ZMQError internal(errnum,errmsg) =
   inherit Exception(errmsg)
 
-  /// the ZeroMQ-defined, or OS-defined, error code reported by ZMQ
+  /// the ZeroMQ-defined, or OS-defined, error code
   member __.ErrorNumber = errnum
 
 

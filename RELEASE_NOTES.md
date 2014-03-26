@@ -21,7 +21,8 @@
 * NuGet package now has proper uninstaller
 
 ### New in 4.0.5 (unreleased)
-* Removed Timing module
+* !BREAKING! Removed Timing module
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
-* Changed poll function to DoPoll when called from other CLR languages
+* !BREAKING! Changed poll function to DoPoll when called from other CLR languages
 * Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)
+* !BREAKING! Normalized many function names in the Message, Context, and Socket modules

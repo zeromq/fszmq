@@ -8,6 +8,8 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
 
 --------------------
 
+**Chapter 1 examples**
+
  * [Hello World server](hwserver.html) ... Expects "Hello" from client, replies with "World"
  * [Hello World client](hwclient.html) ... Sends "Hello" to server, expects "World" back
  
@@ -19,8 +21,30 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
  * [Task worker](taskwork.html) ... Collects workloads from ventilator and sends results to sink
  * [Task ventillator](taskvent.html) ... Sends batch of tasks to workers
  * [Task sink](tasksink.html) ... Collects results from workers
+
+--------------------
+
+**Chapter 2 examples**
  
- * more to come
+ * coming soon
+
+--------------------
+
+**Chapter 3 examples**
+ 
+ * coming soon
+
+--------------------
+
+**Chapter 4 examples**
+ 
+ * coming soon
+
+--------------------
+
+**Chapter 5 examples**
+ 
+ * coming soon
 
 --------------------
 

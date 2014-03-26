@@ -252,6 +252,10 @@ Target "All" DoNothing
   ==> "RunTests"
   ==> "All"
 
+"All"
+  ==> "CleanDocs"
+  ==> "GenerateLocalDocs"
+
 "All" 
   ==> "NuGet"
   ==> "CleanDocs"

@@ -8,7 +8,7 @@ type ENV = System.Environment
 //      easiest way to do that, and still work with FSI, 
 //      is to manually set the current directory to a folder containing libzmq.dll
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s/../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+ENV.CurrentDirectory <- sprintf "%s/../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 
 // define some constants and helper functions
 let [<Literal>] ADDRESS = "tcp://127.0.0.1:5555"
@@ -51,11 +51,11 @@ let server () =
   // create reply socket
   use server  = rep context
   // begin receiving connections
-  ADDRESS |> bind server 
+  bind server ADDRESS
   
   let rec loop () =
     // process request
-    match (recv >> decode) server with
+    match server |> recv |> decode with
     | "hello"   ->  // valid request; send a reply
                     "world"B |>> server
                     // wait for next request

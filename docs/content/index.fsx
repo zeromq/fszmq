@@ -1,8 +1,12 @@
 (*** hide ***)
+// do some environmental setup
 #I "../../bin"
 
 type ENV = System.Environment
 
+//NOTE: fszmq.dll needs to "see" libzmq.dll...
+//      easiest way to do that, and still work with FSI, 
+//      is to manually set the current directory to a folder containing libzmq.dll
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
 ENV.CurrentDirectory <- sprintf "%s../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 

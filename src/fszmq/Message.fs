@@ -35,13 +35,13 @@ module Message =
     |    -1 -> ZMQ.error()
     | value -> value
 
-  /// Sets the given option value for the given Socket
+  /// Sets the given option value for the given Message
   [<Extension;CompiledName("SetOption")>]
   let setOption (message:Message) (messageOption,value) = 
     if C.zmq_msg_set(message.Handle,messageOption,value) <> 0 then ZMQ.error()
 
   /// Returns the content of the given Message
-  [<Extension;CompiledName("GetData")>]
+  [<Extension;CompiledName("Data")>]
   let data (message:Message) =
     let size = C.zmq_msg_size(message.Handle) |> int 
     let data = C.zmq_msg_data(message.Handle)
@@ -50,37 +50,37 @@ module Message =
     output
   
   /// Returns the size (in bytes) of the given Message
-  [<Extension;CompiledName("GetSize")>]
+  [<Extension;CompiledName("Size")>]
   let size (message:Message) = C.zmq_msg_size(message.Handle) |> int
     
   /// Returns true if the given message is a frame in a multi-part message and more frames are available
   [<Extension;CompiledName("HasMore")>]
-  let more (message:Message) = C.zmq_msg_more(message.Handle) |> bool
+  let hasMore (message:Message) = C.zmq_msg_more(message.Handle) |> bool
 
 (* message manipulation *)
 
   /// <summary>
   /// Copies the content from one message to another message.
-  /// <para>Avoid modifying message content after a message has been copied, 
+  /// <para> Avoid modifying message content after a message has been copied, 
   /// as this can result in undefined behavior.</para>
   /// </summary>
-  [<Extension;CompiledName("CopyTo")>]
+  [<Extension;CompiledName("Copy")>]
   let copy (source:Message) (target:Message) =
     if source.Handle = target.Handle then ZMQ.einval()
     if C.zmq_msg_copy(target.Handle,source.Handle) <> 0 then ZMQ.error()
   
   /// <summary>
   /// Moves the content from one message to another message.
-  /// <para>No actual copying of message content is performed, `target` is simply updated to reference the new content. 
-  /// `source` becomes an empty message after calling `Message.move()`. The original content of `target`, if any, 
+  /// <para> No actual copying of message content is performed, target is simply updated to reference the new content. 
+  /// source becomes an empty message after calling `Message.move()`. The original content of target, if any, 
   /// shall be released. To preseve the content of source, see `Message.copy()`.</para>
   /// </summary>
-  [<Extension;CompiledName("MoveTo")>]
+  [<Extension;CompiledName("Move")>]
   let move (source:Message) (target:Message) =
     if source.Handle = target.Handle then ZMQ.einval()
     if C.zmq_msg_move(target.Handle,source.Handle) <> 0 then ZMQ.error()
 
-  /// Makes a new instance of the `Message` type, with an independent copy of the `source` content.
+  /// Makes a new instance of the Message type, with an independent copy of the source content.
   [<Extension;CompiledName("Clone")>]
   let clone (source:Message) = 
     let target = new Message()
@@ -114,18 +114,18 @@ module Message =
   [<Extension;CompiledName("Send")>]
   let send socket message = waitForOkay (trySend message) socket ZMQ.WAIT
 
-  /// Sends a frame, indicating more frames will follow, 
+  /// Sends a frame, indicating more frames will follow
   [<Extension;CompiledName("SendMore")>]
   let sendMore socket message = waitForOkay (trySend message) socket (ZMQ.WAIT ||| ZMQ.SNDMORE)
 
-  /// Operator equivalent to Message.send
+  /// Operator equivalent to `Message.send`
   let (<<-) socket = send socket
-  /// Operator equivalent to Message.sendMore
+  /// Operator equivalent to `Message.sendMore`
   let (<<+) socket = sendMore socket
 
-  /// Operator equivalent to Message.send (with arguments reversed)
+  /// Operator equivalent to `Message.send` (with arguments reversed)
   let (->>) message socket = socket <<- message
-  /// Operator equivalent to Message.sendMore (with arguments reversed)
+  /// Operator equivalent to `Message.sendMore` (with arguments reversed)
   let (+>>) message socket = socket <<+ message
 
 (* message receiving *)

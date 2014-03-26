@@ -23,14 +23,14 @@ open System.Collections.Generic
 open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 
-/// For use with the Poll module...
+/// For use with the Polling module...
 /// 
 /// Associates a callback with a Socket instance and one or more events, 
 /// such that the callback is invoked when the event(s) occurs on the Socket instance
 /// 
 /// ** Note: all sockets passed to Polling.poll MUST share the same context 
-/// and belong to the thread calling `Polling.poll`. **
-type Poll = Poll of events:int16 * Socket * (Socket -> unit) with  
+/// and belong to the thread calling Polling.poll **
+type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) with  
 
   /// Creates a poll item in a way friendly to languages other then F#
   static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
@@ -60,8 +60,11 @@ module Polling =
   ///
   /// ** Note: All items passed to Polling.poll MUST share the same context 
   /// and belong to the thread calling `Polling.poll`. **
+  ///
+  /// This function is named DoPoll in compiled assemblies. 
+  /// If you are accessing the function from a language other than F#, or through reflection, use this name.
   [<CompiledName("DoPoll")>]
-  let poll<[<Measure>]'u> (timeout:int64<'u>) items =
+  let poll<[<Measure>]'unit> (timeout:int64<'unit>) items =
     let items  = items |> Array.ofSeq
     let items' = items |> Array.map (fun (Poll(v,s,_)) -> C.zmq_pollitem_t(s.Handle,v))
     match C.zmq_poll(items',items'.Length,int64 timeout) with
@@ -73,12 +76,11 @@ module Polling =
                         true
     | _             ->  ZMQ.error()
 
-  /// Calls Polling.poll with the given sequence of 
-  /// Poll items and 0 microseconds timeout
+  /// Calls `Polling.poll` with the given sequence of Poll items and 0 microseconds timeout
   [<CompiledName("PollNow")>]
   let pollNow items = poll ZMQ.NOW items
 
-  /// Calls Polling.poll with the given sequence of Poll items and no timeout,
+  /// Calls `Polling.poll` with the given sequence of Poll items and no timeout,
   /// effectively causing the polling loop to block indefinitely.
   [<CompiledName("PollForever")>]
   let pollForever items = poll ZMQ.FOREVER items
@@ -86,7 +88,7 @@ module Polling =
   /// Polls the given socket, up to the given timeout, for an input message.
   /// Returns a byte[][] option, where None indicates no message was received.
   [<CompiledName("TryPollInput")>]
-  let tryPollInput timeout socket =
+  let tryPollInput<[<Measure>]'unit> (timeout:int64<'unit>) socket =
     let msg   = ref Array.empty
     let items = [socket |> pollIn (Socket.recvAll >> ((:=) msg))]
     match poll timeout items with
@@ -118,7 +120,7 @@ type PollingExtensions =
   /// Polls the given socket, up to the given timeout, for an input message.
   /// Retuns true if input was received, in which case the message is assigned to the out parameter.
   [<Extension>]
-  static member TryGetInput (socket,timeout,[<Out>]message:byref<byte[][]>) =
+  static member TryGetInput (socket,timeout:int64,[<Out>]message:byref<byte[][]>) =
     match Polling.tryPollInput timeout socket with
     | Some msg  -> message <- msg;  true
     | None      -> message <- [||]; false
