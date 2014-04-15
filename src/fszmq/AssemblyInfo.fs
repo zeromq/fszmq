@@ -22,7 +22,7 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("fszmq")>]
 [<assembly: AssemblyProductAttribute("fszmq")>]
 [<assembly: AssemblyDescriptionAttribute("An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library.")>]
-[<assembly: AssemblyVersionAttribute("4.0.5")>]
-[<assembly: AssemblyFileVersionAttribute("4.0.5")>]
+[<assembly: AssemblyVersionAttribute("4.0.4")>]
+[<assembly: AssemblyFileVersionAttribute("4.0.4")>]
 do ()
 
