@@ -35,9 +35,9 @@ type Version = Version of major:int * minor:int * revision:int
              | Unknown with 
 
     /// textual representation of Verison
-    member V.Text = match V with
-                    | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
-                    | Unknown        -> "<unknown>"
+    member private V.Text = match V with
+                            | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
+                            | Unknown        -> "<unknown>"
 
     override V.ToString() = V.Text
 

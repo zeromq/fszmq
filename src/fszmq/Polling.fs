@@ -51,7 +51,8 @@ module Polling =
   
   /// Creates a Poll item for the socket which will 
   /// invoke the callback when the socket sends or receives messages
-  [<CompiledName("PollInOut")>]
+  ///
+  [<CompiledName("PollIO")>]
   let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
   /// Performs a single polling run 

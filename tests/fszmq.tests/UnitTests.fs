@@ -42,10 +42,10 @@ open NUnit.Framework
 module UnitTest = 
 
   [<Test;Category("Miscellany")>]
-  let ``major version should be 4.0.4``() =
+  let ``major version should be 4.0.5``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
-    vsn |> should equal (Version(4,0,4))
+    vsn |> should equal (Version(4,0,5))
 
 (* ZCURVE & Z85 Tests *)
   let BINARY = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
