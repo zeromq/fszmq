@@ -26,3 +26,4 @@
 * !BREAKING! Changed poll function to DoPoll when called from other CLR languages
 * Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)
 * !BREAKING! Normalized many function names in the Message, Context, and Socket modules
+* updated libzmq to 4.0.5
