@@ -26,25 +26,27 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
 
 **Chapter 2 examples**
  
- * coming soon
+ * [Multi-socket Reader](msreader.html) ... Reads from multiple sockets using a simple recv loop.
+ * [Multi-socket Poller](mspoller.html) ... Reads from multiple sockets using ZMQ's polling functionality.
 
+ * _More examples coming soon._
 --------------------
 
 **Chapter 3 examples**
  
- * coming soon
+ * _Coming soon._
 
 --------------------
 
 **Chapter 4 examples**
  
- * coming soon
+ * _Coming soon._
 
 --------------------
 
 **Chapter 5 examples**
  
- * coming soon
+ * _Coming soon._
 
 --------------------
 
