@@ -20,7 +20,7 @@ module fszmq.perf.remote_lat.Program
 
 open fszmq
 open fszmq.Message
-open fszmq.Timing
+open System.Diagnostics
 
 (* _ zeromq ____________________________________________________________ *)
 
@@ -37,8 +37,11 @@ let runTest address messageSize roundtripCount =
   use socket  = Context.req context
   Socket.connect socket address
 
-  let elapsed = execTimed (fun () -> processMessages messageSize roundtripCount socket)
-  let latency = float elapsed / (float roundtripCount * 2.0);
+  let watch = Stopwatch.StartNew ()
+  processMessages messageSize roundtripCount socket
+  watch.Stop ()
+
+  let latency = watch.Elapsed.TotalMilliseconds / (float roundtripCount * 2.0);
 
   printfn "message size: %d [B]" messageSize
   printfn "roundtrip count: %d" roundtripCount

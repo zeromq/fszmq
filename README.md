@@ -74,7 +74,9 @@ Other platform/architecture/runtime combinations should work (so long as the .NE
 there is a native libzmq port) and will be tested in due course..
 
 _Please note: comprehensive Mac OS X testing has NOT been conducted, due to resource constraints._
+
 _Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
+
 _Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
 
 ### NuGet

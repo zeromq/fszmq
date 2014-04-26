@@ -8,10 +8,7 @@ type ENV = System.Environment
 //      easiest way to do that, and still work with FSI, 
 //      is to manually set the current directory to a folder containing libzmq.dll
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s/../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
-
-// define some constants and helper functions
-let [<Literal>] ADDRESS = "tcp://127.0.0.1:5555"
+ENV.CurrentDirectory <- sprintf "%s/../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
 
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString 
@@ -51,17 +48,19 @@ let server () =
   // create reply socket
   use server  = rep context
   // begin receiving connections
-  ADDRESS |> bind server 
+  bind server "tcp://*:5555"
   
   let rec loop () =
-    // process request
-    match (recv >> decode) server with
-    | "hello"   ->  // valid request; send a reply
+    // process request (i.e. 'recv' a message from our 'server')
+    // NOTE: it's convenient to 'decode' the (binary) message into a string
+    match server |> recv |> decode with
+    | "hello"   ->  // valid request; send a reply back
+                    // NOTE: "..."B is short-hand for a byte array of ASCII-encoded chars
                     "world"B |>> server
                     // wait for next request
                     loop() 
-    | _         ->  // invalid request; shutdown
-                    "goodbye"B |>> server
+    | _         ->  // invalid request; stop receiving connections
+                    "goodbye"B |>> server 
 
   // wait for next request
   loop () 
@@ -77,11 +76,12 @@ let client () =
   // create a request socket
   use client  = req context
   // connect to the server
-  ADDRESS |> connect client
+  "tcp://localhost:5555" |> connect client
 
   for i in 1 .. 10 do
-    // send a request to the server
+    // 'send' a request to the server
     let request = if i = 10 then "goodbye" else "hello"
+    // NOTE: we need to 'encode' a string to binary (before transmission)
     request |> encode |> send client
     printfn "(%i) sent: %s" i request
     // receive and print a reply from the server
@@ -154,7 +154,7 @@ If you run this example in F# Interactive, you should see the following:
 
 Notice how our two sockets are communicating synchronously. In other words, the client sends one request and must wait for a reply.
 Conversely, the server waits for a single request and immediately responds to it. If this were not the case, the parenthetical numbers
-at the start of each output line would be out of order. 
+at the start of each output line could be out of order. 
 
 But don't think this is the only way to use fszmq! Go look at the other [samples][content], or read the [zguide][zguide], 
 to see examples of asynchronous client\server, publish\subscribe, map\reduce, and many other distributed computing patterns. 

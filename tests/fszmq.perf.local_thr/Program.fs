@@ -20,7 +20,7 @@ module fszmq.perf.local_thr.Program
 
 open fszmq
 open fszmq.Socket
-open fszmq.Timing
+open System.Diagnostics
 
 (* _ zeromq ____________________________________________________________ *)
 
@@ -36,9 +36,13 @@ let runTest address messageSize messageCount =
   Socket.bind socket address
 
   recvMsg messageSize socket
-  let elapsed = execTimed (fun () -> for _ in 1L .. (messageCount - 1L) do recvMsg messageSize socket)
 
-  let throughput  = uint32 ((float messageCount) / (float elapsed) * 1000000.0)
+  let watch = Stopwatch.StartNew ()
+  for _ in 1L .. (messageCount - 1L) do recvMsg messageSize socket
+  watch.Stop ()
+
+  let elapsed     = watch.Elapsed.TotalMilliseconds
+  let throughput  = uint32 ((float messageCount) / elapsed * 1000000.0)
   let megabits    = (float (throughput * (uint32 messageSize) * 8u)) / 1000000.0
   
   printfn "message size: %i [B]" messageSize

@@ -20,7 +20,6 @@ module fszmq.perf.inproc_lat.Program
 
 open fszmq
 open fszmq.Message
-open fszmq.Timing
 open System.Diagnostics
 open System.Threading
 
@@ -54,8 +53,11 @@ let runTest messageSize roundtripCount =
   printfn "message size: %i [B]" messageSize
   printfn "roundtrip count: %i" roundtripCount
   
-  let elapsed = execTimed (fun () -> processMessages messageSize roundtripCount socket)
-  let latency = (float elapsed) / (float roundtripCount * 2.0)
+  let watch = Stopwatch.StartNew ()
+  processMessages messageSize roundtripCount socket
+  watch.Stop()
+
+  let latency = watch.Elapsed.TotalMilliseconds / (float roundtripCount * 2.0)
   
   thread.Join()
 

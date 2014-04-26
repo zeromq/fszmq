@@ -8,10 +8,56 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
 
 --------------------
 
+**Chapter 1 examples**
+
  * [Hello World server](hwserver.html) ... Expects "Hello" from client, replies with "World"
  * [Hello World client](hwclient.html) ... Sends "Hello" to server, expects "World" back
+ 
+ * [0MQ Version](version.html) ... Displays the version of 0MQ currently being used
+ 
+ * [Weather Update server](wuserver.html) ... Publishes random weather updates
+ * [Weather Update client](wuclient.html) ... Collects weather updates and finds avg temp in zipcode
 
- * more to come
+ * [Task worker](taskwork.html) ... Collects workloads from ventilator and sends results to sink
+ * [Task ventillator](taskvent.html) ... Sends batch of tasks to workers
+ * [Task sink](tasksink.html) ... Collects results from workers
+
+--------------------
+
+**Chapter 2 examples**
+ 
+ * [Multi-socket Reader](msreader.html) ... Reads from multiple sockets using a simple recv loop
+ * [Multi-socket Poller](mspoller.html) ... Reads from multiple sockets using ZMQ's polling functionality
+
+ * [Request-Reply Client](rrclient.html) ... Sends "Hello" to a server (via a broker) and expects "World" back
+ * [Request-Reply Worker](rrworker.html) ... Expects "Hello" from clients (via a broker) and replies with "World"
+ * [Request-Reply Broker](rrbroker.html) ... A simple broker for connecting client requests to server replies
+
+ * [Message Queue Broker](msgqueue.html) ... Like [Request-Reply Broker] but using device (i.e. a proxy)
+
+ * [Weather Update Proxy](wuproxy.html) ... A proxy device which does network bridging
+
+ * [Task Worker (2nd design)](taskwork2.html) ... Like [Task Worker](taskwork.html), but with a extra flow to receive and respond to a 'KILL' signal
+ * [Task Sink (2nd design)](tasksink2.html) ... Like [Task Sink](tasksink.html), but with a extra flow to receive and respond to a 'KILL' signal
+
+ * _More examples coming soon._
+--------------------
+
+**Chapter 3 examples**
+ 
+ * _Coming soon._
+
+--------------------
+
+**Chapter 4 examples**
+ 
+ * _Coming soon._
+
+--------------------
+
+**Chapter 5 examples**
+ 
+ * _Coming soon._
 
 --------------------
 

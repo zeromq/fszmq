@@ -57,9 +57,9 @@ namespace fszmq.compat.cs
     static void Main (String[] args)
     {
       using (var context = new Context())
-      using (var socket  = context.Response())
+      using (var socket  = context.Rep())
       {  
-        socket.CreateMonitor(MONITOR_ADDRESS,ZMQ.EVENT_ALL);
+        socket.Monitor(MONITOR_ADDRESS,ZMQ.EVENT_ALL);
         (new Thread(Monitor)).Start(context);
         socket.Bind(REQUEST_ADDRESS);
         
