@@ -34,6 +34,7 @@ module Proxying =
     match capture with
     | Some capture -> C.zmq_proxy(frontend.Handle,backend.Handle,capture.Handle)
     | _            -> C.zmq_proxy(frontend.Handle,backend.Handle,            0n)
+    |> ignore
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
@@ -87,31 +88,3 @@ module Curve =
     let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
     if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
     (string publicKey),(string secretKey)
-
-/// Utilities to assist with high-resolution time calculations
-module Timing =
-
-  /// returns the current system clock as milliseconds
-  [<CompiledName("Clock")>]
-  let clock () = 
-    let now = DateTime.UtcNow
-    (uint64 now.Second) * 1000UL + (uint64 now.Millisecond)
-
-  /// starts the stopwatch; returns the handle to the watch
-  [<CompiledName("StartWatch")>]
-  let startWatch () = C.zmq_stopwatch_start()
-
-  /// stops the stopwatch; returns the number of microseconds elapsed
-  [<CompiledName("StopWatch")>]
-  let stopWatch watch = C.zmq_stopwatch_stop(watch)
-
-  /// executes given function, returning elapsed microseconds
-  [<CompiledName("ExecTimed")>]
-  let execTimed action = 
-    let watch = startWatch()
-    action()
-    stopWatch watch
-  
-  /// sleeps the current thread for given number of seconds
-  [<CompiledName("Sleep")>]
-  let sleep seconds = C.zmq_sleep(seconds)

@@ -21,6 +21,12 @@
 * NuGet package now has proper uninstaller
 
 ### New in 4.0.5 (unreleased)
-* Fixed bug in stopwatch function
-* Added high-resolution `clock` function (analagous to `CZMQ::zclock()`)
+* updated libzmq to 4.0.5
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
+* Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)
+* !BREAKING! Removed Timing module
+* !BREAKING! Changed poll function to DoPoll when called from other CLR languages
+* !BREAKING! Normalized many function names in the Message, Context, and Socket modules
+* !BREAKING! Changed `pollIO` function to `PollIO` when called from other CLR languages
+* !BREAKING! Changed `Proxingy.proxy` to return `unit` 
+* Fixed potential memory leak in `Message.tryRecv`

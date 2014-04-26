@@ -62,16 +62,16 @@ printfn "%A" ZMQ.version
 
 (*-----------------------------------------------------------------------*)
 
+open Microsoft.FSharp.Core.Printf
 open System.Text
 
 let encode data = Encoding.ASCII.GetBytes(string data)
 let decode data = Encoding.ASCII.GetString(data)
   
 let hexstr frame =
-  frame
-  |> Array.fold (fun (b:StringBuilder) (f:byte) -> b.AppendFormat("{0:2X}",f))
-                (StringBuilder(2 * Array.length frame))
+  frame 
+  |> Array.fold (fun b f -> bprintf b "%02x" (byte f); b)
+                (StringBuilder (2 * Array.length frame))
   |> string
-
+   
 (*-----------------------------------------------------------------------*)
-

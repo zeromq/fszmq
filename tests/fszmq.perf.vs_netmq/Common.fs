@@ -1,4 +1,4 @@
-(* ------------------------------------------------------------------------
+﻿(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
 fszmq is free software: you can redistribute it and/or modify
@@ -16,13 +16,8 @@ along with fszmq. If not, see <http://www.gnu.org/licenses/>.
 
 Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
-namespace fszmq
-open System.Reflection
-
-[<assembly: AssemblyTitleAttribute("fszmq")>]
-[<assembly: AssemblyProductAttribute("fszmq")>]
-[<assembly: AssemblyDescriptionAttribute("An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library.")>]
-[<assembly: AssemblyVersionAttribute("4.0.5")>]
-[<assembly: AssemblyFileVersionAttribute("4.0.5")>]
-do ()
-
+namespace fszmq.perf.inproc
+  
+  type ITest =
+    abstract TestName :string
+    abstract RunTest  :unit -> unit

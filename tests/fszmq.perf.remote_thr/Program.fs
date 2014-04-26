@@ -20,7 +20,6 @@ module fszmq.perf.remote_thr.Program
 
 open fszmq
 open fszmq.Socket
-open fszmq.Timing
 
 (* _ zeromq ____________________________________________________________ *)
 

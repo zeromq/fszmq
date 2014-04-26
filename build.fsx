@@ -194,6 +194,7 @@ Target "NuGet" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Clone examples from zguide
+
 Target "CopyGuide" (fun _ ->
   let currentGuide = DirectoryInfo(__SOURCE_DIRECTORY__ + "/docs/content/zguide")
   let sourceGuide  = DirectoryInfo(__SOURCE_DIRECTORY__ + zguide)
@@ -211,6 +212,10 @@ Target "CopyGuide" (fun _ ->
 
 Target "GenerateDocs" (fun _ ->
   executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:RELEASE"] [] |> ignore
+)
+
+Target "GenerateLocalDocs" (fun _ ->
+  executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:DEBUG"] [] |> ignore
 )
 
 // --------------------------------------------------------------------------------------
@@ -247,11 +252,15 @@ Target "All" DoNothing
   ==> "RunTests"
   ==> "All"
 
+"All"
+  ==> "CleanDocs"
+  ==> "GenerateLocalDocs"
+
 "All" 
+  ==> "NuGet"
   ==> "CleanDocs"
   ==> "GenerateDocs"
   ==> "ReleaseDocs"
-  ==> "NuGet"
   ==> "Release"
 
 RunTargetOrDefault "All"

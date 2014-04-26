@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1F1B4F0F-2998-4D74-865B-9122611C2B14}"
 	ProjectSection(SolutionItems) = preProject
@@ -62,7 +62,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC
 		docs\content\zguide\hwclient.fsx = docs\content\zguide\hwclient.fsx
 		docs\content\zguide\hwserver.fsx = docs\content\zguide\hwserver.fsx
 		docs\content\zguide\index.fsx = docs\content\zguide\index.fsx
+		docs\content\zguide\msgqueue.fsx = docs\content\zguide\msgqueue.fsx
+		docs\content\zguide\mspoller.fsx = docs\content\zguide\mspoller.fsx
+		docs\content\zguide\msreader.fsx = docs\content\zguide\msreader.fsx
+		docs\content\zguide\rrbroker.fsx = docs\content\zguide\rrbroker.fsx
+		docs\content\zguide\rrclient.fsx = docs\content\zguide\rrclient.fsx
+		docs\content\zguide\rrworker.fsx = docs\content\zguide\rrworker.fsx
+		docs\content\zguide\tasksink.fsx = docs\content\zguide\tasksink.fsx
+		docs\content\zguide\tasksink2.fsx = docs\content\zguide\tasksink2.fsx
+		docs\content\zguide\taskvent.fsx = docs\content\zguide\taskvent.fsx
+		docs\content\zguide\taskwork.fsx = docs\content\zguide\taskwork.fsx
+		docs\content\zguide\taskwork2.fsx = docs\content\zguide\taskwork2.fsx
 		docs\content\zguide\TODO.txt = docs\content\zguide\TODO.txt
+		docs\content\zguide\version.fsx = docs\content\zguide\version.fsx
+		docs\content\zguide\wuclient.fsx = docs\content\zguide\wuclient.fsx
+		docs\content\zguide\wuproxy.fsx = docs\content\zguide\wuproxy.fsx
+		docs\content\zguide\wuserver.fsx = docs\content\zguide\wuserver.fsx
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.local_lat", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"
@@ -72,6 +87,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.local_thr", "tests\fszmq.perf.local_thr\fszmq.perf.local_thr.fsproj", "{2FB9221E-3695-429A-83A1-075DE00827A2}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.remote_thr", "tests\fszmq.perf.remote_thr\fszmq.perf.remote_thr.fsproj", "{9D0E4922-695E-4036-9928-00F528A8E183}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.perf.vs_netmq", "tests\fszmq.perf.vs_netmq\fszmq.perf.vs_netmq.fsproj", "{A4F4A709-B83C-45E8-8DC8-356E181EF28D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -237,6 +254,22 @@ Global
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x64.Build.0 = Release|x64
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x86.ActiveCfg = Release|x86
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x86.Build.0 = Release|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|x64.ActiveCfg = Debug|x64
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|x64.Build.0 = Debug|x64
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|x86.ActiveCfg = Debug|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Debug|x86.Build.0 = Debug|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|x64.ActiveCfg = Release|x64
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|x64.Build.0 = Release|x64
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|x86.ActiveCfg = Release|x86
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -254,6 +287,7 @@ Global
 		{B53FB44D-54E6-43B5-9590-E38A48A2490D} = {0563B220-C3FD-4D3A-AF3A-04388C817AFE}
 		{2FB9221E-3695-429A-83A1-075DE00827A2} = {0563B220-C3FD-4D3A-AF3A-04388C817AFE}
 		{9D0E4922-695E-4036-9928-00F528A8E183} = {0563B220-C3FD-4D3A-AF3A-04388C817AFE}
+		{A4F4A709-B83C-45E8-8DC8-356E181EF28D} = {0563B220-C3FD-4D3A-AF3A-04388C817AFE}
 		{E41153B1-DE3A-4808-8C29-5F21B11A2B47} = {7B19DF26-F8A5-49F1-B7E2-5CF4C5C6DD92}
 		{9E64DAD3-2227-4AE8-88E3-295C42464C47} = {7B19DF26-F8A5-49F1-B7E2-5CF4C5C6DD92}
 	EndGlobalSection
