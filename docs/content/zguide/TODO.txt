@@ -11,39 +11,39 @@ Chapter 1
 Chapter 2
 [x] msreader.fsx
 [x] mspoller.fsx
+[x] rrclient.fsx
+[x] rrworker.fsx
+[x] rrbroker.fsx
+[x] msgqueue.fsx
+[x] wuproxy.fsx
+[x] taskwork2.fsx
+[x] tasksink2.fsx
+*[] interrupt.fsx
 --------------------
-[-] rrclient.fsx
-[-] rrworker.fsx
-[-] rrbroker.fsx
-[-] msgqueue.fsx
-[-] wuproxy.fsx
-[-] taskwork2.fsx
-[-] tasksink2.fsx
-[ ] interrupt.fsx
-[-] mtserver.fsx
-[-] mtrelay.fsx
-[-] syncpub.fsx
-[-] syncsub.fsx
-[-] psenvpub.fsx
-[-] psenvsub.fsx
+[ ] mtserver.fsx
+[ ] mtrelay.fsx
+[ ] syncpub.fsx
+[ ] syncsub.fsx
+[ ] psenvpub.fsx
+[ ] psenvsub.fsx
 Chapter 3
-[-] identity.fsx
-[-] rtreq.fsx
-[-] rtdealer.fsx
-[-] lbbroker.fsx
+[ ] identity.fsx
+[ ] rtreq.fsx
+[ ] rtdealer.fsx
+[ ] lbbroker.fsx
 [ ] lbbroker2.fsx
 [ ] lbbroker3.fsx
-[-] asyncsrv.fsx
-[-] peering1.fsx
-[-] peering2.fsx
-[-] peering3.fsx
+[ ] asyncsrv.fsx
+[ ] peering1.fsx
+[ ] peering2.fsx
+[ ] peering3.fsx
 Chapter 4
-[-] lpclient.fsx
-[-] lpserver.fsx
-[-] spqueue.fsx
-[-] spworker.fsx
-[-] ppqueue.fsx
-[-] ppworker.fsx
+[ ] lpclient.fsx
+[ ] lpserver.fsx
+[ ] spqueue.fsx
+[ ] spworker.fsx
+[ ] ppqueue.fsx
+[ ] ppworker.fsx
 [ ] mdcliapi.fsx
 [ ] mdclient.fsx
 [ ] mdwrkapi.fsx

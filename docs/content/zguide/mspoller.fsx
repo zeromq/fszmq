@@ -17,8 +17,8 @@ Reading from multiple sockets. This version uses a uses ZMQ's polling functional
 open fszmq
 open System.Threading
 
-let main args = 
-  use context = new Context()
+let main () = 
+  use context = new Context ()
 
   // connect to task ventilator
   let receiver = Context.pull context
@@ -43,5 +43,4 @@ let main args =
   0 // return code
 
 (*** hide ***)    
-main fsi.CommandLineArgs.[1 ..]
-// 0th commandline arg is __SOURCE_FILE__
+main ()

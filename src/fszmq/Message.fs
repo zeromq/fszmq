@@ -138,7 +138,8 @@ module Message =
     match C.zmq_msg_recv(frame.Handle,socket.Handle,flags) with
     | Okay -> Some(frame)
     | Busy -> None
-    | Fail -> ZMQ.error()
+    | Fail -> (frame :> IDisposable).Dispose()
+              ZMQ.error()
 
   /// Waits for (and returns) the next available Message from a socket
   [<CompiledName("Recv")>]

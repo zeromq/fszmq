@@ -62,14 +62,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC
 		docs\content\zguide\hwclient.fsx = docs\content\zguide\hwclient.fsx
 		docs\content\zguide\hwserver.fsx = docs\content\zguide\hwserver.fsx
 		docs\content\zguide\index.fsx = docs\content\zguide\index.fsx
+		docs\content\zguide\msgqueue.fsx = docs\content\zguide\msgqueue.fsx
 		docs\content\zguide\mspoller.fsx = docs\content\zguide\mspoller.fsx
 		docs\content\zguide\msreader.fsx = docs\content\zguide\msreader.fsx
+		docs\content\zguide\rrbroker.fsx = docs\content\zguide\rrbroker.fsx
+		docs\content\zguide\rrclient.fsx = docs\content\zguide\rrclient.fsx
+		docs\content\zguide\rrworker.fsx = docs\content\zguide\rrworker.fsx
 		docs\content\zguide\tasksink.fsx = docs\content\zguide\tasksink.fsx
+		docs\content\zguide\tasksink2.fsx = docs\content\zguide\tasksink2.fsx
 		docs\content\zguide\taskvent.fsx = docs\content\zguide\taskvent.fsx
 		docs\content\zguide\taskwork.fsx = docs\content\zguide\taskwork.fsx
+		docs\content\zguide\taskwork2.fsx = docs\content\zguide\taskwork2.fsx
 		docs\content\zguide\TODO.txt = docs\content\zguide\TODO.txt
 		docs\content\zguide\version.fsx = docs\content\zguide\version.fsx
 		docs\content\zguide\wuclient.fsx = docs\content\zguide\wuclient.fsx
+		docs\content\zguide\wuproxy.fsx = docs\content\zguide\wuproxy.fsx
 		docs\content\zguide\wuserver.fsx = docs\content\zguide\wuserver.fsx
 	EndProjectSection
 EndProject

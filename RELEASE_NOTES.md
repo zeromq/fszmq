@@ -27,4 +27,6 @@
 * !BREAKING! Removed Timing module
 * !BREAKING! Changed poll function to DoPoll when called from other CLR languages
 * !BREAKING! Normalized many function names in the Message, Context, and Socket modules
-* !BREAKING! Changed pollIO function to PollIO when called from other CLR languages
+* !BREAKING! Changed `pollIO` function to `PollIO` when called from other CLR languages
+* !BREAKING! Changed `Proxingy.proxy` to return `unit` 
+* Fixed potential memory leak in `Message.tryRecv`

@@ -34,6 +34,7 @@ module Proxying =
     match capture with
     | Some capture -> C.zmq_proxy(frontend.Handle,backend.Handle,capture.Handle)
     | _            -> C.zmq_proxy(frontend.Handle,backend.Handle,            0n)
+    |> ignore
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]

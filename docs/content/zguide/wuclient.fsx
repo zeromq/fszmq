@@ -23,7 +23,7 @@ let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
 let main args = 
-  use context = new Context()
+  use context = new Context ()
 
   // socket to talk to server
   printfn "Collecting updates from weather server..."
