@@ -44,6 +44,7 @@ It will <em>connect</em> to the server's TCP endpoint and issue a number of requ
 <p>To start, we'll reference our library and open the <code>fszmq</code> namespace, which defines the <code>Socket</code> type and the <code>Context</code> type.
 <em>(Note: don't worry too much about contexts just yet. For now, assume every node in your network has one <code>Context</code> instance
 which owns one, or more, <code>Socket</code> instances.)</em> We'll also open some modules which contain functions for working with contexts and sockets.</p>
+
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
 <span class="l">2: </span>
@@ -58,7 +59,10 @@ which owns one, or more, <code>Socket</code> instances.)</em> We'll also open so
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="i">fszmq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="i">Socket</span></pre>
 </td>
 </tr>
-</table><p>Now here's our basic server that takes "hello" requests and replies with "world". Any other message causes it to exit.</p>
+</table>
+
+<p>Now here's our basic server that takes "hello" requests and replies with "world". Any other message causes it to exit.</p>
+
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -81,6 +85,8 @@ which owns one, or more, <code>Socket</code> instances.)</em> We'll also open so
 <span class="l">19: </span>
 <span class="l">20: </span>
 <span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
@@ -91,23 +97,28 @@ which owns one, or more, <code>Socket</code> instances.)</em> We'll also open so
   <span class="c">// create reply socket</span>
   <span class="k">use</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="i">server</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="i">rep</span> <span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="i">context</span>
   <span class="c">// begin receiving connections</span>
-  <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="i">ADDRESS</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="i">bind</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="i">server</span> 
+  <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="i">bind</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="i">server</span> <span class="s">&quot;</span><span class="s">tcp</span><span class="s">:</span><span class="s">/</span><span class="s">/</span><span class="s">*</span><span class="s">:</span><span class="s">5555</span><span class="s">&quot;</span>
   
-  <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">loop</span> () <span class="o">=</span>
-    <span class="c">// process request</span>
-    <span class="k">match</span> (<span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">recv</span> <span class="o">&gt;</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="i">decode</span>) <span onmouseout="hideTip(event, 'fs6', 18)" onmouseover="showTip(event, 'fs6', 18)" class="i">server</span> <span class="k">with</span>
-    | <span class="s">&quot;</span><span class="s">hello</span><span class="s">&quot;</span>   <span class="k">-&gt;</span>  <span class="c">// valid request; send a reply</span>
-                    <span class="s">&quot;</span><span class="s">world</span><span class="s">&quot;B</span> <span class="o">|&gt;&gt;</span> <span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="i">server</span>
+  <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">loop</span> () <span class="o">=</span>
+    <span class="c">// process request (i.e. &#39;recv&#39; a message from our &#39;server&#39;)</span>
+    <span class="c">// NOTE: it&#39;s convenient to &#39;decode&#39; the (binary) message into a string</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs6', 15)" onmouseover="showTip(event, 'fs6', 15)" class="i">server</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">recv</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">decode</span> <span class="k">with</span>
+    | <span class="s">&quot;</span><span class="s">hello</span><span class="s">&quot;</span>   <span class="k">-&gt;</span>  <span class="c">// valid request; send a reply back</span>
+                    <span class="c">// NOTE: &quot;...&quot;B is short-hand for a byte array of ASCII-encoded chars</span>
+                    <span class="s">&quot;</span><span class="s">world</span><span class="s">&quot;B</span> <span class="o">|&gt;&gt;</span> <span onmouseout="hideTip(event, 'fs6', 18)" onmouseover="showTip(event, 'fs6', 18)" class="i">server</span>
                     <span class="c">// wait for next request</span>
-                    <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="i">loop</span>() 
-    | _         <span class="k">-&gt;</span>  <span class="c">// invalid request; shutdown</span>
-                    <span class="s">&quot;</span><span class="s">goodbye</span><span class="s">&quot;B</span> <span class="o">|&gt;&gt;</span> <span onmouseout="hideTip(event, 'fs6', 21)" onmouseover="showTip(event, 'fs6', 21)" class="i">server</span>
+                    <span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="i">loop</span>() 
+    | _         <span class="k">-&gt;</span>  <span class="c">// invalid request; stop receiving connections</span>
+                    <span class="s">&quot;</span><span class="s">goodbye</span><span class="s">&quot;B</span> <span class="o">|&gt;&gt;</span> <span onmouseout="hideTip(event, 'fs6', 20)" onmouseover="showTip(event, 'fs6', 20)" class="i">server</span> 
 
   <span class="c">// wait for next request</span>
-  <span onmouseout="hideTip(event, 'fs10', 22)" onmouseover="showTip(event, 'fs10', 22)" class="i">loop</span> () </pre>
+  <span onmouseout="hideTip(event, 'fs9', 21)" onmouseover="showTip(event, 'fs9', 21)" class="i">loop</span> () </pre>
 </td>
 </tr>
-</table><p>And here's a simple client that makes 10 requests and prints the server's reply each time.</p>
+</table>
+
+<p>And here's a simple client that makes 10 requests and prints the server's reply each time.</p>
+
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -126,29 +137,33 @@ which owns one, or more, <code>Socket</code> instances.)</em> We'll also open so
 <span class="l">15: </span>
 <span class="l">16: </span>
 <span class="l">17: </span>
+<span class="l">18: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="i">client</span> () <span class="o">=</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="i">client</span> () <span class="o">=</span>
   <span class="c">// create a ZMQ context</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs5', 24)" onmouseover="showTip(event, 'fs5', 24)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs2', 25)" onmouseover="showTip(event, 'fs2', 25)" class="i">Context</span>()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs5', 23)" onmouseover="showTip(event, 'fs5', 23)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs2', 24)" onmouseover="showTip(event, 'fs2', 24)" class="i">Context</span>()
   
   <span class="c">// create a request socket</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">client</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="i">req</span> <span onmouseout="hideTip(event, 'fs5', 28)" onmouseover="showTip(event, 'fs5', 28)" class="i">context</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="i">client</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">req</span> <span onmouseout="hideTip(event, 'fs5', 27)" onmouseover="showTip(event, 'fs5', 27)" class="i">context</span>
   <span class="c">// connect to the server</span>
-  <span onmouseout="hideTip(event, 'fs8', 29)" onmouseover="showTip(event, 'fs8', 29)" class="i">ADDRESS</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">connect</span> <span onmouseout="hideTip(event, 'fs14', 31)" onmouseover="showTip(event, 'fs14', 31)" class="i">client</span>
+  <span class="s">&quot;</span><span class="s">tcp</span><span class="s">:</span><span class="s">/</span><span class="s">/</span><span class="s">localhost</span><span class="s">:</span><span class="s">5555</span><span class="s">&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="i">connect</span> <span onmouseout="hideTip(event, 'fs13', 29)" onmouseover="showTip(event, 'fs13', 29)" class="i">client</span>
 
-  <span class="k">for</span> <span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">10</span> <span class="k">do</span>
-    <span class="c">// send a request to the server</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="i">request</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="i">i</span> <span class="o">=</span> <span class="n">10</span> <span class="k">then</span> <span class="s">&quot;</span><span class="s">goodbye</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;</span><span class="s">hello</span><span class="s">&quot;</span>
-    <span onmouseout="hideTip(event, 'fs18', 35)" onmouseover="showTip(event, 'fs18', 35)" class="i">request</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="i">encode</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="i">send</span> <span onmouseout="hideTip(event, 'fs14', 38)" onmouseover="showTip(event, 'fs14', 38)" class="i">client</span>
-    <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">(</span><span class="s">%</span><span class="s">i</span><span class="s">)</span><span class="s"> </span><span class="s">sent</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs17', 40)" onmouseover="showTip(event, 'fs17', 40)" class="i">i</span> <span onmouseout="hideTip(event, 'fs18', 41)" onmouseover="showTip(event, 'fs18', 41)" class="i">request</span>
+  <span class="k">for</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">10</span> <span class="k">do</span>
+    <span class="c">// &#39;send&#39; a request to the server</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="i">request</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs16', 32)" onmouseover="showTip(event, 'fs16', 32)" class="i">i</span> <span class="o">=</span> <span class="n">10</span> <span class="k">then</span> <span class="s">&quot;</span><span class="s">goodbye</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;</span><span class="s">hello</span><span class="s">&quot;</span>
+    <span class="c">// NOTE: we need to &#39;encode&#39; a string to binary (before transmission)</span>
+    <span onmouseout="hideTip(event, 'fs17', 33)" onmouseover="showTip(event, 'fs17', 33)" class="i">request</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="i">encode</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="i">send</span> <span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="i">client</span>
+    <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">(</span><span class="s">%</span><span class="s">i</span><span class="s">)</span><span class="s"> </span><span class="s">sent</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="i">i</span> <span onmouseout="hideTip(event, 'fs17', 39)" onmouseover="showTip(event, 'fs17', 39)" class="i">request</span>
     <span class="c">// receive and print a reply from the server</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 42)" onmouseover="showTip(event, 'fs22', 42)" class="i">reply</span> <span class="o">=</span> (<span onmouseout="hideTip(event, 'fs11', 43)" onmouseover="showTip(event, 'fs11', 43)" class="i">recv</span> <span class="o">&gt;</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs12', 44)" onmouseover="showTip(event, 'fs12', 44)" class="i">decode</span>) <span onmouseout="hideTip(event, 'fs14', 45)" onmouseover="showTip(event, 'fs14', 45)" class="i">client</span>
-    <span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">(</span><span class="s">%</span><span class="s">i</span><span class="s">)</span><span class="s"> </span><span class="s">got</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs17', 47)" onmouseover="showTip(event, 'fs17', 47)" class="i">i</span> <span onmouseout="hideTip(event, 'fs22', 48)" onmouseover="showTip(event, 'fs22', 48)" class="i">reply</span></pre>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="i">reply</span> <span class="o">=</span> (<span onmouseout="hideTip(event, 'fs10', 41)" onmouseover="showTip(event, 'fs10', 41)" class="i">recv</span> <span class="o">&gt;</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs11', 42)" onmouseover="showTip(event, 'fs11', 42)" class="i">decode</span>) <span onmouseout="hideTip(event, 'fs13', 43)" onmouseover="showTip(event, 'fs13', 43)" class="i">client</span>
+    <span onmouseout="hideTip(event, 'fs20', 44)" onmouseover="showTip(event, 'fs20', 44)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">(</span><span class="s">%</span><span class="s">i</span><span class="s">)</span><span class="s"> </span><span class="s">got</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs16', 45)" onmouseover="showTip(event, 'fs16', 45)" class="i">i</span> <span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="i">reply</span></pre>
 </td>
 </tr>
-</table><p>If you run this example in F# Interactive, you should see the following:</p>
+</table>
+
+<p>If you run this example in F# Interactive, you should see the following:</p>
 
 <table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -208,34 +223,33 @@ which owns one, or more, <code>Socket</code> instances.)</em> We'll also open so
 
 <p>Notice how our two sockets are communicating synchronously. In other words, the client sends one request and must wait for a reply.
 Conversely, the server waits for a single request and immediately responds to it. If this were not the case, the parenthetical numbers
-at the start of each output line would be out of order.</p>
+at the start of each output line could be out of order.</p>
 
 <p>But don't think this is the only way to use fszmq! Go look at the other <a href="https://github.com/pblasucci/fszmq/tree/master/docs/content">samples</a>, or read the <a href="http://zguide.zeromq.org/page:all">zguide</a>, 
 to see examples of asynchronous client\server, publish\subscribe, map\reduce, and many other distributed computing patterns. 
 And, most of all, have fun using F# ("Simple code for complex problems") and ZeroMQ ("Distributed computing made simple")!</p>
 
 <div class="tip" id="fs1">namespace fszmq</div>
-<div class="tip" id="fs2">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : HANDLE<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs3">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : HANDLE<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs2">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs3">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
 <div class="tip" id="fs4">val server : unit -&gt; unit<br /><br />Full name: Tutorial.server</div>
 <div class="tip" id="fs5">val context : Context</div>
 <div class="tip" id="fs6">val server : Socket</div>
 <div class="tip" id="fs7">val rep : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.rep</div>
-<div class="tip" id="fs8">val ADDRESS : string<br /><br />Full name: Tutorial.ADDRESS</div>
-<div class="tip" id="fs9">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
-<div class="tip" id="fs10">val loop : (unit -&gt; unit)</div>
-<div class="tip" id="fs11">val recv : socket:Socket -&gt; byte []<br /><br />Full name: fszmq.Socket.recv</div>
-<div class="tip" id="fs12">val decode : (byte [] -&gt; string)<br /><br />Full name: Tutorial.decode</div>
-<div class="tip" id="fs13">val client : unit -&gt; unit<br /><br />Full name: Tutorial.client</div>
-<div class="tip" id="fs14">val client : Socket</div>
-<div class="tip" id="fs15">val req : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.req</div>
-<div class="tip" id="fs16">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
-<div class="tip" id="fs17">val i : int32</div>
-<div class="tip" id="fs18">val request : string</div>
-<div class="tip" id="fs19">val encode : (string -&gt; byte [])<br /><br />Full name: Tutorial.encode</div>
-<div class="tip" id="fs20">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>
-<div class="tip" id="fs21">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs22">val reply : string</div>
+<div class="tip" id="fs8">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
+<div class="tip" id="fs9">val loop : (unit -&gt; unit)</div>
+<div class="tip" id="fs10">val recv : socket:Socket -&gt; byte []<br /><br />Full name: fszmq.Socket.recv</div>
+<div class="tip" id="fs11">val decode : (byte [] -&gt; string)<br /><br />Full name: Tutorial.decode</div>
+<div class="tip" id="fs12">val client : unit -&gt; unit<br /><br />Full name: Tutorial.client</div>
+<div class="tip" id="fs13">val client : Socket</div>
+<div class="tip" id="fs14">val req : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.req</div>
+<div class="tip" id="fs15">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
+<div class="tip" id="fs16">val i : int32</div>
+<div class="tip" id="fs17">val request : string</div>
+<div class="tip" id="fs18">val encode : (string -&gt; byte [])<br /><br />Full name: Tutorial.encode</div>
+<div class="tip" id="fs19">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>
+<div class="tip" id="fs20">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<div class="tip" id="fs21">val reply : string</div>
 
         </div>
         <div class="span3">

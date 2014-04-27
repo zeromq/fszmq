@@ -60,6 +60,7 @@ to appear "friendly" when consumed by other CLR languages (C#, et aliam).</p>
 <p>The simplest thing we can do with fszmq is print the ZeroMQ version. That is, we can display the version, 
 which is not fixed at compile-time, of the native library (i.e. libzmq) against which fszmq.dll is current bound.
 <em>(Note: the version of fszmq.dll, itself, may be retrieved via the normal mechanisms for CLR libraries.)</em></p>
+
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
 <span class="l">2: </span>
@@ -74,7 +75,9 @@ which is not fixed at compile-time, of the native library (i.e. libzmq) against 
 <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">libzmq</span><span class="s"> </span><span class="s">version</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">ZMQ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">version</span></pre>
 </td>
 </tr>
-</table><p>Running this code should produce something like the following (the actual numbers may be different on your machine):</p>
+</table>
+
+<p>Running this code should produce something like the following (the actual numbers may be different on your machine):</p>
 
 <table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -86,6 +89,7 @@ which is not fixed at compile-time, of the native library (i.e. libzmq) against 
 </td>
 </tr>
 </tbody></table>
+
 <h2>Samples &amp; Documentation</h2>
 
 <p>This library features API documentation, and an ever-growing collection of samples. Most of these narrative-style examples
