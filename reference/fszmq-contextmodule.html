@@ -41,13 +41,7 @@
 <p>Contains methods for working with Context instances</p>
 </div>
 
-<!-- TODO: Refactor me - copy & paste from 'namespaces.cshtml' -->
-
-
-
-<!-- END TODO -->
-
-
+<!-- Render nested types and modules, if there are any -->
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -58,240 +52,291 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '145', 145)" onmouseover="showTip(event, '145', 145)">
-            config context options
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+            configure context options
           </code>
-          <div class="tip" id="145">
-            <strong>Signature:</strong>context:Context -&gt; options:seq&lt;int * int&gt; -&gt; unit<br />
+          <div class="tip" id="4">
+            <strong>Signature:</strong> context:Context -&gt; options:seq&lt;int * int&gt; -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sets the given block of option values for the given Context</p>
-</td>
+        <td class="xmldoc">
+        <p>Sets the given block of option values for the given Context</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L152-152" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '146', 146)" onmouseover="showTip(event, '146', 146)">
-            deal context
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            dealer context
           </code>
-          <div class="tip" id="146">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="12">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates an advanced socket type used for extending the request/reply 
+        <td class="xmldoc">
+        <p>Creates an advanced socket type used for extending the request/reply 
 pattern. 
-When a <code>ZMQ.DEALER</code> socket is connected to a <code>ZMQ.REP</code> socket,
+ When a <code>ZMQ.DEALER</code> socket is connected to a <code>ZMQ.REP</code> socket,
 each message sent must consist of an empty message part, the 
 delimiter, followed by one or more body parts.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L69-69" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '147', 147)" onmouseover="showTip(event, '147', 147)">
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
             getOption context contextOption
           </code>
-          <div class="tip" id="147">
-            <strong>Signature:</strong>context:Context -&gt; contextOption:int -&gt; int<br />
+          <div class="tip" id="13">
+            <strong>Signature:</strong> context:Context -&gt; contextOption:int -&gt; int<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Gets the value of the given option for the given Context</p>
-</td>
+        <td class="xmldoc">
+        <p>Gets the value of the given option for the given Context</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L140-140" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '148', 148)" onmouseover="showTip(event, '148', 148)">
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
             newSocket context socketType
           </code>
-          <div class="tip" id="148">
-            <strong>Signature:</strong>context:Context -&gt; socketType:int -&gt; Socket<br />
+          <div class="tip" id="14">
+            <strong>Signature:</strong> context:Context -&gt; socketType:int -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a Socket, of the given type, within the given context</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a Socket, of the given type, within the given context</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L33-33" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '149', 149)" onmouseover="showTip(event, '149', 149)">
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
             pair context
           </code>
-          <div class="tip" id="149">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="15">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a peer connected to exactly one other peer. 
-This socket type is used primarily for inter-thread 
-communication across the <code>inproc</code> transport.</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a peer connected to exactly one other peer. 
+ This socket type is used primarily for inter-thread 
+communication across the "inproc" transport.</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L41-41" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '150', 150)" onmouseover="showTip(event, '150', 150)">
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
             pub context
           </code>
-          <div class="tip" id="150">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="16">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a publisher used to distribute messages to subscribers. 
-Note: topical filtering will be done by the subscriber</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a publisher used to distribute messages to subscribers.</p>
+
+<p><strong>Note: topical filtering will be done at the subscriber (after receiving messages)</strong></p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L96-96" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '151', 151)" onmouseover="showTip(event, '151', 151)">
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
             pull context
           </code>
-          <div class="tip" id="151">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="17">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a pipeline node to receive messages from upstream (<code>ZMQ.PUSH</code>) nodes.</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a pipeline node to receive messages from upstream (<code>ZMQ.PUSH</code>) nodes.</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L84-84" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '152', 152)" onmouseover="showTip(event, '152', 152)">
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
             push context
           </code>
-          <div class="tip" id="152">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="18">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a pipeline node to send messages to downstream (<code>ZMQ.PULL</code>) nodes.</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a pipeline node to send messages to downstream (<code>ZMQ.PULL</code>) nodes.</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L88-88" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '153', 153)" onmouseover="showTip(event, '153', 153)">
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
             rep context
           </code>
-          <div class="tip" id="153">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="19">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a service to receive requests from and send replies to a 
+        <td class="xmldoc">
+        <p>Creates a service to receive requests from and send replies to a 
 client. 
-This socket type allows only an alternating sequence of 
+ This socket type allows only an alternating sequence of 
 <code>Socket.recv(reply)</code> followed by <code>Socket.send(request)</code> calls.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L59-59" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '154', 154)" onmouseover="showTip(event, '154', 154)">
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
             req context
           </code>
-          <div class="tip" id="154">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="20">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a client for sending requests to and receiving replies from 
+        <td class="xmldoc">
+        <p>Creates a client for sending requests to and receiving replies from 
 a service. 
-This socket type allows only an alternating sequence of 
+ This socket type allows only an alternating sequence of 
 <code>Socket.send(request)</code> followed by <code>Socket.recv(reply)</code> calls.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L50-50" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '155', 155)" onmouseover="showTip(event, '155', 155)">
-            route context
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            router context
           </code>
-          <div class="tip" id="155">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="21">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates an advanced socket type used for extending the request/reply 
+        <td class="xmldoc">
+        <p>Creates an advanced socket type used for extending the request/reply 
 pattern. 
-When receiving messages a <code>ZMQ.ROUTER</code> socket prepends a 
-message part containing the identity of the originating peer. When sending messages a <code>ZMQ.ROUTER</code> socket removes the first 
+ When receiving messages a <code>ZMQ.ROUTER</code> socket prepends a 
+message part containing the identity of the originating peer.  When sending messages a <code>ZMQ.ROUTER</code> socket removes the first 
 part of the message and uses it to determine the identity of the recipient.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L80-80" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '156', 156)" onmouseover="showTip(event, '156', 156)">
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
             setOption context (contextOption, value)
           </code>
-          <div class="tip" id="156">
-            <strong>Signature:</strong>context:Context -&gt; (contextOption:int * value:int) -&gt; unit<br />
+          <div class="tip" id="22">
+            <strong>Signature:</strong> context:Context -&gt; (contextOption:int * value:int) -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sets the given option value for the given Context</p>
-</td>
+        <td class="xmldoc">
+        <p>Sets the given option value for the given Context</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L147-147" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '157', 157)" onmouseover="showTip(event, '157', 157)">
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
             stream context
           </code>
-          <div class="tip" id="157">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="23">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a socket which can, asynchronously, send data to or 
-receive data from an non-ZeroMQ peer (via the <code>TCP</code> transport). 
-Note: each message should begin with a peer identity. Additionally, a <code>ZMQ.STREAM</code> socket can act as client or a server. 
+        <td class="xmldoc">
+        <p>Creates a socket which can, asynchronously, send data to or 
+receive data from an non-ZeroMQ peer (via the "TCP" transport). 
+ Note: each message should begin with a peer identity.  Additionally, a <code>ZMQ.STREAM</code> socket can act as client or a server. 
 When acting as a server, the socket MUST set the <code>ZMQ.SENDMORE</code> flag. 
 When acting as a client, the <code>ZMQ.SENDMORE</code> flag is ignored. 
 Sending an identity followed by an empty frame, closes the connection.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L134-134" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '158', 158)" onmouseover="showTip(event, '158', 158)">
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
             sub context
           </code>
-          <div class="tip" id="158">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="24">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a subscriber to receive to data distributed by a publisher. 
-Initially a <code>ZMQ.SUB</code> socket is not subscribed to any messages 
-(i.e. one, or more, subscriptions must be manually applied before 
-any messages will be received).</p>
-</td>
+        <td class="xmldoc">
+        <p>Creates a subscriber to receive to data distributed by a publisher. 
+ Initially a <code>ZMQ.SUB</code> socket is not subscribed to any messages 
+(i.e. one, or more, subscriptions must be applied, via <code>Socket.setOption</code>, 
+before any messages will be received).</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L105-105" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
             xpub context
           </code>
-          <div class="tip" id="159">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="25">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Behaves the same as a publisher, except topical filtering is done
-by the publisher (before sending a message)</p>
-</td>
+        <td class="xmldoc">
+        <p>Behaves the same as a publisher, except this socket type may also receive
+subscription messages from peers.</p>
+
+<p><strong>Note: topical filtering will be done at the publisher (before sending messages)</strong></p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L112-112" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
+          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
             xsub context
           </code>
-          <div class="tip" id="160">
-            <strong>Signature:</strong>context:Context -&gt; Socket<br />
+          <div class="tip" id="26">
+            <strong>Signature:</strong> context:Context -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Behaves the same as a subscriber, except topical filtering is done
-by the publisher (before sending a message). 
-Note: subscriptions are made by sending a subscription message,
+        <td class="xmldoc">
+        <p>Behaves the same as a subscriber, except topical filtering is done
+by sending subscription messages to the publisher. 
+ Subscriptions are made by sending a subscription message,
 in which the first byte is 1 or 0 (subscribe or unsubscribe) 
 and the remainder of the message is the topic</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Context.fs#L122-122" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
     </tbody>
   </table>

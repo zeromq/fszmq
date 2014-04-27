@@ -42,10 +42,56 @@ the <a href="https://github.com/imatix/zguide/tree/master/examples/F%23">F#-spec
 
 <hr />
 
+<p><strong>Chapter 1 examples</strong></p>
+
 <ul>
 <li><a href="hwserver.html">Hello World server</a> ... Expects "Hello" from client, replies with "World"</li>
 <li><p><a href="hwclient.html">Hello World client</a> ... Sends "Hello" to server, expects "World" back</p></li>
-<li><p>more to come</p></li>
+<li><p><a href="version.html">0MQ Version</a> ... Displays the version of 0MQ currently being used</p></li>
+<li><a href="wuserver.html">Weather Update server</a> ... Publishes random weather updates</li>
+<li><p><a href="wuclient.html">Weather Update client</a> ... Collects weather updates and finds avg temp in zipcode</p></li>
+<li><a href="taskwork.html">Task worker</a> ... Collects workloads from ventilator and sends results to sink</li>
+<li><a href="taskvent.html">Task ventillator</a> ... Sends batch of tasks to workers</li>
+<li><a href="tasksink.html">Task sink</a> ... Collects results from workers</li>
+</ul>
+
+<hr />
+
+<p><strong>Chapter 2 examples</strong></p>
+
+<ul>
+<li><a href="msreader.html">Multi-socket Reader</a> ... Reads from multiple sockets using a simple recv loop</li>
+<li><p><a href="mspoller.html">Multi-socket Poller</a> ... Reads from multiple sockets using ZMQ's polling functionality</p></li>
+<li><a href="rrclient.html">Request-Reply Client</a> ... Sends "Hello" to a server (via a broker) and expects "World" back</li>
+<li><a href="rrworker.html">Request-Reply Worker</a> ... Expects "Hello" from clients (via a broker) and replies with "World"</li>
+<li><p><a href="rrbroker.html">Request-Reply Broker</a> ... A simple broker for connecting client requests to server replies</p></li>
+<li><p><a href="msgqueue.html">Message Queue Broker</a> ... Like [Request-Reply Broker] but using device (i.e. a proxy)</p></li>
+<li><p><a href="wuproxy.html">Weather Update Proxy</a> ... A proxy device which does network bridging</p></li>
+<li><a href="taskwork2.html">Task Worker (2nd design)</a> ... Like <a href="taskwork.html">Task Worker</a>, but with a extra flow to receive and respond to a 'KILL' signal</li>
+<li><p><a href="tasksink2.html">Task Sink (2nd design)</a> ... Like <a href="tasksink.html">Task Sink</a>, but with a extra flow to receive and respond to a 'KILL' signal</p></li>
+<li><h2><em>More examples coming soon.</em></h2></li>
+</ul>
+
+<p><strong>Chapter 3 examples</strong></p>
+
+<ul>
+<li><em>Coming soon.</em></li>
+</ul>
+
+<hr />
+
+<p><strong>Chapter 4 examples</strong></p>
+
+<ul>
+<li><em>Coming soon.</em></li>
+</ul>
+
+<hr />
+
+<p><strong>Chapter 5 examples</strong></p>
+
+<ul>
+<li><em>Coming soon.</em></li>
 </ul>
 
 <hr />

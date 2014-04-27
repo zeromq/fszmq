@@ -41,13 +41,7 @@
 <p>Contains methods for working with Socket instances</p>
 </div>
 
-<!-- TODO: Refactor me - copy & paste from 'namespaces.cshtml' -->
-
-
-
-<!-- END TODO -->
-
-
+<!-- Render nested types and modules, if there are any -->
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -58,294 +52,360 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
             ( |~&gt; ) data socket
           </code>
-          <div class="tip" id="106">
-            <strong>Signature:</strong>data:byte [] -&gt; socket:Socket -&gt; Socket<br />
+          <div class="tip" id="43">
+            <strong>Signature:</strong> data:byte [] -&gt; socket:Socket -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Operator equivalent to Socket.sendMore (with arguments reversed)</p>
-</td>
+        <td class="xmldoc">
+        <p>Operator equivalent to <code>Socket.sendMore</code> (with arguments reversed)</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L200-200" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
+          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
             ( |&gt;&gt; ) data socket
           </code>
-          <div class="tip" id="107">
-            <strong>Signature:</strong>data:byte [] -&gt; socket:Socket -&gt; unit<br />
+          <div class="tip" id="44">
+            <strong>Signature:</strong> data:byte [] -&gt; socket:Socket -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Operator equivalent to Socket.send (with arguments reversed)</p>
-</td>
+        <td class="xmldoc">
+        <p>Operator equivalent to <code>Socket.send</code> (with arguments reversed)</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L198-198" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
+          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
             ( &lt;~| ) socket
           </code>
-          <div class="tip" id="108">
-            <strong>Signature:</strong>socket:Socket -&gt; byte [] -&gt; Socket<br />
+          <div class="tip" id="45">
+            <strong>Signature:</strong> socket:Socket -&gt; byte [] -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Operator equivalent to Socket.sendMore</p>
-</td>
+        <td class="xmldoc">
+        <p>Operator equivalent to <code>Socket.sendMore</code></p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L195-195" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '109', 109)" onmouseover="showTip(event, '109', 109)">
+          <code onmouseout="hideTip(event, '46', 46)" onmouseover="showTip(event, '46', 46)">
             ( &lt;&lt;| ) socket
           </code>
-          <div class="tip" id="109">
-            <strong>Signature:</strong>socket:Socket -&gt; byte [] -&gt; unit<br />
+          <div class="tip" id="46">
+            <strong>Signature:</strong> socket:Socket -&gt; byte [] -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Operator equivalent to Socket.send</p>
-</td>
+        <td class="xmldoc">
+        <p>Operator equivalent to <code>Socket.send</code></p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L193-193" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
+          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
             bind socket address
           </code>
-          <div class="tip" id="110">
-            <strong>Signature:</strong>socket:Socket -&gt; address:string -&gt; unit<br />
+          <div class="tip" id="47">
+            <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Causes an endpoint to start accepting
+        <td class="xmldoc">
+        <p>Causes an endpoint to start accepting
 connections at the given address</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L96-96" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
-            config socket socketOptions
+          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
+            configure socket socketOptions
           </code>
-          <div class="tip" id="111">
-            <strong>Signature:</strong>socket:Socket -&gt; socketOptions:seq&lt;int * obj&gt; -&gt; unit<br />
+          <div class="tip" id="48">
+            <strong>Signature:</strong> socket:Socket -&gt; socketOptions:seq&lt;int * obj&gt; -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sets the given block of option values for the given Socket</p>
-</td>
+        <td class="xmldoc">
+        <p>Sets the given block of option values for the given Socket</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L156-156" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
+          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
             connect socket address
           </code>
-          <div class="tip" id="112">
-            <strong>Signature:</strong>socket:Socket -&gt; address:string -&gt; unit<br />
+          <div class="tip" id="49">
+            <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Connects to an endpoint to the given address</p>
-</td>
+        <td class="xmldoc">
+        <p>Connects to an endpoint to the given address</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L107-107" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
+          <code onmouseout="hideTip(event, '50', 50)" onmouseover="showTip(event, '50', 50)">
             disconnect socket address
           </code>
-          <div class="tip" id="113">
-            <strong>Signature:</strong>socket:Socket -&gt; address:string -&gt; unit<br />
+          <div class="tip" id="50">
+            <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Disconnects to an endpoint from the given address</p>
-</td>
+        <td class="xmldoc">
+        <p>Disconnects to an endpoint from the given address</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L112-112" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
+          <code onmouseout="hideTip(event, '51', 51)" onmouseover="showTip(event, '51', 51)">
             getOption socket socketOption
           </code>
-          <div class="tip" id="114">
-            <strong>Signature:</strong>socket:Socket -&gt; socketOption:int -&gt; &#39;t<br />
+          <div class="tip" id="51">
+            <strong>Signature:</strong> socket:Socket -&gt; socketOption:int -&gt; &#39;t<br />
                           <strong>Type parameters:</strong> 't          </div>
         </td>
-        <td class="xmldoc"><p>Gets the value of the given option for the given Socket</p>
-</td>
+        <td class="xmldoc">
+        <p>Gets the value of the given option for the given Socket</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L119-119" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '115', 115)" onmouseover="showTip(event, '115', 115)">
+          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
             monitor socket address events
           </code>
-          <div class="tip" id="115">
-            <strong>Signature:</strong>socket:Socket -&gt; address:string -&gt; events:int -&gt; unit<br />
+          <div class="tip" id="52">
+            <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; events:int -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Creates a <code>ZMQ.PAIR</code> socket, bound to the given address, which broadcasts 
+        <td class="xmldoc">
+        <p>Creates a <code>ZMQ.PAIR</code> socket, bound to the given address, which broadcasts 
 events for the given socket. These events should be consumed by another <code>ZMQ.PAIR</code> socket 
 connected to the given address (preferably on a background thread).</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L244-244" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '116', 116)" onmouseover="showTip(event, '116', 116)">
+          <code onmouseout="hideTip(event, '53', 53)" onmouseover="showTip(event, '53', 53)">
             recv socket
           </code>
-          <div class="tip" id="116">
-            <strong>Signature:</strong>socket:Socket -&gt; byte []<br />
+          <div class="tip" id="53">
+            <strong>Signature:</strong> socket:Socket -&gt; byte []<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Waits for (and returns) the next available frame from a socket</p>
-</td>
+        <td class="xmldoc">
+        <p>Waits for (and returns) the next available frame from a socket</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L224-224" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '117', 117)" onmouseover="showTip(event, '117', 117)">
+          <code onmouseout="hideTip(event, '54', 54)" onmouseover="showTip(event, '54', 54)">
             recvAll socket
           </code>
-          <div class="tip" id="117">
-            <strong>Signature:</strong>socket:Socket -&gt; byte [] []<br />
+          <div class="tip" id="54">
+            <strong>Signature:</strong> socket:Socket -&gt; byte [] []<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Retrieves all frames of the next available message</p>
-</td>
+        <td class="xmldoc">
+        <p>Retrieves all frames of the next available message</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L235-235" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '118', 118)" onmouseover="showTip(event, '118', 118)">
+          <code onmouseout="hideTip(event, '55', 55)" onmouseover="showTip(event, '55', 55)">
             recvMore socket
           </code>
-          <div class="tip" id="118">
-            <strong>Signature:</strong>socket:Socket -&gt; bool<br />
+          <div class="tip" id="55">
+            <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Returns true if more message frames are available</p>
-</td>
+        <td class="xmldoc">
+        <p>Returns true if more message frames are available</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L231-231" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '119', 119)" onmouseover="showTip(event, '119', 119)">
+          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
             send socket frame
           </code>
-          <div class="tip" id="119">
-            <strong>Signature:</strong>socket:Socket -&gt; frame:byte [] -&gt; unit<br />
+          <div class="tip" id="56">
+            <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sends a frame (blocking), indicating no more frames will follow</p>
-</td>
+        <td class="xmldoc">
+        <p>Sends a frame (blocking), indicating no more frames will follow</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L184-184" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '120', 120)" onmouseover="showTip(event, '120', 120)">
+          <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
             sendAll socket message
           </code>
-          <div class="tip" id="120">
-            <strong>Signature:</strong>socket:Socket -&gt; message:seq&lt;byte []&gt; -&gt; unit<br />
+          <div class="tip" id="57">
+            <strong>Signature:</strong> socket:Socket -&gt; message:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sends all frames of a given message</p>
-</td>
+        <td class="xmldoc">
+        <p>Sends all frames of a given message</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L204-204" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '121', 121)" onmouseover="showTip(event, '121', 121)">
+          <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
             sendMore socket frame
           </code>
-          <div class="tip" id="121">
-            <strong>Signature:</strong>socket:Socket -&gt; frame:byte [] -&gt; Socket<br />
+          <div class="tip" id="58">
+            <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; Socket<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sends a frame (blocking), indicating more frames will follow, and returning the given socket</p>
-</td>
+        <td class="xmldoc">
+        <p>Sends a frame (blocking), indicating more frames will follow, and returning the given socket</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L188-188" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '122', 122)" onmouseover="showTip(event, '122', 122)">
+          <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
             setOption socket (socketOption, value)
           </code>
-          <div class="tip" id="122">
-            <strong>Signature:</strong>socket:Socket -&gt; (socketOption:int * value:&#39;t) -&gt; unit<br />
+          <div class="tip" id="59">
+            <strong>Signature:</strong> socket:Socket -&gt; (socketOption:int * value:&#39;t) -&gt; unit<br />
                           <strong>Type parameters:</strong> 't          </div>
         </td>
-        <td class="xmldoc"><p>Sets the given option value for the given Socket</p>
-</td>
+        <td class="xmldoc">
+        <p>Sets the given option value for the given Socket</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L138-138" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '123', 123)" onmouseover="showTip(event, '123', 123)">
+          <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
             subscribe socket topics
           </code>
-          <div class="tip" id="123">
-            <strong>Signature:</strong>socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
+          <div class="tip" id="60">
+            <strong>Signature:</strong> socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Adds one subscription for each of the given topics</p>
-</td>
+        <td class="xmldoc">
+        <p>Adds one subscription for each of the given topics</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L163-163" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '124', 124)" onmouseover="showTip(event, '124', 124)">
+          <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
             tryRecv socket length flags
           </code>
-          <div class="tip" id="124">
-            <strong>Signature:</strong>socket:Socket -&gt; length:int -&gt; flags:int -&gt; byte [] option<br />
+          <div class="tip" id="61">
+            <strong>Signature:</strong> socket:Socket -&gt; length:int -&gt; flags:int -&gt; byte [] option<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Gets the next available frame from a socket, returning a frame option
+        <td class="xmldoc">
+        <p>Gets the next available frame from a socket, returning a frame option
 where None indicates the operation should be re-attempted</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L215-215" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '125', 125)" onmouseover="showTip(event, '125', 125)">
+          <code onmouseout="hideTip(event, '62', 62)" onmouseover="showTip(event, '62', 62)">
             trySend socket frame flags
           </code>
-          <div class="tip" id="125">
-            <strong>Signature:</strong>socket:Socket -&gt; frame:byte [] -&gt; flags:int -&gt; bool<br />
+          <div class="tip" id="62">
+            <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; flags:int -&gt; bool<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Sends a frame, with the given flags, returning true (or false) 
+        <td class="xmldoc">
+        <p>Sends a frame, with the given flags, returning true (or false) 
 if the send was successful (or should be re-tried)</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L176-176" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '126', 126)" onmouseover="showTip(event, '126', 126)">
+          <code onmouseout="hideTip(event, '63', 63)" onmouseover="showTip(event, '63', 63)">
             unbind socket address
           </code>
-          <div class="tip" id="126">
-            <strong>Signature:</strong>socket:Socket -&gt; address:string -&gt; unit<br />
+          <div class="tip" id="63">
+            <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Causes an endpoint to stop accepting
+        <td class="xmldoc">
+        <p>Causes an endpoint to stop accepting
 connections at the given address</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L102-102" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '127', 127)" onmouseover="showTip(event, '127', 127)">
+          <code onmouseout="hideTip(event, '64', 64)" onmouseover="showTip(event, '64', 64)">
             unsubscribe socket topics
           </code>
-          <div class="tip" id="127">
-            <strong>Signature:</strong>socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
+          <div class="tip" id="64">
+            <strong>Signature:</strong> socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Removes one subscription for each of the given topics</p>
-</td>
+        <td class="xmldoc">
+        <p>Removes one subscription for each of the given topics</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Socket.fs#L168-168" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
     </tbody>
   </table>

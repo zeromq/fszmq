@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Update Proxy
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library.">
+    <meta name="author" content="Paulmichael Blasucci">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
+    <script type="text/javascript" src="/fszmq/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://zeromq.org/" target="_blank">zeromq.org</a></li>
+          <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
+          <li><a href="http://github.com/pblasucci/fszmq">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/fszmq/index.html">fszmq</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1>Weather Update Proxy</h1>
+
+<p>Weather proxy device which does network bridging</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="prep">#r</span> <span class="s">&quot;</span><span class="s">fszmq</span><span class="s">.</span><span class="s">dll</span><span class="s">&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">fszmq</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">fszmq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">Proxying</span>
+  
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">main</span> () <span class="o">=</span> 
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">Context</span> ()
+
+  <span class="c">// this is where the weather server sits</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">frontend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">xsub</span> <span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="i">context</span>
+  <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="i">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">connect</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="i">frontend</span> <span class="s">&quot;</span><span class="s">tcp</span><span class="s">:</span><span class="s">/</span><span class="s">/</span><span class="s">192</span><span class="s">.</span><span class="s">168</span><span class="s">.</span><span class="s">55</span><span class="s">.</span><span class="s">210</span><span class="s">:</span><span class="s">5556</span><span class="s">&quot;</span>
+
+  <span class="c">// this is our public endpoint for subscribers</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">backend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="i">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">xpub</span> <span onmouseout="hideTip(event, 'fs4', 17)" onmouseover="showTip(event, 'fs4', 17)" class="i">context</span>
+  <span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="i">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="i">bind</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="i">backend</span> <span class="s">&quot;</span><span class="s">tcp</span><span class="s">:</span><span class="s">/</span><span class="s">/</span><span class="s">10</span><span class="s">.</span><span class="s">1</span><span class="s">.</span><span class="s">1</span><span class="s">.</span><span class="s">0</span><span class="s">:</span><span class="s">8100</span><span class="s">&quot;</span>
+
+  <span class="c">// run the proxy until the user interrupts us</span>
+  <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="i">proxy</span> <span onmouseout="hideTip(event, 'fs6', 22)" onmouseover="showTip(event, 'fs6', 22)" class="i">frontend</span> <span onmouseout="hideTip(event, 'fs10', 23)" onmouseover="showTip(event, 'fs10', 23)" class="i">backend</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="i">None</span>
+
+  <span class="n">0</span> <span class="c">// return code</span>
+  </pre>
+</td>
+</tr>
+</table>
+
+<div class="tip" id="fs1">namespace fszmq</div>
+<div class="tip" id="fs2">module Proxying<br /><br />from fszmq</div>
+<div class="tip" id="fs3">val main : unit -&gt; int<br /><br />Full name: Wuproxy.main</div>
+<div class="tip" id="fs4">val context : Context</div>
+<div class="tip" id="fs5">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs6">val frontend : Socket</div>
+<div class="tip" id="fs7">val xsub : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.xsub</div>
+<div class="tip" id="fs8">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs9">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
+<div class="tip" id="fs10">val backend : Socket</div>
+<div class="tip" id="fs11">val xpub : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.xpub</div>
+<div class="tip" id="fs12">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
+<div class="tip" id="fs13">val proxy : frontend:Socket -&gt; backend:Socket -&gt; capture:Socket option -&gt; unit<br /><br />Full name: fszmq.Proxying.proxy</div>
+<div class="tip" id="fs14">union case Option.None: Option&lt;&#39;T&gt;</div>
+
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">fszmq</li>
+            <li><a href="/fszmq/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/LICENSE.txt">License</a></li>
+            <li><a href="http://github.com/pblasucci/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+            <li class="divider"></li>
+            <li class="nav-header">Documenation</li>
+            <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+            <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/pblasucci/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>

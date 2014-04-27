@@ -38,28 +38,9 @@
 
 <h1>ZMQError</h1>
 <div class="xmldoc">
-<p>Represents any error raised by the native ZMQ library.Stores a human-readable summary in the <code>Message</code> property.</p>
+<p>Represents any error raised by the native ZMQ library,
+with a human-readable summary in the Message property.</p>
 </div>
-  <h3>Constructors</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Constructor</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '162', 162)" onmouseover="showTip(event, '162', 162)">
-            new ZMQError
-          </code>
-          <div class="tip" id="162">
-            <strong>Signature:</strong>(errnum:int * errmsg:string) -&gt; ZMQError<br />
-                      </div>
-        </td>
-        <td class="xmldoc"></td>
-      </tr>
-    </tbody>
-  </table>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
     <thead>
@@ -69,15 +50,18 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '165', 165)" onmouseover="showTip(event, '165', 165)">
-            zMQError.ErrorNumber
+          <code onmouseout="hideTip(event, '190', 190)" onmouseover="showTip(event, '190', 190)">
+            ErrorNumber
           </code>
-          <div class="tip" id="165">
-            <strong>Signature:</strong>int<br />
+          <div class="tip" id="190">
+            <strong>Signature:</strong> int<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>the ZeroMQ-defined, or OS-defined, error code reported by ZMQ</p>
-</td>
+        <td class="xmldoc">
+        <p>the ZeroMQ-defined, or OS-defined, error code</p>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Constants.fs#L53-53" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
     </tbody>
   </table>

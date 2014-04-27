@@ -41,13 +41,7 @@
 <p>Utilities for working with the CurveZMQ security protocol</p>
 </div>
 
-<!-- TODO: Refactor me - copy & paste from 'namespaces.cshtml' -->
-
-
-
-<!-- END TODO -->
-
-
+<!-- Render nested types and modules, if there are any -->
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -58,16 +52,19 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
+          <code onmouseout="hideTip(event, '1', 1)" onmouseover="showTip(event, '1', 1)">
             curveKeyPair ()
           </code>
-          <div class="tip" id="3">
-            <strong>Signature:</strong>unit -&gt; string * string<br />
+          <div class="tip" id="1">
+            <strong>Signature:</strong> unit -&gt; string * string<br />
                       </div>
         </td>
-        <td class="xmldoc"><p>Returns a newly generated random keypair consisting of a public key and a secret key. 
+        <td class="xmldoc">
+        <p>Returns a newly generated random keypair consisting of a public key and a secret key. 
 The keys are encoded using ZeroMQ Base-85 Encoding.</p>
-</td>
+
+            <a href="http://github.com/pblasucci/fszmq/tree/master/src/fszmq/Utilities.fs#L87-87" class="github-link">Go to GitHub source</a>
+        </td>
       </tr>
     </tbody>
   </table>
