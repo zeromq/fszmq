@@ -97,12 +97,12 @@ The documentation accompanying fszmq, and any sample code contained therein, is 
 the MIT LICENSE which allows modification and reuse for both commercial non-commercial purposes.
 For more information see the [documentation license file][docslicense] in the GitHub repository. 
 
-  [content]: https://github.com/pblasucci/fszmq/tree/master/docs/content
-  [gh]: https://github.com/pblasucci/fszmq
-  [issues]: https://github.com/pblasucci/fszmq/issues
-  [readme]: https://github.com/pblasucci/fszmq/blob/master/README.md
-  [license]: https://github.com/pblasucci/fszmq/blob/master/COPYING.lesser
-  [docslicense]: https://github.com/pblasucci/fszmq/blob/master/docs/files/LICENSE.txt
+  [content]: https://github.com/zeromq/fszmq/tree/master/docs/content
+  [gh]: https://github.com/zeromq/fszmq
+  [issues]: https://github.com/zeromq/fszmq/issues
+  [readme]: https://github.com/zeromq/fszmq/blob/master/README.md
+  [license]: https://github.com/zeromq/fszmq/blob/master/COPYING.lesser
+  [docslicense]: https://github.com/zeromq/fszmq/blob/master/docs/files/LICENSE.txt
   [zguide]: http://zguide.zeromq.org/page:all
   [zguidefs]: https://github.com/imatix/zguide/tree/master/examples/F%23
   [localguide]: zguide/index.html

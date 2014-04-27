@@ -7,7 +7,7 @@
 let referenceBinaries = [ "fszmq.dll" ]
 // Web site location for the generated documentation
 let website = "/fszmq"
-let srcsite = "http://github.com/pblasucci/fszmq"
+let srcsite = "http://github.com/zeromq/fszmq"
 
 // Specify more information about your project
 let info =
