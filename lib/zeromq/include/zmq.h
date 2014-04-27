@@ -31,7 +31,7 @@
 /*  Version macros for compile-time API version detection                     */
 #define ZMQ_VERSION_MAJOR 4
 #define ZMQ_VERSION_MINOR 0
-#define ZMQ_VERSION_PATCH 4
+#define ZMQ_VERSION_PATCH 5
 
 #define ZMQ_MAKE_VERSION(major, minor, patch) \
     ((major) * 10000 + (minor) * 100 + (patch))
@@ -392,6 +392,7 @@ ZMQ_EXPORT int zmq_poll (zmq_pollitem_t *items, int nitems, long timeout);
 /*  Built-in message proxy (3-way) */
 
 ZMQ_EXPORT int zmq_proxy (void *frontend, void *backend, void *capture);
+ZMQ_EXPORT int zmq_proxy_steerable (void *frontend, void *backend, void *capture, void *control);
 
 /*  Encode a binary key as printable text using ZMQ RFC 32  */
 ZMQ_EXPORT char *zmq_z85_encode (char *dest, uint8_t *data, size_t size);

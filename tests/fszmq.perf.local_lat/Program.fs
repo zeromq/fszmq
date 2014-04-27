@@ -20,7 +20,8 @@ module fszmq.perf.local_lat.Program
 
 open fszmq
 open fszmq.Message
-open fszmq.Timing
+open System
+open System.Threading
 
 (* _ zeromq ____________________________________________________________ *)
 
@@ -34,7 +35,7 @@ let runTest address messageSize roundtripCount =
     if size message <> messageSize then failwith "message of incorrect size received"
     send socket message
 
-  sleep 1
+  Thread.Sleep (TimeSpan.FromMilliseconds 1.0)
 
 (* _ program ___________________________________________________________ *)
 

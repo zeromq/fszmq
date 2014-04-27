@@ -1,4 +1,4 @@
-(* ------------------------------------------------------------------------
+﻿(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
 fszmq is free software: you can redistribute it and/or modify
@@ -16,13 +16,20 @@ along with fszmq. If not, see <http://www.gnu.org/licenses/>.
 
 Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
-namespace fszmq
-open System.Reflection
+module fszmq.perf.inproc.Program
+ 
+open System
 
-[<assembly: AssemblyTitleAttribute("fszmq")>]
-[<assembly: AssemblyProductAttribute("fszmq")>]
-[<assembly: AssemblyDescriptionAttribute("An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library.")>]
-[<assembly: AssemblyVersionAttribute("4.0.5")>]
-[<assembly: AssemblyFileVersionAttribute("4.0.5")>]
-do ()
+let [<Literal>] OKAY = 0
 
+[<EntryPoint>]
+let main _ = 
+  let tests = [ HelloWorld.benchmark; Latency.benchmark; Throughput.benchmark; ]
+  
+  for test in tests do
+    Console.WriteLine ("Running test {0}...", test.TestName)
+    Console.WriteLine ()
+    test.RunTest ()
+    Console.WriteLine ()
+
+  OKAY  

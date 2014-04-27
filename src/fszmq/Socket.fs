@@ -153,7 +153,7 @@ module Socket =
 
   /// Sets the given block of option values for the given Socket
   [<Extension;CompiledName("Configure")>]
-  let config socket socketOptions =
+  let configure socket socketOptions =
     Seq.iter (fun (opt:int * obj) -> setOption socket opt) socketOptions
   
 (* subscriptions *)
@@ -189,14 +189,14 @@ module Socket =
     Message.waitForOkay (trySend socket) frame (ZMQ.WAIT ||| ZMQ.SNDMORE)
     socket
   
-  /// Operator equivalent to Socket.send
+  /// Operator equivalent to `Socket.send`
   let (<<|) socket = send socket
-  /// Operator equivalent to Socket.sendMore
+  /// Operator equivalent to `Socket.sendMore`
   let (<~|) socket = sendMore socket
 
-  /// Operator equivalent to Socket.send (with arguments reversed)
+  /// Operator equivalent to `Socket.send` (with arguments reversed)
   let (|>>) data socket = socket <<| data
-  /// Operator equivalent to Socket.sendMore (with arguments reversed)
+  /// Operator equivalent to `Socket.sendMore` (with arguments reversed)
   let (|~>) data socket = socket <~| data
 
   /// Sends all frames of a given message
@@ -240,6 +240,6 @@ module Socket =
   /// Creates a `ZMQ.PAIR` socket, bound to the given address, which broadcasts 
   /// events for the given socket. These events should be consumed by another `ZMQ.PAIR` socket 
   /// connected to the given address (preferably on a background thread). 
-  [<Extension;CompiledName("CreateMonitor")>]
+  [<Extension;CompiledName("Monitor")>]
   let monitor (socket:Socket) address events =
     if C.zmq_socket_monitor(socket.Handle,address,events) < 0 then ZMQ.error()
