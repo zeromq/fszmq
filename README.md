@@ -52,7 +52,7 @@ versioning scheme _usually_ matches the equivalent in libzmq. While this can not
 However, the third segment of fszmq's version is _in no way correlated_ to any part of libzmq. The third segment tracks 
 semanitcally minor changes to the actual fszmq codebase. The practical take-away from all this is: 
 so long as the major versions agree, you're not likely to have no problems between fszmq and libzmq. If you do, 
-open an [issue](http://github.com/pblasucci/fszmq/issues) and it'll get sorted.
+open an [issue](http://github.com/zeromq/fszmq/issues) and it'll get sorted.
 
 #### Testing
 
@@ -114,7 +114,7 @@ Starting with the current Master (targeting the 4.0.x release of 0MQ), copies of
 
 ---------------------------------------------------------------------------
 
-Issues, questions, and concerns may be directed the the [Issue Tracker](http://github.com/pblasucci/fszmq/issues).
+Issues, questions, and concerns may be directed the the [Issue Tracker](http://github.com/zeromq/fszmq/issues).
 
 More information about ZeroMQ is available at http://zero.mq.
 
