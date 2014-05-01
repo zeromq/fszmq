@@ -20,7 +20,7 @@
 * NuGet package now installs either x86 or x64 version of libzmq.dll (based on project configuration)
 * NuGet package now has proper uninstaller
 
-### New in 4.0.5 (unreleased)
+### New in 4.0.5 (2014/04/27)
 * updated libzmq to 4.0.5
 * Fixed working-directory pathing in `Scratch.fsx` to be properly relative
 * Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)
@@ -30,3 +30,6 @@
 * !BREAKING! Changed `pollIO` function to `PollIO` when called from other CLR languages
 * !BREAKING! Changed `Proxingy.proxy` to return `unit` 
 * Fixed potential memory leak in `Message.tryRecv`
+
+### New in 4.0.6 (unreleased)
+* added assembly-level Extension attribute

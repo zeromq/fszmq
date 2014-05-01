@@ -16,13 +16,6 @@
 ' 
 ' Copyright (c) 2011-2013 Paulmichael Blasucci
 ' -------------------------------------------------------------------------
-Imports fszmq.ContextModule
-Imports fszmq.SocketModule
-Imports fszmq.PollingExtensions
-Imports fszmq.PollingModule
-
-Imports System.Threading
-
 Module Program
 
   Const REQUEST_ADDR = "tcp://127.0.0.1:1979"
@@ -40,7 +33,7 @@ Module Program
       Console.WriteLine("Message sent, awaiting reply")      
 
       Dim msg(0)() As Byte
-      While TryGetInput(socket,2500,msg)
+      While socket.TryGetInput(2500,msg)
         Console.WriteLine("Received reply")
         socket.SendAll(Message)
         Console.WriteLine("Message sent, awaiting reply")      

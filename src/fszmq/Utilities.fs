@@ -88,3 +88,7 @@ module Curve =
     let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
     if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
     (string publicKey),(string secretKey)
+
+//NOTE: This allows non-F# extensions to have proper visibility/interop with all CLR languages
+[<assembly: ExtensionAttribute()>]
+do()
