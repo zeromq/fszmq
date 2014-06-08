@@ -6,6 +6,8 @@ zguide
 It should definitely be read. And then read again. Also, while the zguide features examples in many languages, 
 the [F#-specific zguide code samples][zguidefs] have been collected here as a convenience.
 
+_Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples below have been modified to run against version 4.0.x of ZeroMQ._
+
 --------------------
 
 **Chapter 1 examples**
@@ -40,7 +42,12 @@ the [F#-specific zguide code samples][zguidefs] have been collected here as a co
  * [Task Worker (2nd design)](taskwork2.html) ... Like [Task Worker](taskwork.html), but with a extra flow to receive and respond to a 'KILL' signal
  * [Task Sink (2nd design)](tasksink2.html) ... Like [Task Sink](tasksink.html), but with a extra flow to receive and respond to a 'KILL' signal
 
+ * [Interrupt Handling](interrupt.html) ... Shows how to handle manual interrupt (i.e. CTRL+C) in a console application
+ 
+ * [Multi-threaded service](mtserver.html) ... Passes actual handling of requests to workers on other threads
+
  * _More examples coming soon._
+
 --------------------
 
 **Chapter 3 examples**
