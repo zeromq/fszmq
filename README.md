@@ -110,7 +110,7 @@ the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or 
 
 **Be Advised** 
 The ZeroMQ library file (libzmq) will need to be made available for the 2.1.x and 3.2.x branches to run. 
-Starting with the current Master (targeting the 4.0.x release of 0MQ), copies of libzmq are included with the project source.
+Starting with the the 4.0.x release of 0MQ (currently, the Master branch of fszmq), copies of libzmq are included with the project source.
 
 ---------------------------------------------------------------------------
 
