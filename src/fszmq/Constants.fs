@@ -73,9 +73,9 @@ module ZMQ =
   let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
   // constructs and raises native-to-managed errors
   let inline internal error() = (buildError >> raise) <| C.zmq_errno() 
-  // helper for "faking" native errors
-  let inline internal einval() = raise <| ZMQError(22,"Invalid argument")
-
+  // helpers for "faking" native errors
+  let inline internal einval msg = raise <| ZMQError(22,msg)
+  
 (* error codes *)
   #if BSD_EAGAIN
   /// Non-blocking mode was requested and the message cannot be sent at the moment
@@ -103,7 +103,7 @@ module ZMQ =
 
 
 (* event codes *)
-  let internal EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int>
+  let internal EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int32>
 
   /// Socket connection established
   let [<Literal>] EVENT_CONNECTED       =    1us

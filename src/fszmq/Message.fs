@@ -66,7 +66,7 @@ module Message =
   /// </summary>
   [<Extension;CompiledName("Copy")>]
   let copy (source:Message) (target:Message) =
-    if source.Handle = target.Handle then ZMQ.einval()
+    if source.Handle = target.Handle then ZMQ.einval "Invalid argument"
     if C.zmq_msg_copy(target.Handle,source.Handle) <> 0 then ZMQ.error()
   
   /// <summary>
@@ -77,7 +77,7 @@ module Message =
   /// </summary>
   [<Extension;CompiledName("Move")>]
   let move (source:Message) (target:Message) =
-    if source.Handle = target.Handle then ZMQ.einval()
+    if source.Handle = target.Handle then ZMQ.einval "Invalid argument"
     if C.zmq_msg_move(target.Handle,source.Handle) <> 0 then ZMQ.error()
 
   /// Makes a new instance of the Message type, with an independent copy of the source content.
