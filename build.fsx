@@ -2,7 +2,7 @@
 This file is part of fszmq.
 
 fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
+it under the terms of the GNU Lesser General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
@@ -18,7 +18,7 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 
 #r @"packages/FAKE/tools/FakeLib.dll"
-open Fake 
+open Fake
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
@@ -29,11 +29,11 @@ open System.IO
 
 // Information about the project are used
 //  - for version and project name in generated AssemblyInfo file
-//  - by the generated NuGet package 
+//  - by the generated NuGet package
 //  - to run tests and to publish documentation on GitHub gh-pages
 //  - for documentation, you also need to edit info in "docs/tools/generate.fsx"
 
-// The name of the project 
+// The name of the project
 // (used by attributes in AssemblyInfo, name of a NuGet package and directory in 'src')
 let project = "fszmq"
 
@@ -44,10 +44,10 @@ let summary = "An LGPLv3-licensed F# binding for the ZeroMQ distributed computin
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
 let description = """
-fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library. 
-It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ 
-(Note: each binding is a separate branch in git, as there are some non-compatible differences). 
-This library is primarily designed to be consumed from F#. However, where possible, 
+fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library.
+It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
+(Note: each binding is a separate branch in git, as there are some non-compatible differences).
+This library is primarily designed to be consumed from F#. However, where possible,
 the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam)."""
 
 // List of author names (for NuGet package)
@@ -55,14 +55,14 @@ let authors = [ "Paulmichael Blasucci" ]
 // Tags for your project (for NuGet package)
 let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport"
 
-// File system information 
+// File system information
 // (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
 let solutionFile  = "fszmq"
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.dll"]
 
 // Git configuration (used for publishing documentation in gh-pages branch)
-// The profile where the project is posted 
+// The profile where the project is posted
 let gitHome = "https://github.com/pblasucci"
 // The name of the project on GitHub
 let gitName = "fszmq"
@@ -75,7 +75,7 @@ let zguide = "/../zguide/examples/F#"
 // Read additional information from the release notes document
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 let release = parseReleaseNotes (IO.File.ReadAllLines "RELEASE_NOTES.md")
-let license = 
+let license =
   [|"(* ------------------------------------------------------------------------"
     "This file is part of fszmq."
     ""
@@ -103,7 +103,7 @@ Target "AssemblyInfo" (fun _ ->
         Attribute.Product project
         Attribute.Description summary
         Attribute.Version release.AssemblyVersion
-        Attribute.FileVersion release.AssemblyVersion ] 
+        Attribute.FileVersion release.AssemblyVersion ]
         { GenerateClass = false
           UseNamespace  = project }
   // prepend licensing header to start of AssemblyInfo file
@@ -130,11 +130,11 @@ Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
 Target "Build" (fun _ ->
   { BaseDirectory = __SOURCE_DIRECTORY__
     Includes = [ solutionFile + ".sln" ]
-    Excludes = [] } 
+    Excludes = [] }
   |> MSBuild "" "Rebuild" [ "Configuration","Release"
                             "Platform"     ,"x86" ]
   |> ignore
-  // .fsproj outputs will automatically wind up in the right locations, 
+  // .fsproj outputs will automatically wind up in the right locations,
   // but native libraries need to be moved manually
   CopyDir "bin/zeromq/x86" "lib/zeromq/x86" (fun _ -> true)
   CopyDir "bin/zeromq/x64" "lib/zeromq/x64" (fun _ -> true)
@@ -150,7 +150,7 @@ Target "RunTests" (fun _ ->
 
     { BaseDirectory = __SOURCE_DIRECTORY__
       Includes = testAssemblies
-      Excludes = [] } 
+      Excludes = [] }
     |> NUnit (fun p ->
         { p with
             ToolPath = nunitPath
@@ -161,7 +161,7 @@ Target "RunTests" (fun _ ->
             OutputFile = "TestResults.xml" })
 )
 
-FinalTarget "CloseTestRunner" (fun _ ->  
+FinalTarget "CloseTestRunner" (fun _ ->
     ProcessHelper.killProcess "nunit-agent-x86.exe"
 )
 
@@ -174,8 +174,8 @@ Target "NuGet" (fun _ ->
                                .Replace("\n", "" )
                                .Replace("  ", " ")
   let nugetPath = ".nuget/nuget.exe"
-  NuGet (fun p -> 
-      { p with   
+  NuGet (fun p ->
+      { p with
           Authors = authors
           Project = project
           Summary = summary
@@ -200,7 +200,7 @@ Target "CopyGuide" (fun _ ->
   let sourceGuide  = DirectoryInfo(__SOURCE_DIRECTORY__ + zguide)
   let current = filesInDirMatching "*.fsx" currentGuide
   printfn "%s: %i files" currentGuide.FullName current.Length
-  let source  = filesInDirMatching "*.fsx" sourceGuide 
+  let source  = filesInDirMatching "*.fsx" sourceGuide
                 |> Seq.filter (fun f -> not <| isInFolder currentGuide f)
                 |> Seq.map    (fun f -> f.FullName)
   printfn "%s: %i files" sourceGuide.FullName (Seq.length source)
@@ -256,7 +256,7 @@ Target "All" DoNothing
   ==> "CleanDocs"
   ==> "GenerateLocalDocs"
 
-"All" 
+"All"
   ==> "NuGet"
   ==> "CleanDocs"
   ==> "GenerateDocs"

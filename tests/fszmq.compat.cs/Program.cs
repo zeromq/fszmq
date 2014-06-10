@@ -42,13 +42,13 @@ namespace fszmq.compat.cs
         {
           try
           {
-            var evt = ZMQEvent.Build(monitor.RecvAll());
+            var evt = monitor.RecvEvent();
             Debug.WriteLine("{0} ({1})", evt.Details, evt.Address);
             if (evt.Details.IsMonitorStopped) break;
           }
           catch (ZMQError x)
           { 
-            Debug.WriteLine("ERROR: {0}", x.Message);
+            Debug.WriteLine(string.Format("ERROR: {0}", x.Message));
           }
         }
       }

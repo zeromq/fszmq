@@ -33,3 +33,5 @@
 
 ### New in 4.0.6 (unreleased)
 * added assembly-level Extension attribute
+* removed unused P/Invoke functions (last vestiges of Timing module)
+* refactored monitoring API to include convenience functions (also extension methods)

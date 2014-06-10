@@ -59,7 +59,7 @@ module Z85 =
   [<CompiledName("Encode")>]
   let encode data =
     let datalen = Array.length data 
-    if  datalen = 0 then ZMQ.einval()
+    if  datalen = 0 then ZMQ.einval "Invalid argument"
     let buffer  = StringBuilder (datalen * 5 / 4 + 1)
     if C.zmq_z85_encode(buffer,data,unativeint datalen) = 0n then ZMQ.error()
     string buffer
@@ -70,7 +70,7 @@ module Z85 =
   [<CompiledName("Decode")>]
   let decode data =
     let datalen = String.length data 
-    if  datalen = 0 then ZMQ.einval()
+    if  datalen = 0 then ZMQ.einval "Invalid argument"
     let buffer  = Array.zeroCreate (datalen * 4 / 5)
     if C.zmq_z85_decode(buffer,data) = 0n then ZMQ.error()
     buffer

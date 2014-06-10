@@ -203,13 +203,3 @@ module internal C =
   
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_z85_decode ([<Out>] byte[] dest, [<MarshalAs(UnmanagedType.LPStr)>] string value)
-
-(* timing *)
-  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
-  extern HANDLE zmq_stopwatch_start ();
-
-  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
-  extern uint32 zmq_stopwatch_stop (HANDLE watch);
-
-  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
-  extern void zmq_sleep (int seconds);
