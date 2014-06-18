@@ -44,7 +44,9 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 
  * [Interrupt Handling](interrupt.html) ... Shows how to handle manual interrupt (i.e. CTRL+C) in a console application
  
- * [Multi-threaded service](mtserver.html) ... Passes actual handling of requests to workers on other threads
+ * [Multi-threaded Service](mtserver.html) ... Passes actual handling of requests to workers on other threads
+
+ * [Signaling Between Threads](mtrelay.html) ... Demonstrates inter-thread coordination
 
  * _More examples coming soon._
 
