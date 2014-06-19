@@ -157,12 +157,15 @@ module Socket =
     | Message.Fail -> ZMQ.error()
     
   /// Waits for (and returns) the next available frame from a socket
+  /// If no message is received before RCVTIMEO expires, throws a TimeoutException
   [<Extension;CompiledName("Recv")>]
   let recv socket = 
-    Message.tryRecv socket ZMQ.WAIT
-    |> Option.map Message.data
-    |> Option.get 
-  
+    let msg = Message.tryRecv socket ZMQ.WAIT
+              |> Option.map Message.data
+    match msg with
+    | Some frame  -> frame
+    | None        -> raise <| TimeoutException ()
+     
   /// Returns true if more message frames are available
   [<Extension;CompiledName("RecvMore")>]
   let recvMore socket = getOption<bool> socket ZMQ.RCVMORE
