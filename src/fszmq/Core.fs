@@ -66,10 +66,12 @@ type Socket internal(context,socketType) =
   let mutable disposed  = false
   let mutable _socket   = C.zmq_socket(context,socketType)
 
-  let cancelLinger () =
+  let cancelLinger (ignoreError) =
     useBuffer (fun (size,buffer) -> writeInt32 ZMQ.NO_LINGER buffer
                                     let okay = C.zmq_setsockopt(_socket,ZMQ.LINGER,buffer,unativeint size)
-                                    if  okay <> 0 then ZMQ.error()) 
+                                    if  okay <> 0 && not ignoreError then ZMQ.error()
+                                    ()
+                                    ) 
               sizeof<Int32>
 
   do if _socket = 0n then ZMQ.error()
@@ -82,7 +84,7 @@ type Socket internal(context,socketType) =
   override __.Finalize() =
     if not disposed then
       disposed <- true
-      cancelLinger ()
+      cancelLinger (true)
       let okay = C.zmq_close(_socket)
       _socket <- 0n
       if okay <> 0 then ZMQ.error()
