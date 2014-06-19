@@ -52,10 +52,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '131', 131)" onmouseover="showTip(event, '131', 131)">
+          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
             ( |~&gt; ) data socket
           </code>
-          <div class="tip" id="131">
+          <div class="tip" id="93">
             <strong>Signature:</strong> data:byte [] -&gt; socket:Socket -&gt; Socket<br />
                       </div>
         </td>
@@ -68,10 +68,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '133', 133)" onmouseover="showTip(event, '133', 133)">
+          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
             ( |&gt;&gt; ) data socket
           </code>
-          <div class="tip" id="133">
+          <div class="tip" id="95">
             <strong>Signature:</strong> data:byte [] -&gt; socket:Socket -&gt; unit<br />
                       </div>
         </td>
@@ -84,10 +84,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '134', 134)" onmouseover="showTip(event, '134', 134)">
+          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
             ( &lt;~| ) socket
           </code>
-          <div class="tip" id="134">
+          <div class="tip" id="96">
             <strong>Signature:</strong> socket:Socket -&gt; byte [] -&gt; Socket<br />
                       </div>
         </td>
@@ -100,10 +100,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '135', 135)" onmouseover="showTip(event, '135', 135)">
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
             ( &lt;&lt;| ) socket
           </code>
-          <div class="tip" id="135">
+          <div class="tip" id="97">
             <strong>Signature:</strong> socket:Socket -&gt; byte [] -&gt; unit<br />
                       </div>
         </td>
@@ -116,10 +116,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '136', 136)" onmouseover="showTip(event, '136', 136)">
+          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
             bind socket address
           </code>
-          <div class="tip" id="136">
+          <div class="tip" id="98">
             <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
@@ -133,10 +133,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '137', 137)" onmouseover="showTip(event, '137', 137)">
+          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
             configure socket socketOptions
           </code>
-          <div class="tip" id="137">
+          <div class="tip" id="99">
             <strong>Signature:</strong> socket:Socket -&gt; socketOptions:seq&lt;int * obj&gt; -&gt; unit<br />
                       </div>
         </td>
@@ -149,10 +149,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '138', 138)" onmouseover="showTip(event, '138', 138)">
+          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
             connect socket address
           </code>
-          <div class="tip" id="138">
+          <div class="tip" id="100">
             <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
@@ -165,10 +165,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '139', 139)" onmouseover="showTip(event, '139', 139)">
+          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
             disconnect socket address
           </code>
-          <div class="tip" id="139">
+          <div class="tip" id="101">
             <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
@@ -181,10 +181,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '140', 140)" onmouseover="showTip(event, '140', 140)">
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
             getOption socket socketOption
           </code>
-          <div class="tip" id="140">
+          <div class="tip" id="102">
             <strong>Signature:</strong> socket:Socket -&gt; socketOption:int -&gt; &#39;t<br />
                           <strong>Type parameters:</strong> 't          </div>
         </td>
@@ -197,10 +197,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '141', 141)" onmouseover="showTip(event, '141', 141)">
+          <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
             monitor socket address events
           </code>
-          <div class="tip" id="141">
+          <div class="tip" id="103">
             <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; events:int -&gt; unit<br />
                       </div>
         </td>
@@ -209,64 +209,65 @@ connections at the given address</p>
 events for the given socket. These events should be consumed by another <code>ZMQ.PAIR</code> socket 
 connected to the given address (preferably on a background thread).</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L181-181" class="github-link">Go to GitHub source</a>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L184-184" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '142', 142)" onmouseover="showTip(event, '142', 142)">
+          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
             recv socket
           </code>
-          <div class="tip" id="142">
+          <div class="tip" id="104">
             <strong>Signature:</strong> socket:Socket -&gt; byte []<br />
                       </div>
         </td>
         <td class="xmldoc">
-        <p>Waits for (and returns) the next available frame from a socket</p>
+        <p>Waits for (and returns) the next available frame from a socket
+If no message is received before RCVTIMEO expires, throws a TimeoutException</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L161-161" class="github-link">Go to GitHub source</a>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L162-162" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '143', 143)" onmouseover="showTip(event, '143', 143)">
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
             recvAll socket
           </code>
-          <div class="tip" id="143">
+          <div class="tip" id="105">
             <strong>Signature:</strong> socket:Socket -&gt; byte [] []<br />
                       </div>
         </td>
         <td class="xmldoc">
         <p>Retrieves all frames of the next available message</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L172-172" class="github-link">Go to GitHub source</a>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L175-175" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '144', 144)" onmouseover="showTip(event, '144', 144)">
+          <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
             recvMore socket
           </code>
-          <div class="tip" id="144">
+          <div class="tip" id="106">
             <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
         <td class="xmldoc">
         <p>Returns true if more message frames are available</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L168-168" class="github-link">Go to GitHub source</a>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Socket.fs#L171-171" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '145', 145)" onmouseover="showTip(event, '145', 145)">
+          <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
             send socket frame
           </code>
-          <div class="tip" id="145">
+          <div class="tip" id="107">
             <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; unit<br />
                       </div>
         </td>
@@ -279,10 +280,10 @@ connected to the given address (preferably on a background thread).</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '146', 146)" onmouseover="showTip(event, '146', 146)">
+          <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
             sendAll socket message
           </code>
-          <div class="tip" id="146">
+          <div class="tip" id="108">
             <strong>Signature:</strong> socket:Socket -&gt; message:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
@@ -295,10 +296,10 @@ connected to the given address (preferably on a background thread).</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '147', 147)" onmouseover="showTip(event, '147', 147)">
+          <code onmouseout="hideTip(event, '109', 109)" onmouseover="showTip(event, '109', 109)">
             sendMore socket frame
           </code>
-          <div class="tip" id="147">
+          <div class="tip" id="109">
             <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; Socket<br />
                       </div>
         </td>
@@ -311,10 +312,10 @@ connected to the given address (preferably on a background thread).</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '148', 148)" onmouseover="showTip(event, '148', 148)">
+          <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
             setOption socket (socketOption, value)
           </code>
-          <div class="tip" id="148">
+          <div class="tip" id="110">
             <strong>Signature:</strong> socket:Socket -&gt; (socketOption:int * value:&#39;t) -&gt; unit<br />
                           <strong>Type parameters:</strong> 't          </div>
         </td>
@@ -327,10 +328,10 @@ connected to the given address (preferably on a background thread).</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '149', 149)" onmouseover="showTip(event, '149', 149)">
+          <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
             subscribe socket topics
           </code>
-          <div class="tip" id="149">
+          <div class="tip" id="111">
             <strong>Signature:</strong> socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
@@ -343,10 +344,10 @@ connected to the given address (preferably on a background thread).</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '150', 150)" onmouseover="showTip(event, '150', 150)">
+          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
             tryRecv socket length flags
           </code>
-          <div class="tip" id="150">
+          <div class="tip" id="112">
             <strong>Signature:</strong> socket:Socket -&gt; length:int -&gt; flags:int -&gt; byte [] option<br />
                       </div>
         </td>
@@ -360,10 +361,10 @@ where None indicates the operation should be re-attempted</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '151', 151)" onmouseover="showTip(event, '151', 151)">
+          <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
             trySend socket frame flags
           </code>
-          <div class="tip" id="151">
+          <div class="tip" id="113">
             <strong>Signature:</strong> socket:Socket -&gt; frame:byte [] -&gt; flags:int -&gt; bool<br />
                       </div>
         </td>
@@ -377,10 +378,10 @@ if the send was successful (or should be re-tried)</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '152', 152)" onmouseover="showTip(event, '152', 152)">
+          <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
             unbind socket address
           </code>
-          <div class="tip" id="152">
+          <div class="tip" id="114">
             <strong>Signature:</strong> socket:Socket -&gt; address:string -&gt; unit<br />
                       </div>
         </td>
@@ -394,10 +395,10 @@ connections at the given address</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '153', 153)" onmouseover="showTip(event, '153', 153)">
+          <code onmouseout="hideTip(event, '115', 115)" onmouseover="showTip(event, '115', 115)">
             unsubscribe socket topics
           </code>
-          <div class="tip" id="153">
+          <div class="tip" id="115">
             <strong>Signature:</strong> socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br />
                       </div>
         </td>
