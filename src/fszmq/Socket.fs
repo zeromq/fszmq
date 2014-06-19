@@ -159,9 +159,9 @@ module Socket =
   /// Waits for (and returns) the next available frame from a socket
   [<Extension;CompiledName("Recv")>]
   let recv socket = 
-    match Message.tryRecv socket ZMQ.WAIT with
-    | None  -> null
-    | Some ms -> Message.data ms
+    Message.tryRecv socket ZMQ.WAIT
+    |> Option.map Message.data
+    |> Option.get 
   
   /// Returns true if more message frames are available
   [<Extension;CompiledName("RecvMore")>]

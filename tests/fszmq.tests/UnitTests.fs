@@ -42,7 +42,7 @@ open NUnit.Framework
 module UnitTest = 
 
   [<Test;Category("Miscellany")>]
-  let ``major version should be 4.0.5``() =
+  let ``libzmq version should be 4.0.5``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
     vsn |> should equal (Version(4,0,5))

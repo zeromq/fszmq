@@ -17,11 +17,11 @@ Chapter 2
 [x] wuproxy.fsx
 [x] taskwork2.fsx
 [x] tasksink2.fsx
-[X] interrupt.fsx
+[x] interrupt.fsx
 [x] mtserver.fsx
-[ ] mtrelay.fsx
---------------------
+[x] mtrelay.fsx
 [ ] syncpub.fsx
+--------------------
 [ ] syncsub.fsx
 [ ] psenvpub.fsx
 [ ] psenvsub.fsx
