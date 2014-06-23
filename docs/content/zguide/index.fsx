@@ -48,7 +48,11 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 
  * [Signaling Between Threads](mtrelay.html) ... Demonstrates inter-thread coordination
 
- * _More examples coming soon._
+ * [Synchronized Publisher](syncpub.html) ... Synchronizes data distribution across a fixed number of clients
+ * [Synchronized Subscriber](syncsub.html) ... Participates in node-coordinated data distribution
+
+ * [Pub-Sub Envelope Publisher](psenvpub.html) ... Sends multi-part messages where the first frame is the subscription topic
+ * [Pub-Sub Envelope Subscriber](psenvsub.html) ... Only receives messages with a specific topic frame
 
 --------------------
 

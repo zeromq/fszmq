@@ -20,11 +20,11 @@ Chapter 2
 [x] interrupt.fsx
 [x] mtserver.fsx
 [x] mtrelay.fsx
-[ ] syncpub.fsx
+[x] syncpub.fsx
+[x] syncsub.fsx
+[x] psenvpub.fsx
+[x] psenvsub.fsx
 --------------------
-[ ] syncsub.fsx
-[ ] psenvpub.fsx
-[ ] psenvsub.fsx
 Chapter 3
 [ ] identity.fsx
 [ ] rtreq.fsx
