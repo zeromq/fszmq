@@ -141,6 +141,10 @@ module Message =
     | Fail -> (frame :> IDisposable).Dispose()
               ZMQ.error()
 
-  /// Waits for (and returns) the next available Message from a socket
+  /// Waits for (and returns) the next available Message from a socket;
+  /// If no message is received before RCVTIMEO expires, throws a TimeoutException
   [<CompiledName("Recv")>]
-  let recv socket = Option.get (tryRecv socket ZMQ.WAIT)
+  let recv socket = 
+    match tryRecv socket ZMQ.WAIT with
+    | Some frame  -> frame
+    | None        -> raise <| TimeoutException ()

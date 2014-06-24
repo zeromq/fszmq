@@ -31,7 +31,7 @@
 * !BREAKING! Changed `Proxingy.proxy` to return `unit` 
 * Fixed potential memory leak in `Message.tryRecv`
 
-### New in 4.0.6 (unreleased)
+### New in 4.0.6 (2014/06/10)
 * added assembly-level Extension attribute
 * removed unused P/Invoke functions (last vestiges of Timing module)
 * refactored monitoring API to include convenience functions (also extension methods)

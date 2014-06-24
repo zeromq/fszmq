@@ -44,9 +44,15 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 
  * [Interrupt Handling](interrupt.html) ... Shows how to handle manual interrupt (i.e. CTRL+C) in a console application
  
- * [Multi-threaded service](mtserver.html) ... Passes actual handling of requests to workers on other threads
+ * [Multi-threaded Service](mtserver.html) ... Passes actual handling of requests to workers on other threads
 
- * _More examples coming soon._
+ * [Signaling Between Threads](mtrelay.html) ... Demonstrates inter-thread coordination
+
+ * [Synchronized Publisher](syncpub.html) ... Synchronizes data distribution across a fixed number of clients
+ * [Synchronized Subscriber](syncsub.html) ... Participates in node-coordinated data distribution
+
+ * [Pub-Sub Envelope Publisher](psenvpub.html) ... Sends multi-part messages where the first frame is the subscription topic
+ * [Pub-Sub Envelope Subscriber](psenvsub.html) ... Only receives messages with a specific topic frame
 
 --------------------
 

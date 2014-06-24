@@ -17,14 +17,14 @@ Chapter 2
 [x] wuproxy.fsx
 [x] taskwork2.fsx
 [x] tasksink2.fsx
-[X] interrupt.fsx
+[x] interrupt.fsx
 [x] mtserver.fsx
-[ ] mtrelay.fsx
+[x] mtrelay.fsx
+[x] syncpub.fsx
+[x] syncsub.fsx
+[x] psenvpub.fsx
+[x] psenvsub.fsx
 --------------------
-[ ] syncpub.fsx
-[ ] syncsub.fsx
-[ ] psenvpub.fsx
-[ ] psenvsub.fsx
 Chapter 3
 [ ] identity.fsx
 [ ] rtreq.fsx

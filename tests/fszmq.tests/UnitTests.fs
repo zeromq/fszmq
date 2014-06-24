@@ -34,6 +34,7 @@ printfn "CurrentDirectory = %s" Environment.CurrentDirectory
 namespace fszmq.tests
 #endif
 
+open System
 open FsUnit
 open fszmq
 open NUnit.Framework
@@ -42,10 +43,24 @@ open NUnit.Framework
 module UnitTest = 
 
   [<Test;Category("Miscellany")>]
-  let ``major version should be 4.0.5``() =
+  let ``libzmq version should be 4.0.5``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
     vsn |> should equal (Version(4,0,5))
+
+  [<Test;Category("Miscellany")>]
+  let ``recv throws TimeoutException if RCVTIMEO expires`` () =
+    let testFn () =
+      use ctx = new Context ()
+      use sck = Context.pair ctx
+      Socket.setOption sck (ZMQ.RCVTIMEO,10)
+      Socket.bind sck "inproc://dummy"
+      sck 
+      |> Socket.recv 
+      |> printfn "msg: %A"
+
+    let error = Assert.Throws<TimeoutException> (TestDelegate(testFn))
+    error.Message |> should equal "The operation has timed out."
 
 (* ZCURVE & Z85 Tests *)
   let BINARY = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]

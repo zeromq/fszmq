@@ -84,9 +84,9 @@ type Socket internal(context,socketType) =
       disposed <- true
       cancelLinger ()
       let okay = C.zmq_close(_socket)
-      _socket <- 0n
       if okay <> 0 then ZMQ.error()
-
+      _socket  <- 0n
+      
   interface IDisposable with
 
     member self.Dispose() =

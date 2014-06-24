@@ -68,8 +68,9 @@ let ProxyPush () =
   for msgSize in MessageSizes do
     let frm = Array.zeroCreate msgSize
     frm.[msgSize / 2] <- 0x42uy
-    use msg = new Message (frm)
-    for _ in 0L .. MSG_COUNT do Message.send socket msg
+    for _ in 0L .. MSG_COUNT do 
+      use msg = new Message (frm)
+      Message.send socket msg
 
 let benchmark = { new ITest with
                     member __.TestName = "Throughput Benchmark" 
