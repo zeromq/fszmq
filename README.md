@@ -64,13 +64,13 @@ _Please note: comprehensive documentation is under development, but is incomplet
 
 ### Platforms
 
-At this point in time, fszmq has been tested against the CLR on the following platform/architecture/runtime combinations:
+At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
 * 32-bit Windows XP (running against .NET)
 * 64-bit Windows Server 2008 R2 (running against .NET)
 * 32-bit and 64-bit Windows 7 (running against .NET or Mono)
 * 32-bit and 64-bit Windows 8 (running against .NET or Mono)
 
-Other platform/architecture/runtime combinations should work (so long as the .NET or Mono are supported and 
+Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and 
 there is a native libzmq port) and will be tested in due course..
 
 _Please note: comprehensive Mac OS X testing has NOT been conducted, due to resource constraints._
