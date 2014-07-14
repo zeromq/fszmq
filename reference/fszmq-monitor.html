@@ -52,67 +52,79 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '2', 2)" onmouseover="showTip(event, '2', 2)">
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
             buildEvent message
           </code>
-          <div class="tip" id="2">
+          <div class="tip" id="25">
             <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent<br />
                       </div>
         </td>
         <td class="xmldoc">
-        <p>Constructs a ZMQEvent from a raw (binary) message; 
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L90-90" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Constructs a ZMQEvent from a raw (binary) message; 
 will raise exception if message format is incorrect</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L90-90" class="github-link">Go to GitHub source</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
-            recvEvent socket
-          </code>
-          <div class="tip" id="26">
-            <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-        <p>Receives the next ZMQEvent from a monitor socket; 
-will raise exception if called on a non-monitor socket</p>
-
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L105-105" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
-            tryBuildEvent message
+            recvEvent socket
           </code>
           <div class="tip" id="27">
-            <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent option<br />
+            <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent<br />
                       </div>
         </td>
         <td class="xmldoc">
-        <p>Constructs a ZMQEvent option from a raw (binary) message</p>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L105-105" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Receives the next ZMQEvent from a monitor socket; 
+will raise exception if called on a non-monitor socket</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L73-73" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
-            tryRecvEvent socket
+            tryBuildEvent message
           </code>
           <div class="tip" id="28">
+            <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L73-73" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Constructs a ZMQEvent option from a raw (binary) message</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            tryRecvEvent socket
+          </code>
+          <div class="tip" id="29">
             <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent option<br />
                       </div>
         </td>
         <td class="xmldoc">
-        <p>Tries to receive the next ZMQEvent from a monitor socket</p>
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L97-97" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Tries to receive the next ZMQEvent from a monitor socket</p>
 
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L97-97" class="github-link">Go to GitHub source</a>
         </td>
       </tr>
     </tbody>
