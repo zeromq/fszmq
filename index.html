@@ -70,25 +70,17 @@ which is not fixed at compile-time, of the native library (i.e. libzmq) against 
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="prep">#r</span> <span class="s">&quot;</span><span class="s">fszmq</span><span class="s">.</span><span class="s">dll</span><span class="s">&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">fszmq</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="i">fszmq</span>
 
-<span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">libzmq</span><span class="s"> </span><span class="s">version</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">ZMQ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">version</span></pre>
+<span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="i">printfn</span> <span class="s">&quot;</span><span class="s">libzmq</span><span class="s"> </span><span class="s">version</span><span class="s">:</span><span class="s"> </span><span class="s">%</span><span class="s">A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">ZMQ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">version</span></pre>
 </td>
 </tr>
 </table>
 
 <p>Running this code should produce something like the following (the actual numbers may be different on your machine):</p>
 
-<table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span></pre>
-</td>
-<td class="snippet"><pre class="fssnip"><span class="i">&gt;</span>
-<span class="i">libzmq version: 4.0.4</span>
-<span class="i">&gt;</span></pre>
-</td>
-</tr>
-</tbody></table>
+<table class="pre"><tr><td><pre><code>libzmq version: 4.0.5
+</code></pre></td></tr></table>
 
 <h2>Samples &amp; Documentation</h2>
 
@@ -103,7 +95,7 @@ are also executable F# scripts, and may be found in <a href="https://github.com/
 and functions in the library. This includes additional brief samples on using some of the functionality.</p></li>
 </ul>
 
-<p>Additionally, general information about ZeroMQ maybe found at <a href="http://zero.mq">http://zero.mq</a>. 
+<p>Additionally, general information about ZeroMQ maybe found at <a href="http://zero.mq"><a href="http://zero.mq">http://zero.mq</a></a>. 
 And <a href="http://zguide.zeromq.org/page:all">the zguide</a> is a well-written, exhaustive explanation of the library. 
 It should definitely be read. And then read again. Also, while the zguide features examples in many languages, 
 the <a href="https://github.com/imatix/zguide/tree/master/examples/F%23">F#-specific zguide code samples</a> have been <a href="zguide/index.html">collected here as a convenience</a>.</p>
@@ -124,10 +116,20 @@ For more information see the <a href="https://github.com/zeromq/fszmq/blob/maste
 the MIT LICENSE which allows modification and reuse for both commercial non-commercial purposes.
 For more information see the <a href="https://github.com/zeromq/fszmq/blob/master/docs/files/LICENSE.txt">documentation license file</a> in the GitHub repository.</p>
 
-<div class="tip" id="fs1">namespace fszmq</div>
-<div class="tip" id="fs2">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs3">module ZMQ<br /><br />from fszmq</div>
-<div class="tip" id="fs4">val version : Version<br /><br />Full name: fszmq.ZMQ.version</div>
+<div class="tip" id="fs1">type ENV = System.Environment<br /><br />Full name: Index.ENV</div>
+<div class="tip" id="fs2">namespace System</div>
+<div class="tip" id="fs3">type Environment =<br />&#160;&#160;static member CommandLine : string<br />&#160;&#160;static member CurrentDirectory : string with get, set<br />&#160;&#160;static member Exit : exitCode:int -&gt; unit<br />&#160;&#160;static member ExitCode : int with get, set<br />&#160;&#160;static member ExpandEnvironmentVariables : name:string -&gt; string<br />&#160;&#160;static member FailFast : message:string -&gt; unit + 1 overload<br />&#160;&#160;static member GetCommandLineArgs : unit -&gt; string[]<br />&#160;&#160;static member GetEnvironmentVariable : variable:string -&gt; string + 1 overload<br />&#160;&#160;static member GetEnvironmentVariables : unit -&gt; IDictionary + 1 overload<br />&#160;&#160;static member GetFolderPath : folder:SpecialFolder -&gt; string + 1 overload<br />&#160;&#160;...<br />&#160;&#160;nested type SpecialFolder<br />&#160;&#160;nested type SpecialFolderOption<br /><br />Full name: System.Environment</div>
+<div class="tip" id="fs4">val zmqVersion : string<br /><br />Full name: Index.zmqVersion</div>
+<div class="tip" id="fs5">property System.Environment.Is64BitProcess: bool</div>
+<div class="tip" id="fs6">val oldPath : string<br /><br />Full name: Index.oldPath</div>
+<div class="tip" id="fs7">System.Environment.GetEnvironmentVariable(variable: string) : string<br />System.Environment.GetEnvironmentVariable(variable: string, target: System.EnvironmentVariableTarget) : string</div>
+<div class="tip" id="fs8">val newPath : string<br /><br />Full name: Index.newPath</div>
+<div class="tip" id="fs9">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
+<div class="tip" id="fs10">System.Environment.SetEnvironmentVariable(variable: string, value: string) : unit<br />System.Environment.SetEnvironmentVariable(variable: string, value: string, target: System.EnvironmentVariableTarget) : unit</div>
+<div class="tip" id="fs11">namespace fszmq</div>
+<div class="tip" id="fs12">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<div class="tip" id="fs13">module ZMQ<br /><br />from fszmq</div>
+<div class="tip" id="fs14">val version : Version<br /><br />Full name: fszmq.ZMQ.version</div>
 
         </div>
         <div class="span3">
