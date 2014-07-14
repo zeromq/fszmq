@@ -1,3 +1,4 @@
+(*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
 

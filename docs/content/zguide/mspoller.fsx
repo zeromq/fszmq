@@ -1,4 +1,5 @@
-﻿(*** hide ***)
+﻿(*** do-not-eval-file ***)
+(*** hide ***)
 #I "../../../bin"
 
 type ENV = System.Environment

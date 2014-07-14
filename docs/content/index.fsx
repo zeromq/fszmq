@@ -5,10 +5,11 @@
 type ENV = System.Environment
 
 //NOTE: fszmq.dll needs to "see" libzmq.dll...
-//      easiest way to do that, and still work with FSI, 
-//      is to manually set the current directory to a folder containing libzmq.dll
+//      force that by adding libzmq.dll to PATH
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+let oldPath = ENV.GetEnvironmentVariable("PATH")
+let newPath = sprintf "%s;%s" oldPath (sprintf "%s../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion)
+ENV.SetEnvironmentVariable ("PATH",newPath)
 
 (**
 fszmq
@@ -39,8 +40,8 @@ Getting Started
 The simplest thing we can do with fszmq is print the ZeroMQ version. That is, we can display the version, 
 which is not fixed at compile-time, of the native library (i.e. libzmq) against which fszmq.dll is current bound.
 _(Note: the version of fszmq.dll, itself, may be retrieved via the normal mechanisms for CLR libraries.)_
-
 *)
+(*** define-output: vsn ***)
 #r "fszmq.dll"
 open fszmq
 
@@ -48,18 +49,13 @@ printfn "libzmq version: %A" ZMQ.version
 
 (**
 Running this code should produce something like the following (the actual numbers may be different on your machine):
-
-<table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span></pre>
-</td>
-<td class="snippet"><pre class="fssnip"><span class="i">&gt;</span>
-<span class="i">libzmq version: 4.0.4</span>
-<span class="i">&gt;</span></pre>
-</td>
-</tr>
-</tbody></table>
 *)
+(*** include-output: vsn ***)
+
+
+(*** hide ***)
+// remove libzmq.dll from PATH
+ENV.SetEnvironmentVariable ("PATH",oldPath)
 
 (**
 Samples & Documentation

@@ -5,10 +5,11 @@
 type ENV = System.Environment
 
 //NOTE: fszmq.dll needs to "see" libzmq.dll...
-//      easiest way to do that, and still work with FSI, 
-//      is to manually set the current directory to a folder containing libzmq.dll
+//      force that by adding libzmq.dll to PATH
 let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s/../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+let oldPath = ENV.GetEnvironmentVariable("PATH")
+let newPath = sprintf "%s;%s" oldPath (sprintf "%s../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion)
+ENV.SetEnvironmentVariable ("PATH",newPath)
 
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString 
@@ -88,70 +89,20 @@ let client () =
     let reply = (recv >> decode) client
     printfn "(%i) got: %s" i reply
 
-(*** hide ***)
+(*** hide, define-output: client ***)
 spawn server
 client()
 
 (**
-
 If you run this example in F# Interactive, you should see the following:
+*)
+(*** include-output: client ***)
 
-<table class="pre"><tbody><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-<span class="l">24: </span>
-<span class="l">25: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip"><span class="i">&gt;</span>
-<span class="i">(1) sent: hello</span>
-<span class="i">(1) got: world</span>
-<span class="i">(2) sent: hello</span>
-<span class="i">(2) got: world</span>
-<span class="i">(3) sent: hello</span>
-<span class="i">(3) got: world</span>
-<span class="i">(4) sent: hello</span>
-<span class="i">(4) got: world</span>
-<span class="i">(5) sent: hello</span>
-<span class="i">(5) got: world</span>
-<span class="i">(6) sent: hello</span>
-<span class="i">(6) got: world</span>
-<span class="i">(7) sent: hello</span>
-<span class="i">(7) got: world</span>
-<span class="i">(8) sent: hello</span>
-<span class="i">(8) got: world</span>
-<span class="i">(9) sent: hello</span>
-<span class="i">(9) got: world</span>
-<span class="i">(10) sent: goodbye</span>
-<span class="i">(10) got: goodbye</span>
-<span class="i">&nbsp;</span>
-<span class="i">val it : unit = ()</span>
-<span class="i">&nbsp;</span>
-<span class="i">&gt;</span></pre>
-</td>
-</tr>
-</tbody></table>
+(*** hide ***)
+// remove libzmq.dll from PATH
+ENV.SetEnvironmentVariable ("PATH",oldPath)
 
+(**
 Notice how our two sockets are communicating synchronously. In other words, the client sends one request and must wait for a reply.
 Conversely, the server waits for a single request and immediately responds to it. If this were not the case, the parenthetical numbers
 at the start of each output line could be out of order. 
