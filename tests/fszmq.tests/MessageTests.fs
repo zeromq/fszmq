@@ -18,15 +18,11 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 #if INTERACTIVE
 open System
-#I "../../packages/ExtCore.0.8.36/lib/net40"
-#I "../../packages/FsCheck.0.9.2.0/lib/net40-client"
 #I "../../packages/FsUnit.1.2.1.0/Lib/Net40"
 #I "../../packages/NUnit.2.6.3/lib"
 #I "./bin/Debug"
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + "/bin/Debug"
 printfn "CurrentDirectory = %s" Environment.CurrentDirectory
-#r "ExtCore.dll"
-#r "FsCheck.dll"
 #r "FsUnit.NUnit.dll"
 #r "fszmq.dll"
 #r "nunit.framework.dll"
@@ -37,8 +33,6 @@ namespace fszmq.tests
 open FsUnit
 open fszmq
 open NUnit.Framework
-open NUnit.Framework.Constraints
-open System
 
 [<AutoOpen;TestFixture>]
 module MessageTest = 
