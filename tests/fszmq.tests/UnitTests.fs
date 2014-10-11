@@ -18,15 +18,11 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 #if INTERACTIVE
 open System
-#I "../../packages/ExtCore.0.8.36/lib/net40"
-#I "../../packages/FsCheck.0.9.2.0/lib/net40-client"
 #I "../../packages/FsUnit.1.2.1.0/Lib/Net40"
 #I "../../packages/NUnit.2.6.3/lib"
 #I "./bin/Debug"
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ + "/bin/Debug"
 printfn "CurrentDirectory = %s" Environment.CurrentDirectory
-#r "ExtCore.dll"
-#r "FsCheck.dll"
 #r "FsUnit.NUnit.dll"
 #r "fszmq.dll"
 #r "nunit.framework.dll"
@@ -43,11 +39,16 @@ open NUnit.Framework
 module UnitTest = 
 
   [<Test;Category("Miscellany")>]
-  let ``libzmq version should be 4.0.5``() =
+  let ``libzmq version should be at least 4``() =
     let vsn = ZMQ.version
     printfn "%A" vsn
-    vsn |> should equal (Version(4,0,5))
-
+    match vsn with
+    | Version(major,minor,build) -> major |> should equal 4
+                                    minor |> should be (greaterThanOrEqualTo 0)
+                                    build |> should be (greaterThanOrEqualTo 0)
+    //TODO: find a better way to handle failure
+    | otherwise -> otherwise |> should not' (equal Unknown)
+    
   [<Test;Category("Miscellany")>]
   let ``recv throws TimeoutException if RCVTIMEO expires`` () =
     let testFn () =

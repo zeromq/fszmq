@@ -104,8 +104,9 @@ Target "AssemblyInfo" (fun _ ->
         Attribute.Description summary
         Attribute.Version release.AssemblyVersion
         Attribute.FileVersion release.AssemblyVersion ]
-        { GenerateClass = false
-          UseNamespace  = project }
+      (AssemblyInfoFileConfig (generateClass  = false
+                              ,useNamespace   = project))
+
   // prepend licensing header to start of AssemblyInfo file
   File.WriteAllLines (fileName,Array.append license (File.ReadAllLines fileName))
 )
