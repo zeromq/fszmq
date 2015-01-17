@@ -49,68 +49,38 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '180', 180)" onmouseover="showTip(event, '180', 180)">
-            new(source)
+          <code onmouseout="hideTip(event, '181', 181)" onmouseover="showTip(event, '181', 181)">
+            new()
           </code>
-          <div class="tip" id="180">
-            <strong>Signature:</strong> (source:byte array option) -&gt; Message<br />
+          <div class="tip" id="181">
+            <strong>Signature:</strong> unit -&gt; Message<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L25-25" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L45-45" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Creates a new empty Message</p>
+
         </td>
       </tr>
-    </tbody>
-  </table>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '182', 182)" onmouseover="showTip(event, '182', 182)">
-            Handle
+            new(source)
           </code>
           <div class="tip" id="182">
-            <strong>Signature:</strong> nativeint<br />
+            <strong>Signature:</strong> (source:byte array) -&gt; Message<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L44-44" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L42-42" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Pointer to underlying (native) ZMQ message</p>
-
-<p><strong> Note: For internal use only. </strong></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '183', 183)" onmouseover="showTip(event, '183', 183)">
-            Handle
-          </code>
-          <div class="tip" id="183">
-            <strong>Signature:</strong> nativeint<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L44-44" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Pointer to underlying (native) ZMQ message</p>
-
-<p><strong> Note: For internal use only. </strong></p>
+          <p>Creates a new Message from the given byte array</p>
 
         </td>
       </tr>
