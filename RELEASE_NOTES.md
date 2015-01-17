@@ -32,6 +32,12 @@
 * Fixed potential memory leak in `Message.tryRecv`
 
 ### New in 4.0.6 (2014/06/10)
-* added assembly-level Extension attribute
-* removed unused P/Invoke functions (last vestiges of Timing module)
-* refactored monitoring API to include convenience functions (also extension methods)
+* Added assembly-level Extension attribute
+* Removed unused P/Invoke functions (last vestiges of Timing module)
+* Refactored monitoring API to include convenience functions (also extension methods)
+
+### New in 4.0.7-prerelease (2015/01/16)
+* Fixed bugs related to LINGER being set during `Socket` disposal
+* `Context` now tracks and disposes any `Socket` instances associated with it
+* Improved `Message` constructor usage from languages other than F#
+* !BREAKING! The `Handle` property on `Message`, `Socket`, and `Context` instances is now internal

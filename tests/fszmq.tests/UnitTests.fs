@@ -53,7 +53,7 @@ module UnitTest =
   let ``recv throws TimeoutException if RCVTIMEO expires`` () =
     let testFn () =
       use ctx = new Context ()
-      use sck = Context.pair ctx
+      let sck = Context.pair ctx
       Socket.setOption sck (ZMQ.RCVTIMEO,10)
       Socket.bind sck "inproc://dummy"
       sck 

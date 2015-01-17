@@ -30,7 +30,7 @@ module internal Marshal =
   let inline bool (v:^T) = Convert.ToBoolean(v)
 
 (* general-purpose helpers *)
-  let inline useBuffer fn (size:int) =
+  let inline useBuffer (size:int) fn =
     let buffer = Marshal.AllocHGlobal(size)
     try
       fn (unativeint size,buffer)
