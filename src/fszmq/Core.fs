@@ -64,7 +64,7 @@ type Message private(?source:byte array) =
 /// An abstraction of an asynchronous message queue, 
 /// with the exact queuing and message-exchange 
 /// semantics determined by the socket type
-type Socket (context,socketType) =
+type Socket internal(context,socketType) =
   let mutable disposed  = false
   let mutable _socket   = C.zmq_socket(context,socketType)
 
