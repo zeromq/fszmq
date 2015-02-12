@@ -22,7 +22,7 @@ open System
 open System.Runtime.InteropServices
 
 /// Provides a memory-managed wrapper over ZMQ message operations
-type Message(?source:byte array) =
+type Message private(?source:byte array) =
   let mutable disposed  = false
   let mutable memory    = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
 
@@ -38,10 +38,13 @@ type Message(?source:byte array) =
                             Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
     | _                 ->  if C.zmq_msg_init(memory) <> 0 then ZMQ.error()
 
-  /// Pointer to underlying (native) ZMQ message
-  /// 
-  /// ** Note: For internal use only. **
-  member __.Handle :nativeint = memory
+  /// Creates a new Message from the given byte array
+  new (source) = new Message (?source=Some source)
+  
+  /// Creates a new empty Message
+  new () = new Message (?source=None) 
+
+  member internal __.Handle :nativeint = memory
 
   override __.Finalize() = 
     if not disposed then
@@ -62,31 +65,27 @@ type Message(?source:byte array) =
 /// with the exact queuing and message-exchange 
 /// semantics determined by the socket type
 type Socket internal(context,socketType) =
-
   let mutable disposed  = false
   let mutable _socket   = C.zmq_socket(context,socketType)
 
-  let cancelLinger () =
-    useBuffer (fun (size,buffer) -> writeInt32 ZMQ.NO_LINGER buffer
-                                    let okay = C.zmq_setsockopt(_socket,ZMQ.LINGER,buffer,unativeint size)
-                                    if  okay <> 0 then ZMQ.error()) 
-              sizeof<Int32>
-
   do if _socket = 0n then ZMQ.error()
 
-  /// Pointer to underlying (native) ZMQ socket
-  /// 
-  /// ** Note: For internal use only. **
-  member __.Handle :nativeint = _socket
+  member internal __.Handle :nativeint = _socket
+
+  override this.GetHashCode () = hash this.Handle
+
+  override this.Equals (obj) = 
+    match obj with
+    | :? Socket as that -> this.Handle = that.Handle
+    | _                 -> invalidArg "obj" "Argument is not of type Socket"
 
   override __.Finalize() =
     if not disposed then
       disposed <- true
-      cancelLinger ()
       let okay = C.zmq_close(_socket)
       if okay <> 0 then ZMQ.error()
       _socket  <- 0n
-      
+            
   interface IDisposable with
 
     member self.Dispose() =
@@ -95,21 +94,34 @@ type Socket internal(context,socketType) =
 
 
 /// Represents the container for a group of sockets in a node
-type Context() =
-
+type Context () =
   let mutable disposed = false
   let mutable _context = C.zmq_ctx_new()
-  
+
+  let sockets = ResizeArray<Socket> ()
+
   do if _context = 0n then ZMQ.error()
-  
-  /// Pointer to underlying (native) ZMQ context
-  /// 
-  /// ** Note: For internal use only. **
-  member __.Handle :nativeint = _context
+
+  let closeSockets () = 
+    useBuffer sizeof<Int32> (fun (size,buffer) -> 
+      writeInt32 ZMQ.NO_LINGER buffer
+      while sockets.Count > 0 do
+        let socket = sockets.Item 0
+        sockets.RemoveAt 0
+        try
+          C.zmq_setsockopt(socket.Handle,ZMQ.LINGER,buffer,size) |> ignore
+        finally  
+          (socket :> IDisposable).Dispose ()) 
+    
+  member internal __.Attach (socket) =
+    if not <| sockets.Contains socket then sockets.Add socket
+
+  member internal __.Handle :nativeint = _context
 
   override __.Finalize() = 
     if not disposed then
       disposed <- true
+      closeSockets ()
       if C.zmq_ctx_shutdown(_context) = 0
         then  let okay = C.zmq_ctx_term(_context)
               _context <- 0n

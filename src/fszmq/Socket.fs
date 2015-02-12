@@ -68,7 +68,7 @@ module Socket =
       match C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') with 
       | 0 -> downcast read (size',buffer)
       | _ -> ZMQ.error()
-    useBuffer getter size
+    useBuffer size getter
 
   /// Sets the given option value for the given Socket
   [<Extension;CompiledName("SetOption")>]
@@ -86,7 +86,7 @@ module Socket =
       write buffer
       let okay = C.zmq_setsockopt(socket.Handle,socketOption,buffer,size)
       if  okay <> 0 then ZMQ.error()
-    useBuffer setter size
+    useBuffer size setter 
 
   /// Sets the given block of option values for the given Socket
   [<Extension;CompiledName("Configure")>]

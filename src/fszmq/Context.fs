@@ -30,7 +30,10 @@ module Context =
 
   /// Creates a Socket, of the given type, within the given context 
   [<Extension;CompiledName("Socket")>]
-  let newSocket (context:Context) socketType = new Socket(context.Handle,socketType)
+  let newSocket (context:Context) socketType = 
+    let socket = new Socket (context.Handle,socketType)
+    context.Attach socket
+    socket
 
   /// <summary>
   /// Creates a peer connected to exactly one other peer. 

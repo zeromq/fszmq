@@ -73,5 +73,7 @@ let hexstr frame =
   |> Array.fold (fun b f -> bprintf b "%02x" (byte f); b)
                 (StringBuilder (2 * Array.length frame))
   |> string
+
+let dispose (d:#IDisposable) = d.Dispose ()
    
 (*-----------------------------------------------------------------------*)
