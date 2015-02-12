@@ -42,8 +42,9 @@
 * Improved `Message` constructor usage from languages other than F#
 * !BREAKING! The `Handle` property on `Message`, `Socket`, and `Context` instances is now internal
 
-### New in 4.0.8-prerelease (2015/01/16)
+### New in 4.0.8 (2015/01/16)
 * Fixed bugs related to LINGER being set during `Socket` disposal
 * `Context` now tracks and disposes any `Socket` instances associated with it
 * Improved `Message` constructor usage from languages other than F#
 * !BREAKING! The `Handle` property on `Message`, `Socket`, and `Context` instances is now internal
+* Updated bundled libzmq.dll to version 4.0.6
