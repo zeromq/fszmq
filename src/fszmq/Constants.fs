@@ -18,9 +18,6 @@ Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
-open Microsoft.FSharp.Data.UnitSystems.SI.UnitNames
-open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
-
 open System
 open System.Globalization
 open System.Runtime.InteropServices
