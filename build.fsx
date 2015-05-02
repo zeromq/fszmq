@@ -156,7 +156,7 @@ Target "RunTests" (fun _ ->
         { p with
             ToolPath = nunitPath
             ToolName = "nunit-console-x86.exe"
-            Framework = "net-4.5"
+            (*Framework = "net-4.0" *)
             DisableShadowCopy = true
             TimeOut = TimeSpan.FromMinutes 20.
             OutputFile = "TestResults.xml" })
