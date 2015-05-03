@@ -156,7 +156,10 @@ Target "RunTests" (fun _ ->
         { p with
             ToolPath = nunitPath
             ToolName = "nunit-console-x86.exe"
-            Framework = if not EnvironmentHelper.isMono then "net-4.0" else p.Framework
+            Framework = if  not EnvironmentHelper.isLinux &&
+                            not EnvironmentHelper.isUnix
+                            then "net-4.0"
+                            else p.Framework
             DisableShadowCopy = true
             TimeOut = TimeSpan.FromMinutes 20.
             OutputFile = "TestResults.xml" })
