@@ -61,7 +61,7 @@ module UnitTest =
       |> printfn "msg: %A"
 
     let error = Assert.Throws<TimeoutException> (TestDelegate(testFn))
-    error.Message |> should contain "has timed out"
+    error.Message.Replace ("-"," ") |> should contain "has timed out"
 
 (* ZCURVE & Z85 Tests *)
   let BINARY = [| 0x86uy; 0x4Fuy; 0xD2uy; 0x6Fuy; 0xB5uy; 0x59uy; 0xF7uy; 0x5Buy |]
