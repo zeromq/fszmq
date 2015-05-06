@@ -31,7 +31,24 @@ module internal C =
   type zmq_msg_t  =  nativeint
   type size_t     = unativeint
   type strBuffer  = System.Text.StringBuilder
+
+(* platform *)
+  let [<Literal>] SYS_NAMELEN = 256
   
+  [<Struct;StructLayout(LayoutKind.Sequential)>]
+  type utsname = 
+    [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable sysname  : string
+    [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable release  : string
+    [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable version  : string
+    [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable machine  : string
+    [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable nodename : string
+
+  (* :: HACK ::
+  Calling this function is used as a hack to determine the current operating 
+  system. See `Constants.EAGAIN` for more details. *)
+  [<DllImport("libc",CallingConvention = CallingConvention.Cdecl)>]
+  extern int uname([<In;Out>] utsname& info)
+
 (* version *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern void zmq_version([<Out>] int& major,[<Out>] int& minor,[<Out>] int& patch)

@@ -57,7 +57,7 @@ let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging t
 
 // File system information
 // (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
-let solutionFile  = "fszmq"
+let solutionFile  = sprintf "fszmq-%s" (if EnvironmentHelper.isMacOS then "mac" else "win")
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.dll"]
 
@@ -156,7 +156,10 @@ Target "RunTests" (fun _ ->
         { p with
             ToolPath = nunitPath
             ToolName = "nunit-console-x86.exe"
-            Framework = "net-4.5"
+            Framework = if  not EnvironmentHelper.isLinux &&
+                            not EnvironmentHelper.isUnix
+                            then "net-4.0"
+                            else p.Framework
             DisableShadowCopy = true
             TimeOut = TimeSpan.FromMinutes 20.
             OutputFile = "TestResults.xml" })

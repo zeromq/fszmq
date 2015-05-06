@@ -166,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\fszmq\fszmq.fsproj">
-      <Project>D0F2CDEB-3D9C-4FE6-BEF9-27B9C7F0CF71</Project>
+      <Project>{d0f2cdeb-3d9c-4fe6-bef9-27b9c7f0cf71}</Project>
       <Name>fszmq</Name>
     </ProjectReference>
   </ItemGroup>
