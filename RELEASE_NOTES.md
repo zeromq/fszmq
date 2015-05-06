@@ -49,6 +49,6 @@
 * !BREAKING! The `Handle` property on `Message`, `Socket`, and `Context` instances is now internal
 * Updated bundled libzmq.dll to version 4.0.6
 
-### New in 4.0.9 (2015/05/06)
+### New in 4.0.9-prerelease (2015/05/06)
 * Split project into Mac-friendly and Windows-friendly solutions
 * Removed the need for compiling with `--define:BSD_EAGAIN` 
