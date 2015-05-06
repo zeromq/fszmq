@@ -58,17 +58,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{072EAC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
-		build.cmd = build.cmd
 		build.fsx = build.fsx
 		build.sh = build.sh
 		COPYING.lesser = COPYING.lesser
-		nuget\fszmq.nuspec = nuget\fszmq.nuspec
-		nuget\Install.ps1 = nuget\Install.ps1
 		LICENSE.txt = LICENSE.txt
-		nuget\publish.cmd = nuget\publish.cmd
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
-		nuget\Uninstall.ps1 = nuget\Uninstall.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"

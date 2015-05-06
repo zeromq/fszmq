@@ -160,8 +160,7 @@ module Socket =
   /// If no message is received before RCVTIMEO expires, throws a TimeoutException
   [<Extension;CompiledName("Recv")>]
   let recv socket = 
-    let msg = Message.tryRecv socket ZMQ.WAIT
-              |> Option.map Message.data
+    let msg = Message.tryRecv socket ZMQ.WAIT |> Option.map Message.data
     match msg with
     | Some frame  -> frame
     | None        -> raise <| TimeoutException ()

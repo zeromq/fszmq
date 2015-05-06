@@ -74,17 +74,28 @@ module ZMQ =
   let inline internal einval msg = raise <| ZMQError(22,msg)
   
 (* error codes *)
-  #if BSD_EAGAIN
+  let [<Literal>] internal POSIX_EAGAIN = 11
+  let [<Literal>] internal BSD_EAGAIN   = 35
+  // !!! HACK !!! This whole setup is bad and wrong and should be replaced
+  let internal eagain = 
+    try
+      let mutable info = C.utsname()
+      C.uname (&info) |> ignore //TODO: handle this better
+      match info.sysname.ToLowerInvariant () with
+      | "linux"   -> POSIX_EAGAIN  // Linux
+      | "darwin"  -> BSD_EAGAIN   // Mac OS X
+      //NOTE: this assumes all Unixes are BSD-derived, which is bad and wrong
+      | _         -> BSD_EAGAIN
+      //TODO: extend this to include other OSes
+    with
+      | _ -> POSIX_EAGAIN  // Windows
+    (* :: NOTE :: 
+    if _anything_ goes wrong, we assume "libc::uname" doesn't exist (i.e. we're on Windows);
+    this is probably bad and wrong and really ought to be replaced with _something_ else.*)
+
   /// Non-blocking mode was requested and the message cannot be sent at the moment
-  let [<Literal>] EAGAIN = 35 // popular Unix systems like FreeBSD, OpenBSD, and Mac OSX
-  #else
-  /// Non-blocking mode was requested and the message cannot be sent at the moment
-  let [<Literal>] EAGAIN = 11 // all version of Windows, anything running the Linux kernel
-  #endif
-  (* :: NOTE :: 
-    Binary distributions of fszmq will likely fail on systems using BSD-style EAGAIN and/or EWOULDBLOCK 
-    (most commonly FreeBSD, OpenBSD, or Mac OSX). If you are targeting such an OS, please compile fszmq 
-    from source after defining the appropriate pragma value (e.g. `--define:BSD_EAGAIN`). *)
+  let (|EAGAIN|_|) errno =
+    if errno = eagain then Some () else None
 
 (* context options *)
   /// (Int32) Set number of OS-level I/O threads
