@@ -108,7 +108,7 @@ let buildReference () =
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
-  let fsi = FsiEvaluator ()
+  let fsi = FsiEvaluator [|"--lib";"bin/x86"|]
   fsi.EvaluationFailed.Add (fun x -> traceError x.StdErr
                                      exit 3)
   // First, process files which are placed in the content root directory.

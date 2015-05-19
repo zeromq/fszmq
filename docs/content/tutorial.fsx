@@ -1,25 +1,8 @@
 (*** hide ***)
-// do some environmental setup
 #I "../../bin"
-open System
-
-let workingFolder =
-  match Environment.OSVersion.Platform with
-  | PlatformID.Unix 
-  | PlatformID.MacOSX ->  "" //NOTE: on WIN we need different paths per architecture
-  | _                 ->  if Environment.Is64BitProcess then "x64" else "x86"
-  |> sprintf "../../bin/%s"
-//NOTE: fszmq.dll needs to "see" libzmq.dll...
-//      force that by running in the deployment staging folder
-Environment.CurrentDirectory <- workingFolder 
-
-let encode = string >> System.Text.Encoding.ASCII.GetBytes
-let decode = System.Text.Encoding.ASCII.GetString 
-
-open System.Threading
-let sleepms ms  = Thread.Sleep(int ms)
-let spawn  fn   = Thread(ThreadStart fn).Start()
-let spawnp fn o = Thread(ParameterizedThreadStart fn).Start(o)
+#load "docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 "Hello, World" with fszmq
@@ -35,6 +18,7 @@ _(Note: don't worry too much about contexts just yet. For now, assume every node
 which owns one, or more, `Socket` instances.)_ We'll also open some modules which contain functions for working with contexts and sockets.
 
 *)
+
 #r "fszmq.dll"
 open fszmq
 open fszmq.Context
@@ -99,6 +83,9 @@ client()
 If you run this example in F# Interactive, you should see the following:
 *)
 (*** include-output: client ***)
+
+(*** hide ***)
+PATH.release ()
 
 (**
 Notice how our two sockets are communicating synchronously. In other words, the client sends one request and must wait for a reply.

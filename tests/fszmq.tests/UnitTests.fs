@@ -59,7 +59,7 @@ module UnitTest =
   [<Test;Category("ZCURVE")>]
   let ``keypair generation requires sodium`` () =
     let error = Assert.Throws<ZMQError> (fun () -> Curve.curveKeyPair() |> ignore)
-    Assert.That(error.Message, Is.StringContaining "not supported")
+    Assert.That(error.Message.ToLower(), Is.StringContaining "not supported")
     
   //TODO: write passing tests, once you figure out libsodium installation
 

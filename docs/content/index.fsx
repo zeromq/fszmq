@@ -1,18 +1,8 @@
 (*** hide ***)
-// do some environmental setup
 #I "../../bin"
-open System
-open System.IO
-
-let workingFolder =
-  match Environment.OSVersion.Platform with
-  | PlatformID.Unix 
-  | PlatformID.MacOSX ->  "" //NOTE: on WIN we need different paths per architecture
-  | _                 ->  if Environment.Is64BitProcess then "x64" else "x86"
-  |> sprintf "../../bin/%s"       
-//NOTE: fszmq.dll needs to "see" libzmq.dll...
-//      force that by running in the deployment staging folder
-Environment.CurrentDirectory <- workingFolder 
+#load "docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 fszmq
@@ -54,6 +44,9 @@ printfn "libzmq version: %A" ZMQ.version
 Running this code should produce something like the following (the actual numbers may be different on your machine):
 *)
 (*** include-output: vsn ***)
+
+(*** hide ***)
+PATH.release ()
 
 (**
 Samples & Documentation

@@ -17,6 +17,7 @@ along with fszmq. If not, see <http://www.gnu.org/licenses/>.
 Copyright (c) 2011-2013 Paulmichael Blasucci
 ------------------------------------------------------------------------ *)
 
+#r "System.Xml.Linq"
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
 open Fake.Git
@@ -173,10 +174,8 @@ Target "CopyBinaries" (fun _ ->
   // native dependencies
   if notWin
     then  !! "lib/zeromq/OSX/**/*.*"  |> CopyTo "bin"
-    else  !! "lib/zeromq/WIN/x86/*.*" |> CopyTo "bin/x86"
-          !! "lib/zeromq/WIN/x64/*.*" |> CopyTo "bin/x64"
-
-  )
+    else  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/x86"
+          !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/x64")
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -201,8 +200,14 @@ Target "RunTests" (fun _ ->
   |> NUnit (fun p ->
       { p with
           DisableShadowCopy = true
-          TimeOut = TimeSpan.FromMinutes 20.
-          OutputFile = "tests/TestResults.xml" }))
+          ToolName          = if notWin 
+                                then p.ToolName   
+                                else "nunit-console-x86.exe"
+          Framework         = if notWin 
+                                then p.Framework 
+                                else "net-4.0"
+          TimeOut           = TimeSpan.FromMinutes 20.
+          OutputFile        = "tests/TestResults.xml" }))
 
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
