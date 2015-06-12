@@ -30,9 +30,9 @@ open System.Threading
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // socket to receive messages on
   use receiver = Context.pull context
   Socket.connect receiver "tcp://localhost:5557"
@@ -59,11 +59,11 @@ let main () =
       // Any waiting controller command acts as 'KILL'
       controller  |> pollIn (fun _ -> again := false (* exit loop *)) ]
 
-  while !again do 
+  while !again do
     items |> pollForever |> ignore
-  
+
   0 // return code
- 
+
 (*** hide ***)
 main ()
 PATH.release ()

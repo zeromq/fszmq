@@ -1,21 +1,3 @@
-﻿(* ------------------------------------------------------------------------
-This file is part of fszmq.
-
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
------------------------------------------------------------------------- *)
 namespace fszmq.tests
 
 open System
@@ -23,7 +5,7 @@ open fszmq
 open NUnit.Framework
 
 [<TestFixture>]
-module UnitTest = 
+module UnitTest =
 
   [<Test;Category("Miscellany")>]
   let ``libzmq version should be at least 4``() =
@@ -43,10 +25,10 @@ module UnitTest =
       let sck = Context.pair ctx
       Socket.setOption sck (ZMQ.RCVTIMEO,10)
       Socket.bind sck "inproc://dummy"
-      sck 
-      |> Socket.recv 
+      sck
+      |> Socket.recv
       |> printfn "msg: %A"
-    
+
     let error = Assert.Throws<TimeoutException> (TestDelegate(testFn))
     Assert.That (error.Message.Replace ("-"," "),Is.StringContaining "has timed out")
 
@@ -60,14 +42,14 @@ module UnitTest =
   let ``keypair generation requires sodium`` () =
     let error = Assert.Throws<ZMQError> (fun () -> Curve.curveKeyPair() |> ignore)
     Assert.That(error.Message.ToLower(), Is.StringContaining "not supported")
-    
+
   //TODO: write passing tests, once you figure out libsodium installation
 
   [<Test;Category("Z85")>]
   let ``can encode (binary-to-string)`` () =
     let encoded = Z85.encode(BINARY)
     Assert.That (encoded, Is.EqualTo STRING)
-    
+
   [<Test;Category("Z85")>]
   let ``unencoded binary must be divisible by 4`` () =
     let binary = BINARY.[1 ..] // 7 bytes shouldn't be divisible by 4
@@ -83,7 +65,7 @@ module UnitTest =
   let ``can decode (string-to-binary)`` () =
     let decoded = Z85.decode(STRING)
     Assert.That (decoded,Is.EqualTo BINARY)
-      
+
   [<Test;Category("Z85")>]
   let ``encoded string must be divisible by 5`` () =
     let string = STRING + "!" // 11 bytes shouldn't be divisible by 5

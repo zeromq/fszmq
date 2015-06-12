@@ -1,7 +1,8 @@
 type project
+
 owners
     Paulmichael Blasucci
-authors 
+authors
     Paulmichael Blasucci
 projectUrl
     http://github.com/zeromq/fszmq
@@ -12,12 +13,14 @@ licenseUrl
 requireLicenseAcceptance
     false
 copyright
-    Copyright 2015
+    Copyright 2011-2015 Paulmichael Blasucci
 tags
-    
+    F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport
 summary
-    fszmq
+    An MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
 description
-    fszmq
-
-
+    fszmq is an MPLv2-licensed F# binding for the ZeroMQ  distributed computing library.
+    It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
+    (Note: each binding is a separate branch in git, as there are some non-compatible differences).
+    This library is primarily designed to be consumed from F#. However, where possible,
+    the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam).

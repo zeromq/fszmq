@@ -21,7 +21,7 @@ Adds PUB-SUB flow to receive and respond to kill signal
 open fszmq
 open System.Diagnostics
 
-let main () = 
+let main () =
   use context  = new Context ()
 
   // Socket to receive messages on

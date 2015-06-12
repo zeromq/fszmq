@@ -23,8 +23,8 @@ let encode = string >> System.Text.Encoding.ASCII.GetBytes
 
 // initialize random number generator
 let rand = Random DateTime.Now.Millisecond
-  
-let main () = 
+
+let main () =
   // prepare our context and publisher
   use context   = new Context ()
   use publisher = Context.pub context
@@ -43,7 +43,7 @@ let main () =
     Socket.send publisher (encode update)
 
   0 // return code
-  
-(*** hide ***) 
+
+(*** hide ***)
 main ()
 PATH.release ()

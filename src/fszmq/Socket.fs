@@ -1,20 +1,8 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
@@ -63,9 +51,9 @@ module Socket =
       elif  t = typeof<string>  then 255,(       readString >> box)
       elif  t = typeof<byte[]>  then 255,(       readBytes  >> box)
                                 else invalidOp "Invalid data type"
-    let getter (size,buffer) = 
+    let getter (size,buffer) =
       let mutable size' = unativeint size
-      match C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') with 
+      match C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') with
       | 0 -> downcast read (size',buffer)
       | _ -> ZMQ.error()
     useBuffer size getter
@@ -75,10 +63,10 @@ module Socket =
   let setOption (socket:Socket) (socketOption,value:'t) =
     let size,write =
       match box value with
-      | :? (int32 ) as v  -> sizeof<Int32>,(writeInt32  v)     
-      | :? (bool  ) as v  -> sizeof<Int32>,(writeBool   v)   
-      | :? (int64 ) as v  -> sizeof<Int32>,(writeInt64  v)    
-      | :? (uint64) as v  -> sizeof<Int64>,(writeUInt64 v)   
+      | :? (int32 ) as v  -> sizeof<Int32>,(writeInt32  v)
+      | :? (bool  ) as v  -> sizeof<Int32>,(writeBool   v)
+      | :? (int64 ) as v  -> sizeof<Int32>,(writeInt64  v)
+      | :? (uint64) as v  -> sizeof<Int64>,(writeUInt64 v)
       | :? (string) as v  -> v.Length     ,(writeString v)
       | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
       | _                 -> invalidOp "Invalid data type"
@@ -86,13 +74,13 @@ module Socket =
       write buffer
       let okay = C.zmq_setsockopt(socket.Handle,socketOption,buffer,size)
       if  okay <> 0 then ZMQ.error()
-    useBuffer size setter 
+    useBuffer size setter
 
   /// Sets the given block of option values for the given Socket
   [<Extension;CompiledName("Configure")>]
   let configure socket socketOptions =
     Seq.iter (fun (opt:int * obj) -> setOption socket opt) socketOptions
-  
+
 (* subscriptions *)
 
   /// Adds one subscription for each of the given topics
@@ -106,8 +94,8 @@ module Socket =
     Seq.iter (fun (t:byte[]) -> setOption socket (ZMQ.UNSUBSCRIBE,t)) topics
 
 (* message sending *)
-  
-  /// Sends a frame, with the given flags, returning true (or false) 
+
+  /// Sends a frame, with the given flags, returning true (or false)
   /// if the send was successful (or should be re-tried)
   [<Extension;CompiledName("TrySend")>]
   let trySend (socket:Socket) (frame:byte[]) flags =
@@ -119,13 +107,13 @@ module Socket =
   /// Sends a frame (blocking), indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
   let send socket frame = Message.waitForOkay (trySend socket) frame ZMQ.WAIT
-  
+
   /// Sends a frame (blocking), indicating more frames will follow, and returning the given socket
   [<Extension;CompiledName("SendMore")>]
-  let sendMore socket frame : Socket = 
+  let sendMore socket frame : Socket =
     Message.waitForOkay (trySend socket) frame (ZMQ.WAIT ||| ZMQ.SNDMORE)
     socket
-  
+
   /// Operator equivalent to `Socket.send`
   let (<<|) socket = send socket
   /// Operator equivalent to `Socket.sendMore`
@@ -155,16 +143,16 @@ module Socket =
     | Message.Okay -> Some(buffer)
     | Message.Busy -> None
     | Message.Fail -> ZMQ.error()
-    
+
   /// Waits for (and returns) the next available frame from a socket
   /// If no message is received before RCVTIMEO expires, throws a TimeoutException
   [<Extension;CompiledName("Recv")>]
-  let recv socket = 
+  let recv socket =
     let msg = Message.tryRecv socket ZMQ.WAIT |> Option.map Message.data
     match msg with
     | Some frame  -> frame
     | None        -> raise <| TimeoutException ()
-     
+
   /// Returns true if more message frames are available
   [<Extension;CompiledName("RecvMore")>]
   let recvMore socket = getOption<bool> socket ZMQ.RCVMORE
@@ -172,13 +160,13 @@ module Socket =
   /// Retrieves all frames of the next available message
   [<Extension;CompiledName("RecvAll")>]
   let recvAll socket  =
-    [|  yield socket |> recv 
+    [|  yield socket |> recv
         while socket |> recvMore do yield socket |> recv  |]
 
 (* monitoring *)
-  /// Creates a `ZMQ.PAIR` socket, bound to the given address, which broadcasts 
-  /// events for the given socket. These events should be consumed by another `ZMQ.PAIR` socket 
-  /// connected to the given address (preferably on a background thread). 
+  /// Creates a `ZMQ.PAIR` socket, bound to the given address, which broadcasts
+  /// events for the given socket. These events should be consumed by another `ZMQ.PAIR` socket
+  /// connected to the given address (preferably on a background thread).
   [<Extension;CompiledName("Monitor")>]
   let monitor (socket:Socket) address events =
     if C.zmq_socket_monitor(socket.Handle,address,events) < 0 then ZMQ.error()

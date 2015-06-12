@@ -17,18 +17,18 @@ Sends "Hello" to server, expects "World" back
 #r @"fszmq.dll"
 open fszmq
 
-let main () = 
+let main () =
   printfn "Connecting to hello world server..."
   use context = new Context ()
-  use requester = Context.req context 
+  use requester = Context.req context
   Socket.connect requester "tcp://localhost:5555"
 
   for request_nbr in 0 .. 9 do
     printfn "Sending Hello %d..." request_nbr
-    Socket.send requester "Hello"B 
+    Socket.send requester "Hello"B
     let _buffer = Socket.recv requester
     printfn "Received World %d" request_nbr
-    
+
   0 // return code
 
 (*** hide ***)

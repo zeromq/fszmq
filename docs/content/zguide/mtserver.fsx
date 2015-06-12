@@ -28,7 +28,7 @@ let workerRoutine key context = async {
 
   while true do
     receiver
-    |> Socket.recv 
+    |> Socket.recv
     |> Encoding.ASCII.GetString
     |> printfn "(%i) Received request: [%s]" key
     // do some 'work'
@@ -37,7 +37,7 @@ let workerRoutine key context = async {
     Socket.send receiver "World"B
   }
 
-let main () = 
+let main () =
   use context = new Context ()
 
   // socket to talk to clients
@@ -49,12 +49,12 @@ let main () =
   Socket.bind workers WORKERS_PIPE
 
   // launch pool of worker threads
-  for key in 0 .. 5 do 
+  for key in 0 .. 5 do
     Async.Start (workerRoutine key context)
-    
+
   // connect worker threads to client requests via a queue proxy
   proxy clients workers None
-  
+
   0 // return code
 
 (*** hide ***)

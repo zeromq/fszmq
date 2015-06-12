@@ -15,8 +15,8 @@ Weather proxy device which does network bridging
 #r "fszmq.dll"
 open fszmq
 open fszmq.Proxying
-  
-let main () = 
+
+let main () =
   use context = new Context ()
 
   // this is where the weather server sits
@@ -31,7 +31,7 @@ let main () =
   proxy frontend backend None
 
   0 // return code
-  
-(*** hide ***) 
+
+(*** hide ***)
 main ()
 PATH.release ()

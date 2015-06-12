@@ -19,7 +19,7 @@ open fszmq.Polling
 // helper for managing resources
 let dispose (o : System.IDisposable) = if o <> null then o.Dispose()
 
-let main () = 
+let main () =
   // prepare our context and sockets
   use context   = new Context ()
   use frontend  = Context.router context
@@ -47,9 +47,9 @@ let main () =
 
   // switch messages between sockets
   while items |> pollForever do ((* nothing *))
-    
+
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main ()
 PATH.release ()

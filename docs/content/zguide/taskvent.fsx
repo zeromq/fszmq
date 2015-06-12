@@ -24,9 +24,9 @@ let encode = string >> System.Text.Encoding.ASCII.GetBytes
 // initialize random number generator
 let rand = Random DateTime.Now.Millisecond
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // Socket to send messages on
   use sender = Context.push context
   Socket.bind sender "tcp://*:5557"
@@ -49,7 +49,7 @@ let main () =
     let workload = (rand.Next 100) + 1
     total_msec <- total_msec + workload
     workload |> encode |> Socket.send sender
-  
+
   printfn "Total expected cost: %d msec" total_msec
 
   0 // return code

@@ -31,12 +31,12 @@ Now here's our basic server that takes "hello" requests and replies with "world"
 let server () =
   // create a ZMQ context
   use context = new Context()
-  
+
   // create reply socket
   use server  = rep context
   // begin receiving connections
   bind server "tcp://*:5555"
-  
+
   let rec loop () =
     // process request (i.e. 'recv' a message from our 'server')
     // NOTE: it's convenient to 'decode' the (binary) message into a string
@@ -45,12 +45,12 @@ let server () =
                     // NOTE: "..."B is short-hand for a byte array of ASCII-encoded chars
                     "world"B |>> server
                     // wait for next request
-                    loop() 
+                    loop()
     | _         ->  // invalid request; stop receiving connections
-                    "goodbye"B |>> server 
+                    "goodbye"B |>> server
 
   // wait for next request
-  loop () 
+  loop ()
 
 (**
 And here's a simple client that makes 10 requests and prints the server's reply each time.
@@ -59,7 +59,7 @@ And here's a simple client that makes 10 requests and prints the server's reply 
 let client () =
   // create a ZMQ context
   use context = new Context()
-  
+
   // create a request socket
   use client  = req context
   // connect to the server
@@ -90,10 +90,10 @@ PATH.release ()
 (**
 Notice how our two sockets are communicating synchronously. In other words, the client sends one request and must wait for a reply.
 Conversely, the server waits for a single request and immediately responds to it. If this were not the case, the parenthetical numbers
-at the start of each output line could be out of order. 
+at the start of each output line could be out of order.
 
-But don't think this is the only way to use fszmq! Go look at the other [samples][content], or read the [zguide][zguide], 
-to see examples of asynchronous client\server, publish\subscribe, map\reduce, and many other distributed computing patterns. 
+But don't think this is the only way to use fszmq! Go look at the other [samples][content], or read the [zguide][zguide],
+to see examples of asynchronous client\server, publish\subscribe, map\reduce, and many other distributed computing patterns.
 And, most of all, have fun using F# ("Simple code for complex problems") and ZeroMQ ("Distributed computing made simple")!
 
   [content]: https://github.com/zeromq/fszmq/tree/master/docs/content

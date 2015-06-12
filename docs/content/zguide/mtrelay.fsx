@@ -29,21 +29,21 @@ let step1 context = async {
 let step2 context = async {
   use receiver = Context.pair context
   Socket.bind receiver STEP2_PIPE
-  
+
   use xmitter = Context.pair context
   Socket.connect xmitter STEP3_PIPE
-  
+
   // wait for signal and pass it on
   receiver
-  |> Socket.recv 
+  |> Socket.recv
   |> Encoding.ASCII.GetString
   |> ignore
 
   printfn "Step 2 ready, signaling step 3"
-  
+
   "READY"B |> Socket.send xmitter }
 
-let main () = 
+let main () =
   use context = new Context ()
 
   Async.Start (step1 context)
@@ -51,7 +51,7 @@ let main () =
 
   use receiver = Context.pair context
   Socket.bind receiver STEP3_PIPE
-  
+
   // wait for signal
   receiver
   |> Socket.recv

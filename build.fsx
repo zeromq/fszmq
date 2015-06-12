@@ -1,20 +1,8 @@
 (* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 
 #r "System.Xml.Linq"
@@ -26,16 +14,6 @@ open Fake.ReleaseNotesHelper
 open System
 open System.IO
 
-// --------------------------------------------------------------------------------------
-// START TODO: Provide project-specific details below
-// --------------------------------------------------------------------------------------
-
-// Information about the project are used
-//  - for version and project name in generated AssemblyInfo file
-//  - by the generated NuGet package
-//  - to run tests and to publish documentation on GitHub gh-pages
-//  - for documentation, you also need to edit info in "docs/tools/generate.fsx"
-
 let notWin = isUnix || isLinux || isMacOS
 
 // The name of the project
@@ -44,22 +22,7 @@ let project = "fszmq"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library."
-
-// Longer description of the project
-// (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = """
-fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library.
-It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
-(Note: each binding is a separate branch in git, as there are some non-compatible differences).
-This library is primarily designed to be consumed from F#. However, where possible,
-the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam)."""
-
-// List of author names (for NuGet package)
-let authors = [ "Paulmichael Blasucci" ]
-
-// Tags for your project (for NuGet package)
-let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport"
+let summary = "An MPLv2-licensed F# binding for the ZeroMQ distributed computing library."
 
 // File system information
 let solutionFile  = sprintf "fszmq-%s.sln" (if notWin then "osx" else "win")
@@ -78,27 +41,11 @@ let gitName = "fszmq"
 // The url for the raw files hosted
 let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/zeromq"
 
-// --------------------------------------------------------------------------------------
-// END TODO: The rest of the file includes standard build steps
-// --------------------------------------------------------------------------------------
-
 // Standard file header
 let [<Literal>] HEADER = """This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci"""
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/."""
 
 // Adapt header to various comment blocks
 let newLineChars = Environment.NewLine.ToCharArray ()
@@ -173,7 +120,7 @@ Target "CopyBinaries" (fun _ ->
     ++ "tests/**/bin/Release/*.exe" |> CopyTo "bin"
   // native dependencies
   if notWin
-    then  !! "lib/zeromq/OSX/**/*.*"  |> CopyTo "bin"
+    then  !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin"
     else  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/x86"
           !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/x64")
 
@@ -200,11 +147,11 @@ Target "RunTests" (fun _ ->
   |> NUnit (fun p ->
       { p with
           DisableShadowCopy = true
-          ToolName          = if notWin 
-                                then p.ToolName   
+          ToolName          = if notWin
+                                then p.ToolName
                                 else "nunit-console-x86.exe"
-          Framework         = if notWin 
-                                then p.Framework 
+          Framework         = if notWin
+                                then p.Framework
                                 else "net-4.0"
           TimeOut           = TimeSpan.FromMinutes 20.
           OutputFile        = "tests/TestResults.xml" }))
@@ -220,9 +167,9 @@ Target "NuGet" (fun _ ->
         ReleaseNotes = toLines release.Notes}))
 
 Target "PublishNuget" (fun _ ->
-  Paket.Push(fun p ->
-      { p with
-          WorkingDir = "bin" }))
+    Paket.Push(fun p ->
+        { p with
+            WorkingDir = "bin" }))
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation

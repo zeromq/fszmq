@@ -17,7 +17,7 @@ Collects results from workers via that socket
 open fszmq
 open System.Diagnostics
 
-let main () = 
+let main () =
   // Prepare our context and socket
   use context  = new Context ()
   use receiver = Context.pull context

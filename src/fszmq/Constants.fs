@@ -1,20 +1,8 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
@@ -28,8 +16,8 @@ open System.Runtime.InteropServices
 /// <para>or an Unknown indicator</para>
 /// </summary>
 [<StructuredFormatDisplay("{Text}")>]
-type Version = Version of major:int * minor:int * revision:int 
-             | Unknown with 
+type Version = Version of major:int * minor:int * revision:int
+             | Unknown with
 
     /// textual representation of Verison
     member private V.Text = match V with
@@ -42,7 +30,7 @@ type Version = Version of major:int * minor:int * revision:int
 /// <summary>
 /// Represents any error raised by the native ZMQ library,
 /// with a human-readable summary in the Message property.
-/// </summary> 
+/// </summary>
 type ZMQError internal(errnum,errmsg) =
   inherit Exception(errmsg)
 
@@ -53,7 +41,7 @@ type ZMQError internal(errnum,errmsg) =
 /// Contains commonly-used pre-defined ZMQ values
 [<RequireQualifiedAccess>]
 module ZMQ =
-  
+
   /// Version of the underlying (native) ZMQ library
   [<CompiledName("Version")>]
   let version =
@@ -69,15 +57,15 @@ module ZMQ =
   // helper function for build native-to-managed errors
   let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
   // constructs and raises native-to-managed errors
-  let inline internal error() = (buildError >> raise) <| C.zmq_errno() 
+  let inline internal error() = (buildError >> raise) <| C.zmq_errno()
   // helpers for "faking" native errors
   let inline internal einval msg = raise <| ZMQError(22,msg)
-  
+
 (* error codes *)
   let [<Literal>] internal POSIX_EAGAIN = 11
   let [<Literal>] internal BSD_EAGAIN   = 35
   // !!! HACK !!! This whole setup is bad and wrong and should be replaced
-  let internal eagain = 
+  let internal eagain =
     try
       let mutable info = C.utsname()
       C.uname (&info) |> ignore //TODO: handle this better
@@ -89,7 +77,7 @@ module ZMQ =
       //TODO: extend this to include other OSes
     with
       | _ -> POSIX_EAGAIN  // Windows
-    (* :: NOTE :: 
+    (* :: NOTE ::
     if _anything_ goes wrong, we assume "libc::uname" doesn't exist (i.e. we're on Windows);
     this is probably bad and wrong and really ought to be replaced with _something_ else.*)
 
@@ -135,7 +123,7 @@ module ZMQ =
   let [<Literal>] EVENT_DISCONNECTED    =  512us
   /// Event monitoring has been disabled
   let [<Literal>] EVENT_MONITOR_STOPPED = 1024us
-  
+
   /// Monitor all possible events
   let [<Literal>] EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
                           ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
@@ -172,7 +160,7 @@ module ZMQ =
   let [<Literal>] STREAM  = 11
 
   (* deprecated socket types *)
-  
+
   /// Deprecated. Use ZMQ.DEALER
   let [<Obsolete;Literal>] XREQ = DEALER
   /// Deprecated. Use ZMQ.ROUTER
@@ -285,15 +273,15 @@ module ZMQ =
   /// Deprecated. Use ZMQ.ROUTER_MANDATORY
   let [<Obsolete;Literal>] ROUTER_BEHAVIOR = ROUTER_MANDATORY
 
-  
+
 (* message options *)
-  
+
   /// (Int32) 1 if more message frames are available, 0 otherwise
   let [<Literal>] MORE = 1
 
 
 (* transmission options *)
-  
+
   /// Block thread until message frame is sent
   let [<Literal>] WAIT      =   0
   /// Queue message frame for sending (return immediately)
@@ -304,7 +292,7 @@ module ZMQ =
   (* deprecated transmission options *)
   /// Deprecated. Use ZMQ.DONTWAIT
   let [<Obsolete;Literal>] NOBLOCK = DONTWAIT
-  
+
 
 (* polling *)
   /// poll for inbound messages
@@ -313,9 +301,9 @@ module ZMQ =
   let [<Literal>] POLLOUT = 2s
   /// poll for messages on stderr (for use with file descriptors)
   let [<Literal>] POLLERR = 4s
-  
+
   (* common timeout lengths for polling *)
   /// indicates polling should exit immediately
   let [<Literal>] NOW     =  0L
-  /// indicates polling should wait indefinitely 
+  /// indicates polling should wait indefinitely
   let [<Literal>] FOREVER = -1L

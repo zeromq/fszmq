@@ -6,7 +6,7 @@ open docs
 PATH.hijack ()
 
 (**
-Node Coordination 
+Node Coordination
 ====================
 
 Synchronized subscriber
@@ -15,9 +15,9 @@ Synchronized subscriber
 open fszmq
 open System.Threading
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // first, connect our subscriber socket
   use subscriber = Context.sub context
   Socket.connect subscriber "tcp://localhost:5561"

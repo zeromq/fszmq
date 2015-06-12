@@ -16,7 +16,7 @@ open fszmq
 open fszmq.Socket
 open System.Threading
 
-let main () = 
+let main () =
   // prepare our context and publisher
   use context   = new Context ()
   use publisher = Context.pub context

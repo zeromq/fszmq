@@ -22,9 +22,9 @@ open System.Threading
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // socket to talk clients
   use responder = Context.rep context
   Socket.connect responder "tcp://localhost:5560"
@@ -39,9 +39,9 @@ let main () =
 
     // send reply back to client
     Socket.send responder (encode "World")
-    
+
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main ()
 PATH.release ()

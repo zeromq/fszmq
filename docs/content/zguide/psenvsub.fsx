@@ -17,7 +17,7 @@ open System.Text
 
 let s_recv = Socket.recv >> Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   // prepare our context and subscriber
   use context     = new Context ()
   use subscriber  = Context.sub context
@@ -30,7 +30,7 @@ let main () =
     // read message contents
     let contents = s_recv subscriber
     printfn "[%s] %s" address contents
- 
+
   0 // return code
 
 (*** hide ***)

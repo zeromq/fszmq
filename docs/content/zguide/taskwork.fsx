@@ -25,9 +25,9 @@ open System.Threading
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // Socket to receive messages on
   use receiver = Context.pull context
   Socket.connect receiver "tcp://localhost:5557"
@@ -49,7 +49,7 @@ let main () =
     Socket.send sender ""B
 
   0 // return code
- 
+
 (*** hide ***)
 main ()
 PATH.release ()

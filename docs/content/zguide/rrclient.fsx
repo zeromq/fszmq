@@ -21,7 +21,7 @@ open fszmq
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   use context = new Context ()
 
   // socket to talk to server
@@ -35,6 +35,6 @@ let main () =
 
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main ()
 PATH.release ()
