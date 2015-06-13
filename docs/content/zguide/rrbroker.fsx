@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Request-Reply Broker
@@ -21,7 +19,7 @@ open fszmq.Polling
 // helper for managing resources
 let dispose (o : System.IDisposable) = if o <> null then o.Dispose()
 
-let main () = 
+let main () =
   // prepare our context and sockets
   use context   = new Context ()
   use frontend  = Context.router context
@@ -49,8 +47,9 @@ let main () =
 
   // switch messages between sockets
   while items |> pollForever do ((* nothing *))
-    
+
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main ()
+PATH.release ()

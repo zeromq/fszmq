@@ -1,14 +1,12 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
-Node Coordination 
+Node Coordination
 ====================
 
 Synchronized subscriber
@@ -17,9 +15,9 @@ Synchronized subscriber
 open fszmq
 open System.Threading
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // first, connect our subscriber socket
   use subscriber = Context.sub context
   Socket.connect subscriber "tcp://localhost:5561"
@@ -52,3 +50,4 @@ let main () =
 
 (*** hide ***)
 main ()
+PATH.release ()

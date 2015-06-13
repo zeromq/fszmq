@@ -1,46 +1,42 @@
-<!---
-This file is part of fszmq.
-
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
--->
 fszmq
 =======================
 
----------------------------------------------------------------------------
-
 ### An F# binding for the ZeroMQ distributed computing library.
 
-fszmq is an LGPLv3-licensed F# binding for the ZeroMQ distributed computing library.
+fszmq is an MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
 It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
 (Note: each binding is a separate branch in git, as there are some non-compatible differences).
-This library is primarily designed to be consumed from F#. However, where possible, the library has been designed
-to appear "friendly" when consumed by other CLR languages (C#, et aliam).
+This library is primarily designed to be consumed from F#. However, where possible,
+the library has been designed to appear "friendly" when consumed by other CLR languages (C#, et aliam).
 
 ---------------------------------------------------------------------------
 
-#### Library design
+### NuGet
 
-fszmq mostly follows the ZeroMQ guidelines for language bindings, and uses an approach similar to many C libraries.
-Specifically, the three core ZeroMQ "concepts" (`Context`, `Socket`, and `Message`) are each modelled as a type
-with a definite lifetime (i.e. must be instantiated and implements `System.IDisposable`), which wraps a native resource.
-However, all non-lifecycle operations are defined as functions in various modules (e.g. `fszmq.Socket`, `fszmq.Polling`).
-Nearly all of these module functions expect an instance of (at least) one of the core types as input.
-Further, many of the module functions are extensions when used from CLR languages other than F#
-(i.e. they present as member functions on instances of `Context`, `Socket`, or `Message`).
-Finally, many relevant constant values are defined in the `fszmq.ZMQ` module.
+The fszmq library can be [installed from NuGet](https://www.nuget.org/packages/fszmq):
+
+<pre>PM> Install-Package fszmq</pre>
+
+_Please note: the fszmq NuGet package **ONLY** provides the managed `fszmq.dll` file.
+**You** need to provide the native `libzmq` file(s) appropriate to your platform._
+
+---------------------------------------------------------------------------
+
+### Platforms
+
+At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
+* 32-bit Windows XP (running against .NET)
+* 64-bit Windows Server 2008 R2 (running against .NET)
+* 32-bit and 64-bit Windows 7 (running against .NET or Mono)
+* 32-bit and 64-bit Windows 8 (running against .NET or Mono)
+* 64-bit OS X 10.9.4 (running against Mono)
+
+Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
+there is a native libzmq port) and will be tested in due course..
+
+_Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
+
+_Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
 
 #### A note about versions
 
@@ -54,65 +50,15 @@ semanitcally minor changes to the actual fszmq codebase. The practical take-away
 so long as the major versions agree, you're not likely to have no problems between fszmq and libzmq. If you do,
 open an [issue](http://github.com/zeromq/fszmq/issues) and it'll get sorted.
 
-#### Testing
-
-_Please note: a full testing suite is under development, but is (woefully) incomplete at this time._
-
-_Please note: comprehensive documentation is under development, but is incomplete at this time._
-
----------------------------------------------------------------------------
-
-### Platforms
-
-At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
-* 32-bit Windows XP (running against .NET)
-* 64-bit Windows Server 2008 R2 (running against .NET)
-* 32-bit and 64-bit Windows 7 (running against .NET or Mono)
-* 32-bit and 64-bit Windows 8 (running against .NET or Mono)
-
-Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
-there is a native libzmq port) and will be tested in due course..
-
-_Please note: comprehensive Mac OS X testing has NOT been conducted, due to resource constraints._
-
-_Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
-
-_Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
-
-### NuGet
-
-The fszmq library can be [installed from NuGet](https://www.nuget.org/packages/fszmq):
-
-<pre>PM> Install-Package fszmq</pre>
-
-_Please note: the fszmq NuGet package will attempt to include a version of libzmq (either x86 or x64/AnyCPU,
-depending on configuration) with your project._
-
-### Pre-requisites
-
-fszmq targets version 4.0, and above, of the .NET runtime, or the equivalent version of the Mono run-time (although it's been known to run on earlier versions).
-
-fszmq (for the 2.1.x branch) should be compiled with Visual Studio 2010 SP1,
-the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or Xamarin Studio.
-
-fszmq (for the 3.2.x branch) should be compiled with Visual Studio 2012,
-the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or Xamarin Studio.
-
-fszmq (for the Master branch) should be compiled with Visual Studio 2013,
-the equivalent F# Free Tools Release, or a compatible version of MonoDevelop or Xamarin Studio.
-
-**Be Advised**
-The ZeroMQ library file (libzmq) will need to be made available for the 2.1.x and 3.2.x branches to run.
-Starting with the the 4.0.x release of 0MQ (currently, the Master branch of fszmq), copies of libzmq are included with the project source.
-
 ---------------------------------------------------------------------------
 
 Issues, questions, and concerns may be directed the the [Issue Tracker](http://github.com/zeromq/fszmq/issues).
 
 More information about ZeroMQ is available at http://zero.mq.
 
+If you'd like to help develop and maintain fszmq, please read about [CONTRIBUTING](CONTRIBUTING.MD).
+
 ---------------------------------------------------------------------------
 
-###### Copyright &#169; 2011-2013 Paulmichael Blasucci.
-###### This project is released under the LGPL (v3) [license](COPYING.lesser).
+###### This project is released under the MPL (v2) [license](LICENSE.txt).
 ###### This project's documentation is released under the MIT [license](docs/files/LICENSE.txt).

@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Hello World server
@@ -21,7 +19,7 @@ open fszmq
 open fszmq.Socket
 open System.Threading
 
-let main () = 
+let main () =
   // socket to talk to clients
   use context = new Context ()
   use responder = Context.rep context
@@ -31,14 +29,15 @@ let main () =
     // wait for next request from client
     let _buffer = Socket.recv responder
     printfn "Received Hello"
-    
+
     // do some work
     Thread.Sleep 1000 // msecs
 
     // send reply back to client
     Socket.send responder "World"B
- 
+
   0 // return code
 
 (*** hide ***)
 main ()
+PATH.release ()

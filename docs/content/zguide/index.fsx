@@ -2,8 +2,8 @@
 zguide
 ===================
 
-[The zguide][zguide] is a well-written, exhaustive explanation of the library. 
-It should definitely be read. And then read again. Also, while the zguide features examples in many languages, 
+[The zguide][zguide] is a well-written, exhaustive explanation of the library.
+It should definitely be read. And then read again. Also, while the zguide features examples in many languages,
 the [F#-specific zguide code samples][zguidefs] have been collected here as a convenience.
 
 _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples below have been modified to run against version 4.0.x of ZeroMQ._
@@ -14,9 +14,9 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 
  * [Hello World server](hwserver.html) ... Expects "Hello" from client, replies with "World"
  * [Hello World client](hwclient.html) ... Sends "Hello" to server, expects "World" back
- 
+
  * [0MQ Version](version.html) ... Displays the version of 0MQ currently being used
- 
+
  * [Weather Update server](wuserver.html) ... Publishes random weather updates
  * [Weather Update client](wuclient.html) ... Collects weather updates and finds avg temp in zipcode
 
@@ -27,7 +27,7 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 --------------------
 
 **Chapter 2 examples**
- 
+
  * [Multi-socket Reader](msreader.html) ... Reads from multiple sockets using a simple recv loop
  * [Multi-socket Poller](mspoller.html) ... Reads from multiple sockets using ZMQ's polling functionality
 
@@ -43,7 +43,7 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
  * [Task Sink (2nd design)](tasksink2.html) ... Like [Task Sink](tasksink.html), but with a extra flow to receive and respond to a 'KILL' signal
 
  * [Interrupt Handling](interrupt.html) ... Shows how to handle manual interrupt (i.e. CTRL+C) in a console application
- 
+
  * [Multi-threaded Service](mtserver.html) ... Passes actual handling of requests to workers on other threads
 
  * [Signaling Between Threads](mtrelay.html) ... Demonstrates inter-thread coordination
@@ -57,28 +57,32 @@ _Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples belo
 --------------------
 
 **Chapter 3 examples**
- 
+
  * _Coming soon._
 
 --------------------
 
 **Chapter 4 examples**
- 
+
  * _Coming soon._
 
 --------------------
 
 **Chapter 5 examples**
- 
+
  * _Coming soon._
 
 --------------------
 
 The documentation accompanying fszmq, and any sample code contained therein, is available under
 the MIT LICENSE which allows modification and reuse for both commercial non-commercial purposes.
-For more information see the [documentation license file][docslicense] in the GitHub repository. 
+For more information see the [documentation license file][docslicense] in the GitHub repository.
 
   [docslicense]: https://github.com/zeromq/fszmq/blob/master/docs/files/LICENSE.txt
   [zguide]: http://zguide.zeromq.org/page:all
   [zguidefs]: https://github.com/imatix/zguide/tree/master/examples/F%23
+
+---------------------------------------------------------------------------
+
+###### Copyright © 2011-2015 Paulmichael Blasucci.
 *)

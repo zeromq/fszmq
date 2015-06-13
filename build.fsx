@@ -1,22 +1,11 @@
 (* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 
+#r "System.Xml.Linq"
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
 open Fake.Git
@@ -25,13 +14,7 @@ open Fake.ReleaseNotesHelper
 open System
 open System.IO
 
-(* ------------------------------------------------------------------------ *)
-
-// Information about the project are used
-//  - for version and project name in generated AssemblyInfo file
-//  - by the generated NuGet package
-//  - to run tests and to publish documentation on GitHub gh-pages
-//  - for documentation, you also need to edit info in "docs/tools/generate.fsx"
+let notWin = isUnix || isLinux || isMacOS
 
 // The name of the project
 // (used by attributes in AssemblyInfo, name of a NuGet package and directory in 'src')
@@ -39,210 +22,209 @@ let project = "fszmq"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "An LGPLv3-licensed F# binding for the ZeroMQ distributed computing library."
-
-// Longer description of the project
-// (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = """
-fszmq is an LGPLv3-licensed F# binding for the ZeroMQ  distributed computing library.
-It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
-(Note: each binding is a separate branch in git, as there are some non-compatible differences).
-This library is primarily designed to be consumed from F#. However, where possible,
-the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam)."""
-
-// List of author names (for NuGet package)
-let authors = [ "Paulmichael Blasucci" ]
-// Tags for your project (for NuGet package)
-let tags = "F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport"
+let summary = "An MPLv2-licensed F# binding for the ZeroMQ distributed computing library."
 
 // File system information
-// (<solutionFile>.sln and <solutionFile>.Tests.sln are built during the building)
-let solutionFile  = sprintf "fszmq-%s" (if EnvironmentHelper.isMacOS then "mac" else "win")
+let solutionFile  = sprintf "fszmq-%s.sln" (if notWin then "osx" else "win")
+
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = ["tests/*/bin/Release/fszmq*tests*.dll"]
+let testAssemblies = "tests/**/bin/Release/*tests*.dll"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
-let gitHome = "https://github.com/pblasucci"
+let gitOwner = "zeromq"
+let gitHome = "https://github.com/" + gitOwner
+
 // The name of the project on GitHub
 let gitName = "fszmq"
 
-// Path to zguide examples (can be deployed with docs)
-let zguide = "/../zguide/examples/F#"
+// The url for the raw files hosted
+let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/zeromq"
 
-(* ------------------------------------------------------------------------ *)
+// Standard file header
+let [<Literal>] HEADER = """This file is part of fszmq.
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/."""
+
+// Adapt header to various comment blocks
+let newLineChars = Environment.NewLine.ToCharArray ()
+let fsHeader =  String.Join ( Environment.NewLine
+                            , [| "(* ------------------------------------------------------------------------"
+                                 HEADER
+                                 "------------------------------------------------------------------------ *)" |])
+let csHeader =  String.Join ( Environment.NewLine
+                            , HEADER.Split newLineChars
+                              |> Array.map (fun l -> "//" + l) )
+let vbHeader =  String.Join ( Environment.NewLine
+                            , HEADER.Split newLineChars
+                              |> Array.map (fun l -> "' " + l) )
 
 // Read additional information from the release notes document
-Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-let release = parseReleaseNotes (IO.File.ReadAllLines "RELEASE_NOTES.md")
-let license =
-  [|"(* ------------------------------------------------------------------------"
-    "This file is part of fszmq."
-    ""
-    "fszmq is free software: you can redistribute it and/or modify"
-    "it under the terms of the GNU Lesser General Public License as published "
-    "by the Free Software Foundation, either version 3 of the License, or"
-    "(at your option) any later version."
-    ""
-    "fszmq is distributed in the hope that it will be useful,"
-    "but WITHOUT ANY WARRANTY; without even the implied warranty of"
-    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the"
-    "GNU Lesser General Public License for more details."
-    ""
-    "You should have received a copy of the GNU Lesser General Public License"
-    "along with fszmq. If not, see <http://www.gnu.org/licenses/>."
-    ""
-    "Copyright (c) 2011-2013 Paulmichael Blasucci"
-    "------------------------------------------------------------------------ *)"|]
+let release = LoadReleaseNotes "RELEASE_NOTES.md"
+
+// Helper active pattern for project types
+let (|Fsproj|Csproj|Vbproj|) (projFileName:string) =
+  match projFileName with
+  | f when f.EndsWith "fsproj"  ->  Fsproj
+  | f when f.EndsWith "csproj"  ->  Csproj
+  | f when f.EndsWith "vbproj"  ->  Vbproj
+  | _ ->  projFileName
+          |> sprintf "Project file %s not supported. Unknown project type."
+          |> failwith
 
 // Generate assembly info files with the right version & up-to-date information
 Target "AssemblyInfo" (fun _ ->
-  let fileName = "src/" + project + "/AssemblyInfo.fs"
-  CreateFSharpAssemblyInfoWithConfig fileName
-      [ Attribute.Title project
-        Attribute.Product project
-        Attribute.Description summary
-        Attribute.Version release.AssemblyVersion
-        Attribute.FileVersion release.AssemblyVersion ]
-      (AssemblyInfoFileConfig (generateClass  = false
-                              ,useNamespace   = project))
+  let getAssemblyInfoAttributes projectName =
+    [ Attribute.Title (projectName)
+      Attribute.Product project
+      Attribute.Description summary
+      Attribute.Version release.AssemblyVersion
+      Attribute.FileVersion release.AssemblyVersion ]
 
-  // prepend licensing header to start of AssemblyInfo file
-  File.WriteAllLines (fileName,Array.append license (File.ReadAllLines fileName))
-)
+  let getProjectDetails projectPath =
+    let projectName = Path.GetFileNameWithoutExtension projectPath
+    (projectPath
+    ,projectName
+    ,Path.GetDirectoryName projectPath
+    ,getAssemblyInfoAttributes projectName)
+
+  let writeFile builder attributes header fileName =
+    builder fileName attributes
+    let before  = File.ReadAllText fileName
+    let after   = sprintf "%s%s%s" header Environment.NewLine before
+    File.WriteAllText (fileName,after)
+
+  !! "src/**/*.??proj"
+  |> Seq.map getProjectDetails
+  |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
+      match projFileName with
+      | Fsproj -> writeFile CreateFSharpAssemblyInfo
+                            attributes
+                            fsHeader
+                            (folderName @@ "AssemblyInfo.fs")
+      | Csproj -> writeFile CreateCSharpAssemblyInfo
+                            attributes
+                            csHeader
+                            ((folderName @@ "Properties") @@ "AssemblyInfo.cs")
+      | Vbproj -> writeFile CreateVisualBasicAssemblyInfo
+                            attributes
+                            vbHeader
+                            ((folderName @@ "My Project") @@ "AssemblyInfo.vb")))
+
+// Copies binaries from default VS location to exepcted bin folder
+Target "CopyBinaries" (fun _ ->
+  // managed libraries
+  !! "src/fszmq/bin/Release/fszmq.*"
+    // support tooling
+    ++ "tests/**/bin/Release/*.exe" |> CopyTo "bin"
+  // native dependencies
+  if notWin
+    then  !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin"
+    else  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/x86"
+          !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/x64")
 
 // --------------------------------------------------------------------------------------
-// Clean build results & restore NuGet packages
+// Clean build results
 
-Target "RestorePackages" (fun _ ->
-  !! "./**/packages.config"
-  |> Seq.iter (RestorePackage (fun p -> { p with ToolPath = "./.nuget/NuGet.exe" }))
-)
-
-Target "Clean" (fun _ -> CleanDirs ["bin"; "temp"])
-
-Target "CleanDocs" (fun _ -> CleanDirs ["docs/output"])
-
+Target "Clean"      (fun _ -> CleanDirs ["bin"; "temp"])
+Target "CleanDocs"  (fun _ -> CleanDirs ["docs/output"])
 Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
 
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
 Target "Build" (fun _ ->
-  { BaseDirectory = __SOURCE_DIRECTORY__
-    Includes = [ solutionFile + ".sln" ]
-    Excludes = [] }
-  |> MSBuild "" "Rebuild" [ "Configuration","Release"
-                            "Platform"     ,"x86" ]
-  |> ignore
-  // .fsproj outputs will automatically wind up in the right locations,
-  // but native libraries need to be moved manually
-  CopyDir "bin/zeromq/x86" "lib/zeromq/x86" (fun _ -> true)
-  CopyDir "bin/zeromq/x64" "lib/zeromq/x64" (fun _ -> true)
-)
+  !! solutionFile
+  |> MSBuildRelease "" "Rebuild"
+  |> ignore)
 
 // --------------------------------------------------------------------------------------
-// Run the unit tests
+// Run the unit tests using test runner
 
 Target "RunTests" (fun _ ->
-    let nunitVersion = GetPackageVersion "packages" "NUnit.Runners"
-    let nunitPath = sprintf "packages/NUnit.Runners.%s/Tools" nunitVersion
-    ActivateFinalTarget "CloseTestRunner"
-
-    { BaseDirectory = __SOURCE_DIRECTORY__
-      Includes = testAssemblies
-      Excludes = [] }
-    |> NUnit (fun p ->
-        { p with
-            ToolPath = nunitPath
-            ToolName = "nunit-console-x86.exe"
-            Framework = if  not EnvironmentHelper.isLinux &&
-                            not EnvironmentHelper.isUnix
-                            then "net-4.0"
-                            else p.Framework
-            DisableShadowCopy = true
-            TimeOut = TimeSpan.FromMinutes 20.
-            OutputFile = "TestResults.xml" })
-)
-
-FinalTarget "CloseTestRunner" (fun _ ->
-    ProcessHelper.killProcess "nunit-agent-x86.exe"
-)
+  !! testAssemblies
+  |> NUnit (fun p ->
+      { p with
+          DisableShadowCopy = true
+          ToolName          = if notWin
+                                then p.ToolName
+                                else "nunit-console-x86.exe"
+          Framework         = if notWin
+                                then p.Framework
+                                else "net-4.0"
+          TimeOut           = TimeSpan.FromMinutes 20.
+          OutputFile        = "tests/TestResults.xml" }))
 
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
 Target "NuGet" (fun _ ->
-  // Format the description to fit on a single line (remove \r\n and double-spaces)
-  let description = description.Replace("\r", "" )
-                               .Replace("\n", "" )
-                               .Replace("  ", " ")
-  let nugetPath = ".nuget/nuget.exe"
-  NuGet (fun p ->
-      { p with
-          Authors = authors
-          Project = project
-          Summary = summary
-          Description = description
-          Version = release.NugetVersion
-          ReleaseNotes = String.Join(Environment.NewLine, release.Notes)
-          Tags = tags
-          OutputPath = "bin"
-          WorkingDir = "nuget"
-          ToolPath = nugetPath
-          AccessKey = getBuildParamOrDefault "nugetkey" ""
-          Publish = hasBuildParam "nugetkey"
-          Dependencies = [] })
-      ("nuget/" + project + ".nuspec")
-)
+  Paket.Pack(fun p ->
+    { p with
+        OutputPath = "bin"
+        Version = release.NugetVersion
+        ReleaseNotes = toLines release.Notes}))
 
-// --------------------------------------------------------------------------------------
-// Clone examples from zguide
-
-Target "CopyGuide" (fun _ ->
-  let currentGuide = DirectoryInfo(__SOURCE_DIRECTORY__ + "/docs/content/zguide")
-  let sourceGuide  = DirectoryInfo(__SOURCE_DIRECTORY__ + zguide)
-  let current = filesInDirMatching "*.fsx" currentGuide
-  printfn "%s: %i files" currentGuide.FullName current.Length
-  let source  = filesInDirMatching "*.fsx" sourceGuide
-                |> Seq.filter (fun f -> not <| isInFolder currentGuide f)
-                |> Seq.map    (fun f -> f.FullName)
-  printfn "%s: %i files" sourceGuide.FullName (Seq.length source)
-  CopyFiles currentGuide.FullName source
-)
+Target "PublishNuget" (fun _ ->
+    Paket.Push(fun p ->
+        { p with
+            WorkingDir = "bin" }))
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
+let generateDocs (refDocs,helpDocs) debug =
+  // stage release notes for formatting
+  CopyFile "docs/content/release_notes.md" "RELEASE_NOTES.md"
+  // configure formatting options
+  let args = [ (if not debug then "--define:RELEASE"   else "")
+               (if refDocs   then "--define:REFERENCE" else "")
+               (if helpDocs  then "--define:HELP"      else "") ]
+  // do it!
+  if executeFSIWithArgs "docs/tools" "generate.fsx" args []
+    then  traceImportant "Help generated"
+    else  traceImportant "generating help documentation failed"
 
-Target "GenerateDocs" (fun _ ->
-  executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:RELEASE"] [] |> ignore
-)
+Target "GenerateRefDocs"      (fun _ -> generateDocs (true ,false) false)
+Target "GenerateHelp"         (fun _ -> generateDocs (false,true ) false)
+Target "GenerateRefDocsLocal" (fun _ -> generateDocs (true ,false) true )
+Target "GenerateHelpLocal"    (fun _ -> generateDocs (false,true ) true )
 
-Target "GenerateLocalDocs" (fun _ ->
-  executeFSIWithArgs "docs/tools" "generate.fsx" ["--define:DEBUG"] [] |> ignore
-)
+Target "GenerateDocs"       DoNothing
+Target "GenerateDocsLocal"  DoNothing
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
 Target "ReleaseDocs" (fun _ ->
-  let ghPages      = "gh-pages"
-  let ghPagesLocal = "temp/gh-pages"
-  Repository.clone "temp" (gitHome + "/" + gitName + ".git") ghPages
-  Branches.checkoutBranch ghPagesLocal ghPages
-  CopyRecursive "docs/output" ghPagesLocal true |> printfn "%A"
-  CommandHelper.runSimpleGitCommand ghPagesLocal "add ." |> printfn "%s"
-  let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
-  CommandHelper.runSimpleGitCommand ghPagesLocal cmd |> printfn "%s"
-  Branches.push ghPagesLocal
-)
+  let tempDocsDir = "temp/gh-pages"
+  CleanDir tempDocsDir
+  Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
 
-Target "Release" DoNothing
+  CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
+  StageAll tempDocsDir
+  Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+  Branches.push tempDocsDir)
 
-// --------------------------------------------------------------------------------------
-// Display a list of available targets. Useful if you haven't seen this project in a while
+#load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
+open Octokit
 
-Target "List" (fun _ -> PrintTargets())
+Target "Release" (fun _ ->
+  StageAll ""
+  Git.Commit.Commit "" (sprintf "Bump version to %s" release.NugetVersion)
+  Branches.push ""
+
+  Branches.tag "" release.NugetVersion
+  Branches.pushTag "" "origin" release.NugetVersion
+
+  // release on github
+  createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
+  |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
+  // TODO: |> uploadFile "PATH_TO_FILE"
+  |> releaseDraft
+  |> Async.RunSynchronously)
+
+Target "BuildPackage" DoNothing
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
@@ -250,21 +232,34 @@ Target "List" (fun _ -> PrintTargets())
 Target "All" DoNothing
 
 "Clean"
-  ==> "RestorePackages"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "CopyBinaries"
   ==> "RunTests"
+  ==> "GenerateDocs"
   ==> "All"
-
-"All"
-  ==> "CleanDocs"
-  ==> "GenerateLocalDocs"
+  =?> ("ReleaseDocs",isLocalBuild)
 
 "All"
   ==> "NuGet"
-  ==> "CleanDocs"
+  ==> "BuildPackage"
+
+"CleanDocs"
+  ==> "GenerateHelp"
+  ==> "GenerateRefDocs"
   ==> "GenerateDocs"
-  ==> "ReleaseDocs"
+
+"CopyBinaries"
+  ==> "CleanDocs"
+  ==> "GenerateHelpLocal"
+  ==> "GenerateRefDocsLocal"
+  ==> "GenerateDocsLocal"
+
+"ReleaseDocs"
+  ==> "Release"
+
+"BuildPackage"
+  ==> "PublishNuget"
   ==> "Release"
 
 RunTargetOrDefault "All"

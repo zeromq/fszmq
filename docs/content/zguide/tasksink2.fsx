@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Task Sink (design 2)
@@ -23,7 +21,7 @@ Adds PUB-SUB flow to receive and respond to kill signal
 open fszmq
 open System.Diagnostics
 
-let main () = 
+let main () =
   use context  = new Context ()
 
   // Socket to receive messages on
@@ -56,3 +54,4 @@ let main () =
 
 (*** hide ***)
 main ()
+PATH.release ()

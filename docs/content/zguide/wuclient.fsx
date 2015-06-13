@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Weather Update Client
@@ -23,7 +21,7 @@ open fszmq
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main args = 
+let main args =
   use context = new Context ()
 
   // socket to talk to server
@@ -45,16 +43,17 @@ let main args =
   for _ in 0 .. 99 do
     let update = decode <| Socket.recv subscriber
     // update = "zipcode temperature relhumidity"
-    let temperature = int <| Array.get (update.Split ()) 1                  
+    let temperature = int <| Array.get (update.Split ()) 1
     total_temp := !total_temp + temperature
     incr update_nbr
 
   printfn "Average temperature for zipcode '%s' was %dF"
           filter
-          (!total_temp / !update_nbr)              
-  
+          (!total_temp / !update_nbr)
+
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main fsi.CommandLineArgs.[1 ..]
 // 0th commandline arg is __SOURCE_FILE__
+PATH.release ()

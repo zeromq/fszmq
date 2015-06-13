@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Task Sink
@@ -19,7 +17,7 @@ Collects results from workers via that socket
 open fszmq
 open System.Diagnostics
 
-let main () = 
+let main () =
   // Prepare our context and socket
   use context  = new Context ()
   use receiver = Context.pull context
@@ -44,3 +42,4 @@ let main () =
 
 (*** hide ***)
 main ()
+PATH.release ()

@@ -1,14 +1,12 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
-Node Coordination 
+Node Coordination
 ====================
 
 Synchronized publisher
@@ -19,9 +17,9 @@ open fszmq
 let [<Literal>] SUBSCRIBERS_EXPECTED = 10
 // we wait for 10 subscribers
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // socket to talk to clients
   use publisher = Context.pub context
   Socket.setOption publisher (ZMQ.SNDHWM,1100000)
@@ -46,7 +44,7 @@ let main () =
 
   // now broadcast exactly 1M updates followed by END
   printfn "Broadcasting messages"
-  for _ in 0 .. 1000000 do 
+  for _ in 0 .. 1000000 do
     "Rhubarb"B |> Socket.send publisher
   "END"B |> Socket.send publisher
 
@@ -54,3 +52,4 @@ let main () =
 
 (*** hide ***)
 main ()
+PATH.release ()

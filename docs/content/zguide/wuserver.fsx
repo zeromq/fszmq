@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Weather Update Server
@@ -25,8 +23,8 @@ let encode = string >> System.Text.Encoding.ASCII.GetBytes
 
 // initialize random number generator
 let rand = Random DateTime.Now.Millisecond
-  
-let main () = 
+
+let main () =
   // prepare our context and publisher
   use context   = new Context ()
   use publisher = Context.pub context
@@ -45,6 +43,7 @@ let main () =
     Socket.send publisher (encode update)
 
   0 // return code
-  
-(*** hide ***) 
+
+(*** hide ***)
 main ()
+PATH.release ()

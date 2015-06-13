@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Weather Update Proxy
@@ -17,8 +15,8 @@ Weather proxy device which does network bridging
 #r "fszmq.dll"
 open fszmq
 open fszmq.Proxying
-  
-let main () = 
+
+let main () =
   use context = new Context ()
 
   // this is where the weather server sits
@@ -33,6 +31,7 @@ let main () =
   proxy frontend backend None
 
   0 // return code
-  
-(*** hide ***) 
+
+(*** hide ***)
 main ()
+PATH.release ()

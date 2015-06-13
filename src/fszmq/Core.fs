@@ -1,20 +1,8 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
@@ -27,12 +15,12 @@ type Message private(?source:byte array) =
   let mutable memory    = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
 
   let (|Source|_|) = function
-    | None 
+    | None
     | Some null ->  None
     | Some data ->  let size = (Array.length >> unativeint) data
                     Some(size,data)
 
-  do (* ctor *) 
+  do (* ctor *)
     match source with
     | Source(size,data) ->  if C.zmq_msg_init_size(memory,size) <> 0 then ZMQ.error()
                             Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
@@ -40,13 +28,13 @@ type Message private(?source:byte array) =
 
   /// Creates a new Message from the given byte array
   new (source) = new Message (?source=Some source)
-  
+
   /// Creates a new empty Message
-  new () = new Message (?source=None) 
+  new () = new Message (?source=None)
 
   member internal __.Handle :nativeint = memory
 
-  override __.Finalize() = 
+  override __.Finalize() =
     if not disposed then
       disposed <- true
       let okay = C.zmq_msg_close(memory)
@@ -61,8 +49,8 @@ type Message private(?source:byte array) =
       GC.SuppressFinalize(self)
 
 
-/// An abstraction of an asynchronous message queue, 
-/// with the exact queuing and message-exchange 
+/// An abstraction of an asynchronous message queue,
+/// with the exact queuing and message-exchange
 /// semantics determined by the socket type
 type Socket internal(context,socketType) =
   let mutable disposed  = false
@@ -74,7 +62,7 @@ type Socket internal(context,socketType) =
 
   override this.GetHashCode () = hash this.Handle
 
-  override this.Equals (obj) = 
+  override this.Equals (obj) =
     match obj with
     | :? Socket as that -> this.Handle = that.Handle
     | _                 -> invalidArg "obj" "Argument is not of type Socket"
@@ -85,7 +73,7 @@ type Socket internal(context,socketType) =
       let okay = C.zmq_close(_socket)
       if okay <> 0 then ZMQ.error()
       _socket  <- 0n
-            
+
   interface IDisposable with
 
     member self.Dispose() =
@@ -102,23 +90,23 @@ type Context () =
 
   do if _context = 0n then ZMQ.error()
 
-  let closeSockets () = 
-    useBuffer sizeof<Int32> (fun (size,buffer) -> 
+  let closeSockets () =
+    useBuffer sizeof<Int32> (fun (size,buffer) ->
       writeInt32 ZMQ.NO_LINGER buffer
       while sockets.Count > 0 do
         let socket = sockets.Item 0
         sockets.RemoveAt 0
         try
           C.zmq_setsockopt(socket.Handle,ZMQ.LINGER,buffer,size) |> ignore
-        finally  
-          (socket :> IDisposable).Dispose ()) 
-    
+        finally
+          (socket :> IDisposable).Dispose ())
+
   member internal __.Attach (socket) =
     if not <| sockets.Contains socket then sockets.Add socket
 
   member internal __.Handle :nativeint = _context
 
-  override __.Finalize() = 
+  override __.Finalize() =
     if not disposed then
       disposed <- true
       closeSockets ()

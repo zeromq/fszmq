@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Message Queue Broker
@@ -18,7 +16,7 @@ Simple message queuing broker, same as request-reply broker but using device.
 open fszmq
 open fszmq.Proxying
 
-let main () = 
+let main () =
   use context = new Context ()
 
   // socket facing clients
@@ -34,5 +32,6 @@ let main () =
 
   0 // return code
 
-(*** hide ***)    
+(*** hide ***)
 main ()
+PATH.release ()

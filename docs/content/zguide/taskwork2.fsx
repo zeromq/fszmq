@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Task Worker (design 2)
@@ -32,9 +30,9 @@ open System.Threading
 let encode = string >> System.Text.Encoding.ASCII.GetBytes
 let decode = System.Text.Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   use context = new Context ()
-  
+
   // socket to receive messages on
   use receiver = Context.pull context
   Socket.connect receiver "tcp://localhost:5557"
@@ -61,10 +59,11 @@ let main () =
       // Any waiting controller command acts as 'KILL'
       controller  |> pollIn (fun _ -> again := false (* exit loop *)) ]
 
-  while !again do 
+  while !again do
     items |> pollForever |> ignore
-  
+
   0 // return code
- 
+
 (*** hide ***)
 main ()
+PATH.release ()

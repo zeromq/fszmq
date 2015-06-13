@@ -1,25 +1,16 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
 open System
 open System.Runtime.InteropServices
+
+#nowarn "1182" // value is unused
+//NOTE: P/Invoke support in Xamarin Studio is flaky
 
 #nowarn "9" // possible unverifiable IL generation
 //NOTE: spurious warning, see `zmq_event_t`,`zmq_pollitem_t` for info
@@ -34,9 +25,9 @@ module internal C =
 
 (* platform *)
   let [<Literal>] SYS_NAMELEN = 256
-  
+
   [<Struct;StructLayout(LayoutKind.Sequential)>]
-  type utsname = 
+  type utsname =
     [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable sysname  : string
     [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable release  : string
     [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable version  : string
@@ -44,7 +35,7 @@ module internal C =
     [<MarshalAs(UnmanagedType.ByValTStr,SizeConst=SYS_NAMELEN)>] val mutable nodename : string
 
   (* :: HACK ::
-  Calling this function is used as a hack to determine the current operating 
+  Calling this function is used as a hack to determine the current operating
   system. See `Constants.EAGAIN` for more details. *)
   [<DllImport("libc",CallingConvention = CallingConvention.Cdecl)>]
   extern int uname([<In;Out>] utsname& info)
@@ -72,7 +63,7 @@ module internal C =
   (* :: NOTE ::
   No binding is given for libzmq.zmq_msg_init_data(...), as it is a micro-optimization function.
   For such low-level performance tuning, code should be written in a native (i.e. unmanaged) language. *)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_move(zmq_msg_t target, zmq_msg_t source)
 
@@ -106,16 +97,16 @@ module internal C =
 (* socket *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_socket(HANDLE context, int socketType)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_close(HANDLE socket)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_setsockopt(HANDLE socket, int option, HANDLE value, size_t size)
-   
+
    [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_getsockopt(HANDLE socket, int option, HANDLE value, [<Out>] size_t& size)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_bind(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
 
@@ -127,7 +118,7 @@ module internal C =
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_disconnect(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_send(HANDLE socket, byte[] buffer, size_t length, int flags)
 
@@ -142,22 +133,22 @@ module internal C =
   type zmq_event_t =
     val mutable event : uint16  // ID of the event as bit-field
     val mutable value : int     // value is either error code, FD, or reconnect interval
-    
-    (* :: NOTE :: 
-    With the current F# compiler, any use of the StructLayout attribute 
-    produces the warning: "Uses of this construct may result in the 
+
+    (* :: NOTE ::
+    With the current F# compiler, any use of the StructLayout attribute
+    produces the warning: "Uses of this construct may result in the
     generation of unverifiable .NET IL code". However, zmq_event_t
-    does _not_ have "explicit packing and an object reference which  
-    overlaps a built-in value type or a part of another object 
+    does _not_ have "explicit packing and an object reference which
+    overlaps a built-in value type or a part of another object
     reference". So, at least by the ECMA-355 specification, it should
-    still produce verifiable code. A quick pass of fszmq.dll through 
-    peverify.exe confirms this safety assertion. Microsoft has 
-    acknowledged this bug, but considers it a low priority. Thus, a 
+    still produce verifiable code. A quick pass of fszmq.dll through
+    peverify.exe confirms this safety assertion. Microsoft has
+    acknowledged this bug, but considers it a low priority. Thus, a
     #nowarn pragma has been included near the top of the this file. *)
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_socket_monitor(HANDLE socket, [<MarshalAs(UnmanagedType.LPStr)>] string address, int events)
-    
+
 (* context *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_ctx_new()
@@ -173,7 +164,7 @@ module internal C =
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_ctx_get(HANDLE context, int option)
- 
+
 (* polling *)
   [<Struct;StructLayout(LayoutKind.Sequential)>]
   type zmq_pollitem_t =
@@ -183,21 +174,21 @@ module internal C =
     val mutable revents : int16
 
     new(socket,events) = {  socket  = socket
-                            fd      = 0n 
+                            fd      = 0n
                             events  = events
                             revents = 0s }
-  (* :: NOTE :: 
-    With the current F# compiler, any use of the StructLayout attribute 
-    produces the warning: "Uses of this construct may result in the 
+  (* :: NOTE ::
+    With the current F# compiler, any use of the StructLayout attribute
+    produces the warning: "Uses of this construct may result in the
     generation of unverifiable .NET IL code". However, zmq_pollitem_t
-    does _not_ have "explicit packing and an object reference which  
-    overlaps a built-in value type or a part of another object 
+    does _not_ have "explicit packing and an object reference which
+    overlaps a built-in value type or a part of another object
     reference". So, at least by the ECMA-355 specification, it should
-    still produce verifiable code. A quick pass of fszmq.dll through 
-    peverify.exe confirms this safety assertion. Microsoft has 
-    acknowledged this bug, but considers it a low priority. Thus, a 
+    still produce verifiable code. A quick pass of fszmq.dll through
+    peverify.exe confirms this safety assertion. Microsoft has
+    acknowledged this bug, but considers it a low priority. Thus, a
     #nowarn pragma has been included near the top of the this file. *)
-    
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_poll ([<In;Out>] zmq_pollitem_t[] items, int count, int64 timeout)
 
@@ -206,9 +197,9 @@ module internal C =
   extern int zmq_proxy (HANDLE frontend, HANDLE backend, HANDLE capture)
 
   (* :: NOTE ::
-    The zmq_proxy function replaces all previous "in the box" 0MQ devices. 
-    Said devices API has been deprecated and should no longer be used.     
-    Additionally, the (optional) capture socket on zmq_proxy is an good    
+    The zmq_proxy function replaces all previous "in the box" 0MQ devices.
+    Said devices API has been deprecated and should no longer be used.
+    Additionally, the (optional) capture socket on zmq_proxy is an good
     logging and auditing tool. *)
 
 (* authentication *)
@@ -217,6 +208,6 @@ module internal C =
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_z85_encode ([<Out>] strBuffer dest, byte[] data, size_t size)
-  
+
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern HANDLE zmq_z85_decode ([<Out>] byte[] dest, [<MarshalAs(UnmanagedType.LPStr)>] string value)

@@ -1,20 +1,8 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
@@ -36,8 +24,8 @@ module internal Marshal =
       fn (unativeint size,buffer)
     finally
       Marshal.FreeHGlobal(buffer)
-   
-(* reading native values *)  
+
+(* reading native values *)
   let inline readInt32 pointer = Marshal.ReadInt32(pointer)
   let inline readInt64 pointer = Marshal.ReadInt64(pointer)
 
@@ -58,9 +46,9 @@ module internal Marshal =
 
   let inline writeBool value pointer = writeInt32 (if value then 1 else 0) pointer
   let inline writeUInt64 (value:UInt64) pointer = writeInt64 (int64 value) pointer
-  
+
   let inline writeBytes (value:byte[]) pointer = Marshal.Copy(value,0,pointer,value.Length)
 
   let inline writeString value pointer =
-    let bytes = System.Text.Encoding.UTF8.GetBytes(string value) 
+    let bytes = System.Text.Encoding.UTF8.GetBytes(string value)
     Marshal.Copy(bytes,0,pointer,bytes.Length)

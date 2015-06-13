@@ -1,20 +1,8 @@
-﻿(* ------------------------------------------------------------------------
+(* ------------------------------------------------------------------------
 This file is part of fszmq.
 
-fszmq is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published 
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-fszmq is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with fszmq. If not, see <http://www.gnu.org/licenses/>.
-
-Copyright (c) 2011-2013 Paulmichael Blasucci
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ------------------------------------------------------------------------ *)
 namespace fszmq
 
@@ -24,13 +12,13 @@ open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 
 /// For use with the Polling module...
-/// 
-/// Associates a callback with a Socket instance and one or more events, 
+///
+/// Associates a callback with a Socket instance and one or more events,
 /// such that the callback is invoked when the event(s) occurs on the Socket instance
-/// 
-/// ** Note: all sockets passed to Polling.poll MUST share the same context 
+///
+/// ** Note: all sockets passed to Polling.poll MUST share the same context
 /// and belong to the thread calling Polling.poll **
-type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) with  
+type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) with
 
   /// Creates a poll item in a way friendly to languages other then F#
   static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
@@ -38,31 +26,31 @@ type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) wit
 /// Contains methods for working with ZMQ's polling capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module Polling =
-  
-  /// Creates a Poll item for the socket which will 
+
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket receives a message
   [<CompiledName("PollIn")>]
   let pollIn fn socket = Poll(ZMQ.POLLIN,socket,fn)
-  
-  /// Creates a Poll item for the socket which will 
+
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket sends a message
   [<CompiledName("PollOut")>]
   let pollOut fn socket = Poll(ZMQ.POLLOUT,socket,fn)
-  
-  /// Creates a Poll item for the socket which will 
+
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket sends or receives messages
   ///
   [<CompiledName("PollIO")>]
   let pollIO fn socket = Poll(ZMQ.POLLIN ||| ZMQ.POLLOUT,socket,fn)
 
-  /// Performs a single polling run 
-  /// across the given sequence of Poll items, waiting up to the given timeout. 
+  /// Performs a single polling run
+  /// across the given sequence of Poll items, waiting up to the given timeout.
   /// Returns true when one or more callbacks have been invoked, returns false otherwise.
   ///
-  /// ** Note: All items passed to Polling.poll MUST share the same context 
+  /// ** Note: All items passed to Polling.poll MUST share the same context
   /// and belong to the thread calling `Polling.poll`. **
   ///
-  /// This function is named DoPoll in compiled assemblies. 
+  /// This function is named DoPoll in compiled assemblies.
   /// If you are accessing the function from a language other than F#, or through reflection, use this name.
   [<CompiledName("DoPoll")>]
   let poll<[<Measure>]'unit> (timeout:int64<'unit>) items =
@@ -100,19 +88,19 @@ module Polling =
 [<Extension>]
 type PollingExtensions =
 
-  /// Creates a Poll item for the socket which will 
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket receives a message
   [<Extension>]
   static member AsPollIn (socket,callback:Action<_>) =
     socket |> Polling.pollIn (fun s -> callback.Invoke(s))
 
-  /// Creates a Poll item for the socket which will 
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket receives a message
   [<Extension>]
   static member AsPollOut (socket,callback:Action<_>) =
     socket |> Polling.pollOut (fun s -> callback.Invoke(s))
 
-  /// Creates a Poll item for the socket which will 
+  /// Creates a Poll item for the socket which will
   /// invoke the callback when the socket sends or receives a message
   [<Extension>]
   static member AsPollIO (socket,callback:Action<_>) =

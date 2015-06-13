@@ -1,11 +1,9 @@
 (*** do-not-eval-file ***)
 (*** hide ***)
 #I "../../../bin"
-
-type ENV = System.Environment
-
-let zmqVersion = if ENV.Is64BitProcess then "x64" else "x86"
-ENV.CurrentDirectory <- sprintf "%s../../../../bin/zeromq/%s" __SOURCE_DIRECTORY__ zmqVersion
+#load "../docs.fs"
+open docs
+PATH.hijack ()
 
 (**
 Pub-Sub Message Evelopes
@@ -19,7 +17,7 @@ open System.Text
 
 let s_recv = Socket.recv >> Encoding.ASCII.GetString
 
-let main () = 
+let main () =
   // prepare our context and subscriber
   use context     = new Context ()
   use subscriber  = Context.sub context
@@ -32,8 +30,9 @@ let main () =
     // read message contents
     let contents = s_recv subscriber
     printfn "[%s] %s" address contents
- 
+
   0 // return code
 
 (*** hide ***)
 main ()
+PATH.release ()
