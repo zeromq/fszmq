@@ -1,9 +1,3 @@
-<!---
-This file is part of fszmq.
-
-This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
-If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
--->
 fszmq
 =======================
 
@@ -12,8 +6,8 @@ fszmq
 fszmq is an MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
 It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
 (Note: each binding is a separate branch in git, as there are some non-compatible differences).
-This library is primarily designed to be consumed from F#. However, where possible, the library has been designed
-to appear "friendly" when consumed by other CLR languages (C#, et aliam).
+This library is primarily designed to be consumed from F#. However, where possible,
+the library has been designed to appear "friendly" when consumed by other CLR languages (C#, et aliam).
 
 ---------------------------------------------------------------------------
 
@@ -26,25 +20,23 @@ The fszmq library can be [installed from NuGet](https://www.nuget.org/packages/f
 _Please note: the fszmq NuGet package **ONLY** provides the managed `fszmq.dll` file.
 **You** need to provide the native `libzmq` file(s) appropriate to your platform._
 
-Additionally, on **Windows** you can use [this package](https://www.nuget.org/packages/fszmq.plus):
-
-<pre>PM> Install-Package fszmq.plus</pre>
-
-_Please note: the fszmq.plus NuGet package will attempt to include a version of `libzmq.dll`
-(either x86 or x64/AnyCPU, depending on configuration) with your project._
-
 ---------------------------------------------------------------------------
 
-### Library design
+### Platforms
 
-fszmq mostly follows the ZeroMQ guidelines for language bindings, and uses an approach similar to many C libraries.
-Specifically, the three core ZeroMQ "concepts" (`Context`, `Socket`, and `Message`) are each modelled as a type
-with a definite lifetime (i.e. must be instantiated and implements `System.IDisposable`), which wraps a native resource.
-However, all non-lifecycle operations are defined as functions in various modules (e.g. `fszmq.Socket`, `fszmq.Polling`).
-Nearly all of these module functions expect an instance of (at least) one of the core types as input.
-Further, many of the module functions are extensions when used from CLR languages other than F#
-(i.e. they present as member functions on instances of `Context`, `Socket`, or `Message`).
-Finally, many relevant constant values are defined in the `fszmq.ZMQ` module.
+At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
+* 32-bit Windows XP (running against .NET)
+* 64-bit Windows Server 2008 R2 (running against .NET)
+* 32-bit and 64-bit Windows 7 (running against .NET or Mono)
+* 32-bit and 64-bit Windows 8 (running against .NET or Mono)
+* 64-bit OS X 10.9.4 (running against Mono)
+
+Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
+there is a native libzmq port) and will be tested in due course..
+
+_Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
+
+_Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
 
 #### A note about versions
 
