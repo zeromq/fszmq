@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Polling - fszmq</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Paulmichael Blasucci">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Paulmichael Blasucci"/>
 
-    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
 
     <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
     <script type="text/javascript" src="/fszmq/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
@@ -39,6 +39,8 @@
 <h1>Polling</h1>
 <div class="xmldoc">
 <p>Contains methods for working with ZMQ's polling capabilities</p>
+
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -52,146 +54,160 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
             poll timeout items
           </code>
-          <div class="tip" id="20">
+          <div class="tip" id="39">
             <strong>Signature:</strong> timeout:int64&lt;&#39;unit&gt; -&gt; items:seq&lt;Poll&gt; -&gt; bool<br />
                           <strong>Type parameters:</strong> 'unit          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L68-68" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Performs a single polling run 
-across the given sequence of Poll items, waiting up to the given timeout. 
-Returns true when one or more callbacks have been invoked, returns false otherwise.</p>
-
-<p><strong> Note: All items passed to Polling.poll MUST share the same context 
-and belong to the thread calling <code>Polling.poll</code>. </strong></p>
-
-<p>This function is named DoPoll in compiled assemblies. 
-If you are accessing the function from a language other than F#, or through reflection, use this name.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '128', 128)" onmouseover="showTip(event, '128', 128)">
-            pollForever items
-          </code>
-          <div class="tip" id="128">
-            <strong>Signature:</strong> items:seq&lt;Poll&gt; -&gt; bool<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L87-87" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Calls <code>Polling.poll</code> with the given sequence of Poll items and no timeout,
-effectively causing the polling loop to block indefinitely.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '129', 129)" onmouseover="showTip(event, '129', 129)">
-            pollIn fn socket
-          </code>
-          <div class="tip" id="129">
-            <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L45-45" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Creates a Poll item for the socket which will 
-invoke the callback when the socket receives a message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '130', 130)" onmouseover="showTip(event, '130', 130)">
-            pollIO fn socket
-          </code>
-          <div class="tip" id="130">
-            <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
-                      </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L56-56" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a Poll item for the socket which will 
-invoke the callback when the socket sends or receives messages</p>
+          <p>Performs a single polling run
+across the given sequence of Poll items, waiting up to the given timeout.
+Returns true when one or more callbacks have been invoked, returns false otherwise.</p>
+
+<p><strong> Note: All items passed to Polling.poll MUST share the same context
+and belong to the thread calling <code>Polling.poll</code>. </strong></p>
+
+<p>This function is named DoPoll in compiled assemblies.
+If you are accessing the function from a language other than F#, or through reflection, use this name.</p>
+
+
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '131', 131)" onmouseover="showTip(event, '131', 131)">
-            pollNow items
+          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
+            pollForever items
           </code>
-          <div class="tip" id="131">
+          <div class="tip" id="40">
             <strong>Signature:</strong> items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L82-82" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L75-75" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Calls <code>Polling.poll</code> with the given sequence of Poll items and no timeout,
+effectively causing the polling loop to block indefinitely.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
+            pollIn fn socket
+          </code>
+          <div class="tip" id="41">
+            <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L33-33" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates a Poll item for the socket which will
+invoke the callback when the socket receives a message</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
+            pollIO fn socket
+          </code>
+          <div class="tip" id="42">
+            <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L44-44" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates a Poll item for the socket which will
+invoke the callback when the socket sends or receives messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
+            pollNow items
+          </code>
+          <div class="tip" id="43">
+            <strong>Signature:</strong> items:seq&lt;Poll&gt; -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L70-70" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Calls <code>Polling.poll</code> with the given sequence of Poll items and 0 microseconds timeout</p>
 
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '132', 132)" onmouseover="showTip(event, '132', 132)">
+          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
             pollOut fn socket
           </code>
-          <div class="tip" id="132">
+          <div class="tip" id="44">
             <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L50-50" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L38-38" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a Poll item for the socket which will 
+          <p>Creates a Poll item for the socket which will
 invoke the callback when the socket sends a message</p>
+
+
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '133', 133)" onmouseover="showTip(event, '133', 133)">
+          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
             tryPollInput timeout socket
           </code>
-          <div class="tip" id="133">
+          <div class="tip" id="45">
             <strong>Signature:</strong> timeout:int64&lt;&#39;unit&gt; -&gt; socket:Socket -&gt; byte [] [] option<br />
                           <strong>Type parameters:</strong> 'unit          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L92-92" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Polling.fs#L80-80" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Polls the given socket, up to the given timeout, for an input message.
 Returns a byte[][] option, where None indicates no message was received.</p>
+
+
 
         </td>
       </tr>
@@ -200,23 +216,25 @@ Returns a byte[][] option, where None indicates no message was received.</p>
 
         </div>
         <div class="span3">
-          <ul class="nav nav-list" id="menu">
+          <img src="/fszmq/img/fszmq_logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">fszmq</li>
             <li><a href="/fszmq/index.html">Home page</a></li>
             <li class="divider"></li>
-            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://nuget.org/packages/fszmq">Get Library via NuGet</a></li>
             <li><a href="http://github.com/zeromq/fszmq">Source Code on GitHub</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/LICENSE.txt">License</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-            <li class="divider"></li>
-            <li class="nav-header">Documenation</li>
+            <li><a href="/fszmq/release_notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
             <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
             <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
-            <li><a href="/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+            <li><a href="/fszmq/reference/index.html">API Reference</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>

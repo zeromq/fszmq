@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>release_notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="fszmq"/>
+    <meta name="author" content="Paulmichael Blasucci"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
+    <script type="text/javascript" src="/fszmq/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://zeromq.org/" target="_blank">zeromq.org</a></li>
+          <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
+          <li><a href="http://github.com/zeromq/fszmq">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/fszmq/index.html">fszmq</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h3><a name="New-in-4-0-9-prerelease-2015-05-06" class="anchor" href="#New-in-4-0-9-prerelease-2015-05-06">New in 4.0.9-prerelease (2015/05/06)</a></h3>
+
+<ul>
+<li>Split project into Mac-friendly and Windows-friendly solutions</li>
+<li>Removed the need for compiling with <code>--define:BSD_EAGAIN</code></li>
+</ul>
+
+<h3><a name="New-in-4-0-8-2015-01-16" class="anchor" href="#New-in-4-0-8-2015-01-16">New in 4.0.8 (2015/01/16)</a></h3>
+
+<ul>
+<li>Fixed bugs related to LINGER being set during <code>Socket</code> disposal</li>
+<li><code>Context</code> now tracks and disposes any <code>Socket</code> instances associated with it</li>
+<li>Improved <code>Message</code> constructor usage from languages other than F#</li>
+<li>!BREAKING! The <code>Handle</code> property on <code>Message</code>, <code>Socket</code>, and <code>Context</code> instances is now internal</li>
+<li>Updated bundled libzmq.dll to version 4.0.6</li>
+</ul>
+
+<h3><a name="New-in-4-0-7-prerelease-2015-01-16" class="anchor" href="#New-in-4-0-7-prerelease-2015-01-16">New in 4.0.7-prerelease (2015/01/16)</a></h3>
+
+<ul>
+<li>Fixed bugs related to LINGER being set during <code>Socket</code> disposal</li>
+<li><code>Context</code> now tracks and disposes any <code>Socket</code> instances associated with it</li>
+<li>Improved <code>Message</code> constructor usage from languages other than F#</li>
+<li>!BREAKING! The <code>Handle</code> property on <code>Message</code>, <code>Socket</code>, and <code>Context</code> instances is now internal</li>
+</ul>
+
+<h3><a name="New-in-4-0-6-2014-06-10" class="anchor" href="#New-in-4-0-6-2014-06-10">New in 4.0.6 (2014/06/10)</a></h3>
+
+<ul>
+<li>Added assembly-level Extension attribute</li>
+<li>Removed unused P/Invoke functions (last vestiges of Timing module)</li>
+<li>Refactored monitoring API to include convenience functions (also extension methods)</li>
+</ul>
+
+<h3><a name="New-in-4-0-5-2014-04-27" class="anchor" href="#New-in-4-0-5-2014-04-27">New in 4.0.5 (2014/04/27)</a></h3>
+
+<ul>
+<li>updated libzmq to 4.0.5</li>
+<li>Fixed working-directory pathing in <code>Scratch.fsx</code> to be properly relative</li>
+<li>Added methods to simplify polling a single socket for input (see tryPollIn,TryGetInput)</li>
+<li>!BREAKING! Removed Timing module</li>
+<li>!BREAKING! Changed poll function to DoPoll when called from other CLR languages</li>
+<li>!BREAKING! Normalized many function names in the Message, Context, and Socket modules</li>
+<li>!BREAKING! Changed <code>pollIO</code> function to <code>PollIO</code> when called from other CLR languages</li>
+<li>!BREAKING! Changed <code>Proxingy.proxy</code> to return <code>unit</code></li>
+<li>Fixed potential memory leak in <code>Message.tryRecv</code></li>
+</ul>
+
+<h3><a name="New-in-4-0-4-Released-2013-12-08" class="anchor" href="#New-in-4-0-4-Released-2013-12-08">New in 4.0.4 (Released 2013/12/08)</a></h3>
+
+<ul>
+<li>Tracked against zeromq4x (stable repo)</li>
+<li>Message type now has a corresponding suite of functions in the Message module</li>
+<li>Added utility functions for timing (see Timing module)</li>
+<li>Added utility functions for Base85 encoding (see Z85 module)</li>
+<li>Added utility functions for CURVE security (see Curve module). WARNING: experimental!</li>
+<li>Added unit tests</li>
+<li>Added API documentation</li>
+<li>Added narrative examples</li>
+<li>Refactored performance tests</li>
+<li>NuGet package now installs either x86 or x64 version of libzmq.dll (based on project configuration)</li>
+<li>NuGet package now has proper uninstaller</li>
+</ul>
+
+<h3><a name="New-in-4-0-1-beta" class="anchor" href="#New-in-4-0-1-beta">New in 4.0.1-beta</a></h3>
+
+<ul>
+<li>Experimental message-passing functions</li>
+<li>Migrated code license to LGPLv3</li>
+<li>Migrated documentation license to MIT/X11</li>
+</ul>
+
+<h3><a name="New-in-4-0-0-beta" class="anchor" href="#New-in-4-0-0-beta">New in 4.0.0-beta</a></h3>
+
+<ul>
+<li>Enhanced solution structure (tests, deployment, docs, et cetera)</li>
+<li>Upgraded to latest libzmq.dll</li>
+</ul>
+
+
+        </div>
+        <div class="span3">
+          <img src="/fszmq/img/fszmq_logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">fszmq</li>
+            <li><a href="/fszmq/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/zeromq/fszmq">Source Code on GitHub</a></li>
+            <li><a href="/fszmq/release_notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="/fszmq/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

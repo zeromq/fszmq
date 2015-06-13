@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Z85 - fszmq</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Paulmichael Blasucci">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Paulmichael Blasucci"/>
 
-    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
 
     <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
     <script type="text/javascript" src="/fszmq/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
@@ -39,6 +39,8 @@
 <h1>Z85</h1>
 <div class="xmldoc">
 <p>Utilities for working with ZeroMQ Base-85 Encoding</p>
+
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -52,15 +54,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '135', 135)" onmouseover="showTip(event, '135', 135)">
+          <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
             decode(data)
           </code>
-          <div class="tip" id="135">
+          <div class="tip" id="69">
             <strong>Signature:</strong> data:string -&gt; byte []<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L71-71" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L59-59" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -68,26 +70,30 @@
 
 <p><strong> Note: the size of the string MUST be divisible be 5. </strong></p>
 
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '139', 139)" onmouseover="showTip(event, '139', 139)">
+          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
             encode(data)
           </code>
-          <div class="tip" id="139">
+          <div class="tip" id="70">
             <strong>Signature:</strong> data:byte [] -&gt; string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L60-60" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L48-48" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Encodes a binary block into a string using ZeroMQ Base-85 Encoding.</p>
 
 <p><strong> Note: the size of the binary block MUST be divisible be 4. </strong></p>
+
+
 
         </td>
       </tr>
@@ -96,23 +102,25 @@
 
         </div>
         <div class="span3">
-          <ul class="nav nav-list" id="menu">
+          <img src="/fszmq/img/fszmq_logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">fszmq</li>
             <li><a href="/fszmq/index.html">Home page</a></li>
             <li class="divider"></li>
-            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://nuget.org/packages/fszmq">Get Library via NuGet</a></li>
             <li><a href="http://github.com/zeromq/fszmq">Source Code on GitHub</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/LICENSE.txt">License</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-            <li class="divider"></li>
-            <li class="nav-header">Documenation</li>
+            <li><a href="/fszmq/release_notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
             <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
             <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
-            <li><a href="/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+            <li><a href="/fszmq/reference/index.html">API Reference</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Monitor - fszmq</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Paulmichael Blasucci">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Paulmichael Blasucci"/>
 
-    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
 
     <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
     <script type="text/javascript" src="/fszmq/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
@@ -39,6 +39,8 @@
 <h1>Monitor</h1>
 <div class="xmldoc">
 <p>Contains methods for working with Socket diagnostics</p>
+
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -52,78 +54,86 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '134', 134)" onmouseover="showTip(event, '134', 134)">
+          <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
             buildEvent message
           </code>
-          <div class="tip" id="134">
+          <div class="tip" id="35">
             <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L90-90" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L77-77" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Constructs a ZMQEvent from a raw (binary) message; 
+          <p>Constructs a ZMQEvent from a raw (binary) message;
 will raise exception if message format is incorrect</p>
+
+
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '136', 136)" onmouseover="showTip(event, '136', 136)">
+          <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
             recvEvent socket
           </code>
-          <div class="tip" id="136">
+          <div class="tip" id="36">
             <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L105-105" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L92-92" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Receives the next ZMQEvent from a monitor socket; 
+          <p>Receives the next ZMQEvent from a monitor socket;
 will raise exception if called on a non-monitor socket</p>
+
+
 
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '137', 137)" onmouseover="showTip(event, '137', 137)">
+          <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
             tryBuildEvent message
           </code>
-          <div class="tip" id="137">
+          <div class="tip" id="37">
             <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L73-73" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L60-60" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Constructs a ZMQEvent option from a raw (binary) message</p>
 
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '138', 138)" onmouseover="showTip(event, '138', 138)">
+          <code onmouseout="hideTip(event, '38', 38)" onmouseover="showTip(event, '38', 38)">
             tryRecvEvent socket
           </code>
-          <div class="tip" id="138">
+          <div class="tip" id="38">
             <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L97-97" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L84-84" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Tries to receive the next ZMQEvent from a monitor socket</p>
+
+
 
         </td>
       </tr>
@@ -132,23 +142,25 @@ will raise exception if called on a non-monitor socket</p>
 
         </div>
         <div class="span3">
-          <ul class="nav nav-list" id="menu">
+          <img src="/fszmq/img/fszmq_logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">fszmq</li>
             <li><a href="/fszmq/index.html">Home page</a></li>
             <li class="divider"></li>
-            <li><a href="http://www.nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://nuget.org/packages/fszmq">Get Library via NuGet</a></li>
             <li><a href="http://github.com/zeromq/fszmq">Source Code on GitHub</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/LICENSE.txt">License</a></li>
-            <li><a href="http://github.com/zeromq/fszmq/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-            <li class="divider"></li>
-            <li class="nav-header">Documenation</li>
+            <li><a href="/fszmq/release_notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
             <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
             <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
-            <li><a href="/fszmq/reference/index.html" title="fszmq API Reference">API Reference</a></li>
+            <li><a href="/fszmq/reference/index.html">API Reference</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>
