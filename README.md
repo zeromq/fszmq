@@ -56,7 +56,7 @@ Issues, questions, and concerns may be directed the the [Issue Tracker](http://g
 
 More information about ZeroMQ is available at http://zero.mq.
 
-If you'd like to help develop and maintain fszmq, please read about [CONTRIBUTING](CONTRIBUTING.MD).
+If you'd like to help develop and maintain fszmq, please read about [CONTRIBUTING](CONTRIBUTING.md).
 
 ---------------------------------------------------------------------------
 
