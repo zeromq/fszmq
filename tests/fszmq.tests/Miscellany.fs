@@ -1,10 +1,10 @@
 namespace fszmq.tests
 
-open System
 open FsCheck
 open fszmq
-open Swensen.Unquote
 open NUnit.Framework
+open Swensen.Unquote
+open System
 
 [<TestFixture>]
 module Miscellany =
@@ -27,6 +27,9 @@ module Miscellany =
       |> printfn "msg: %A"
 
     raises<TimeoutException> <@ testFn () @>
+
+[<TestFixture>]
+module Z85 =
 
   [<Test>]
   let ``encode-then-decode preserves data`` () =

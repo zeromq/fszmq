@@ -33,7 +33,9 @@ SHOULD NOT worry about having them pre-installed, as bootstrapping is handled au
 + [FAKE](http://fsharp.github.io/FAKE/) ... for build-automation
 + [Paket](http://fsprojects.github.io/Paket/) ... for dependency management
 + [FSharp.Formatting](http://tpetricek.github.io/FSharp.Formatting/) ... for API documentation and help files (include the zguide samples)
-+ [NUnit](http://www.nunit.org/) ... for unit testing
++ [FsCheck](http://) ... the primary tool for testing library code
++ [Unquote](http://) ... for tests drilling into particular nooks and crannies (or when property-based testing is a poor fit)
++ [NUnit](http://www.nunit.org/) ... for tying together tests and connecting them to various runners
 
 ---------------------------------------------------------------------------
 

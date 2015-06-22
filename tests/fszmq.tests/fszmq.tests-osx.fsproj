@@ -89,8 +89,6 @@
   <Import Project="$(FSharpTargetsPath)" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
-    <Compile Include="UnitTests.fs" />
-    <Compile Include="MessageTests.fs" />
     <None Include="app.config" />
     <None Include="..\..\lib\zeromq\OSX\fszmq.dll.config">
       <Link>fszmq.dll.config</Link>
@@ -105,6 +103,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="paket.references" />
+    <Compile Include="Miscellany.fs" />
+    <Compile Include="Messages.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
