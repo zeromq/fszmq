@@ -5,5 +5,7 @@ nuget FSharp.Formatting
 nuget NUnit 
 nuget NUnit.Runners
 nuget FAKE
+nuget FsCheck
+nuget Unquote
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx
