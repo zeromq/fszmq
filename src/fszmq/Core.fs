@@ -34,6 +34,8 @@ type Message private(?source:byte array) =
 
   member internal __.Handle :nativeint = memory
 
+  override this.ToString () = sprintf "Message(%i)" this.Handle 
+
   override __.Finalize() =
     if not disposed then
       disposed <- true
@@ -67,6 +69,8 @@ type Socket internal(context,socketType) =
     | :? Socket as that -> this.Handle = that.Handle
     | _                 -> invalidArg "obj" "Argument is not of type Socket"
 
+  override this.ToString () = sprintf "Socket(%i)" this.Handle 
+
   override __.Finalize() =
     if not disposed then
       disposed <- true
@@ -86,6 +90,7 @@ type Context () =
   let mutable disposed = false
   let mutable _context = C.zmq_ctx_new()
 
+  let locker  = obj () // used to synchronize access to `sockets`
   let sockets = ResizeArray<Socket> ()
 
   do if _context = 0n then ZMQ.error()
@@ -102,14 +107,23 @@ type Context () =
           (socket :> IDisposable).Dispose ())
 
   member internal __.Attach (socket) =
-    if not <| sockets.Contains socket then sockets.Add socket
+    lock locker (fun () -> if not <| sockets.Contains socket then sockets.Add socket)
 
   member internal __.Handle :nativeint = _context
+
+  override this.GetHashCode () = hash this.Handle
+
+  override this.Equals (obj) =
+    match obj with
+    | :? Context as that -> this.Handle = that.Handle
+    | _                  -> invalidArg "obj" "Argument is not of type Context"
+
+  override this.ToString () = sprintf "Context(%i)" this.Handle 
 
   override __.Finalize() =
     if not disposed then
       disposed <- true
-      closeSockets ()
+      lock locker (fun () -> closeSockets ())
       if C.zmq_ctx_shutdown(_context) = 0
         then  let okay = C.zmq_ctx_term(_context)
               _context <- 0n
