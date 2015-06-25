@@ -7,12 +7,12 @@ open System.Diagnostics
 (* _ zeromq ____________________________________________________________ *)
 
 let processMessages messageSize roundtripCount socket =
-  let frame = Array.zeroCreate messageSize
+  use message = new Message(Array.zeroCreate messageSize)
   for _ in 1L .. roundtripCount do
-    use msgOut = new Message(frame)
-    send socket msgOut
-    use msgIn = recv socket
-    if size msgIn <> messageSize then failwith "message of incorrect size received"
+    use msg = clone message
+    send msg socket 
+    socket |> recv msg |> ignore
+    if size msg <> messageSize then failwith "message of incorrect size received"
 
 let runTest address messageSize roundtripCount =
   use context = new Context()

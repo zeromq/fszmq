@@ -10,9 +10,9 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("fszmq")>]
 [<assembly: AssemblyProductAttribute("fszmq")>]
 [<assembly: AssemblyDescriptionAttribute("An MPLv2-licensed F# binding for the ZeroMQ distributed computing library.")>]
-[<assembly: AssemblyVersionAttribute("4.0.9")>]
-[<assembly: AssemblyFileVersionAttribute("4.0.9")>]
+[<assembly: AssemblyVersionAttribute("4.0.10")>]
+[<assembly: AssemblyFileVersionAttribute("4.0.10")>]
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "4.0.9"
+    let [<Literal>] Version = "4.0.10"

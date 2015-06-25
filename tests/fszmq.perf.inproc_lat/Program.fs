@@ -14,15 +14,18 @@ let worker (state:obj) =
   use socket = Context.rep context
   Socket.connect socket ENDPOINT
 
-  for _ in 1L .. roundtripCount do Message.recv socket ->> socket
+  use msg = new Message ()
+  for _ in 1L .. roundtripCount do 
+    Message.recv msg socket 
+    msg ->> socket
 
 let processMessages messageSize roundtripCount socket =
-  use message  = new Message(Array.zeroCreate messageSize)
+  use msg' = new Message(Array.zeroCreate messageSize)
   for i in 1L .. roundtripCount do
-    use msgOut = clone message
-    msgOut ->> socket
-    use msgIn = Message.recv socket
-    if size msgIn <> messageSize then failwith "message of incorrect size received"
+    use msg = clone msg'
+    msg ->> socket
+    socket |> Message.recv msg |> ignore
+    if size msg <> messageSize then failwith "message of incorrect size received"
 
 let runTest messageSize roundtripCount =
   use context = new Context()

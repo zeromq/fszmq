@@ -34,6 +34,13 @@ type Message private(?source:byte array) =
 
   member internal __.Handle :nativeint = memory
 
+  override this.GetHashCode () = hash this.Handle
+
+  override this.Equals (obj) =
+    match obj with
+    | :? Message as that -> this.Handle = that.Handle
+    | _                  -> invalidArg "obj" "Argument is not of type Message"
+
   override this.ToString () = sprintf "Message(%i)" this.Handle 
 
   override __.Finalize() =
