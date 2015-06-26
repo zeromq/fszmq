@@ -83,7 +83,7 @@ Remember: the ultimate goal is readablity (to ease mantenance).
 this automatically, please try a new one. If you need help configuring this in
 Xamarin Studio or Visual Studio, please ask.
 
-* Please intend in increments of 2 (spaces). Lots of projects use 4, but that's
+* Please indent in increments of 2 (spaces). Lots of projects use 4, but that's
 just greedy. Not all of use 30-inch monitors.
 
 * Please try to keep lines of code to -- at most -- 80 chars in length (see
