@@ -9,7 +9,7 @@ namespace fszmq.compat.cs
   class Program
   {
     const String MONITOR_ADDRESS = @"inproc://monitor.test";
-    const String REQUEST_ADDRESS = @"inproc://request.test";
+    const String REQUEST_ADDRESS = @"tcp://127.0.0.1:20002";
 
     const Int32 ONE_SECOND = 1000;
 
