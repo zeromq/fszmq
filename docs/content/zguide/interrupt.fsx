@@ -31,14 +31,15 @@ let main () =
   System.Console.CancelKeyPress |> Event.add (fun e ->  interrupted := true
                                                         e.Cancel    <- true)
 
+  use message = new Message ()
   while not !interrupted do
-    Message.tryRecv replyer ZMQ.DONTWAIT
-    |> Option.iter (fun msg ->  let message = decode <| Message.data msg
-                                printfn "Received request: %s" message
-                                // simulate work, by sleeping
-                                Thread.Sleep 1000
-                                // send reply back to client
-                                Socket.send replyer "World"B)
+    if Message.tryRecv message replyer ZMQ.DONTWAIT then 
+      let msg = decode <| Message.data message
+      printfn "Received request: %s" msg
+      // simulate work, by sleeping
+      Thread.Sleep 1000
+      // send reply back to client
+      Socket.send replyer "World"B
 
   0 // return code
 
