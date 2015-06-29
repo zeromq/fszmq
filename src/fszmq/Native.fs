@@ -52,7 +52,7 @@ module internal C =
   extern HANDLE zmq_strerror(int errno)
 
 (* message *)
-  let [<Literal>] ZMQ_MSG_T_SIZE = 32
+  let [<Literal>] ZMQ_MSG_T_SIZE = 64
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init(zmq_msg_t msg)
