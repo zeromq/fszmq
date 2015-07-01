@@ -40,8 +40,7 @@
 
 <p>Sends "Hello" to server, expects "World" back.</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -61,10 +60,8 @@
 <span class="l">18: </span>
 <span class="l">19: </span>
 <span class="l">20: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">fszmq</span>
 
 <span class="c">// helpers to convert between strings and frames</span>
@@ -84,8 +81,7 @@
     <span onmouseout="hideTip(event, 'fs25', 38)" onmouseover="showTip(event, 'fs25', 38)" class="f">printfn</span> <span class="s">&quot;Received reply </span><span class="pf">%d</span><span class="s"> [</span><span class="pf">%s</span><span class="s">]&quot;</span> <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="i">request_nbr</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="i">string</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
@@ -104,10 +100,10 @@
 <div class="tip" id="fs13">System.Text.Encoding.GetString(bytes: byte []) : string<br />System.Text.Encoding.GetString(bytes: byte [], index: int, count: int) : string</div>
 <div class="tip" id="fs14">val main : unit -&gt; int<br /><br />Full name: Rrclient.main</div>
 <div class="tip" id="fs15">val context : Context</div>
-<div class="tip" id="fs16">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs16">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
 <div class="tip" id="fs17">val requester : Socket</div>
 <div class="tip" id="fs18">val req : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.req</div>
-<div class="tip" id="fs19">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs19">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
 <div class="tip" id="fs20">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
 <div class="tip" id="fs21">val request_nbr : int32</div>
 <div class="tip" id="fs22">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>

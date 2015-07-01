@@ -37,6 +37,9 @@
 
 
 <h1>Polling</h1>
+<p>
+  <span>Namespace: fszmq</span><br />
+</p>
 <div class="xmldoc">
 <p>Contains methods for working with ZMQ's polling capabilities</p>
 
@@ -54,10 +57,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
+          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
             poll timeout items
           </code>
-          <div class="tip" id="39">
+          <div class="tip" id="42">
             <strong>Signature:</strong> timeout:int64&lt;&#39;unit&gt; -&gt; items:seq&lt;Poll&gt; -&gt; bool<br />
                           <strong>Type parameters:</strong> 'unit          </div>
         </td>
@@ -83,10 +86,10 @@ If you are accessing the function from a language other than F#, or through refl
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
             pollForever items
           </code>
-          <div class="tip" id="40">
+          <div class="tip" id="43">
             <strong>Signature:</strong> items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
@@ -105,10 +108,10 @@ effectively causing the polling loop to block indefinitely.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
+          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
             pollIn fn socket
           </code>
-          <div class="tip" id="41">
+          <div class="tip" id="44">
             <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -127,10 +130,10 @@ invoke the callback when the socket receives a message</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
+          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
             pollIO fn socket
           </code>
-          <div class="tip" id="42">
+          <div class="tip" id="45">
             <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -149,10 +152,10 @@ invoke the callback when the socket sends or receives messages</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
+          <code onmouseout="hideTip(event, '46', 46)" onmouseover="showTip(event, '46', 46)">
             pollNow items
           </code>
-          <div class="tip" id="43">
+          <div class="tip" id="46">
             <strong>Signature:</strong> items:seq&lt;Poll&gt; -&gt; bool<br />
                       </div>
         </td>
@@ -170,10 +173,10 @@ invoke the callback when the socket sends or receives messages</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
+          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
             pollOut fn socket
           </code>
-          <div class="tip" id="44">
+          <div class="tip" id="47">
             <strong>Signature:</strong> fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br />
                       </div>
         </td>
@@ -192,10 +195,10 @@ invoke the callback when the socket sends a message</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
+          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
             tryPollInput timeout socket
           </code>
-          <div class="tip" id="45">
+          <div class="tip" id="48">
             <strong>Signature:</strong> timeout:int64&lt;&#39;unit&gt; -&gt; socket:Socket -&gt; byte [] [] option<br />
                           <strong>Type parameters:</strong> 'unit          </div>
         </td>

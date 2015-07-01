@@ -40,8 +40,7 @@
 
 <p>Sends batch of tasks to workers via that socket</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -81,10 +80,8 @@
 <span class="l">38: </span>
 <span class="l">39: </span>
 <span class="l">40: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">fszmq</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">System</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">Threading</span>
@@ -124,8 +121,7 @@
   <span onmouseout="hideTip(event, 'fs31', 57)" onmouseover="showTip(event, 'fs31', 57)" class="f">printfn</span> <span class="s">&quot;Total expected cost: </span><span class="pf">%d</span><span class="s"> msec&quot;</span> <span onmouseout="hideTip(event, 'fs33', 58)" onmouseover="showTip(event, 'fs33', 58)" class="v">total_msec</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
@@ -148,10 +144,10 @@
 <div class="tip" id="fs17">property DateTime.Millisecond: int</div>
 <div class="tip" id="fs18">val main : unit -&gt; int<br /><br />Full name: Taskvent.main</div>
 <div class="tip" id="fs19">val context : Context</div>
-<div class="tip" id="fs20">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs20">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
 <div class="tip" id="fs21">val sender : Socket</div>
 <div class="tip" id="fs22">val push : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.push</div>
-<div class="tip" id="fs23">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs23">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
 <div class="tip" id="fs24">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
 <div class="tip" id="fs25">val sink : Socket</div>
 <div class="tip" id="fs26">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>

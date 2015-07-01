@@ -38,8 +38,7 @@
 
 <p>Synchronized subscriber</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -75,10 +74,8 @@
 <span class="l">34: </span>
 <span class="l">35: </span>
 <span class="l">36: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">fszmq</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">Threading</span>
 
@@ -114,8 +111,7 @@
   <span onmouseout="hideTip(event, 'fs25', 46)" onmouseover="showTip(event, 'fs25', 46)" class="f">printfn</span> <span class="s">&quot;Received </span><span class="pf">%d</span><span class="s"> updates&quot;</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs22', 47)" onmouseover="showTip(event, 'fs22', 47)" class="f">loop</span> <span class="n">0</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
@@ -127,13 +123,13 @@
 <div class="tip" id="fs6">namespace System.Threading</div>
 <div class="tip" id="fs7">val main : unit -&gt; int<br /><br />Full name: Syncsub.main</div>
 <div class="tip" id="fs8">val context : Context</div>
-<div class="tip" id="fs9">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs9">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
 <div class="tip" id="fs10">val subscriber : Socket</div>
 <div class="tip" id="fs11">val sub : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.sub</div>
-<div class="tip" id="fs12">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs12">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
 <div class="tip" id="fs13">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
 <div class="tip" id="fs14">val subscribe : socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br /><br />Full name: fszmq.Socket.subscribe</div>
-<div class="tip" id="fs15">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member DisableComObjectEagerCleanup : unit -&gt; unit<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
+<div class="tip" id="fs15">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member ExecutionContext : ExecutionContext with get, set<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;member Interrupt : unit -&gt; unit<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
 <div class="tip" id="fs16">Thread.Sleep(timeout: System.TimeSpan) : unit<br />Thread.Sleep(millisecondsTimeout: int) : unit</div>
 <div class="tip" id="fs17">val syncclient : Socket</div>
 <div class="tip" id="fs18">val req : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.req</div>

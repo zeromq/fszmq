@@ -33,6 +33,20 @@
       <div class="row">
         <div class="span9" id="main">
           
+<h3><a name="New-in-12-0-0-Unreleased" class="anchor" href="#New-in-12-0-0-Unreleased">New in 12.0.0 (Unreleased)</a></h3>
+
+<ul>
+<li>Core types (<code>Message</code>, <code>Socket</code>, and <code>Context</code>) now support referential equality based on underlying native handle</li>
+<li>Calling <code>ToString()</code> on core types (<code>Message</code>, <code>Socket</code>, and <code>Context</code>) now includes the value of the native handle</li>
+<li><code>Context</code> is now thread-safe in its managment of attached <code>Socket</code> instances</li>
+<li>Added <code>Message.isMatch</code> for comparing contents of <code>Message</code> instances</li>
+<li>Added operators (|<<) and (>&gt;|) as directinal aliases for <code>Message.recv</code></li>
+<li>!BREAKING! <code>Message.tryRecv</code> now returns a boolean rather than an <code>Option&lt;byte[]&gt;</code></li>
+<li>!BREAKING! <code>Message.recv</code> now returns Unit rather than an <code>Option&lt;byte[]&gt;</code></li>
+<li>!BREAKING! <code>Message.tryRecv</code> and <code>Message.recv</code> now take a <code>Message</code> instance as an argument</li>
+<li>!BREAKING! Order of arguments has been reversed on <code>Message.send</code> and <code>Message.sendMore</code></li>
+</ul>
+
 <h3><a name="New-in-4-0-9-prerelease-2015-05-06" class="anchor" href="#New-in-4-0-9-prerelease-2015-05-06">New in 4.0.9-prerelease (2015/05/06)</a></h3>
 
 <ul>

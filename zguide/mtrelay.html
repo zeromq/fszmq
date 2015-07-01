@@ -38,8 +38,7 @@
 
 <p>Demonstrates inter-thread coordination.</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -88,10 +87,8 @@
 <span class="l">47: </span>
 <span class="l">48: </span>
 <span class="l">49: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;fszmq.dll&quot;</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">fszmq</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">Text</span>
 
@@ -140,8 +137,7 @@
   <span onmouseout="hideTip(event, 'fs18', 79)" onmouseover="showTip(event, 'fs18', 79)" class="f">printfn</span> <span class="s">&quot;Test successful!&quot;</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
@@ -158,9 +154,9 @@
 <div class="tip" id="fs11">val context : Context</div>
 <div class="tip" id="fs12">val async : AsyncBuilder<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.async</div>
 <div class="tip" id="fs13">val xmitter : Socket</div>
-<div class="tip" id="fs14">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
+<div class="tip" id="fs14">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
 <div class="tip" id="fs15">val pair : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.pair</div>
-<div class="tip" id="fs16">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs16">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member private Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
 <div class="tip" id="fs17">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
 <div class="tip" id="fs18">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
 <div class="tip" id="fs19">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>
