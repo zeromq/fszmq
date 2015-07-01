@@ -40,21 +40,32 @@ _Please note: comprehensive Linux testing has NOT been conducted, due to resourc
 
 #### A note about versions
 
-The master branch of fszmq is tracked against the latest stable branch of ZeroMQ.
-Separate (inactive) branches are created for major changes, and usually align with stable branches of ZeroMQ.
-As a rule, the first segment of fszmq's versioning scheme _always_ matches the first segment of libzmq's versioning scheme
-(e.g. fszmq version 3.x.y is tracked against libzmq version 3.x.y). Further, in practice, the second segement of fszmq's
-versioning scheme _usually_ matches the equivalent in libzmq. While this can not be guaranteed, it has not been invalided yet.
-However, the third segment of fszmq's version is _in no way correlated_ to any part of libzmq. The third segment tracks
-semanitcally minor changes to the actual fszmq codebase. The practical take-away from all this is:
-so long as the major versions agree, you're not likely to have no problems between fszmq and libzmq. If you do,
-open an [issue](http://github.com/zeromq/fszmq/issues) and it'll get sorted.
+In the past, several attempts were made (poorly) to keep the version of `fszmq` synchronized to the version of `libzmq`.
+Starting with verion `12.0.0` (which is the _twelth_ release... version 4.0.9 was the eleventh release), this is no longer done. 
+Instead, `fszmq` is versioned _independently_. The versions of `libzmq` supported by each version of `fszmq` are as follows
+(where 'x' means any number >= 0):
+
+`fszmq` version | `libzmq` versions supported
+---------------:|----------------------------:
+12.0.1			| 4.0.x
+4.0.9           | 4.0.5
+4.0.8			| 4.0.5
+4.0.6           | 4.0.5
+4.0.5           | 4.0.5
+4.0.4           | 4.0.4
+3.2.7			| 3.2.5
+3.2.5			| 3.2.5
+2.2.1			| 2.2.1
+2.2.0			| 2.2.0
+2.1.11			| 2.1.x
+2.1.10			| 2.1.x
+2.1.6			| 2.1.x
 
 ---------------------------------------------------------------------------
 
-Issues, questions, and concerns may be directed the the [Issue Tracker](http://github.com/zeromq/fszmq/issues).
-
 More information about ZeroMQ is available at http://zero.mq.
+
+Issues, questions, and concerns may be directed the the [Issue Tracker](http://github.com/zeromq/fszmq/issues).
 
 If you'd like to help develop and maintain fszmq, please read about [CONTRIBUTING](CONTRIBUTING.md).
 

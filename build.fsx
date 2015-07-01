@@ -157,7 +157,7 @@ Target "RunTests" (fun _ ->
           OutputFile        = "tests/TestResults.xml" }))
 
 // --------------------------------------------------------------------------------------
-// Build a NuGet package
+// Build a deployment artifacts
 
 Target "NuGet" (fun _ ->
   Paket.Pack(fun p ->
@@ -173,6 +173,7 @@ Target "PublishNuget" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
+
 let generateDocs (refDocs,helpDocs) debug =
   // stage release notes for formatting
   CopyFile "docs/content/release_notes.md" "RELEASE_NOTES.md"

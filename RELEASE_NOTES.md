@@ -1,4 +1,4 @@
-### New in 12.0.0 (Unreleased)
+### New in 12.0.1 (2015/07/01)
 * Core types (`Message`, `Socket`, and `Context`) now support referential equality based on underlying native handle
 * Calling `ToString()` on core types (`Message`, `Socket`, and `Context`) now includes the value of the native handle
 * `Context` is now thread-safe in its managment of attached `Socket` instances
