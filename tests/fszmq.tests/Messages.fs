@@ -2,6 +2,7 @@ namespace fszmq.tests
 
 open FsCheck
 open fszmq
+open fszmq.Message
 open NUnit.Framework
 open Swensen.Unquote
 open System
@@ -23,8 +24,7 @@ module Message =
       use msg1 = new Message (data)
       use msg2 = Message.clone msg1
 
-      msg1 <> msg2 
-      && Message.data msg1 = Message.data msg2)
+      msg1 <> msg2 && isMatch msg1 msg2)
 
   [<Test>]
   let ``both message should have the same content after copying`` () =
@@ -33,13 +33,9 @@ module Message =
         lazy (use msg1 = new Message (data1)
               use msg2 = new Message (data2)
 
-              let precheck =  msg1 <> msg2 
-                              && Message.data msg1 <> Message.data msg2 
-              
+              let precheck =  msg1 <> msg2 && not (isMatch msg1 msg2)
               Message.copy msg1 msg2
-
-              let postcheck = msg1 <> msg2 
-                              && Message.data msg1 = Message.data msg2
+              let postcheck = msg1 <> msg2 && isMatch msg1 msg2
 
               precheck && postcheck))
 
@@ -50,11 +46,8 @@ module Message =
         lazy (use msg1 = new Message (data1)
               use msg2 = new Message (data2)
 
-              let precheck =  msg1 <> msg2 
-                              && Message.data msg1 <> Message.data msg2
-
+              let precheck =  msg1 <> msg2 && not (isMatch msg1 msg2)
               Message.move msg1 msg2 
-
               let postcheck = msg1 <> msg2 
                               && data1 = Message.data msg2 
                               && Message.data msg1 = [||]

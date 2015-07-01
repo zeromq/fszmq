@@ -9,7 +9,7 @@ namespace fszmq.compat.cs
   class Program
   {
     const String MONITOR_ADDRESS = @"inproc://monitor.test";
-    const String REQUEST_ADDRESS = @"inproc://request.test";
+    const String REQUEST_ADDRESS = @"tcp://127.0.0.1:20002";
 
     const Int32 ONE_SECOND = 1000;
 
@@ -21,6 +21,7 @@ namespace fszmq.compat.cs
     {
       var context = obj as Context;
       if (context == null) throw new InvalidOperationException("Invalid Context");
+
       using (var monitor = context.Pair())
       {
         monitor.Connect(MONITOR_ADDRESS);
@@ -29,7 +30,7 @@ namespace fszmq.compat.cs
           try
           {
             var evt = monitor.RecvEvent();
-            Debug.WriteLine("{0} ({1})", evt.Details, evt.Address);
+            Debug.WriteLine("MONITOR: {0} ({1})", evt.Details, evt.Address);
             if (evt.Details.IsMonitorStopped) break;
           }
           catch (ZMQError x)
@@ -44,6 +45,7 @@ namespace fszmq.compat.cs
     {
       var context = obj as Context;
       if (context == null) throw new InvalidOperationException("Invalid Context");
+
       using (var socket = context.Req())
       {
         socket.Connect(REQUEST_ADDRESS);
@@ -65,8 +67,9 @@ namespace fszmq.compat.cs
 
     static void Main (String[] args)
     {
-      using (var context = new Context())
-      using (var socket  = context.Rep())
+      using (var context  = new Context())
+      using (var socket   = context.Rep())
+      using (var replyMsg = new Message(new []{ (byte)0 }))
       {
         socket.Monitor(MONITOR_ADDRESS,ZMQ.EVENT_ALL);
         (new Thread(Monitor)).Start(context);
@@ -81,7 +84,7 @@ namespace fszmq.compat.cs
           Thread.Sleep(ONE_SECOND / 2);
           var msg = socket.RecvAll();
           Console.WriteLine("Got {0} bytes", msg.Sum(f => f.Length));
-          socket.SendAll(new []{ new []{ (byte)0 } });
+          replyMsg.Send(socket);
         }
       }
     }

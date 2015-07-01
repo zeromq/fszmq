@@ -28,16 +28,16 @@ let main () =
   Socket.bind backend   "tcp://*:5560"
 
   let transfer inbound outbound =
+    use message = new Message ()
     let rec loop () =
       // process all parts of the message
-      let message = Message.recv inbound
+      Message.recv message inbound
       if Message.hasMore message
-        then  Message.sendMore outbound message
-              dispose message
+        then  Message.sendMore message outbound
               loop ()
         else  // last message part
-              Message.send outbound message
-              dispose message
+              Message.send message outbound
+      dispose message
     loop ()
 
   // initialize poll set

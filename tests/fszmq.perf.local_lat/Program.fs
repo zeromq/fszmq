@@ -12,10 +12,11 @@ let runTest address messageSize roundtripCount =
   use socket  = Context.rep context
   Socket.bind socket address
 
+  use message = new Message ()
   for _ in 1L .. roundtripCount do
-    use message = recv socket
+    socket |> recv message |> ignore
     if size message <> messageSize then failwith "message of incorrect size received"
-    send socket message
+    socket <<- message
 
   Thread.Sleep (TimeSpan.FromMilliseconds 1.0)
 

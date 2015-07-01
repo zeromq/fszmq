@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>fszmq.tests</RootNamespace>
     <AssemblyName>fszmq.tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>fszmq.tests-win</Name>
     <TargetFrameworkProfile />
@@ -93,9 +93,16 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
   <ItemGroup>
-    <Compile Include="UnitTests.fs" />
-    <Compile Include="MessageTests.fs" />
+    <Compile Include="Miscellany.fs" />
+    <Compile Include="Messages.fs" />
     <None Include="..\..\lib\zeromq\WIN\x86\libzmq.dll">
       <Link>libzmq.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -114,20 +121,11 @@
     <Reference Include="FSharp.Core">
       <HintPath>..\..\packages\FSharp.Core\lib\net40\FSharp.Core.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\fszmq\fszmq.fsproj">
       <Name>fszmq</Name>
       <Project>{FDA50C33-B288-4E42-9141-D78BDDEF9466}</Project>
     </ProjectReference>
   </ItemGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <Choose>
     <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
       <ItemGroup>

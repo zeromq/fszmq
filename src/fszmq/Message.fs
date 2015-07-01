@@ -45,6 +45,10 @@ module Message =
   [<Extension;CompiledName("HasMore")>]
   let hasMore (message:Message) = C.zmq_msg_more(message.Handle) |> bool
 
+  /// Tests if two `Message` instances have the same size and data
+  [<Extension;CompiledName("IsMatch")>]
+  let isMatch left right = (size left = size right) && (data left = data right)
+
 (* message manipulation *)
 
   /// <summary>
@@ -82,34 +86,36 @@ module Message =
               | _           -> Fail
     | _   ->  Okay
 
-  let internal waitForOkay fn socket flags =
+  let internal waitForOkay fn =
     let rec loop ()  =
-      match fn socket flags with
+      match fn () with
       | true  -> ((* okay *))
       | false -> loop ()
     loop ()
 
-  /// Sends a frame, with the given flags, returning true (or false)
+  /// Sends a message, with the given flags, returning true (or false)
   /// if the send was successful (or should be re-tried)
   [<Extension;CompiledName("TrySend")>]
-  let trySend (message:Message) (socket:Socket) flags =
+  let trySend (message:Message) (socket:Socket)  flags =
     match C.zmq_msg_send(message.Handle,socket.Handle,flags) with
     | Okay  -> true
     | Busy  -> false
     | Fail  -> ZMQ.error()
 
-  /// Sends a frame, indicating no more frames will follow
+  /// Sends a message, indicating no more messages will follow
   [<Extension;CompiledName("Send")>]
-  let send socket message = waitForOkay (trySend message) socket ZMQ.WAIT
+  let send message socket  = 
+    waitForOkay (fun () -> trySend message socket ZMQ.WAIT)
 
-  /// Sends a frame, indicating more frames will follow
+  /// Sends a message, indicating more messages will follow
   [<Extension;CompiledName("SendMore")>]
-  let sendMore socket message = waitForOkay (trySend message) socket (ZMQ.WAIT ||| ZMQ.SNDMORE)
+  let sendMore message socket  = 
+    waitForOkay (fun () -> trySend message socket (ZMQ.WAIT ||| ZMQ.SNDMORE))
 
   /// Operator equivalent to `Message.send`
-  let (<<-) socket = send socket
+  let (<<-) socket message = send message socket
   /// Operator equivalent to `Message.sendMore`
-  let (<<+) socket = sendMore socket
+  let (<<+) socket message = sendMore socket message
 
   /// Operator equivalent to `Message.send` (with arguments reversed)
   let (->>) message socket = socket <<- message
@@ -118,21 +124,23 @@ module Message =
 
 (* message receiving *)
 
-  /// Gets the next available frame from a socket, returning a Message option
-  /// where None indicates the operation should be re-attempted
-  [<CompiledName("TryRecv")>]
-  let tryRecv (socket:Socket) flags =
-    let frame = new Message()
-    match C.zmq_msg_recv(frame.Handle,socket.Handle,flags) with
-    | Okay -> Some(frame)
-    | Busy -> None
-    | Fail -> (frame :> IDisposable).Dispose()
-              ZMQ.error()
+  /// Updates the given `Message` instance with the next available message from a socket, 
+  /// returning true (or false) if the recv was successful (or should be re-tried)
+  [<Extension;CompiledName("TryRecv")>]
+  let tryRecv (message:Message) (socket:Socket) flags =
+    match C.zmq_msg_recv(message.Handle,socket.Handle,flags) with
+    | Okay -> true
+    | Busy -> false
+    | Fail -> ZMQ.error()
 
-  /// Waits for (and returns) the next available Message from a socket;
+  /// Updates the given `Message` instance with the next available message from a socket;
   /// If no message is received before RCVTIMEO expires, throws a TimeoutException
-  [<CompiledName("Recv")>]
-  let recv socket =
-    match tryRecv socket ZMQ.WAIT with
-    | Some frame  -> frame
-    | None        -> raise <| TimeoutException ()
+  [<Extension;CompiledName("Recv")>]
+  let recv message socket =
+    if not <| tryRecv message socket ZMQ.WAIT then raise <| TimeoutException ()
+
+  /// Operator equivalent to `Message.recv`
+  let (|<<) message socket = recv message socket
+
+  /// Operator equivalent to `Message.recv` (with arguments reversed)
+  let (>>|) socket message = message |<< socket

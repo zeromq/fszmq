@@ -106,12 +106,13 @@ module Socket =
 
   /// Sends a frame (blocking), indicating no more frames will follow
   [<Extension;CompiledName("Send")>]
-  let send socket frame = Message.waitForOkay (trySend socket) frame ZMQ.WAIT
+  let send socket frame = 
+    Message.waitForOkay (fun () -> trySend socket frame ZMQ.WAIT)
 
   /// Sends a frame (blocking), indicating more frames will follow, and returning the given socket
   [<Extension;CompiledName("SendMore")>]
   let sendMore socket frame : Socket =
-    Message.waitForOkay (trySend socket) frame (ZMQ.WAIT ||| ZMQ.SNDMORE)
+    Message.waitForOkay (fun () -> trySend socket frame (ZMQ.WAIT ||| ZMQ.SNDMORE))
     socket
 
   /// Operator equivalent to `Socket.send`
@@ -148,10 +149,9 @@ module Socket =
   /// If no message is received before RCVTIMEO expires, throws a TimeoutException
   [<Extension;CompiledName("Recv")>]
   let recv socket =
-    let msg = Message.tryRecv socket ZMQ.WAIT |> Option.map Message.data
-    match msg with
-    | Some frame  -> frame
-    | None        -> raise <| TimeoutException ()
+    use msg = new Message ()
+    Message.recv msg socket
+    Message.data msg
 
   /// Returns true if more message frames are available
   [<Extension;CompiledName("RecvMore")>]

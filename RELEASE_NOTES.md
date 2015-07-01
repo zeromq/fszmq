@@ -1,3 +1,14 @@
+### New in 12.0.0 (Unreleased)
+* Core types (`Message`, `Socket`, and `Context`) now support referential equality based on underlying native handle
+* Calling `ToString()` on core types (`Message`, `Socket`, and `Context`) now includes the value of the native handle
+* `Context` is now thread-safe in its managment of attached `Socket` instances
+* Added `Message.isMatch` for comparing contents of `Message` instances
+* Added operators (|<<) and (>>|) as directinal aliases for `Message.recv`
+* !BREAKING! `Message.tryRecv` now returns a boolean rather than an `Option<byte[]>`
+* !BREAKING! `Message.recv` now returns Unit rather than an `Option<byte[]>`
+* !BREAKING! `Message.tryRecv` and `Message.recv` now take a `Message` instance as an argument  
+* !BREAKING! Order of arguments has been reversed on `Message.send` and `Message.sendMore`
+
 ### New in 4.0.9-prerelease (2015/05/06)
 * Split project into Mac-friendly and Windows-friendly solutions
 * Removed the need for compiling with `--define:BSD_EAGAIN` 
