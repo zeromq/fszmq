@@ -18,17 +18,10 @@ tags
     F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport
 summary
     An MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
-
-    NOTE: This package **ONLY** provides the managed `fszmq.dll` file. **You**
-    need to provide the appropriate native `libzmq` file.
+    NOTE: This package **ONLY** provides the managed `fszmq.dll` file. **You** need to provide the appropriate native `libzmq` file.
 
 description
-    fszmq is an MPLv2-licensed F# binding for the ZeroMQ  distributed computing
-    library. It provides a complete binding to version 4.0.x of ZeroMQ. This
-    library is primarily designed to be consumed from F#. However, where possible,
-    the library has been designed to appear "friendly" when consumed by other
-    .NET languages (C#, et aliam).
-
-    NOTE: This package **ONLY** provides the managed `fszmq.dll` file. **You**
-    need to provide the appropriate native `libzmq` file.
-    
+    fszmq is an MPLv2-licensed F# binding for the ZeroMQ  distributed computing library.
+    This library is primarily designed to be consumed from F#. 
+    However, where possible, the library has been designed to appear "friendly" when consumed by other .NET languages (C#, et aliam).
+    NOTE: This package **ONLY** provides the managed `fszmq.dll` file. **You** need to provide the appropriate native `libzmq` file.

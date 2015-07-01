@@ -67,7 +67,7 @@ And [the zguide][zguide] is a well-written, exhaustive explanation of the librar
 It should definitely be read. And then read again. Also, while the zguide features examples in many languages,
 the [F#-specific zguide code samples][zguidefs] have been [collected here as a convenience][localguide].
 
-Contributing and copyright
+Contributing & Licensing
 --------------------------
 
 The project is hosted on [GitHub][gh] where you can [report issues][issues] 
@@ -84,8 +84,6 @@ the MIT LICENSE which allows modification and reuse for both commercial non-comm
 For more information see the [documentation license file][docslicense] in the GitHub repository.
 
 ---------------------------------------------------------------------------
-
-###### Copyright © 2011-2015 Paulmichael Blasucci.
 
   [content]: https://github.com/zeromq/fszmq/tree/master/docs/content
   [gh]: https://github.com/zeromq/fszmq
