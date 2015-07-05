@@ -7,7 +7,7 @@ authors
 projectUrl
     http://github.com/zeromq/fszmq
 iconUrl
-    https://raw.githubusercontent.com/zeromq/fszmq/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/zeromq/fszmq/master/docs/files/img/fszmq_logo.png
 licenseUrl
     http://github.com/zeromq/fszmq/blob/master/LICENSE.txt
 requireLicenseAcceptance
