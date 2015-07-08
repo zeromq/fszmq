@@ -231,8 +231,12 @@ module ZMQ =
   let [<Literal>] IMMEDIATE               = 39
   /// (Int32) 1 will resend duplicate messages
   let [<Literal>] XPUB_VERBOSE            = 40
+  /// Deprecated. Use ZMQ.STREAM socket instead
+  let [<Obsolete;Literal>] ROUTER_RAW     = 41
   /// (Int32) 1 to enable IPv6 on the socket, 0 to restrict to only IPv4
   let [<Literal>] IPV6                    = 42
+  /// (Int32) Returns the current security mechanism (0 = NULL, 1 = PLAIN, 2 = CURVE)
+  let [<Literal>] MECHANISM               = 43
   /// (Int32) 1 to make socket act as server for PLAIN security, 0 otherwise
   let [<Literal>] PLAIN_SERVER            = 44
   /// (String) Sets the user name for outgoing connections over TCP or IPC
