@@ -196,6 +196,9 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_proxy (HANDLE frontend, HANDLE backend, HANDLE capture)
 
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_proxy_steerable (HANDLE frontend, HANDLE backend, HANDLE capture, HANDLE control)
+
   (* :: NOTE ::
     The zmq_proxy function replaces all previous "in the box" 0MQ devices.
     Said devices API has been deprecated and should no longer be used.

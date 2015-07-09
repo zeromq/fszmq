@@ -311,3 +311,12 @@ module ZMQ =
   let [<Literal>] NOW     =  0L
   /// indicates polling should wait indefinitely
   let [<Literal>] FOREVER = -1L
+
+
+(* proxying *)
+  /// Command used to temporarily suspend a steerable proxy
+  let PAUSE = "PAUSE"B
+  /// Command used to resume a suspended steerable proxy
+  let RESUME = "RESUME"B
+  /// Command used to cleanly shutdown a steerable proxy
+  let TERMINATE = "TERMINATE"B

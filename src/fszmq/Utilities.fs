@@ -24,6 +24,21 @@ module Proxying =
     | _            -> C.zmq_proxy(frontend.Handle,backend.Handle,            0n)
     |> ignore
 
+  /// creates a proxy connection passing messages between two sockets,
+  /// with an (optional) third socket for supplemental data capture,
+  /// and an (optional) fourth socket for PAUSE/RESUME/TERMINATE control
+  [<CompiledName("SteerableProxy")>]
+  let steerableProxy  (frontend :Socket       ) 
+                      (backend  :Socket       ) 
+                      (capture  :Socket option) 
+                      (control  :Socket option) =
+    let capture,control = match capture,control with 
+                          | Some p,Some t ->  p.Handle,t.Handle
+                          | Some p,None   ->  p.Handle,      0n
+                          | None  ,Some t ->        0n,t.Handle
+                          | None  ,None   ->        0n,      0n
+    C.zmq_proxy_steerable (frontend.Handle,backend.Handle,capture,control) |> ignore
+
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
 type ProxyingExtensions =
@@ -33,9 +48,22 @@ type ProxyingExtensions =
   static member Proxy(frontend,backend) = Proxying.proxy frontend backend None
 
   /// creates a proxy connection passing messages between two sockets,
-  /// with an third socket for supplemental data capture (e.g. logging)
+  /// with a third socket for supplemental data capture (e.g. logging)
   [<Extension>]
   static member Proxy(frontend,backend,capture) = Proxying.proxy frontend backend (Some capture)
+
+  /// creates a proxy connection passing messages between two sockets,
+  /// with a third socket for PAUSE/RESUME/TERMINATE control
+  [<Extension>]
+  static member SteerableProxy(frontend,backend,control) = 
+    Proxying.steerableProxy frontend backend None (Some control)
+
+  /// creates a proxy connection passing messages between two sockets,
+  /// with a third socket for PAUSE/RESUME/TERMINATE control
+  /// and a fourth socket for supplemental data capture (e.g. logging)
+  [<Extension>]
+  static member SteerableProxy(frontend,backend,control,capture) = 
+    Proxying.steerableProxy frontend backend (Some capture) (Some control)
 
 /// Utilities for working with ZeroMQ Base-85 Encoding
 [<RequireQualifiedAccess>]
