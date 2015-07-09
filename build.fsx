@@ -158,6 +158,22 @@ Target "RunTests" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts
+Target "Archive" (fun _ ->
+  let rootDir = "temp/fszmq-" + release.NugetVersion
+  let winDir  = rootDir + "/WIN"
+  // set up desired file structure
+  !! "bin/*.dll"
+    ++ "bin/*.xml" 
+    ++ "bin/*.exe" 
+    -- "bin/*.compat.*"             |> Copy rootDir 
+  !! "lib/zeromq/OSX/**/*.*"        |> Copy (rootDir + "/OSX")
+  !! "lib/zeromq/WIN/x86/libzmq.*"  |> Copy (winDir + "/x86")
+  !! "lib/zeromq/WIN/x64/libzmq.*"  |> Copy (winDir + "/x64")
+  // compress
+  !! (rootDir + "/**/*.*") 
+    |> Zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip")
+  // clean up
+  DeleteDir rootDir)
 
 Target "NuGet" (fun _ ->
   Paket.Pack(fun p ->
@@ -221,7 +237,7 @@ Target "Release" (fun _ ->
   // release on github
   createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
   |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-  // TODO: |> uploadFile "PATH_TO_FILE"
+  |> uploadFile ("bin/fszmq-" + release.NugetVersion + ".zip")
   |> releaseDraft
   |> Async.RunSynchronously)
 
@@ -242,6 +258,7 @@ Target "All" DoNothing
   =?> ("ReleaseDocs",isLocalBuild)
 
 "All"
+  ==> "Archive"
   ==> "NuGet"
   ==> "BuildPackage"
 

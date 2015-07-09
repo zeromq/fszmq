@@ -32,7 +32,8 @@ type Message private(?source:byte array) =
   /// Creates a new empty Message
   new () = new Message (?source=None)
 
-  member internal __.Handle :nativeint = memory
+  /// For internal use only
+  member __.Handle :nativeint = memory
 
   override this.GetHashCode () = hash this.Handle
 
@@ -67,7 +68,8 @@ type Socket internal(context,socketType) =
 
   do if _socket = 0n then ZMQ.error()
 
-  member internal __.Handle :nativeint = _socket
+  /// For internal use only
+  member __.Handle :nativeint = _socket
 
   override this.GetHashCode () = hash this.Handle
 
@@ -116,7 +118,8 @@ type Context () =
   member internal __.Attach (socket) =
     lock locker (fun () -> if not <| sockets.Contains socket then sockets.Add socket)
 
-  member internal __.Handle :nativeint = _context
+  /// For internal use only
+  member __.Handle :nativeint = _context
 
   override this.GetHashCode () = hash this.Handle
 
