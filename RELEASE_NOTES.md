@@ -1,5 +1,6 @@
 ### New in 12.1.0 (Unreleased)
 * Added support for `zmq_proxy_steerable`; see the `Proxying` and `ProxyingExtensions` modules
+* Switched native handles on `Context`, `Socket`, and `Message` (back) to public visibility (for projects like `fszmq.plus`)
 
 ### New in 12.0.1 (2015/07/01)
 * Core types (`Message`, `Socket`, and `Context`) now support referential equality based on underlying native handle
