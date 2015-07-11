@@ -158,6 +158,7 @@ Target "RunTests" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts
+
 Target "Archive" (fun _ ->
   let rootDir = "temp/fszmq-" + release.NugetVersion
   let winDir  = rootDir + "/WIN"
@@ -182,10 +183,7 @@ Target "NuGet" (fun _ ->
         Version = release.NugetVersion
         ReleaseNotes = toLines release.Notes}))
 
-Target "PublishNuget" (fun _ ->
-    Paket.Push(fun p ->
-        { p with
-            WorkingDir = "bin" }))
+Target "BuildPackage" DoNothing
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
@@ -201,6 +199,8 @@ let generateDocs (refDocs,helpDocs) debug =
   if executeFSIWithArgs "docs/tools" "generate.fsx" args []
     then  traceImportant "Help generated"
     else  traceImportant "generating help documentation failed"
+  // clean up
+  DeleteFile "docs/content/release_notes.md"
 
 Target "GenerateRefDocs"      (fun _ -> generateDocs (true ,false) false)
 Target "GenerateHelp"         (fun _ -> generateDocs (false,true ) false)
@@ -212,6 +212,14 @@ Target "GenerateDocsLocal"  DoNothing
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
+
+(****************************************************************************************
+**
+** !!! WARNING !!!
+**  
+** Please be extremely careful with the following targets -- especially in a forked repo!
+**
+****************************************************************************************)
 
 Target "ReleaseDocs" (fun _ ->
   let tempDocsDir = "temp/gh-pages"
@@ -240,8 +248,6 @@ Target "Release" (fun _ ->
   |> uploadFile ("bin/fszmq-" + release.NugetVersion + ".zip")
   |> releaseDraft
   |> Async.RunSynchronously)
-
-Target "BuildPackage" DoNothing
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
@@ -273,11 +279,18 @@ Target "All" DoNothing
   ==> "GenerateRefDocsLocal"
   ==> "GenerateDocsLocal"
 
+(****************************************************************************************
+**
+** !!! WARNING !!!
+**  
+** Please be extremely careful with the following targets -- especially in a forked repo!
+**
+****************************************************************************************)
+
 "ReleaseDocs"
   ==> "Release"
 
 "BuildPackage"
-  ==> "PublishNuget"
   ==> "Release"
 
 RunTargetOrDefault "All"
