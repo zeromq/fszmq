@@ -13,7 +13,7 @@ module Miscellany =
   let ``libzmq version should be at least 4``() =
     test <@ match ZMQ.version with
             | Version(major,minor,build) -> major = 4 && minor >= 0 && build >= 0 
-            | Unknown                    -> Unknown <> Unknown @>
+            | Version.Unknown            -> Unknown <> Unknown @>
 
   [<Test>]
   let ``recv throws TimeoutException if RCVTIMEO expires`` () =

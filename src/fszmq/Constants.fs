@@ -16,15 +16,32 @@ open System.Runtime.InteropServices
 /// <para>or an Unknown indicator</para>
 /// </summary>
 [<StructuredFormatDisplay("{Text}")>]
-type Version = Version of major:int * minor:int * revision:int
-             | Unknown with
+type Version = 
+  | Version of major:int * minor:int * revision:int
+  | Unknown
 
-    /// textual representation of Verison
-    member private V.Text = match V with
-                            | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
-                            | Unknown        -> "<unknown>"
+  /// textual representation of Verison
+  member private V.Text = match V with
+                          | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
+                          | Unknown        -> "<unknown>"
 
-    override V.ToString() = V.Text
+  override V.ToString() = V.Text
+
+
+/// Report if the underlying (native) ZMQ library supports a named capability
+[<StructuredFormatDisplay("{Text}")>]
+type Capability = 
+  /// Test passed; `yesOrNo` is true when `name` is supported
+  | Supported of name:string * yesOrNo:bool
+  /// Test for capability failed; support status is unknown
+  | Unknown
+
+  /// textual representation of Capability
+  member private V.Text = match V with
+                          | Supported (name,ok) -> sprintf "%s = %b" name ok
+                          | Unknown             -> "<unknown>"
+
+  override V.ToString() = V.Text
 
 
 /// <summary>
@@ -49,17 +66,29 @@ module ZMQ =
       let mutable major,minor,patch = 0,0,0
       C.zmq_version(&major,&minor,&patch)
       match (major,minor,patch) with
-      | 0,0,0 -> Unknown
+      | 0,0,0 -> Version.Unknown
       | m,n,b -> Version(m,n,b)
     with
-    | _ -> Unknown
+    | _ -> Version.Unknown
 
-  // helper function for build native-to-managed errors
-  let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
-  // constructs and raises native-to-managed errors
-  let inline internal error() = (buildError >> raise) <| C.zmq_errno()
-  // helpers for "faking" native errors
-  let inline internal einval msg = raise <| ZMQError(22,msg)
+
+  /// Tests if the underlying (native) ZMQ library supports a given capability
+  [<CompiledName("Has")>]
+  let has capability =
+    try
+      Supported (capability,C.zmq_has(capability) = 1)
+    with
+      | _ -> Capability.Unknown
+
+
+(* capabilities *)
+  let [<Literal>] CAP_IPC     = "ipc" // - the library supports the ipc:// protocol
+  let [<Literal>] CAP_PGM     = "pgm" // - the library supports the pgm:// protocol
+  let [<Literal>] CAP_TIPC    = "tipc" // - the library supports the tipc:// protocol
+  let [<Literal>] CAP_NORM    = "norm" // - the library supports the norm:// protocol
+  let [<Literal>] CAP_CURVE   = "curve" // - the library supports the CURVE security mechanism
+  let [<Literal>] CAP_GSSAPI  = "gssapi" // - the library supports the GSSAPI security mechanism
+
 
 (* error codes *)
   let [<Literal>] internal POSIX_EAGAIN = 11
@@ -81,14 +110,22 @@ module ZMQ =
     if _anything_ goes wrong, we assume "libc::uname" doesn't exist (i.e. we're on Windows);
     this is probably bad and wrong and really ought to be replaced with _something_ else.*)
 
+  // helper function for build native-to-managed errors
+  let inline internal buildError num = ZMQError(num,Marshal.PtrToStringAnsi(C.zmq_strerror(num)))
+  // constructs and raises native-to-managed errors
+  let inline internal error() = (buildError >> raise) <| C.zmq_errno()
+  // helpers for "faking" native errors
+  let inline internal einval msg = raise <| ZMQError(22,msg)
+
   /// Non-blocking mode was requested and the message cannot be sent at the moment
   let (|EAGAIN|_|) errno =
     if errno = eagain then Some () else None
 
+
 (* message size *)
   let internal ZMQ_MSG_T_SIZE = match version with
-                                | Version(4,n,_) when n > 0 -> 64
-                                | _                         ->  32
+                                | Version(m,n,_) when m >= 4 && n > 0 -> 64
+                                | _                                   -> 32
 
 (* context options *)
   /// (Int32) Set number of OS-level I/O threads
@@ -108,16 +145,6 @@ module ZMQ =
 
   let [<Literal>] THREAD_PRIORITY_DFLT      = -1
   let [<Literal>] THREAD_SCHED_POLICY_DFLT  = -1
-
-(* capabilities *)
-
-  let [<Literal>] PROTO_IPC     = "ipc" // - the library supports the ipc:// protocol
-  let [<Literal>] PROTO_PGM     = "pgm" // - the library supports the pgm:// protocol
-  let [<Literal>] PROTO_TIPC    = "tipc" // - the library supports the tipc:// protocol
-  let [<Literal>] PROTO_NORM    = "norm" // - the library supports the norm:// protocol
-  let [<Literal>] PROTO_CURVE   = "curve" // - the library supports the CURVE security mechanism
-  let [<Literal>] PROTO_GSSAPI  = "gssapi" // - the library supports the GSSAPI security mechanism
-
 
 (* event codes *)
   let internal EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int32>
