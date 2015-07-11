@@ -19,7 +19,6 @@ tags
 summary
     An MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
     NOTE: This package **ONLY** provides the managed `fszmq.dll` file. **You** need to provide the appropriate native `libzmq` file.
-
 description
     fszmq is an MPLv2-licensed F# binding for the ZeroMQ  distributed computing library.
     This library is primarily designed to be consumed from F#. 
