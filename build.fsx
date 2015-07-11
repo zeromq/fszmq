@@ -201,6 +201,8 @@ let generateDocs (refDocs,helpDocs) debug =
   if executeFSIWithArgs "docs/tools" "generate.fsx" args []
     then  traceImportant "Help generated"
     else  traceImportant "generating help documentation failed"
+  // clean up
+  DeleteFile "docs/content/release_notes.md"
 
 Target "GenerateRefDocs"      (fun _ -> generateDocs (true ,false) false)
 Target "GenerateHelp"         (fun _ -> generateDocs (false,true ) false)
