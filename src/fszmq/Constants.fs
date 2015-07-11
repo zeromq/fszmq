@@ -85,52 +85,67 @@ module ZMQ =
   let (|EAGAIN|_|) errno =
     if errno = eagain then Some () else None
 
+(* message size *)
+  let internal ZMQ_MSG_T_SIZE = match version with
+                                | Version(4,n,_) when n > 0 -> 64
+                                | _                         ->  32
+
 (* context options *)
   /// (Int32) Set number of OS-level I/O threads
-  let [<Literal>] IO_THREADS  = 1
+  let [<Literal>] IO_THREADS          = 1
   /// (Int32) Set maximum number of sockets for a context
-  let [<Literal>] MAX_SOCKETS = 2
+  let [<Literal>] MAX_SOCKETS         = 2
+
+  let [<Literal>] SOCKET_LIMIT        = 3
+  let [<Literal>] THREAD_PRIORITY     = 3
+  let [<Literal>] THREAD_SCHED_POLICY = 4
 
   (* default for new contexts *)
   /// default number of OS-level I/O threads (1)
-  let [<Literal>] IO_THREADS_DFLT   =    1
+  let [<Literal>] IO_THREADS_DFLT           =    1
   /// default maximum number of sockets (1024)
-  let [<Literal>] MAX_SOCKETS_DFLT  = 1024
+  let [<Literal>] MAX_SOCKETS_DFLT          = 1024
+
+  let [<Literal>] THREAD_PRIORITY_DFLT      = -1
+  let [<Literal>] THREAD_SCHED_POLICY_DFLT  = -1
+
+(* capabilities *)
+
+  let [<Literal>] PROTO_IPC     = "ipc" // - the library supports the ipc:// protocol
+  let [<Literal>] PROTO_PGM     = "pgm" // - the library supports the pgm:// protocol
+  let [<Literal>] PROTO_TIPC    = "tipc" // - the library supports the tipc:// protocol
+  let [<Literal>] PROTO_NORM    = "norm" // - the library supports the norm:// protocol
+  let [<Literal>] PROTO_CURVE   = "curve" // - the library supports the CURVE security mechanism
+  let [<Literal>] PROTO_GSSAPI  = "gssapi" // - the library supports the GSSAPI security mechanism
 
 
 (* event codes *)
   let internal EVENT_DETAIL_SIZE = sizeof<uint16> + sizeof<int32>
 
   /// Socket connection established
-  let [<Literal>] EVENT_CONNECTED       =    1us
+  let [<Literal>] EVENT_CONNECTED       = 0x0001us
   /// Synchronous connection failed; socket is being polled
-  let [<Literal>] EVENT_CONNECT_DELAYED =    2us
+  let [<Literal>] EVENT_CONNECT_DELAYED = 0x0002us
   /// Asynchronous (re)connection attempt
-  let [<Literal>] EVENT_CONNECT_RETRIED =    4us
+  let [<Literal>] EVENT_CONNECT_RETRIED = 0x0004us
   /// Socket bound to address; ready to accept connections
-  let [<Literal>] EVENT_LISTENING       =    8us
+  let [<Literal>] EVENT_LISTENING       = 0x0008us
   /// Socket could not bind to address
-  let [<Literal>] EVENT_BIND_FAILED     =   16us
+  let [<Literal>] EVENT_BIND_FAILED     = 0x0010us
   /// Connection accepted to bound interface
-  let [<Literal>] EVENT_ACCEPTED        =   32us
+  let [<Literal>] EVENT_ACCEPTED        = 0x0020us
   /// Could not accept client connection
-  let [<Literal>] EVENT_ACCEPT_FAILED   =   64us
+  let [<Literal>] EVENT_ACCEPT_FAILED   = 0x0040us
   /// Socket connection closed
-  let [<Literal>] EVENT_CLOSED          =  128us
+  let [<Literal>] EVENT_CLOSED          = 0x0080us
   /// Connection could not be closed (only for ipc transport)
-  let [<Literal>] EVENT_CLOSE_FAILED    =  256us
+  let [<Literal>] EVENT_CLOSE_FAILED    = 0x0100us
   /// Broken session (specific to ipc and tcp transports)
-  let [<Literal>] EVENT_DISCONNECTED    =  512us
+  let [<Literal>] EVENT_DISCONNECTED    = 0x0200us
   /// Event monitoring has been disabled
-  let [<Literal>] EVENT_MONITOR_STOPPED = 1024us
-
+  let [<Literal>] EVENT_MONITOR_STOPPED = 0x0400us
   /// Monitor all possible events
-  let [<Literal>] EVENT_ALL = EVENT_CONNECTED ||| EVENT_CONNECT_DELAYED ||| EVENT_CONNECT_RETRIED
-                          ||| EVENT_LISTENING ||| EVENT_BIND_FAILED
-                          ||| EVENT_ACCEPTED  ||| EVENT_ACCEPT_FAILED
-                          ||| EVENT_CLOSED    ||| EVENT_CLOSE_FAILED
-                          ||| EVENT_DISCONNECTED
-                          ||| EVENT_MONITOR_STOPPED
+  let [<Literal>] EVENT_ALL             = 0xFFFFus
 
 
 (* socket types *)
@@ -170,118 +185,145 @@ module ZMQ =
 (* socket options *)
 
   /// (UInt64) I/O thread affinity bit-mask
-  let [<Literal>] AFFINITY                =  4
+  let [<Literal>] AFFINITY                  =  4
   /// (Byte[]) Socket identifier
-  let [<Literal>] IDENTITY                =  5
+  let [<Literal>] IDENTITY                  =  5
   /// (Byte[]) Add subscription filter
-  let [<Literal>] SUBSCRIBE               =  6
+  let [<Literal>] SUBSCRIBE                 =  6
   /// (Byte[]) Remove subscription filter
-  let [<Literal>] UNSUBSCRIBE             =  7
+  let [<Literal>] UNSUBSCRIBE               =  7
   /// (Int32) Multicast data rate in kilobits per second
-  let [<Literal>] RATE                    =  8
+  let [<Literal>] RATE                      =  8
   /// (Int32) Multicast recovery period in milliseconds
-  let [<Literal>] RECOVERY_IVL            =  9
+  let [<Literal>] RECOVERY_IVL              =  9
   /// (Int32) Send-message buffer size in bytes
-  let [<Literal>] SNDBUF                  = 11
+  let [<Literal>] SNDBUF                    = 11
   /// (Int32) Receive-message buffer size in bytes
-  let [<Literal>] RCVBUF                  = 12
+  let [<Literal>] RCVBUF                    = 12
   /// (Int32) 1 if more message frames are available, 0 otherwise
-  let [<Literal>] RCVMORE                 = 13
+  let [<Literal>] RCVMORE                   = 13
   /// (IntPtr) native file descriptor
-  let [<Literal>] FD                      = 14
+  let [<Literal>] FD                        = 14
   /// (Int32) Socket event state, see all: Polling
-  let [<Literal>] EVENTS                  = 15
+  let [<Literal>] EVENTS                    = 15
   /// (Int32) Socket type
-  let [<Literal>] TYPE                    = 16
+  let [<Literal>] TYPE                      = 16
   /// (Int32) Pause before shutdown in milliseconds
-  let [<Literal>] LINGER                  = 17
+  let [<Literal>] LINGER                    = 17
   /// (Int32) Pause before reconnect in milliseconds
-  let [<Literal>] RECONNECT_IVL           = 18
+  let [<Literal>] RECONNECT_IVL             = 18
   /// (Int32) Maximum number of queued peers
-  let [<Literal>] BACKLOG                 = 19
+  let [<Literal>] BACKLOG                   = 19
   /// (Int32) Maximum reconnection interval in milliseconds
-  let [<Literal>] RECONNECT_IVL_MAX       = 21
+  let [<Literal>] RECONNECT_IVL_MAX         = 21
   /// (Int64) Maximum inbound message size in bytes
-  let [<Literal>] MAXMSGSIZE              = 22
+  let [<Literal>] MAXMSGSIZE                = 22
   /// (Int32) Maximum number of outbound queued messages
-  let [<Literal>] SNDHWM                  = 23
+  let [<Literal>] SNDHWM                    = 23
   /// (Int32) Maximum number of inbound queued messages
-  let [<Literal>] RCVHWM                  = 24
+  let [<Literal>] RCVHWM                    = 24
   /// (Int32) Time-to-live for each multicast packet in network-hops
-  let [<Literal>] MULTICAST_HOPS          = 25
+  let [<Literal>] MULTICAST_HOPS            = 25
   /// (Int32) Timeout period for inbound messages in milliseconds
-  let [<Literal>] RCVTIMEO                = 27
+  let [<Literal>] RCVTIMEO                  = 27
   /// (Int32) Timeout period for outbound messages in milliseconds
-  let [<Literal>] SNDTIMEO                = 28
+  let [<Literal>] SNDTIMEO                  = 28
   /// (String) Last address bound to endpoint
-  let [<Literal>] LAST_ENDPOINT           = 32
+  let [<Literal>] LAST_ENDPOINT             = 32
   /// (Int32) 1 to error on unroutable messages, 0 to silently ignore
-  let [<Literal>] ROUTER_MANDATORY        = 33
+  let [<Literal>] ROUTER_MANDATORY          = 33
   /// (Int32) Override OS-level TCP keep-alive
-  let [<Literal>] TCP_KEEPALIVE           = 34
+  let [<Literal>] TCP_KEEPALIVE             = 34
   /// (Int32) Override OS-level TCP keep-alive
-  let [<Literal>] TCP_KEEPALIVE_CNT       = 35
+  let [<Literal>] TCP_KEEPALIVE_CNT         = 35
   /// (Int32) Override OS-level TCP keep-alive
-  let [<Literal>] TCP_KEEPALIVE_IDLE      = 36
+  let [<Literal>] TCP_KEEPALIVE_IDLE        = 36
   /// (Int32) Override OS-level TCP keep-alive
-  let [<Literal>] TCP_KEEPALIVE_INTVL     = 37
-  /// (Byte[]) TCP/IP filters
-  let [<Literal>] TCP_ACCEPT_FILTER       = 38
+  let [<Literal>] TCP_KEEPALIVE_INTVL       = 37
   /// (Int32) 1 to limit queuing to only completed connections, 0 otherwise
-  let [<Literal>] IMMEDIATE               = 39
+  let [<Literal>] IMMEDIATE                 = 39
   /// (Int32) 1 will resend duplicate messages
-  let [<Literal>] XPUB_VERBOSE            = 40
-  /// Deprecated. Use ZMQ.STREAM socket instead
-  let [<Obsolete;Literal>] ROUTER_RAW     = 41
+  let [<Literal>] XPUB_VERBOSE              = 40
   /// (Int32) 1 to enable IPv6 on the socket, 0 to restrict to only IPv4
-  let [<Literal>] IPV6                    = 42
+  let [<Literal>] IPV6                      = 42
   /// (Int32) Returns the current security mechanism (0 = NULL, 1 = PLAIN, 2 = CURVE)
-  let [<Literal>] MECHANISM               = 43
+  let [<Literal>] MECHANISM                 = 43
   /// (Int32) 1 to make socket act as server for PLAIN security, 0 otherwise
-  let [<Literal>] PLAIN_SERVER            = 44
+  let [<Literal>] PLAIN_SERVER              = 44
   /// (String) Sets the user name for outgoing connections over TCP or IPC
-  let [<Literal>] PLAIN_USERNAME          = 45
+  let [<Literal>] PLAIN_USERNAME            = 45
   /// (String) Sets the password for outgoing connections over TCP or IPC
-  let [<Literal>] PLAIN_PASSWORD          = 46
+  let [<Literal>] PLAIN_PASSWORD            = 46
   /// (Int32) 1 to make socket act as server for CURVE security, 0 otherwise
-  let [<Literal>] CURVE_SERVER            = 47
+  let [<Literal>] CURVE_SERVER              = 47
   /// (String or Byte[]) sets the long-term public key on a client or server socket
-  let [<Literal>] CURVE_PUBLICKEY         = 48
+  let [<Literal>] CURVE_PUBLICKEY           = 48
   /// (String or Byte[]) sets the long-term secret key on a client socket
-  let [<Literal>] CURVE_SECRETKEY         = 49
+  let [<Literal>] CURVE_SECRETKEY           = 49
   /// (String or Byte[]) sets the long-term server key on a client socket
-  let [<Literal>] CURVE_SERVERKEY         = 50
+  let [<Literal>] CURVE_SERVERKEY           = 50
   /// (Int32) 1 to automatically send an empty message on new connection, 0 otherwise
-  let [<Literal>] PROBE_ROUTER            = 51
+  let [<Literal>] PROBE_ROUTER              = 51
   /// (Int32) 1 to prefix messages with explicit request ID, 0 otherwise
-  let [<Literal>] REQ_CORRELATE           = 52
+  let [<Literal>] REQ_CORRELATE             = 52
   /// (Int32) 1 to relax strict alternation between ZMQ.REQ and ZMQ.REP, 0 otherwise
-  let [<Literal>] REQ_RELAXED             = 53
+  let [<Literal>] REQ_RELAXED               = 53
   /// (Int32) 1 to keep last message in queue (ignores high-water mark options), 0 otherwise
-  let [<Literal>] CONFLATE                = 54
+  let [<Literal>] CONFLATE                  = 54
   /// (String) Sets authentication domain
-  let [<Literal>] ZAP_DOMAIN              = 55
+  let [<Literal>] ZAP_DOMAIN                = 55
+
+  let [<Literal>] ROUTER_HANDOVER           = 56
+  let [<Literal>] TOS                       = 57
+  let [<Literal>] CONNECT_RID               = 61
+  let [<Literal>] GSSAPI_SERVER             = 62
+  let [<Literal>] GSSAPI_PRINCIPAL          = 63
+  let [<Literal>] GSSAPI_SERVICE_PRINCIPAL  = 64
+  let [<Literal>] GSSAPI_PLAINTEXT          = 65
+  let [<Literal>] HANDSHAKE_IVL             = 66
+  let [<Literal>] SOCKS_PROXY               = 68
+  let [<Literal>] XPUB_NODROP               = 69
+
+  (* security mechanisms *)
+  let [<Literal>] SECURITY_NULL   = 0
+  let [<Literal>] SECURITY_PLAIN  = 1
+  let [<Literal>] SECURITY_CURVE  = 2
+  let [<Literal>] SECURITY_GSSAPI = 3
 
   (* common values *)
   /// (Int32) the value needed to disable lingering on a socket's outbound queue
   let [<Literal>] NO_LINGER = 0
 
   (* deprecated socket options *)
-
+ 
   /// Deprecated. Do not use.
-  let [<Obsolete;Literal>] IPV4ONLY = 31
+  let [<Obsolete;Literal>] IPV4ONLY           = 31
+  /// Deprecated. Do not use.
+  let [<Obsolete;Literal>] TCP_ACCEPT_FILTER  = 38
+  /// Deprecated. Do not use.
+  let [<Obsolete;Literal>] IPC_FILTER_PID     = 58
+  /// Deprecated. Do not use.
+  let [<Obsolete;Literal>] IPC_FILTER_UID     = 59
+  /// Deprecated. Do not use.
+  let [<Obsolete;Literal>] IPC_FILTER_GID     = 60
+  /// Deprecated. Use ZMQ.STREAM socket instead
+  let [<Obsolete;Literal>] ROUTER_RAW         = 41
+
   /// Deprecated. Use ZMQ.IMMEDAITE
-  let [<Obsolete;Literal>] DELAY_ATTACH_ON_CONNECT = IMMEDIATE
+  let [<Obsolete;Literal>] DELAY_ATTACH_ON_CONNECT  = IMMEDIATE
   /// Deprecated. Use ZMQ.ROUTER_MANDATORY
-  let [<Obsolete;Literal>] FAIL_UNROUTABLE = ROUTER_MANDATORY
+  let [<Obsolete;Literal>] FAIL_UNROUTABLE          = ROUTER_MANDATORY
   /// Deprecated. Use ZMQ.ROUTER_MANDATORY
-  let [<Obsolete;Literal>] ROUTER_BEHAVIOR = ROUTER_MANDATORY
+  let [<Obsolete;Literal>] ROUTER_BEHAVIOR          = ROUTER_MANDATORY
 
 
 (* message options *)
 
   /// (Int32) 1 if more message frames are available, 0 otherwise
-  let [<Literal>] MORE = 1
+  let [<Literal>] MORE    = 1
+
+  let [<Literal>] SRCFD   = 2
+  let [<Literal>] SHARED  = 3
 
 
 (* transmission options *)
@@ -315,8 +357,8 @@ module ZMQ =
 
 (* proxying *)
   /// Command used to temporarily suspend a steerable proxy
-  let PAUSE = "PAUSE"B
+  let PAUSE     = "PAUSE"B
   /// Command used to resume a suspended steerable proxy
-  let RESUME = "RESUME"B
+  let RESUME    = "RESUME"B
   /// Command used to cleanly shutdown a steerable proxy
   let TERMINATE = "TERMINATE"B

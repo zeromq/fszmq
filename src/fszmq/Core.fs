@@ -12,7 +12,7 @@ open System.Runtime.InteropServices
 /// Provides a memory-managed wrapper over ZMQ message operations
 type Message private(?source:byte array) =
   let mutable disposed  = false
-  let mutable memory    = Marshal.AllocHGlobal(C.ZMQ_MSG_T_SIZE)
+  let mutable memory    = Marshal.AllocHGlobal(ZMQ.ZMQ_MSG_T_SIZE)
 
   let (|Source|_|) = function
     | None
