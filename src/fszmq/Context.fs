@@ -18,8 +18,8 @@ module Context =
 
   /// Creates a Socket, of the given type, within the given context
   [<Extension;CompiledName("Socket")>]
-  let newSocket (context:Context) socketType =
-    let socket = new Socket (context.Handle,socketType)
+  let newSocket (context:Context) (socketType:int<ZMQ.SocketType>) =
+    let socket = new Socket (context.Handle,int socketType)
     context.Attach socket
     socket
 
