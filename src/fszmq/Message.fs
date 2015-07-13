@@ -49,6 +49,26 @@ module Message =
   [<Extension;CompiledName("IsMatch")>]
   let isMatch left right = (size left = size right) && (data left = data right)
 
+  /// For a given message, returns the metadata associated with the given name
+  /// as an `Option<string>` where `None` indicates no metadata is present
+  [<Extension;CompiledName("TryGetProperty")>]
+  let tryGetProperty (message:Message) name =
+    match ZMQ.version with
+    | Version (m,n,_) 
+      when m >= 4 && n >= 1 ->  match C.zmq_msg_gets(message.Handle,name) with
+                                |   0n -> None
+                                | addr -> Some (Marshal.PtrToStringAnsi addr)
+    | _                     ->  None
+
+  /// For a given message, extracts the metadata associated with the given name,
+  /// returning false if no metadata is present (for the given name)
+  [<Extension;CompiledName("TryGetProperty")>]
+  let tryLoadProperty message name ([<Out>]value:byref<string>) =
+    match tryGetProperty message name with
+    | Some prop ->  value <- prop
+                    true
+    | None      ->  false
+
 (* message manipulation *)
 
   /// <summary>

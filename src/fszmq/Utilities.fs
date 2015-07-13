@@ -115,12 +115,27 @@ module Curve =
 [<Extension>]
 type VersionExtensions =
 
+  /// Executes the appropriate callback based on availability of version info
   [<Extension>]
   static member Match (value,version:Func<int,int,int,'r>,unknown:Func<'r>) =
     match value with
     | Version (m,n,b) -> version.Invoke (m,n,b)
     | Version.Unknown -> unknown.Invoke ()
 
+  /// Executes the appropriate callback based on availability of version info
+  [<Extension>]
+  static member Match (value,version:Action<int,int,int>,unknown:Action) =
+    match value with
+    | Version (m,n,b) -> version.Invoke (m,n,b)
+    | Version.Unknown -> unknown.Invoke ()
+
+  /// Executes the given callback only if version information is available
+  [<Extension>]
+  static member IfKnown (value,action) =
+    VersionExtensions.Match(value,action,Action (fun () -> ()))
+
+  /// Extracts the details of the version,
+  /// returning true on success and false if version info is unavailable
   [<Extension>]
   static member TryGetInfo (value ,[<Out>]major:byref<int>
                                   ,[<Out>]minor:byref<int>
@@ -130,23 +145,32 @@ type VersionExtensions =
                           true
     | Version.Unknown ->  false
 
-  [<Extension>]
-  static member IfKnown (value,action:Action<int,int,int>) =
-    match value with
-    | Version (m,n,b) -> action.Invoke (m,n,b)
-    | Version.Unknown -> ()
-
 
 /// Utilities for working with Capabiity from languages other than F#
 [<Extension>]
 type CapabilityExtensions =
 
+  /// Executes the appropriate callback based on availability of capability info
   [<Extension>]
   static member Match (value,supported:Func<string,bool,'r>,unknown:Func<'r>) =
     match value with
     | Supported (name,yesOrNo)  -> supported.Invoke (name,yesOrNo)
     | Capability.Unknown        -> unknown.Invoke ()
 
+  /// Executes the appropriate callback based on availability of capability info
+  [<Extension>]
+  static member Match (value,supported:Action<string,bool>,unknown:Action) =
+    match value with
+    | Supported (name,yesOrNo)  -> supported.Invoke (name,yesOrNo)
+    | Capability.Unknown        -> unknown.Invoke ()
+
+  /// Executes the given callback only if capability information is available
+  [<Extension>]
+  static member IfKnown (value,action) =
+    CapabilityExtensions.Match(value,action,Action (fun () -> ()))
+
+  /// Extracts the details of the capability,
+  /// returning true on success and false if capability info is unavailable
   [<Extension>]
   static member TryGetInfo (value ,[<Out>]name    :byref<string>
                                   ,[<Out>]yesOrNo :byref<bool>) = 
@@ -155,11 +179,6 @@ type CapabilityExtensions =
                               true
     | Capability.Unknown  ->  false
 
-  [<Extension>]
-  static member IfKnown (value,action:Action<string,bool>) =
-    match value with
-    | Supported (name,yesOrNo)  -> action.Invoke (name,yesOrNo)
-    | Capability.Unknown        -> ()
 
 //NOTE: This allows non-F# extensions to have proper visibility/interop with all CLR languages
 [<assembly: ExtensionAttribute()>]

@@ -10,17 +10,15 @@ open System
 open System.Globalization
 open System.Runtime.InteropServices
 
-/// <summary>
-/// A version of two possible states:
-/// <para>a triple of integers for the major revision, minor revision, and patch number </para>
-/// <para>or an Unknown indicator</para>
-/// </summary>
+/// Report the version of the underlying (native) ZMQ library
 [<StructuredFormatDisplay("{Text}")>]
 type Version = 
+  /// Components of native versioning info
   | Version of major:int * minor:int * revision:int
+  /// Unable to determine versioning info
   | Unknown
 
-  /// textual representation of Verison
+  // textual representation of Verison
   member private V.Text = match V with
                           | Version(m,n,b) -> sprintf "%i.%i.%i" m n b
                           | Unknown        -> "<unknown>"
@@ -36,7 +34,7 @@ type Capability =
   /// Test for capability failed; support status is unknown
   | Unknown
 
-  /// textual representation of Capability
+  // textual representation of Capability
   member private V.Text = match V with
                           | Supported (name,ok) -> sprintf "%s = %b" name ok
                           | Unknown             -> "<unknown>"
@@ -82,12 +80,18 @@ module ZMQ =
 
 
 (* capabilities *)
-  let [<Literal>] CAP_IPC     = "ipc" // - the library supports the ipc:// protocol
-  let [<Literal>] CAP_PGM     = "pgm" // - the library supports the pgm:// protocol
-  let [<Literal>] CAP_TIPC    = "tipc" // - the library supports the tipc:// protocol
-  let [<Literal>] CAP_NORM    = "norm" // - the library supports the norm:// protocol
-  let [<Literal>] CAP_CURVE   = "curve" // - the library supports the CURVE security mechanism
-  let [<Literal>] CAP_GSSAPI  = "gssapi" // - the library supports the GSSAPI security mechanism
+  /// Used to test if library supports the IPC transport protocol
+  let [<Literal>] CAP_IPC     = "ipc"
+  /// Used to test if library supports the PGM transport protocol
+  let [<Literal>] CAP_PGM     = "pgm"
+  /// Used to test if library supports the TIPC transport protocol
+  let [<Literal>] CAP_TIPC    = "tipc"
+  /// Used to test if library supports the NORM transport protocol
+  let [<Literal>] CAP_NORM    = "norm"
+  /// Used to test if library supports the CURVE security mechanism
+  let [<Literal>] CAP_CURVE   = "curve"
+  /// Used to test if library supports the GSSAPI security mechanism
+  let [<Literal>] CAP_GSSAPI  = "gssapi"
 
 
 (* error codes *)
@@ -132,9 +136,11 @@ module ZMQ =
   let [<Literal>] IO_THREADS          = 1
   /// (Int32) Set maximum number of sockets for a context
   let [<Literal>] MAX_SOCKETS         = 2
-
+  /// (Int32) Get largest configurable number of sockets
   let [<Literal>] SOCKET_LIMIT        = 3
+  /// ???
   let [<Literal>] THREAD_PRIORITY     = 3
+  /// ???
   let [<Literal>] THREAD_SCHED_POLICY = 4
 
   (* default for new contexts *)
@@ -142,8 +148,9 @@ module ZMQ =
   let [<Literal>] IO_THREADS_DFLT           =    1
   /// default maximum number of sockets (1024)
   let [<Literal>] MAX_SOCKETS_DFLT          = 1024
-
+  /// ??? (-1)
   let [<Literal>] THREAD_PRIORITY_DFLT      = -1
+  /// ??? (-1)
   let [<Literal>] THREAD_SCHED_POLICY_DFLT  = -1
 
 (* event codes *)
@@ -273,7 +280,7 @@ module ZMQ =
   let [<Literal>] XPUB_VERBOSE              = 40
   /// (Int32) 1 to enable IPv6 on the socket, 0 to restrict to only IPv4
   let [<Literal>] IPV6                      = 42
-  /// (Int32) Returns the current security mechanism (0 = NULL, 1 = PLAIN, 2 = CURVE)
+  /// (Int32) Returns the current security mechanism
   let [<Literal>] MECHANISM                 = 43
   /// (Int32) 1 to make socket act as server for PLAIN security, 0 otherwise
   let [<Literal>] PLAIN_SERVER              = 44
@@ -299,22 +306,36 @@ module ZMQ =
   let [<Literal>] CONFLATE                  = 54
   /// (String) Sets authentication domain
   let [<Literal>] ZAP_DOMAIN                = 55
-
+  /// (Int32) 0 to reject clients which use an existing identity, 1 to transfer the connection
   let [<Literal>] ROUTER_HANDOVER           = 56
+  /// (Int32) ToS field is typically used to specify a packets priority; 
+  /// The availability of this option is dependent on intermediate network equipment
   let [<Literal>] TOS                       = 57
+  /// ...
   let [<Literal>] CONNECT_RID               = 61
+  /// ...
   let [<Literal>] GSSAPI_SERVER             = 62
+  /// ...
   let [<Literal>] GSSAPI_PRINCIPAL          = 63
+  /// ...
   let [<Literal>] GSSAPI_SERVICE_PRINCIPAL  = 64
+  /// ...
   let [<Literal>] GSSAPI_PLAINTEXT          = 65
+  /// ...
   let [<Literal>] HANDSHAKE_IVL             = 66
+  /// ???
   let [<Literal>] SOCKS_PROXY               = 68
+  /// ???
   let [<Literal>] XPUB_NODROP               = 69
 
   (* security mechanisms *)
+  /// Indicates there is currently no security mechanism in use
   let [<Literal>] SECURITY_NULL   = 0
+  /// Indicates PLAIN security mechanism is currently in use
   let [<Literal>] SECURITY_PLAIN  = 1
+  /// Indicates CURVE security mechanism is currently in use
   let [<Literal>] SECURITY_CURVE  = 2
+  /// Indicates GSSAPI security mechanism is currently in use
   let [<Literal>] SECURITY_GSSAPI = 3
 
   (* common values *)
@@ -348,8 +369,9 @@ module ZMQ =
 
   /// (Int32) 1 if more message frames are available, 0 otherwise
   let [<Literal>] MORE    = 1
-
+  /// (IntPtr) The file descriptor of the socket from which the 'message' was read
   let [<Literal>] SRCFD   = 2
+  /// (Int32) 1 indicates that a message MAY share underlying storage, 0 otherwise
   let [<Literal>] SHARED  = 3
 
 

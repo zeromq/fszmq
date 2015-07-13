@@ -6,8 +6,9 @@ open NUnit.Framework
 open Swensen.Unquote
 open System
 
+
 [<TestFixture>]
-module Miscellany =
+module Miscellany = 
 
   [<Test>]
   let ``libzmq version should be at least 4``() =

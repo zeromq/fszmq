@@ -8,6 +8,7 @@ namespace fszmq
 
 open System
 open System.Runtime.CompilerServices
+open System.Runtime.InteropServices
 
 /// Contains methods for working with Socket instances
 [<Extension;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
@@ -144,6 +145,15 @@ module Socket =
     | Message.Okay -> Some(buffer)
     | Message.Busy -> None
     | Message.Fail -> ZMQ.error()
+
+  /// Gets the next available frame from a socket, 
+  /// returning false if the operation should be re-attempted
+  [<Extension;CompiledName("TryRecv")>]
+  let tryRecvInto socket length flags ([<Out>]frame:byref<byte[]>) =
+    match tryRecv socket length flags with
+    | Some buffer ->  frame <- buffer
+                      true
+    | None        ->  false
 
   /// Waits for (and returns) the next available frame from a socket
   /// If no message is received before RCVTIMEO expires, throws a TimeoutException

@@ -84,6 +84,7 @@ module Polling =
     | true  -> Some !msg
     | false -> None
 
+
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
 type PollingExtensions =

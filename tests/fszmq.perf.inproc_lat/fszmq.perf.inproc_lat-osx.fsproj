@@ -94,8 +94,8 @@
       <Link>fszmq.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\lib\zeromq\OSX\lib\libzmq.4.dylib">
-      <Link>libzmq.4.dylib</Link>
+    <None Include="..\..\lib\zeromq\OSX\lib\libzmq.dylib">
+      <Link>libzmq.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="paket.references" />

@@ -45,6 +45,7 @@ module internal C =
   extern void zmq_version([<Out>] int& major,[<Out>] int& minor,[<Out>] int& patch)
 
 (* capabilities *)
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_has ([<MarshalAs(UnmanagedType.LPStr)>] string capability);
 
 (* error handling *)
