@@ -3,9 +3,10 @@
 * Switched native handles on `Context`, `Socket`, and `Message` types (back) to public visibility
 * Added extension methods to simplify using `Version` from languages other than F#
 * Added `Socket.tryRecvInto` (mostly so languages other than F# don't have to acknowledge the `Option<'t>` type)
+* Added `Message.configure` function
 * Support for libzmq-4.1.x ... `ZMQ.has` function and `Capabilities` type
-* Support for libzmq-4.1.x ... `Message.tryGetProperty` function (equivalent to `zmq_msg_gets`)
-* Support for libzmq-4.1.x ... `Message.tryLoadProperty` function (for languages where the `Option<'t>` type is uncommon)
+* Support for libzmq-4.1.x ... `Message.tryGetMetadata` function (equivalent to `zmq_msg_gets`)
+* Support for libzmq-4.1.x ... `Message.tryLoadMetadata` function (for languages where the `Option<'t>` type is uncommon)
 * Support for libzmq-4.1.x ... various constants related to socket options, context options, and message options
 
 ### New in 12.0.1 (2015/07/01)

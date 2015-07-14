@@ -12,7 +12,7 @@ open System.Runtime.InteropServices
 /// Provides a memory-managed wrapper over ZMQ message operations
 type Message private(?source:byte array) =
   let mutable disposed  = false
-  let mutable memory    = Marshal.AllocHGlobal(ZMQ.ZMQ_MSG_T_SIZE)
+  let mutable handle    = Marshal.AllocHGlobal(ZMQ.ZMQ_MSG_T_SIZE)
 
   let (|Source|_|) = function
     | None
@@ -22,9 +22,9 @@ type Message private(?source:byte array) =
 
   do (* ctor *)
     match source with
-    | Source(size,data) ->  if C.zmq_msg_init_size(memory,size) <> 0 then ZMQ.error()
-                            Marshal.Copy(data,0,C.zmq_msg_data(memory),int size)
-    | _                 ->  if C.zmq_msg_init(memory) <> 0 then ZMQ.error()
+    | Source(size,data) ->  if C.zmq_msg_init_size(handle,size) <> 0 then ZMQ.error()
+                            Marshal.Copy(data,0,C.zmq_msg_data(handle),int size)
+    | _                 ->  if C.zmq_msg_init(handle) <> 0 then ZMQ.error()
 
   /// Creates a new Message from the given byte array
   new (source) = new Message (?source=Some source)
@@ -33,7 +33,7 @@ type Message private(?source:byte array) =
   new () = new Message (?source=None)
 
   /// For internal use only
-  member __.Handle :nativeint = memory
+  member __.Handle :nativeint = handle
 
   override this.GetHashCode () = hash this.Handle
 
@@ -47,9 +47,9 @@ type Message private(?source:byte array) =
   override __.Finalize() =
     if not disposed then
       disposed <- true
-      let okay = C.zmq_msg_close(memory)
-      Marshal.FreeHGlobal(memory)
-      memory <- 0n
+      let okay = C.zmq_msg_close(handle)
+      Marshal.FreeHGlobal(handle)
+      handle <- 0n
       if okay <> 0 then ZMQ.error()
 
   interface IDisposable with
@@ -64,12 +64,12 @@ type Message private(?source:byte array) =
 /// semantics determined by the socket type
 type Socket internal(context,socketType) =
   let mutable disposed  = false
-  let mutable _socket   = C.zmq_socket(context,socketType)
+  let mutable handle    = C.zmq_socket(context,socketType)
 
-  do if _socket = 0n then ZMQ.error()
+  do if handle = 0n then ZMQ.error()
 
   /// For internal use only
-  member __.Handle :nativeint = _socket
+  member __.Handle :nativeint = handle
 
   override this.GetHashCode () = hash this.Handle
 
@@ -83,9 +83,9 @@ type Socket internal(context,socketType) =
   override __.Finalize() =
     if not disposed then
       disposed <- true
-      let okay = C.zmq_close(_socket)
+      let okay = C.zmq_close(handle)
       if okay <> 0 then ZMQ.error()
-      _socket  <- 0n
+      handle  <- 0n
 
   interface IDisposable with
 
@@ -95,14 +95,15 @@ type Socket internal(context,socketType) =
 
 
 /// Represents the container for a group of sockets in a node
-type Context () =
-  let mutable disposed = false
-  let mutable _context = C.zmq_ctx_new()
+type Context private (__) = 
+  (* ^^^ HACK: used to work around an XMLDoc bug ^^^ *)
+  let mutable disposed  = false
+  let mutable handle    = C.zmq_ctx_new()
 
   let locker  = obj () // used to synchronize access to `sockets`
   let sockets = ResizeArray<Socket> ()
 
-  do if _context = 0n then ZMQ.error()
+  do if handle = 0n then ZMQ.error()
 
   let closeSockets () =
     useBuffer sizeof<Int32> (fun (size,buffer) ->
@@ -114,12 +115,15 @@ type Context () =
           C.zmq_setsockopt(socket.Handle,ZMQ.LINGER,buffer,size) |> ignore
         finally
           (socket :> IDisposable).Dispose ())
+  
+  /// Initializes a new Context instance
+  new () = new Context (null)
 
   member internal __.Attach (socket) =
     lock locker (fun () -> if not <| sockets.Contains socket then sockets.Add socket)
 
   /// For internal use only
-  member __.Handle :nativeint = _context
+  member __.Handle :nativeint = handle
 
   override this.GetHashCode () = hash this.Handle
 
@@ -134,9 +138,9 @@ type Context () =
     if not disposed then
       disposed <- true
       lock locker (fun () -> closeSockets ())
-      if C.zmq_ctx_shutdown(_context) = 0
-        then  let okay = C.zmq_ctx_term(_context)
-              _context <- 0n
+      if C.zmq_ctx_shutdown(handle) = 0
+        then  let okay = C.zmq_ctx_term(handle)
+              handle <- 0n
               if okay <> 0 then ZMQ.error()
         else  ZMQ.error()
 

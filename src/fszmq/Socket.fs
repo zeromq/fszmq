@@ -148,6 +148,9 @@ module Socket =
 
   /// Gets the next available frame from a socket, 
   /// returning false if the operation should be re-attempted
+  ///
+  /// This function is named TryRecv in compiled assemblies.
+  /// If you are accessing the function from a language other than F#, or through reflection, use this name.
   [<Extension;CompiledName("TryRecv")>]
   let tryRecvInto socket length flags ([<Out>]frame:byref<byte[]>) =
     match tryRecv socket length flags with

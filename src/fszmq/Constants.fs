@@ -42,10 +42,8 @@ type Capability =
   override V.ToString() = V.Text
 
 
-/// <summary>
 /// Represents any error raised by the native ZMQ library,
-/// with a human-readable summary in the Message property.
-/// </summary>
+/// with a human-readable summary in the Message property
 type ZMQError internal(errnum,errmsg) =
   inherit Exception(errmsg)
 
@@ -138,19 +136,19 @@ module ZMQ =
   let [<Literal>] MAX_SOCKETS         = 2
   /// (Int32) Get largest configurable number of sockets
   let [<Literal>] SOCKET_LIMIT        = 3
-  /// ???
+  /// (Int32) Change thread scheduling priority (only valid on systems which use pthread)
   let [<Literal>] THREAD_PRIORITY     = 3
-  /// ???
+  /// (Int32) Set thread scheduling policy (only valid on systems which use pthread)
   let [<Literal>] THREAD_SCHED_POLICY = 4
 
   (* default for new contexts *)
-  /// default number of OS-level I/O threads (1)
+  /// Default number of OS-level I/O threads (1)
   let [<Literal>] IO_THREADS_DFLT           =    1
-  /// default maximum number of sockets (1024)
+  /// Default maximum number of sockets (1024)
   let [<Literal>] MAX_SOCKETS_DFLT          = 1024
-  /// ??? (-1)
+  /// Default thread scheduling priority (-1)
   let [<Literal>] THREAD_PRIORITY_DFLT      = -1
-  /// ??? (-1)
+  /// Default thread scheduling policy (-1)
   let [<Literal>] THREAD_SCHED_POLICY_DFLT  = -1
 
 (* event codes *)
@@ -311,21 +309,22 @@ module ZMQ =
   /// (Int32) ToS field is typically used to specify a packets priority; 
   /// The availability of this option is dependent on intermediate network equipment
   let [<Literal>] TOS                       = 57
-  /// ...
+  /// (Byte[]) Sets the peer ID of the next connected host, and immediately 
+  /// readies that connection for data transfer with the named ID
   let [<Literal>] CONNECT_RID               = 61
-  /// ...
+  /// (Int32) 1 means the socket will act as GSSAPI server; 0 means the socket will act as GSSAPI client
   let [<Literal>] GSSAPI_SERVER             = 62
-  /// ...
+  /// (String) The name of the pricipal for whom GSSAPI credentials should be acquired
   let [<Literal>] GSSAPI_PRINCIPAL          = 63
-  /// ...
+  /// (String) The name of the pricipal of the GSSAPI server to which a GSSAPI client intends to connect
   let [<Literal>] GSSAPI_SERVICE_PRINCIPAL  = 64
-  /// ...
+  /// (Int32) 1 means that GSSAPI communication will be plaintext, 0 means communications will be encrypted
   let [<Literal>] GSSAPI_PLAINTEXT          = 65
-  /// ...
+  /// (Int32) The maximum handshake interval in milliseconds for the specified socket
   let [<Literal>] HANDSHAKE_IVL             = 66
-  /// ???
+  /// (String) SOCKS5 proxy
   let [<Literal>] SOCKS_PROXY               = 68
-  /// ???
+  /// (Int32) 0 drops the message silently when the peers SNDHWM is reached, 1 returns an 'EAGAIN' error code (if ZMQ_DONTWAIT was used)
   let [<Literal>] XPUB_NODROP               = 69
 
   (* security mechanisms *)
