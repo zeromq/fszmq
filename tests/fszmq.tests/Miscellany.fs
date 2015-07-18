@@ -42,12 +42,3 @@ module Z85 =
     
     Check.QuickThrowOnFailure (fun data ->
       (isValid data) ==> lazy (data |> Z85.encode |> Z85.decode = data))
-
-(*
-ZMQ.has
-  if version >= 4.1.0
-    then  valid capabilities return true or false
-          invalid capabilities return false
-    else  valid capablities return unknown
-          invalid capablities return unknown
-*)
