@@ -8,6 +8,7 @@
 * Support for libzmq-4.1.x ... `Message.tryGetMetadata` function (equivalent to `zmq_msg_gets`)
 * Support for libzmq-4.1.x ... `Message.tryLoadMetadata` function (for languages where the `Option<'t>` type is uncommon)
 * Support for libzmq-4.1.x ... various constants related to socket options, context options, and message options
+* Support for libzmq-4.1.x ... addressed errors caused by `zmq_msg_t` allocation size
 
 ### New in 12.0.1 (2015/07/01)
 * Core types (`Message`, `Socket`, and `Context`) now support referential equality based on underlying native handle
