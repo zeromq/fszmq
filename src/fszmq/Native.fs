@@ -52,7 +52,16 @@ module internal C =
   extern HANDLE zmq_strerror(int errno)
 
 (* message *)
-  let [<Literal>] ZMQ_MSG_T_SIZE = 32
+  let ZMQ_MSG_T_SIZE =
+      let mutable major, minor, patch = 0, 0, 0
+      zmq_version(&major, &minor, &patch)
+      match major, minor with
+      | 4, 0 ->
+          48
+      | 4, 1 ->
+          64
+      | _, _ ->
+          32
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init(zmq_msg_t msg)
@@ -169,12 +178,12 @@ module internal C =
   [<Struct;StructLayout(LayoutKind.Sequential)>]
   type zmq_pollitem_t =
     val mutable socket  : HANDLE  // if socket _and_ fd are set, socket takes precedence
-    val mutable fd      : HANDLE
+    val mutable fd      : int
     val mutable events  : int16
     val mutable revents : int16
 
     new(socket,events) = {  socket  = socket
-                            fd      = 0n
+                            fd      = 0
                             events  = events
                             revents = 0s }
   (* :: NOTE ::

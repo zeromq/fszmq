@@ -23,6 +23,10 @@ type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) wit
   /// Creates a poll item in a way friendly to languages other then F#
   static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
 
+type FoldedPoll<'T> = FoldedPoll of events:int16 * socket : Socket * callback : ('T -> Socket -> 'T) with
+    
+  static member Create<'T>(events, socket, callback : 'T -> Socket -> 'T) = FoldedPoll(events, socket, callback)
+
 /// Contains methods for working with ZMQ's polling capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module Polling =
@@ -65,6 +69,31 @@ module Polling =
                         true
     | _             ->  ZMQ.error()
 
+
+  [<CompiledName("DoFoldedPoll")>]
+  let foldedPoll<[<Measure>]'unit, 'T> (timeout:int64<'unit>) st0 (items : seq<FoldedPoll<'T>>) =
+    let items = Array.ofSeq items
+    let items' =
+      items
+      |> Array.map(fun (FoldedPoll(v,s, _)) ->
+        C.zmq_pollitem_t(s.Handle, v)
+      )
+    match C.zmq_poll(items', items'.Length, int64 timeout) with
+    | 0 ->
+      st0
+    | n when n > 0 ->
+      Array.zip items' items
+      |> Array.fold(fun st (c_poll, poll) ->
+        let e = c_poll.events
+        let r = c_poll.revents
+        if e &&& r = e then
+          let (FoldedPoll(_, s, cb)) = poll
+          cb st s
+        else
+          st
+      ) st0
+    | _ -> ZMQ.error()
+        
   /// Calls `Polling.poll` with the given sequence of Poll items and 0 microseconds timeout
   [<CompiledName("PollNow")>]
   let pollNow items = poll ZMQ.NOW items
