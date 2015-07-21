@@ -1,4 +1,4 @@
-### New in 12.1.0 (Unreleased)
+### New in 12.1.0 (2015/07/21)
 * Added support for `zmq_proxy_steerable`; see the `Proxying` and `ProxyingExtensions` modules
 * Switched native handles on `Context`, `Socket`, and `Message` types (back) to public visibility
 * Added extension methods to simplify using `Version` from languages other than F#
