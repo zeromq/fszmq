@@ -59,13 +59,13 @@ system, and have at it.**
 Although there are many, many files in the repository, most are infrastructural
 and can be safely ignored. The interesting ones are as follows:
 
-Path 											| Purpose
+Path                      | Purpose
 --------------------------|-------------------------------------------------------------------------------
-`RELEASE_NOTES.md`				| Use this to keep a record of new features _when the assembly version changes_
-`src/fszmq/*.*`						| The actual source code files of `fszmq.dll` live in this project
-`tests/fszmq.tests/*.*`		|	The files in this project form the primary test suite for `fszmq.dll`
-`docs/content/*.*`				|	Any narrative-style documentation resides in this folder
-`docs/content/zguide/*.*`	|	This folder contains examples specifically "borrowed" from the [zguide](http://zguide.zeromq.org/page:all)
+`RELEASE_NOTES.md`        | Use this to keep a record of new features or bug fixes
+`src/fszmq/*.*`           | The actual source code files of `fszmq.dll` live in this project
+`tests/fszmq.tests/*.*`   | The files in this project form the primary test suite for `fszmq.dll`
+`docs/content/*.*`        | Any narrative-style documentation resides in this folder
+`docs/content/zguide/*.*` | This folder contains examples specifically "borrowed" from the [zguide](http://zguide.zeromq.org/page:all)
 
 ### Coding guidelines
 

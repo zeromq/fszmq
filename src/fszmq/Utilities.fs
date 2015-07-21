@@ -97,6 +97,7 @@ module Z85 =
 
 
 /// Utilities for working with the CurveZMQ security protocol
+/// (NOTE: required underlying library support for CurevZMQ)
 [<Experimental("WARNING: Functionality in the Curve module requires more testing.")>]
 module Curve =
 
