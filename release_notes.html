@@ -33,6 +33,22 @@
       <div class="row">
         <div class="span9" id="main">
           
+<h3><a name="New-in-12-1-0-2015-07-21" class="anchor" href="#New-in-12-1-0-2015-07-21">New in 12.1.0 (2015/07/21)</a></h3>
+
+<ul>
+<li>Added support for <code>zmq_proxy_steerable</code>; see the <code>Proxying</code> and <code>ProxyingExtensions</code> modules</li>
+<li>Switched native handles on <code>Context</code>, <code>Socket</code>, and <code>Message</code> types (back) to public visibility</li>
+<li>Added extension methods to simplify using <code>Version</code> from languages other than F#</li>
+<li>Added <code>Socket.tryRecvInto</code> (mostly so languages other than F# don't have to acknowledge the <code>Option&lt;'t&gt;</code> type)</li>
+<li>Added <code>Message.configure</code> function</li>
+<li>Added missing socket options and other constants needed for 4.0.x completeness</li>
+<li>Support for libzmq-4.1.x ... <code>ZMQ.has</code> function and <code>Capabilities</code> type</li>
+<li>Support for libzmq-4.1.x ... <code>Message.tryGetMetadata</code> function (equivalent to <code>zmq_msg_gets</code>)</li>
+<li>Support for libzmq-4.1.x ... <code>Message.tryLoadMetadata</code> function (for languages where the <code>Option&lt;'t&gt;</code> type is uncommon)</li>
+<li>Support for libzmq-4.1.x ... various constants related to socket options, context options, and message options</li>
+<li>Support for libzmq-4.1.x ... addressed errors caused by <code>zmq_msg_t</code> allocation size</li>
+</ul>
+
 <h3><a name="New-in-12-0-1-2015-07-01" class="anchor" href="#New-in-12-0-1-2015-07-01">New in 12.0.1 (2015/07/01)</a></h3>
 
 <ul>

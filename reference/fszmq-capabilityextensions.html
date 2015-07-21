@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Message - fszmq</title>
+    <title>CapabilityExtensions - fszmq</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Paulmichael Blasucci"/>
@@ -36,37 +36,37 @@
 
 
 
-<h1>Message</h1>
+<h1>CapabilityExtensions</h1>
 <p>
   <span>Namespace: fszmq</span><br />
 </p>
 <div class="xmldoc">
-<p>Provides a memory-managed wrapper over ZMQ message operations</p>
+<p>Utilities for working with Capabiity from languages other than F#</p>
 
 
 </div>
-  <h3>Constructors</h3>
+  <h3>Static members</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Constructor</td><td>Description</td></tr>
+      <tr><td>Static member</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '214', 214)" onmouseover="showTip(event, '214', 214)">
-            new()
+          <code onmouseout="hideTip(event, '208', 208)" onmouseover="showTip(event, '208', 208)">
+            IfKnown(value, action)
           </code>
-          <div class="tip" id="214">
-            <strong>Signature:</strong> unit -&gt; Message<br />
+          <div class="tip" id="208">
+            <strong>Signature:</strong> (value:Capability * action:Action&lt;string,bool&gt;) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L33-33" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L170-170" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a new empty Message</p>
+          <p>Executes the given callback only if capability information is available</p>
 
 
 
@@ -75,48 +75,62 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '215', 215)" onmouseover="showTip(event, '215', 215)">
-            new(source)
+          <code onmouseout="hideTip(event, '209', 209)" onmouseover="showTip(event, '209', 209)">
+            Match(value, supported, unknown)
           </code>
-          <div class="tip" id="215">
-            <strong>Signature:</strong> (source:byte array) -&gt; Message<br />
+          <div class="tip" id="209">
+            <strong>Signature:</strong> (value:Capability * supported:Action&lt;string,bool&gt; * unknown:Action) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L30-30" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L163-163" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a new Message from the given byte array</p>
+          <p>Executes the appropriate callback based on availability of capability info</p>
 
 
 
         </td>
       </tr>
-    </tbody>
-  </table>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '216', 216)" onmouseover="showTip(event, '216', 216)">
-            Handle
+          <code onmouseout="hideTip(event, '210', 210)" onmouseover="showTip(event, '210', 210)">
+            Match(value, supported, unknown)
           </code>
-          <div class="tip" id="216">
-            <strong>Signature:</strong> nativeint<br />
-                      </div>
+          <div class="tip" id="210">
+            <strong>Signature:</strong> (value:Capability * supported:Func&lt;string,bool,&#39;r&gt; * unknown:Func&lt;&#39;r&gt;) -&gt; &#39;r<br />
+                          <strong>Type parameters:</strong> 'r          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Core.fs#L36-36" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L156-156" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>For internal use only</p>
+          <p>Executes the appropriate callback based on availability of capability info</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '211', 211)" onmouseover="showTip(event, '211', 211)">
+            TryGetInfo(value, name, yesOrNo)
+          </code>
+          <div class="tip" id="211">
+            <strong>Signature:</strong> (value:Capability * name:byref&lt;string&gt; * yesOrNo:byref&lt;bool&gt;) -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L176-176" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Extracts the details of the capability,
+returning true on success and false if capability info is unavailable</p>
 
 
 

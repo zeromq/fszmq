@@ -57,20 +57,43 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
+          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
             proxy frontend backend capture
           </code>
-          <div class="tip" id="49">
+          <div class="tip" id="52">
             <strong>Signature:</strong> frontend:Socket -&gt; backend:Socket -&gt; capture:Socket option -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L21-21" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L23-23" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>creates a proxy connection passing messages between two sockets,
 with an (optional) third socket for supplemental data capture</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '53', 53)" onmouseover="showTip(event, '53', 53)">
+            steerableProxy (...)
+          </code>
+          <div class="tip" id="53">
+            <strong>Signature:</strong> frontend:Socket -&gt; backend:Socket -&gt; capture:Socket option -&gt; control:Socket option -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L33-33" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>creates a proxy connection passing messages between two sockets,
+with an (optional) third socket for supplemental data capture,
+and an (optional) fourth socket for PAUSE/RESUME/TERMINATE control</p>
 
 
 

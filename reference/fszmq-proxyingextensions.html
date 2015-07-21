@@ -54,20 +54,20 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '174', 174)" onmouseover="showTip(event, '174', 174)">
+          <code onmouseout="hideTip(event, '223', 223)" onmouseover="showTip(event, '223', 223)">
             Proxy(frontend, backend, capture)
           </code>
-          <div class="tip" id="174">
+          <div class="tip" id="223">
             <strong>Signature:</strong> (frontend:Socket * backend:Socket * capture:Socket) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L38-38" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L56-56" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>creates a proxy connection passing messages between two sockets,
-with an third socket for supplemental data capture (e.g. logging)</p>
+with a third socket for supplemental data capture (e.g. logging)</p>
 
 
 
@@ -76,19 +76,64 @@ with an third socket for supplemental data capture (e.g. logging)</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '175', 175)" onmouseover="showTip(event, '175', 175)">
+          <code onmouseout="hideTip(event, '224', 224)" onmouseover="showTip(event, '224', 224)">
             Proxy(frontend, backend)
           </code>
-          <div class="tip" id="175">
+          <div class="tip" id="224">
             <strong>Signature:</strong> (frontend:Socket * backend:Socket) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L33-33" class="github-link">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L51-51" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>creates a proxy connection passing messages between two sockets</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '225', 225)" onmouseover="showTip(event, '225', 225)">
+            SteerableProxy(...)
+          </code>
+          <div class="tip" id="225">
+            <strong>Signature:</strong> (frontend:Socket * backend:Socket * control:Socket * capture:Socket) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>creates a proxy connection passing messages between two sockets,
+with a third socket for PAUSE/RESUME/TERMINATE control
+and a fourth socket for supplemental data capture (e.g. logging)</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '226', 226)" onmouseover="showTip(event, '226', 226)">
+            SteerableProxy(...)
+          </code>
+          <div class="tip" id="226">
+            <strong>Signature:</strong> (frontend:Socket * backend:Socket * control:Socket) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Utilities.fs#L61-61" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>creates a proxy connection passing messages between two sockets,
+with a third socket for PAUSE/RESUME/TERMINATE control</p>
 
 
 
