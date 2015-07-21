@@ -18,7 +18,9 @@ open System.Runtime.InteropServices
 ///
 /// ** Note: all sockets passed to Polling.poll MUST share the same context
 /// and belong to the thread calling Polling.poll **
-type Poll = Poll of events:int16 * socket:Socket * callback:(Socket -> unit) with
+type Poll = 
+  /// Creates a new poll item, associating the given events, socket, and callback
+  | Poll of events:int16 * socket:Socket * callback:(Socket -> unit) with
 
   /// Creates a poll item in a way friendly to languages other then F#
   static member Create(events,socket,callback:Action<Socket>) = Poll(events,socket,fun s -> callback.Invoke(s))
@@ -83,6 +85,7 @@ module Polling =
     match poll timeout items with
     | true  -> Some !msg
     | false -> None
+
 
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]

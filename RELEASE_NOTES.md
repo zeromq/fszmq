@@ -1,6 +1,15 @@
 ### New in 12.1.0 (Unreleased)
 * Added support for `zmq_proxy_steerable`; see the `Proxying` and `ProxyingExtensions` modules
-* Switched native handles on `Context`, `Socket`, and `Message` (back) to public visibility (for projects like `fszmq.plus`)
+* Switched native handles on `Context`, `Socket`, and `Message` types (back) to public visibility
+* Added extension methods to simplify using `Version` from languages other than F#
+* Added `Socket.tryRecvInto` (mostly so languages other than F# don't have to acknowledge the `Option<'t>` type)
+* Added `Message.configure` function
+* Added missing socket options and other constants needed for 4.0.x completeness
+* Support for libzmq-4.1.x ... `ZMQ.has` function and `Capabilities` type
+* Support for libzmq-4.1.x ... `Message.tryGetMetadata` function (equivalent to `zmq_msg_gets`)
+* Support for libzmq-4.1.x ... `Message.tryLoadMetadata` function (for languages where the `Option<'t>` type is uncommon)
+* Support for libzmq-4.1.x ... various constants related to socket options, context options, and message options
+* Support for libzmq-4.1.x ... addressed errors caused by `zmq_msg_t` allocation size
 
 ### New in 12.0.1 (2015/07/01)
 * Core types (`Message`, `Socket`, and `Context`) now support referential equality based on underlying native handle

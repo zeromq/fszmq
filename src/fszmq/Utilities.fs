@@ -9,7 +9,9 @@ namespace fszmq
 open System
 open System.Collections.Generic
 open System.Runtime.CompilerServices
+open System.Runtime.InteropServices
 open System.Text
+
 
 /// Contains methods for working with ZMQ's proxying capabilities
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
@@ -39,6 +41,7 @@ module Proxying =
                           | None  ,None   ->        0n,      0n
     C.zmq_proxy_steerable (frontend.Handle,backend.Handle,capture,control) |> ignore
 
+
 /// Utilities for working with Polling from languages other than F#
 [<Extension>]
 type ProxyingExtensions =
@@ -64,6 +67,7 @@ type ProxyingExtensions =
   [<Extension>]
   static member SteerableProxy(frontend,backend,control,capture) = 
     Proxying.steerableProxy frontend backend (Some capture) (Some control)
+
 
 /// Utilities for working with ZeroMQ Base-85 Encoding
 [<RequireQualifiedAccess>]
@@ -91,7 +95,9 @@ module Z85 =
     if C.zmq_z85_decode(buffer,data) = 0n then ZMQ.error()
     buffer
 
+
 /// Utilities for working with the CurveZMQ security protocol
+/// (NOTE: required underlying library support for CurevZMQ)
 [<Experimental("WARNING: Functionality in the Curve module requires more testing.")>]
 module Curve =
 
@@ -104,6 +110,76 @@ module Curve =
     let publicKey,secretKey = StringBuilder(KEY_SIZE),StringBuilder(KEY_SIZE)
     if C.zmq_curve_keypair(publicKey,secretKey) <> 0 then ZMQ.error()
     (string publicKey),(string secretKey)
+
+
+/// Utilities for working with Version from languages other than F#
+[<Extension>]
+type VersionExtensions =
+
+  /// Executes the appropriate callback based on availability of version info
+  [<Extension>]
+  static member Match (value,version:Func<int,int,int,'r>,unknown:Func<'r>) =
+    match value with
+    | Version (m,n,b) -> version.Invoke (m,n,b)
+    | Version.Unknown -> unknown.Invoke ()
+
+  /// Executes the appropriate callback based on availability of version info
+  [<Extension>]
+  static member Match (value,version:Action<int,int,int>,unknown:Action) =
+    match value with
+    | Version (m,n,b) -> version.Invoke (m,n,b)
+    | Version.Unknown -> unknown.Invoke ()
+
+  /// Executes the given callback only if version information is available
+  [<Extension>]
+  static member IfKnown (value,action) =
+    VersionExtensions.Match(value,action,Action (fun () -> ()))
+
+  /// Extracts the details of the version,
+  /// returning true on success and false if version info is unavailable
+  [<Extension>]
+  static member TryGetInfo (value ,[<Out>]major:byref<int>
+                                  ,[<Out>]minor:byref<int>
+                                  ,[<Out>]build:byref<int>) = 
+    match value with
+    | Version (m,n,b) ->  major <- m; minor <- n; build <- b;
+                          true
+    | Version.Unknown ->  false
+
+
+/// Utilities for working with Capabiity from languages other than F#
+[<Extension>]
+type CapabilityExtensions =
+
+  /// Executes the appropriate callback based on availability of capability info
+  [<Extension>]
+  static member Match (value,supported:Func<string,bool,'r>,unknown:Func<'r>) =
+    match value with
+    | Supported (name,yesOrNo)  -> supported.Invoke (name,yesOrNo)
+    | Capability.Unknown        -> unknown.Invoke ()
+
+  /// Executes the appropriate callback based on availability of capability info
+  [<Extension>]
+  static member Match (value,supported:Action<string,bool>,unknown:Action) =
+    match value with
+    | Supported (name,yesOrNo)  -> supported.Invoke (name,yesOrNo)
+    | Capability.Unknown        -> unknown.Invoke ()
+
+  /// Executes the given callback only if capability information is available
+  [<Extension>]
+  static member IfKnown (value,action) =
+    CapabilityExtensions.Match(value,action,Action (fun () -> ()))
+
+  /// Extracts the details of the capability,
+  /// returning true on success and false if capability info is unavailable
+  [<Extension>]
+  static member TryGetInfo (value ,[<Out>]name    :byref<string>
+                                  ,[<Out>]yesOrNo :byref<bool>) = 
+    match value with
+    | Supported (cap,ok)  ->  name <- cap; yesOrNo <- ok
+                              true
+    | Capability.Unknown  ->  false
+
 
 //NOTE: This allows non-F# extensions to have proper visibility/interop with all CLR languages
 [<assembly: ExtensionAttribute()>]

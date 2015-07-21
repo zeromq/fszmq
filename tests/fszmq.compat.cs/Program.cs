@@ -67,6 +67,10 @@ namespace fszmq.compat.cs
 
     static void Main (String[] args)
     {
+      var vsn = ZMQ.Version.Match(version: (m,n,b) => String.Format("{0}.{1}.{2}",m,n,b)
+                                , unknown: ()      => "<unknown>");
+      Console.WriteLine("libzmq version = {0}", vsn);
+
       using (var context  = new Context())
       using (var socket   = context.Rep())
       using (var replyMsg = new Message(new []{ (byte)0 }))

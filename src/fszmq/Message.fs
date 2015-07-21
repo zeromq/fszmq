@@ -28,6 +28,11 @@ module Message =
   let setOption (message:Message) (messageOption,value) =
     if C.zmq_msg_set(message.Handle,messageOption,value) <> 0 then ZMQ.error()
 
+  /// Sets the given block of option values for the given Message
+  [<Extension;CompiledName("Configure")>]
+  let configure message options =
+    Seq.iter (fun (input:int * int) -> setOption message input) options
+
   /// Returns the content of the given Message
   [<Extension;CompiledName("Data")>]
   let data (message:Message) =
@@ -48,6 +53,29 @@ module Message =
   /// Tests if two `Message` instances have the same size and data
   [<Extension;CompiledName("IsMatch")>]
   let isMatch left right = (size left = size right) && (data left = data right)
+
+  /// For a given message, returns the metadata associated with the given name
+  /// as an `Option<string>` where `None` indicates no metadata is present
+  [<Extension;CompiledName("TryGetMetadata")>]
+  let tryGetMetadata (message:Message) name =
+    match ZMQ.version with
+    | Version (m,n,_) 
+      when m >= 4 && n >= 1 ->  match C.zmq_msg_gets(message.Handle,name) with
+                                |   0n -> None
+                                | addr -> Some (Marshal.PtrToStringAnsi addr)
+    | _                     ->  None
+
+  /// For a given message, extracts the metadata associated with the given name,
+  /// returning false if no metadata is present (for the given name)
+  ///
+  /// This function is named TryGetMetadata in compiled assemblies.
+  /// If you are accessing the function from a language other than F#, or through reflection, use this name.
+  [<Extension;CompiledName("TryGetMetadata")>]
+  let tryLoadMetadata message name ([<Out>]value:byref<string>) =
+    match tryGetMetadata message name with
+    | Some prop ->  value <- prop
+                    true
+    | None      ->  false
 
 (* message manipulation *)
 

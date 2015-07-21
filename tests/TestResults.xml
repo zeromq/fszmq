@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="/Users/pblasucci/Developer/fszmq/tests/fszmq.tests/bin/Release/fszmq.tests.dll" total="8" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-09" time="17:07:35">
-  <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.17020" os-version="Unix 14.3.0.0" platform="Unix" cwd="/Users/pblasucci/Developer/fszmq" machine-name="pblasuccimbp" user="pblasucci" user-domain="pblasuccimbp" />
+<test-results name="c:\Developer\fszmq\tests\fszmq.tests\bin\Release\fszmq.tests.dll" total="8" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-17" time="23:50:50">
+  <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="c:\Developer\fszmq" machine-name="MININT-48ILPV0" user="PBlasucci" user-domain="MI" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="/Users/pblasucci/Developer/fszmq/tests/fszmq.tests/bin/Release/fszmq.tests.dll" executed="True" result="Success" success="True" time="0.417" asserts="0">
+  <test-suite type="Assembly" name="c:\Developer\fszmq\tests\fszmq.tests\bin\Release\fszmq.tests.dll" executed="True" result="Success" success="True" time="1.156" asserts="0">
     <results>
-      <test-suite type="Namespace" name="fszmq" executed="True" result="Success" success="True" time="0.413" asserts="0">
+      <test-suite type="Namespace" name="fszmq" executed="True" result="Success" success="True" time="1.150" asserts="0">
         <results>
-          <test-suite type="Namespace" name="tests" executed="True" result="Success" success="True" time="0.413" asserts="0">
+          <test-suite type="Namespace" name="tests" executed="True" result="Success" success="True" time="1.150" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="Message" executed="True" result="Success" success="True" time="0.308" asserts="0">
+              <test-suite type="TestFixture" name="Message" executed="True" result="Success" success="True" time="0.994" asserts="0">
                 <results>
-                  <test-case name="fszmq.tests.Message.after moving, target content should equal original content" executed="True" result="Success" success="True" time="0.164" asserts="0" />
-                  <test-case name="fszmq.tests.Message.both message should have the same content after copying" executed="True" result="Success" success="True" time="0.016" asserts="0" />
-                  <test-case name="fszmq.tests.Message.clone returns a new instance with the same data" executed="True" result="Success" success="True" time="0.008" asserts="0" />
-                  <test-case name="fszmq.tests.Message.copy requires two distinct message instances" executed="True" result="Success" success="True" time="0.055" asserts="0" />
-                  <test-case name="fszmq.tests.Message.move requires two distinct message instances" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Message.after moving, target content should equal original content" executed="True" result="Success" success="True" time="0.459" asserts="0" />
+                  <test-case name="fszmq.tests.Message.both message should have the same content after copying" executed="True" result="Success" success="True" time="0.040" asserts="0" />
+                  <test-case name="fszmq.tests.Message.clone returns a new instance with the same data" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Message.copy requires two distinct message instances" executed="True" result="Success" success="True" time="0.250" asserts="0" />
+                  <test-case name="fszmq.tests.Message.move requires two distinct message instances" executed="True" result="Success" success="True" time="0.002" asserts="0" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Miscellany" executed="True" result="Success" success="True" time="0.054" asserts="0">
+              <test-suite type="TestFixture" name="Miscellany" executed="True" result="Success" success="True" time="0.122" asserts="0">
                 <results>
-                  <test-case name="fszmq.tests.Miscellany.libzmq version should be at least 4" executed="True" result="Success" success="True" time="0.032" asserts="0" />
-                  <test-case name="fszmq.tests.Miscellany.recv throws TimeoutException if RCVTIMEO expires" executed="True" result="Success" success="True" time="0.020" asserts="0" />
+                  <test-case name="fszmq.tests.Miscellany.libzmq version should be at least 4" executed="True" result="Success" success="True" time="0.094" asserts="0" />
+                  <test-case name="fszmq.tests.Miscellany.recv throws TimeoutException if RCVTIMEO expires" executed="True" result="Success" success="True" time="0.022" asserts="0" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Z85" executed="True" result="Success" success="True" time="0.048" asserts="0">
+              <test-suite type="TestFixture" name="Z85" executed="True" result="Success" success="True" time="0.029" asserts="0">
                 <results>
-                  <test-case name="fszmq.tests.Z85.encode-then-decode preserves data" executed="True" result="Success" success="True" time="0.048" asserts="0" />
+                  <test-case name="fszmq.tests.Z85.encode-then-decode preserves data" executed="True" result="Success" success="True" time="0.027" asserts="0" />
                 </results>
               </test-suite>
             </results>

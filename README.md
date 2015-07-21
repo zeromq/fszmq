@@ -4,8 +4,8 @@ fszmq
 ### An F# binding for the ZeroMQ distributed computing library.
 
 fszmq is an MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
-It provides a complete binding to versions 2.1.x, 3.2.x, and 4.0.x of ZeroMQ
-(Note: each binding is a separate branch in git, as there are some non-compatible differences).
+It provides a complete binding to versions 2.1.x, 3.2.x, 4.0.x, 4.1.x of ZeroMQ
+(Note: prior to 4.0.0, each binding is a separate branch in git, as there are some non-compatible differences).
 This library is primarily designed to be consumed from F#. However, where possible,
 the library has been designed to appear "friendly" when consumed by other CLR languages (C#, et aliam).
 
@@ -29,7 +29,7 @@ At this point in time, fszmq has been tested on the following platform/architect
 * 64-bit Windows Server 2008 R2 (running against .NET)
 * 32-bit and 64-bit Windows 7 (running against .NET or Mono)
 * 32-bit and 64-bit Windows 8 (running against .NET or Mono)
-* 64-bit OS X 10.9.4 (running against Mono)
+* 32-bit and 64-bit OS X (running against Mono)
 
 Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
 there is a native libzmq port) and will be tested in due course..
@@ -47,6 +47,7 @@ Instead, `fszmq` is versioned _independently_. The versions of `libzmq` supporte
 
 `fszmq` version | `libzmq` versions supported
 ---------------:|----------------------------:
+12.1.0			| 4.x.x
 12.0.1			| 4.0.x
 4.0.9           | 4.0.5
 4.0.8			| 4.0.5

@@ -44,6 +44,10 @@ module internal C =
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern void zmq_version([<Out>] int& major,[<Out>] int& minor,[<Out>] int& patch)
 
+(* capabilities *)
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern int zmq_has ([<MarshalAs(UnmanagedType.LPStr)>] string capability);
+
 (* error handling *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_errno()
@@ -52,8 +56,6 @@ module internal C =
   extern HANDLE zmq_strerror(int errno)
 
 (* message *)
-  let [<Literal>] ZMQ_MSG_T_SIZE = 32
-
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_init(zmq_msg_t msg)
 
@@ -93,6 +95,9 @@ module internal C =
 
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
   extern int zmq_msg_set(zmq_msg_t msg, int option, int optval)
+
+  [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]
+  extern HANDLE zmq_msg_gets (zmq_msg_t msg, [<MarshalAs(UnmanagedType.LPStr)>] string property)
 
 (* socket *)
   [<DllImport("libzmq",CallingConvention = CallingConvention.Cdecl)>]

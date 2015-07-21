@@ -6,14 +6,15 @@ open NUnit.Framework
 open Swensen.Unquote
 open System
 
+
 [<TestFixture>]
-module Miscellany =
+module Miscellany = 
 
   [<Test>]
   let ``libzmq version should be at least 4``() =
     test <@ match ZMQ.version with
             | Version(major,minor,build) -> major = 4 && minor >= 0 && build >= 0 
-            | Unknown                    -> Unknown <> Unknown @>
+            | Version.Unknown            -> Unknown <> Unknown @>
 
   [<Test>]
   let ``recv throws TimeoutException if RCVTIMEO expires`` () =
@@ -28,6 +29,7 @@ module Miscellany =
 
     raises<TimeoutException> <@ testFn () @>
 
+   
 [<TestFixture>]
 module Z85 =
 
@@ -40,3 +42,27 @@ module Z85 =
     
     Check.QuickThrowOnFailure (fun data ->
       (isValid data) ==> lazy (data |> Z85.encode |> Z85.decode = data))
+
+
+[<TestFixture>] 
+module Curve =
+  type CurveKeyPair = CurveKeyPair of publicKey:string * privateKey:string
+
+  type CurveKeyPairArb =
+    static member CurveKeyPair = 
+      Arb.fromGen (gen {  let publicKey,privateKey = Curve.curveKeyPair ()
+                          return CurveKeyPair (publicKey,privateKey)  })
+
+  let CurveKeyPairProperties (CurveKeyPair (publicKey,privateKey)) =
+         publicKey.Length  % 5 = 0 
+      && privateKey.Length % 5 = 0 
+      && publicKey <> privateKey
+
+  [<Test>]
+  let ``curveKeyPair generates 2 different evenly-divisible strings`` () =
+    Arb.register<CurveKeyPairArb> () |> ignore
+
+    match ZMQ.has ZMQ.CAP_CURVE with
+    | Supported (_,true ) ->  Check.QuickThrowOnFailure CurveKeyPairProperties
+    | Supported (_,false) ->  Assert.Ignore "CURVE not supported"
+    | Unknown             ->  Assert.Inconclusive "Unable to determine CURVE support"
