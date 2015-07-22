@@ -88,10 +88,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zguide", "zguide", "{5B8077
 		docs\content\zguide\wuserver.fsx = docs\content\zguide\wuserver.fsx
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "publisher_testing", "testing\publisher_testing.fsproj", "{CD84FB10-EA40-401A-99CB-73A90F7114E8}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "subscriber_testing", "subscriber_testing\subscriber_testing.fsproj", "{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -198,22 +194,6 @@ Global
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x64.Build.0 = Release|x64
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x86.ActiveCfg = Release|x86
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Release|x86.Build.0 = Release|x86
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Release|x64.ActiveCfg = Release|Any CPU
-		{CD84FB10-EA40-401A-99CB-73A90F7114E8}.Release|x86.ActiveCfg = Release|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Release|x64.ActiveCfg = Release|Any CPU
-		{9DCF51B1-EC23-47E3-B235-C1A1C40370F1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
