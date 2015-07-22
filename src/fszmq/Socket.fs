@@ -126,12 +126,17 @@ module Socket =
   let (|~>) data socket = socket <~| data
 
   /// Sends all frames of a given message
+  /// If message is empty, sends a single empty frame for convenience
   [<Extension;CompiledName("SendAll")>]
   let sendAll socket message =
-    message
-    |> Seq.take (Seq.length message - 1)
-    |> Seq.fold sendMore socket
-    |> (fun socket -> send socket (Seq.last message))
+    let len = Seq.length message
+    match len with 
+    | 0 -> send socket Array.empty
+    | 1 -> send socket (Seq.exactlyOne message)
+    | _ -> message
+           |> Seq.take (len - 1)
+           |> Seq.fold sendMore socket
+           |> (fun socket -> send socket (Seq.last message))
 
 (* message receiving *)
 
