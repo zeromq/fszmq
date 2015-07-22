@@ -1,3 +1,6 @@
+### New in 12.1.1-unreleased (Unreleased)
+* FIX for Issue #121 - `Socket.sendAll` treats an empty container as an empty 1-frame message (patched by coconaut)
+
 ### New in 12.1.0 (2015/07/21)
 * Added support for `zmq_proxy_steerable`; see the `Proxying` and `ProxyingExtensions` modules
 * Switched native handles on `Context`, `Socket`, and `Message` types (back) to public visibility
