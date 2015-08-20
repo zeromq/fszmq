@@ -50,7 +50,7 @@ type Message private(?source:byte array) =
       let okay = C.zmq_msg_close(handle)
       Marshal.FreeHGlobal(handle)
       handle <- 0n
-      if okay <> 0 then ZMQ.error()
+      assert (okay = 0)
 
   interface IDisposable with
 
@@ -84,8 +84,8 @@ type Socket internal(context,socketType) =
     if not disposed then
       disposed <- true
       let okay = C.zmq_close(handle)
-      if okay <> 0 then ZMQ.error()
-      handle  <- 0n
+      handle <- 0n
+      assert (okay = 0)
 
   interface IDisposable with
 
@@ -111,16 +111,24 @@ type Context private (__) =
       while sockets.Count > 0 do
         let socket = sockets.Item 0
         sockets.RemoveAt 0
-        try
-          C.zmq_setsockopt(socket.Handle,ZMQ.LINGER,buffer,size) |> ignore
-        finally
+        if socket.Handle <> 0n then
+          // only clean-up sockets which haven't already been closed
+          let okay = C.zmq_setsockopt(socket.Handle,ZMQ.LINGER,buffer,size)
+          assert (okay = 0)
           (socket :> IDisposable).Dispose ())
   
+  let rec terminate () =
+    match C.zmq_ctx_term(handle) with
+    | 0 ->  handle <- 0n
+    | _ ->  match C.zmq_errno () with
+            | ZMQ.EINTR -> terminate () // momentary interruption, try again
+            | _         -> ((* HERE BE DRAGONS! *))
+            
   /// Initializes a new Context instance
   new () = new Context (null)
 
   member internal __.Attach (socket) =
-    lock locker (fun () -> if not <| sockets.Contains socket then sockets.Add socket)
+    lock locker (fun () -> if not (sockets.Contains socket) then sockets.Add socket)
 
   /// For internal use only
   member __.Handle :nativeint = handle
@@ -138,12 +146,10 @@ type Context private (__) =
     if not disposed then
       disposed <- true
       lock locker (fun () -> closeSockets ())
-      if C.zmq_ctx_shutdown(handle) = 0
-        then  let okay = C.zmq_ctx_term(handle)
-              handle <- 0n
-              if okay <> 0 then ZMQ.error()
-        else  ZMQ.error()
-
+      let okay = C.zmq_ctx_shutdown(handle)
+      assert (okay = 0)
+      terminate ()
+      
   interface IDisposable with
 
     member self.Dispose() =
