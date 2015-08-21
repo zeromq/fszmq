@@ -93,6 +93,8 @@ module ZMQ =
 
 
 (* error codes *)
+  let [<Literal>] internal EINTR        =  4
+  let [<Literal>] internal EFAULT       = 14 
   let [<Literal>] internal POSIX_EAGAIN = 11
   let [<Literal>] internal BSD_EAGAIN   = 35
   // !!! HACK !!! This whole setup is bad and wrong and should be replaced
