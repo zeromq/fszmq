@@ -1,4 +1,4 @@
-### New in 12.1.1-unreleased (Unreleased)
+### New in 12.1.1 (2015/08/21)
 * FIX (untracked) - corrected small issue with recieving EINTR during `Context` termination
 * FIX for Issue #121 - `Socket.sendAll` treats an empty container as an empty 1-frame message (patched by coconaut)
 * FIX for Issue #125 - `Context`, `Socket`, and `Message` no longer raise exceptions during finalization (though they will assert in DEBUG builds)
