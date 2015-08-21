@@ -8,7 +8,7 @@ open System
 open System.Threading
 
 [<TestFixture>]
-module EchoTest =
+module Termination =
 
   let serverThread o =
     let token,context,address = unbox<CancellationToken * Context * string> o
@@ -53,6 +53,7 @@ module EchoTest =
     0 // OK
 
   [<Test>]
+  //[<Ignore("Xamarin Studio seems to have trouble with this test.")>]
   let ``everything should shutdown cleanly`` () = 
     Check.QuickThrowOnFailure (fun (PositiveInt delay) -> main delay = 0)
     

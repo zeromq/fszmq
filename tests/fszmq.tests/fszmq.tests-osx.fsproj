@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Miscellany.fs" />
     <Compile Include="Messages.fs" />
+    <Compile Include="Termination.fs" />
     <None Include="app.config" />
     <None Include="..\..\lib\zeromq\OSX\fszmq.dll.config">
       <Link>fszmq.dll.config</Link>
