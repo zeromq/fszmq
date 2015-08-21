@@ -33,6 +33,16 @@
       <div class="row">
         <div class="span9" id="main">
           
+<h3><a name="New-in-12-1-1-2015-08-21" class="anchor" href="#New-in-12-1-1-2015-08-21">New in 12.1.1 (2015/08/21)</a></h3>
+
+<ul>
+<li>FIX (untracked) - corrected small issue with recieving EINTR during <code>Context</code> termination</li>
+<li>FIX for Issue #121 - <code>Socket.sendAll</code> treats an empty container as an empty 1-frame message (patched by coconaut)</li>
+<li>FIX for Issue #125 - <code>Context</code>, <code>Socket</code>, and <code>Message</code> no longer raise exceptions during finalization (though they will assert in DEBUG builds)</li>
+<li>FIX for Issue #124 - Improved a few vague error messages</li>
+<li>FIX for Issue #93 - <code>Z85.encode</code> and <code>Z85.decode</code> no longer fail on empty inputs</li>
+</ul>
+
 <h3><a name="New-in-12-1-0-2015-07-21" class="anchor" href="#New-in-12-1-0-2015-07-21">New in 12.1.0 (2015/07/21)</a></h3>
 
 <ul>
