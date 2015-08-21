@@ -101,7 +101,7 @@ module Monitor =
     let buildEvent message =
       match tryBuildEvent message with
       | Some zmqEvent -> zmqEvent
-      | None          -> ZMQ.einval "Not an event"
+      | None          -> ZMQ.einval "Message does not contain ZMQEvent data"
 
     /// Tries to receive the next ZMQEvent from a monitor socket
     [<Extension;CompiledName("TryRecvEvent")>]
@@ -116,4 +116,4 @@ module Monitor =
     let recvEvent socket =
       match tryRecvEvent socket with
       | Some zmqEvent -> zmqEvent
-      | None          -> ZMQ.einval "Invalid endpoint"
+      | None          -> ZMQ.einval "Endpoint did not provide ZMQEvent data"

@@ -1,7 +1,8 @@
 ### New in 12.1.1-unreleased (Unreleased)
+* FIX (untracked) - corrected small issue with recieving EINTR during `Context` termination
 * FIX for Issue #121 - `Socket.sendAll` treats an empty container as an empty 1-frame message (patched by coconaut)
-* FIX corrected small issue with recieving EINTR during `Context` termination
-* FIX `Context`, `Socket`, and `Message` no longer raise exceptions during finalization (though they will assert in DEBUG builds)
+* FIX for Issue #125 - `Context`, `Socket`, and `Message` no longer raise exceptions during finalization (though they will assert in DEBUG builds)
+* FIX for Issue #124 - Improved a few vague error messages
 
 ### New in 12.1.0 (2015/07/21)
 * Added support for `zmq_proxy_steerable`; see the `Proxying` and `ProxyingExtensions` modules
