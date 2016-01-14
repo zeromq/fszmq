@@ -104,6 +104,7 @@
     <Compile Include="Miscellany.fs" />
     <Compile Include="Messages.fs" />
     <Compile Include="Termination.fs" />
+    <None Include="Scratch.fsx" />
     <None Include="..\..\lib\zeromq\WIN\x86\libzmq.dll">
       <Link>libzmq.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
