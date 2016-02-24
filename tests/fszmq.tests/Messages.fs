@@ -53,3 +53,11 @@ module Message =
                               && Message.data msg1 = [||]
 
               precheck && postcheck))
+
+  open Options
+  open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
+
+  let test socket =
+   configureSocket socket [Rate 12<kb/s>]
+   let (Rate rate) = socket
+   rate

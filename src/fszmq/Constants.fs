@@ -183,30 +183,32 @@ module ZMQ =
 
 
 (* socket types *)
+  [<Measure>] type SocketType
+  
   /// An exclusive pair of two sockets (primarily for use with inproc transport)
-  let [<Literal>] PAIR    =  0
+  let [<Literal>] PAIR    =  0<SocketType>
   /// A publisher which broadcasts topic-prefixed messages
-  let [<Literal>] PUB     =  1
+  let [<Literal>] PUB     =  1<SocketType>
   /// A subscribe which receives topic-prefixed messages
-  let [<Literal>] SUB     =  2
+  let [<Literal>] SUB     =  2<SocketType>
   /// Makes synchronous requests of a server (i.e. ZMQ.REP, ZMQ.ROUTER), awaits replies
-  let [<Literal>] REQ     =  3
+  let [<Literal>] REQ     =  3<SocketType>
   /// Awaits synchronous requests of a client (i.e. ZMQ.REQ, ZMQ.DEALER), makes replies
-  let [<Literal>] REP     =  4
+  let [<Literal>] REP     =  4<SocketType>
   /// Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REP, ZMQ.DEALER, ZMQ.ROUTER)
-  let [<Literal>] DEALER  =  5
+  let [<Literal>] DEALER  =  5<SocketType>
   /// Participates in asynchronous request/reply exchanges with compatible peers (i.e. ZMQ.REQ, ZMQ.DEALER, ZMQ.ROUTER)
-  let [<Literal>] ROUTER  =  6
+  let [<Literal>] ROUTER  =  6<SocketType>
   /// Collects messages in a fair-queued fashion from across all upstream (i.e. ZMQ.PUSH) nodes
-  let [<Literal>] PULL    =  7
+  let [<Literal>] PULL    =  7<SocketType>
   /// Delivers messages in a round-robin fashion to across all downstream (i.e. ZMQ.PULL) nodes
-  let [<Literal>] PUSH    =  8
+  let [<Literal>] PUSH    =  8<SocketType>
   /// A publisher like ZMQ.PUB, but does not automatically receive forwarded topic subscriptions
-  let [<Literal>] XPUB    =  9
+  let [<Literal>] XPUB    =  9<SocketType>
   /// A publisher like ZMQ.SUB, but does not automatically forward topic subscriptions
-  let [<Literal>] XSUB    = 10
+  let [<Literal>] XSUB    = 10<SocketType>
   /// Exchanges raw data with a non-ZeroMQ peer via the tcp transport
-  let [<Literal>] STREAM  = 11
+  let [<Literal>] STREAM  = 11<SocketType>
 
   (* deprecated socket types *)
 
