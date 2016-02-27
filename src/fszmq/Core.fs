@@ -10,6 +10,7 @@ open System
 open System.Runtime.InteropServices
 
 /// Provides a memory-managed wrapper over ZMQ message operations
+[<Sealed>]
 type Message private(?source:byte array) =
   let mutable disposed  = false
   let mutable handle    = Marshal.AllocHGlobal(ZMQ.ZMQ_MSG_T_SIZE)
@@ -62,6 +63,7 @@ type Message private(?source:byte array) =
 /// An abstraction of an asynchronous message queue,
 /// with the exact queuing and message-exchange
 /// semantics determined by the socket type
+[<Sealed>]
 type Socket internal(context,socketType) =
   let mutable disposed  = false
   let mutable handle    = C.zmq_socket(context,socketType)
@@ -95,6 +97,7 @@ type Socket internal(context,socketType) =
 
 
 /// Represents the container for a group of sockets in a node
+[<Sealed>]
 type Context private (__) = 
   (* ^^^ HACK: used to work around an XMLDoc bug ^^^ *)
   let mutable disposed  = false
