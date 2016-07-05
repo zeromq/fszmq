@@ -183,7 +183,7 @@ module ZMQ =
 
 
 (* socket types *)
-  [<Measure>] type SocketType
+  type [<Measure>] SocketType
   
   /// An exclusive pair of two sockets (primarily for use with inproc transport)
   let [<Literal>] PAIR    =  0<SocketType>
