@@ -270,9 +270,6 @@ module Options =
     /// limit queuing to only completed connections
     let (|Immediate|) socket = getBool ZMQ.IMMEDIATE socket
   
-    /// resend duplicate messages
-    let (|ResendDuplicateMessages|) socket = getBool ZMQ.XPUB_VERBOSE socket
-  
     /// true to enable IPv6 on the socket, false to restrict to only IPv4
     let (|Ipv6|) socket = getBool ZMQ.IPV6 socket
     
