@@ -149,7 +149,7 @@ module Options =
       | SendQueue                   size        -> Socket.setOption socket (ZMQ.SNDHWM              ,size           )
       | SendTimeout                 delay       -> Socket.setOption socket (ZMQ.SNDTIMEO            ,delay          )
       | TcpKeepalive                (Some keep) -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,keep           )
-      | TcpKeepalive                sysDefault  -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,sysDefault     )
+      | TcpKeepalive                sysDefault  -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,-1             )
       | TcpKeepaliveCount           count       -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_CNT   ,count          )
       | TcpKeepaliveIdle            idle        -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_IDLE  ,idle           )
       | TcpKeepaliveInterval        delay       -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay          )
@@ -245,9 +245,6 @@ module Options =
   
     /// Timeout period for outbound messages
     let (|SendTimeout|) socket : int<ms> = getInt32WithMeasure ZMQ.SNDTIMEO socket
-  
-    /// true to error on unroutable messages, false to silently ignore
-    let (|RouterMandatory|) socket = getBool ZMQ.ROUTER_MANDATORY socket
   
     /// `bool option` indicating state of TCP_KEEPALIVE; 
     /// `None` indicates system default value

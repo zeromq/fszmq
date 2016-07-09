@@ -190,17 +190,17 @@ module Options =
   [<Test>]
   let ``setting options does not throw: ResendDuplicateMessages false`` () =
     ResendDuplicateMessages false
-    |> testSetter ZMQ.XPUB
+    |> testSetter ZMQ.XPUB 
+ 
+  [<Test>]
+  let ``setting options does not throw: RouterMandatory true`` () =
+    RouterMandatory true
+    |> testSetter ZMQ.ROUTER
 
   [<Test>]
-  let ``setting options and reading them are inverses: RouterMandatory true`` () =
-    fun socket -> <@ let (RouterMandatory actual) = socket in RouterMandatory actual @>
-    |> testInverses <| RouterMandatory true
-
-  [<Test>]
-  let ``setting options and reading them are inverses: RouterMandatory false`` () =
-    fun socket -> <@ let (RouterMandatory actual) = socket in RouterMandatory actual @>
-    |> testInverses <| RouterMandatory false
+  let ``setting options does not throw: RouterMandatory false`` () =
+    RouterMandatory false
+    |> testSetter ZMQ.ROUTER
 
   [<Test>]
   let ``setting options and reading them are inverses: SendQueue`` () =
