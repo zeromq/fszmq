@@ -66,7 +66,7 @@ module Socket =
       match box value with
       | :? (int32 ) as v  -> sizeof<Int32>,(writeInt32  v)
       | :? (bool  ) as v  -> sizeof<Int32>,(writeBool   v)
-      | :? (int64 ) as v  -> sizeof<Int32>,(writeInt64  v)
+      | :? (int64 ) as v  -> sizeof<Int64>,(writeInt64  v)
       | :? (uint64) as v  -> sizeof<Int64>,(writeUInt64 v)
       | :? (string) as v  -> v.Length     ,(writeString v)
       | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
