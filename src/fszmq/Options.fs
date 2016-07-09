@@ -11,12 +11,12 @@ open System
 [<Experimental "This module is not properly compatible with languages other than F#">]
 module Options =
 
-  open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
-  
   type [<Measure>] bit
   type [<Measure>] b = bit
   type [<Measure>] kilobit
   type [<Measure>] kb = kilobit
+  type [<Measure>] second = FSharp.Data.UnitSystems.SI.UnitNames.second
+  type [<Measure>] s = second
   type [<Measure>] millisecond
   type [<Measure>] ms = millisecond
   type [<Measure>] Byte
