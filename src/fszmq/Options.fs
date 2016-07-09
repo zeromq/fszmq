@@ -139,7 +139,7 @@ module Options =
       | KeepLastMessageInQueue      false       -> Socket.setOption socket (ZMQ.CONFLATE            ,0              )
       | LingerDelay                 delay       -> Socket.setOption socket (ZMQ.LINGER              ,delay          )
       | MaxMessageSize              size        -> Socket.setOption socket (ZMQ.MAXMSGSIZE          ,size           )
-      | MaxReconnectInterval        delay       -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay          )
+      | MaxReconnectInterval        delay       -> Socket.setOption socket (ZMQ.RECONNECT_IVL_MAX   ,delay          )
       | MulticastHops               hops        -> Socket.setOption socket (ZMQ.MULTICAST_HOPS      ,hops           )
       | ProbeRouter                 true        -> Socket.setOption socket (ZMQ.PROBE_ROUTER        ,1              )
       | ProbeRouter                 false       -> Socket.setOption socket (ZMQ.PROBE_ROUTER        ,0              )
