@@ -82,14 +82,16 @@ module Options =
     | ResendDuplicateMessages of resendDuplicate:bool
     /// true to enable IPv6 on the socket, false to restrict to only IPv4
     | Ipv6 of ipv6:bool
+    /// make socket act as server or client for NULL security
+    | NullSecurity
     /// make socket act as server for PLAIN security
-    | PlainServer of enabled:bool
+    | PlainServer
     /// Set user name and password for client using PLAIN security
     | PlainClient of username:string * password:string
     /// Make socket act as a server for CURVE security
-    | CurveServer of enabled:bool * secretKey:byte[]  
-    /// Public and private keys fo client using CURVE security
-    | CurveClient of publicKey:byte[] * secretKey:byte[] * serverPublicKey:string 
+    | CurveServer of secretKey:byte[]  
+    /// Public and private keys for client using CURVE security
+    | CurveClient of publicKey:byte[] * secretKey:byte[] * serverKey:byte[] 
     /// automatically send an empty message on new connection
     | ProbeRouter of sendEmptyMessageOnConnection:bool
     /// prefix messages with explicit request ID
@@ -119,52 +121,50 @@ module Options =
     let setSocketOption socket option =
       match option with
       // general options
-      | Affinity                    mask        -> Socket.setOption socket (ZMQ.AFFINITY            ,mask           )
-      | Identity                    identifier  -> Socket.setOption socket (ZMQ.IDENTITY            ,identifier     )
-      | Subscribe                   filter      -> Socket.setOption socket (ZMQ.SUBSCRIBE           ,filter         )
-      | Unsubscribe                 filter      -> Socket.setOption socket (ZMQ.UNSUBSCRIBE         ,filter         )
-      | Rate                        dataRate    -> Socket.setOption socket (ZMQ.RATE                ,dataRate       )
-      | MulticastRecovery           time        -> Socket.setOption socket (ZMQ.RECOVERY_IVL        ,time           )
-      | SendBuffer                  size        -> Socket.setOption socket (ZMQ.SNDBUF              ,size           )
-      | ReceiveBuffer               size        -> Socket.setOption socket (ZMQ.RCVBUF              ,size           )
-      | MoreMessageFramesAvailable  more        -> Socket.setOption socket (ZMQ.RCVMORE             ,more           )
-      | Events                      events      -> Socket.setOption socket (ZMQ.EVENTS              ,events         )    
-      | AuthenticationDomain        domain      -> Socket.setOption socket (ZMQ.ZAP_DOMAIN          ,domain         )
-      | Backlog                     length      -> Socket.setOption socket (ZMQ.BACKLOG             ,length         )
-      | Immediate                   immediate   -> Socket.setOption socket (ZMQ.IMMEDIATE           ,immediate      )
-      | Ipv6                        ipv6        -> Socket.setOption socket (ZMQ.IPV6                ,ipv6           )
-      | KeepLastMessageInQueue      keep        -> Socket.setOption socket (ZMQ.CONFLATE            ,keep           )
-      | LingerDelay                 delay       -> Socket.setOption socket (ZMQ.LINGER              ,delay          )
-      | MaxMessageSize              size        -> Socket.setOption socket (ZMQ.MAXMSGSIZE          ,size           )
-      | MaxReconnectInterval        delay       -> Socket.setOption socket (ZMQ.RECONNECT_IVL_MAX   ,delay          )
-      | MulticastHops               hops        -> Socket.setOption socket (ZMQ.MULTICAST_HOPS      ,hops           )
-      | ProbeRouter                 router      -> Socket.setOption socket (ZMQ.PROBE_ROUTER        ,router         )
-      | ReceiveQueue                size        -> Socket.setOption socket (ZMQ.RCVHWM              ,size           )
-      | ReceiveTimeout              delay       -> Socket.setOption socket (ZMQ.RCVTIMEO            ,delay          )
-      | ReconnectDelay              delay       -> Socket.setOption socket (ZMQ.RECONNECT_IVL       ,delay          )
-      | RelaxStrictAlternation      relax       -> Socket.setOption socket (ZMQ.REQ_RELAXED         ,relax          )
-      | RequestCorrelation          corr        -> Socket.setOption socket (ZMQ.REQ_CORRELATE       ,corr           )
-      | ResendDuplicateMessages     resend      -> Socket.setOption socket (ZMQ.XPUB_VERBOSE        ,resend         )
-      | RouterMandatory             mandatory   -> Socket.setOption socket (ZMQ.ROUTER_MANDATORY    ,mandatory      )
-      | SendQueue                   size        -> Socket.setOption socket (ZMQ.SNDHWM              ,size           )
-      | SendTimeout                 delay       -> Socket.setOption socket (ZMQ.SNDTIMEO            ,delay          )
-      | TcpKeepalive                (Some keep) -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,keep           )
-      | TcpKeepalive                sysDefault  -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,-1             )
-      | TcpKeepaliveCount           count       -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_CNT   ,count          )
-      | TcpKeepaliveIdle            idle        -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_IDLE  ,idle           )
-      | TcpKeepaliveInterval        delay       -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay          )
-      // PLAIN security
-      | PlainServer true      ->  Socket.setOption socket (ZMQ.PLAIN_SERVER   ,1  )
-      | PlainServer false     ->  Socket.setOption socket (ZMQ.PLAIN_SERVER   ,0  )
-      | PlainClient (unm,pwd) ->  Socket.setOption socket (ZMQ.PLAIN_USERNAME ,unm)
-                                  Socket.setOption socket (ZMQ.PLAIN_PASSWORD ,pwd)    
-      // CURVE security
-      | CurveServer (true ,secretKey)               ->  Socket.setOption socket (ZMQ.CURVE_SERVER   ,1        )
-                                                        Socket.setOption socket (ZMQ.CURVE_SECRETKEY,secretKey)
-      | CurveServer (false,_        )               ->  Socket.setOption socket (ZMQ.CURVE_SERVER   ,0        )
-      | CurveClient (publicKey,secretKey,serverKey) ->  Socket.setOption socket (ZMQ.CURVE_PUBLICKEY,publicKey)
-                                                        Socket.setOption socket (ZMQ.CURVE_SECRETKEY,secretKey)
-                                                        Socket.setOption socket (ZMQ.CURVE_SERVERKEY,serverKey)
+      | Affinity                    mask            -> Socket.setOption socket (ZMQ.AFFINITY            ,mask             )
+      | Identity                    identifier      -> Socket.setOption socket (ZMQ.IDENTITY            ,identifier       )
+      | Subscribe                   filter          -> Socket.setOption socket (ZMQ.SUBSCRIBE           ,filter           )
+      | Unsubscribe                 filter          -> Socket.setOption socket (ZMQ.UNSUBSCRIBE         ,filter           )
+      | Rate                        dataRate        -> Socket.setOption socket (ZMQ.RATE                ,dataRate         )
+      | MulticastRecovery           time            -> Socket.setOption socket (ZMQ.RECOVERY_IVL        ,time             )
+      | SendBuffer                  size            -> Socket.setOption socket (ZMQ.SNDBUF              ,size             )
+      | ReceiveBuffer               size            -> Socket.setOption socket (ZMQ.RCVBUF              ,size             )
+      | MoreMessageFramesAvailable  more            -> Socket.setOption socket (ZMQ.RCVMORE             ,more             )
+      | Events                      events          -> Socket.setOption socket (ZMQ.EVENTS              ,events           )    
+      | AuthenticationDomain        domain          -> Socket.setOption socket (ZMQ.ZAP_DOMAIN          ,domain           )
+      | Backlog                     length          -> Socket.setOption socket (ZMQ.BACKLOG             ,length           )
+      | Immediate                   immediate       -> Socket.setOption socket (ZMQ.IMMEDIATE           ,immediate        )
+      | Ipv6                        ipv6            -> Socket.setOption socket (ZMQ.IPV6                ,ipv6             )
+      | KeepLastMessageInQueue      keep            -> Socket.setOption socket (ZMQ.CONFLATE            ,keep             )
+      | LingerDelay                 delay           -> Socket.setOption socket (ZMQ.LINGER              ,delay            )
+      | MaxMessageSize              size            -> Socket.setOption socket (ZMQ.MAXMSGSIZE          ,size             )
+      | MaxReconnectInterval        delay           -> Socket.setOption socket (ZMQ.RECONNECT_IVL_MAX   ,delay            )
+      | MulticastHops               hops            -> Socket.setOption socket (ZMQ.MULTICAST_HOPS      ,hops             )
+      | ProbeRouter                 router          -> Socket.setOption socket (ZMQ.PROBE_ROUTER        ,router           )
+      | ReceiveQueue                size            -> Socket.setOption socket (ZMQ.RCVHWM              ,size             )
+      | ReceiveTimeout              delay           -> Socket.setOption socket (ZMQ.RCVTIMEO            ,delay            )
+      | ReconnectDelay              delay           -> Socket.setOption socket (ZMQ.RECONNECT_IVL       ,delay            )
+      | RelaxStrictAlternation      relax           -> Socket.setOption socket (ZMQ.REQ_RELAXED         ,relax            )
+      | RequestCorrelation          corr            -> Socket.setOption socket (ZMQ.REQ_CORRELATE       ,corr             )
+      | ResendDuplicateMessages     resend          -> Socket.setOption socket (ZMQ.XPUB_VERBOSE        ,resend           )
+      | RouterMandatory             mandatory       -> Socket.setOption socket (ZMQ.ROUTER_MANDATORY    ,mandatory        )
+      | SendQueue                   size            -> Socket.setOption socket (ZMQ.SNDHWM              ,size             )
+      | SendTimeout                 delay           -> Socket.setOption socket (ZMQ.SNDTIMEO            ,delay            )
+      | TcpKeepalive                (Some keep)     -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,keep             )
+      | TcpKeepalive                _               -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE       ,-1               )
+      | TcpKeepaliveCount           count           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_CNT   ,count            )
+      | TcpKeepaliveIdle            idle            -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_IDLE  ,idle             )
+      | TcpKeepaliveInterval        delay           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay            )
+      // security                                   
+      | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
+      | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
+      | PlainClient                 (unm,pwd)       -> Socket.setOption socket (ZMQ.PLAIN_USERNAME      ,unm              )
+                                                       Socket.setOption socket (ZMQ.PLAIN_PASSWORD      ,pwd              )    
+      | CurveServer                 secretKey       -> Socket.setOption socket (ZMQ.CURVE_SERVER        ,true             )
+                                                       Socket.setOption socket (ZMQ.CURVE_SECRETKEY     ,secretKey        )
+      | CurveClient (publicKey,secretKey,serverKey) -> Socket.setOption socket (ZMQ.CURVE_SERVERKEY     ,serverKey        )
+                                                       Socket.setOption socket (ZMQ.CURVE_PUBLICKEY     ,publicKey        )
+                                                       Socket.setOption socket (ZMQ.CURVE_SECRETKEY     ,secretKey        )
   
     let configureSocket socket socketOptions = 
       Seq.iter (setSocketOption socket) socketOptions
@@ -271,41 +271,41 @@ module Options =
     let (|Ipv6|) socket = getBool ZMQ.IPV6 socket
     
     /// true if the current security mechanism is NULL
-    let (|NullSec|_|) socket = getInt32AsEnum ZMQ.MECHANISM ZMQ.SECURITY_NULL socket
+    let (|NullSecurity|_|) socket = if getInt32 ZMQ.MECHANISM socket = ZMQ.SECURITY_NULL then Some () else None
     
-    /// true if the current security mechanism is PLAIN
-    let (|PlainSec|_|) socket = getInt32AsEnum ZMQ.MECHANISM ZMQ.SECURITY_PLAIN socket
+    /// true if the current security mechanism is PLAIN and the socket is acting as a server
+    let (|PlainServer|_|) socket = if getBool ZMQ.PLAIN_SERVER socket then Some () else None
+
+    /// true if the current security mechanism is PLAIN and the socket is acting as a client
+    let (|PlainClient|_|) socket = 
+        match getInt32 ZMQ.MECHANISM socket with
+        | ZMQ.SECURITY_PLAIN -> Some (getString ZMQ.PLAIN_USERNAME socket, getString ZMQ.PLAIN_PASSWORD socket)
+        | _ -> None
     
-    /// true if the current security mechanism is CURVE
-    let (|CurveSec|_|) socket = getInt32AsEnum ZMQ.MECHANISM ZMQ.SECURITY_CURVE socket
-        
     /// keep last message in queue (ignores high-water mark options)
     let (|KeepLastMessageInQueue|) socket = getBool ZMQ.CONFLATE socket
   
     /// Sets authentication domain
     let (|AuthenticationDomain|) socket = getString ZMQ.ZAP_DOMAIN socket
     
-    /// Determines if socket is acting as a CURVE Server
-    let (|CurveServer|) socket = getBool ZMQ.CURVE_SERVER socket
+    /// true if the current security mechanism is CURVE and the socket is acting as a server
+    let (|CurveServer|_|) socket =
+        match getBool ZMQ.CURVE_SERVER socket with
+        | true ->
+            let secretKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_SECRETKEY (Some 32)
+            Some(secretKey)
+        | _ -> None
     
-    /// Retrives the public key for a socket using CURVE security
-    let (|CurvePublicKey|_|) socket = 
-      match getBytes ZMQ.CURVE_PUBLICKEY socket with
-      | null | [||] -> None
-      | publickey   -> Some publickey
+    /// true if the current security mechanism is CURVE and the socket is acting as a client
+    let (|CurveClient|_|) socket =
+        match getInt32 ZMQ.MECHANISM socket with
+        | ZMQ.SECURITY_CURVE -> 
+            let publicKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_PUBLICKEY (Some 32)
+            let secretKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_SECRETKEY (Some 32)
+            let serverKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_SERVERKEY (Some 32)
+            Some (publicKey, secretKey, serverKey)
+        | _ -> None
     
-    /// Retrives the secret key for a socket using CURVE security
-    let (|CurveSecretKey|_|) socket = 
-      match getBytes ZMQ.CURVE_SECRETKEY socket with
-      | null | [||] -> None
-      | secretkey   -> Some secretkey
-     
-    /// Retrives the server key for a socket acting as a CURVE client
-    let (|CurveServerKey|_|) socket = 
-      match getBytes ZMQ.CURVE_SERVERKEY socket with
-      | null | [||] -> None
-      | serverkey   -> Some serverkey
-      
     //TODO: LAST_ENDPOINT
     //TODO: ROUTER_HANDOVER
     //TODO: TOS

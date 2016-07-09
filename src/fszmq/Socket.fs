@@ -42,23 +42,28 @@ module Socket =
 
   /// Gets the value of the given option for the given Socket
   [<Extension;CompiledName("GetOption")>]
-  let getOption<'t> (socket:Socket) socketOption : 't =
+  let getOptionWithBufferSize<'t> (socket:Socket) socketOption bufferSize : 't =
     let size,read =
       let   t = typeof<'t>
-      if    t = typeof<int>     then   4,(snd >> readInt32  >> box)
-      elif  t = typeof<bool>    then   4,(snd >> readBool   >> box)
-      elif  t = typeof<int64>   then   8,(snd >> readInt64  >> box)
-      elif  t = typeof<uint64>  then   8,(snd >> readUInt64 >> box)
-      elif  t = typeof<string>  then 255,(       readString >> box)
-      elif  t = typeof<byte[]>  then 255,(       readBytes  >> box)
+      if    t = typeof<int>     then defaultArg bufferSize sizeof<int>   , snd >> readInt32  >> box
+      elif  t = typeof<bool>    then defaultArg bufferSize sizeof<bool>  , snd >> readBool   >> box
+      elif  t = typeof<int64>   then defaultArg bufferSize sizeof<int64> , snd >> readInt64  >> box
+      elif  t = typeof<uint64>  then defaultArg bufferSize sizeof<uint64>, snd >> readUInt64 >> box
+      elif  t = typeof<string>  then defaultArg bufferSize 255           ,        readString >> box
+      elif  t = typeof<byte[]>  then defaultArg bufferSize 255           ,        readBytes  >> box
                                 else invalidOp "Invalid data type"
     let getter (size,buffer) =
       let mutable size' = unativeint size
       match C.zmq_getsockopt(socket.Handle,socketOption,buffer,&size') with
-      | 0 -> downcast read (size',buffer)
+      | 0 -> downcast read (size',buffer) 
       | _ -> ZMQ.error()
     useBuffer size getter
 
+  /// Gets the value of the given option for the given Socket
+  [<Extension;CompiledName("GetOption")>]
+  let getOption socket socketOption =
+    getOptionWithBufferSize socket socketOption None
+  
   /// Sets the given option value for the given Socket
   [<Extension;CompiledName("SetOption")>]
   let setOption (socket:Socket) (socketOption,value:'t) =

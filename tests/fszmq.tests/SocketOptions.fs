@@ -241,11 +241,50 @@ module Options =
   let ``setting options and reading them are inverses: TcpKeepaliveInterval`` () =
     fun socket -> <@ let (TcpKeepaliveInterval actual) = socket in TcpKeepaliveInterval actual @>
     |> testInverses <| TcpKeepaliveInterval 123<s>
+    
+  let parseSecurity socket = 
+    <@ match socket with
+    | NullSecurity -> NullSecurity
+    | PlainServer -> PlainServer
+    | PlainClient (unm, pwd) -> PlainClient(unm, pwd)
+    | CurveServer secretKey -> CurveServer secretKey
+    | CurveClient (publicKey, secretKey, serverKey) -> CurveClient (publicKey, secretKey, serverKey)
+    | _ -> failwith "unknown security mechanism" @>
+    
+
+  [<Test>]
+  let ``setting options and reading them are inverses: NullSecurity`` () =
+    parseSecurity
+    |> testInverses <| NullSecurity
+    
+  [<Test>]
+  let ``setting options and reading them are inverses: PlainServer`` () =
+    parseSecurity
+    |> testInverses <| PlainServer    
+
+  [<Test>]
+  let ``setting options and reading them are inverses: PlainClient`` () =
+    parseSecurity
+    |> testInverses <| PlainClient ("myUserName", "supersecurepassword")
+
+  /// Well-known keys from the ZMQ documentation.
+  module private CurveKeys =
+    let clientPublicKey = Z85.decode "Yne@$w-vo<fVvi]a<NY6T1ed:M$fCG*[IaLV{hID"
+    let clientSecretKey = Z85.decode "D:)Q[IlAW!ahhC2ac:9*A}h:p?([4%wOTJ%JR%cs"
+
+    let serverPublicKey = Z85.decode "rq:rM>}U?@Lns47E1%kR.o@n%FcmmsL/@{H8]yf7"
+    let serverSecretKey = Z85.decode "JTKVSB%%)wK0E.X)V>+}o?pNmC{O&4W4b!Ni{Lh6"
+
+  [<Test>]
+  let ``setting options and reading them are inverses: CurveServer`` () =   
+    parseSecurity
+    |> testInverses <| CurveServer CurveKeys.serverSecretKey
+
+  [<Test>]
+  let ``setting options and reading them are inverses: CurveClient`` () =   
+    parseSecurity
+    |> testInverses <| CurveClient(CurveKeys.clientPublicKey, CurveKeys.clientSecretKey, CurveKeys.serverPublicKey)
 
 
 // TODO: test Subscribe
 // TODO: test Unsubscribe
-// TODO: test plain security (PlainServer true; PlainServer false; PlainClient (unm, pwd))
-// TODO: test curve security (CurveServer (true, secretKey); CurveServer (false, _); CurveClient(publicKey, secretKey,serverKey) 
-// TODO: refactor CurveServer (bool * byte[]) => CurveServerEnabled byte[]; CurveServerDisabled
-  
