@@ -138,14 +138,14 @@ module Options =
     |> testInverses <| MulticastHops 123<NetworkHop>
 
   [<Test>]
-  let ``setting options and reading them are inverses: ProbeRouter true`` () =
-    fun socket -> <@ let (ProbeRouter actual) = socket in ProbeRouter actual @>
-    |> testInverses <| ProbeRouter true
+  let ``setting options does not throw: ProbeRouter true`` () =
+    ProbeRouter true
+    |> testSetter ZMQ.REQ
 
   [<Test>]
-  let ``setting options and reading them are inverses: ProbeRouter false`` () =
-    fun socket -> <@ let (ProbeRouter actual) = socket in ProbeRouter actual @>
-    |> testInverses <| ProbeRouter false
+  let ``setting options does not throw: ProbeRouter false`` () =
+    ProbeRouter false
+    |> testSetter ZMQ.REQ
   
   [<Test>]
   let ``setting options and reading them are inverses: ReceiveQueue`` () =

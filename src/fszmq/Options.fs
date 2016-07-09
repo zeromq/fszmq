@@ -285,9 +285,6 @@ module Options =
     /// true if the current security mechanism is CURVE
     let (|CurveSec|_|) socket = getInt32AsEnum ZMQ.MECHANISM ZMQ.SECURITY_CURVE socket
         
-    /// automatically send an empty message on new connection
-    let (|ProbeRouter|) socket = getBool ZMQ.PROBE_ROUTER socket
-  
     /// keep last message in queue (ignores high-water mark options)
     let (|KeepLastMessageInQueue|) socket = getBool ZMQ.CONFLATE socket
   
