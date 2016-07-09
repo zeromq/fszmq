@@ -297,12 +297,6 @@ module Options =
     /// automatically send an empty message on new connection
     let (|ProbeRouter|) socket = getBool ZMQ.PROBE_ROUTER socket
   
-    /// prefix messages with explicit request ID
-    let (|RequestCorrelation|) socket = getBool ZMQ.REQ_CORRELATE socket
-  
-    /// relax strict alternation between ZMQ.REQ and ZMQ.REP
-    let (|RelaxStrictAlternation|) socket = getBool ZMQ.REQ_RELAXED socket
-  
     /// keep last message in queue (ignores high-water mark options)
     let (|KeepLastMessageInQueue|) socket = getBool ZMQ.CONFLATE socket
   

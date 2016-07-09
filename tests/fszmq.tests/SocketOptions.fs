@@ -32,6 +32,11 @@ module Options =
             let actual = %patternMatch socket
             actual = expected @>
 
+  let testSetter socketType option =
+    use context = new Context()
+    use socket = Context.newSocket context socketType
+    setSocketOption socket option
+
   [<Test>]
   let ``setting options and reading them are inverses: Affinity`` () =
     fun socket -> <@ let (Affinity actual) = socket in Affinity actual @>
@@ -158,24 +163,24 @@ module Options =
     |> testInverses <| ReconnectDelay 123<ms>
 
   [<Test>]
-  let ``setting options and reading them are inverses: RelaxStrictAlternation true`` () =
-    fun socket -> <@ let (RelaxStrictAlternation actual) = socket in RelaxStrictAlternation actual @>
-    |> testInverses <| RelaxStrictAlternation true
+  let ``setting options does not throw: RelaxStrictAlternation true`` () =
+    RelaxStrictAlternation true
+    |> testSetter ZMQ.REQ
 
   [<Test>]
-  let ``setting options and reading them are inverses: RelaxStrictAlternation false`` () =
-    fun socket -> <@ let (RelaxStrictAlternation actual) = socket in RelaxStrictAlternation actual @>
-    |> testInverses <| RelaxStrictAlternation false
+  let ``setting options does not throw: RelaxStrictAlternation false`` () =
+    RelaxStrictAlternation false
+    |> testSetter ZMQ.REQ
 
   [<Test>]
-  let ``setting options and reading them are inverses: RequestCorrelation true`` () =
-    fun socket -> <@ let (RequestCorrelation actual) = socket in RequestCorrelation actual @>
-    |> testInverses <| RequestCorrelation true
+  let ``setting options does not throw: RequestCorrelation true`` () =
+    RequestCorrelation true
+    |> testSetter ZMQ.REQ
 
   [<Test>]
-  let ``setting options and reading them are inverses: RequestCorrelation false`` () =
-    fun socket -> <@ let (RequestCorrelation actual) = socket in RequestCorrelation actual @>
-    |> testInverses <| RequestCorrelation false
+  let ``setting options does not throw: RequestCorrelation false`` () =
+    RequestCorrelation false
+    |> testSetter ZMQ.REQ
 
   [<Test>]
   let ``setting options and reading them are inverses: ResendDuplicateMessages true`` () =
