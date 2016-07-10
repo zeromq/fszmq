@@ -55,6 +55,16 @@ module Options =
     |> testInverses <| Identity "My Identity"B
 
   [<Test>]
+  let ``setting options does not throw: Subscribe "prefix"B`` () =
+    Subscribe "prefix"B
+    |> testSetter ZMQ.SUB
+
+  [<Test>]
+  let ``setting options does not throw: Unsubscribe "prefix"B`` () =
+    Unsubscribe "prefix"B
+    |> testSetter ZMQ.SUB
+
+  [<Test>]
   let ``setting options and reading them are inverses: Rate`` () =
     fun socket -> <@ let (Rate actual) = socket in Rate actual @>
     |> testInverses <| Rate 123<kb/s>
@@ -291,6 +301,3 @@ module Options =
     parseSecurity
     |> testInverses <| CurveClient(CurveKeys.clientPublicKey, CurveKeys.clientSecretKey, CurveKeys.serverPublicKey)
 
-
-// TODO: test Subscribe
-// TODO: test Unsubscribe
