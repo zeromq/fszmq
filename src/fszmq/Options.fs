@@ -42,10 +42,6 @@ module Options =
     | SendBuffer of size:int<Byte>
     /// Receive-message buffer size in bytes
     | ReceiveBuffer of int<Byte>
-    /// More message frames available
-    | MoreMessageFramesAvailable of bool
-    /// Socket event state, see all: Polling
-    | Events of polling:int
     /// Pause before shutdown
     | LingerDelay of delay:int<ms>
     /// Pause before reconnect
@@ -129,8 +125,6 @@ module Options =
       | MulticastRecovery           time            -> Socket.setOption socket (ZMQ.RECOVERY_IVL        ,time             )
       | SendBuffer                  size            -> Socket.setOption socket (ZMQ.SNDBUF              ,size             )
       | ReceiveBuffer               size            -> Socket.setOption socket (ZMQ.RCVBUF              ,size             )
-      | MoreMessageFramesAvailable  more            -> Socket.setOption socket (ZMQ.RCVMORE             ,more             )
-      | Events                      events          -> Socket.setOption socket (ZMQ.EVENTS              ,events           )    
       | AuthenticationDomain        domain          -> Socket.setOption socket (ZMQ.ZAP_DOMAIN          ,domain           )
       | Backlog                     length          -> Socket.setOption socket (ZMQ.BACKLOG             ,length           )
       | Immediate                   immediate       -> Socket.setOption socket (ZMQ.IMMEDIATE           ,immediate        )
@@ -185,10 +179,7 @@ module Options =
       socket
       |> getInt64 option 
       |> LanguagePrimitives.Int64WithMeasure
-  
-    let inline private getInt32AsEnum option value socket =
-      if getInt32 option socket = value then Some value else None
-      
+       
     /// I/O thread affinity bit-mask
     let (|Affinity|) socket = getUInt64 ZMQ.AFFINITY socket
     
@@ -211,7 +202,7 @@ module Options =
     let (|MoreMessageFramesAvailable|) socket = getBool ZMQ.RCVMORE socket
   
     /// Socket event state, see all: Polling
-    let (|Events|) socket = getInt32 ZMQ.EVENTS socket
+    let (|Events|) socket = getInt32 ZMQ.EVENTS socket |> int16 // ZMQ actually uses and int32 in the getOptions, even though, internally only an int16 is actually used
   
     /// Socket type
     let (|SocketType|) socket : int<ZMQ.SocketType> = getInt32WithMeasure ZMQ.TYPE socket

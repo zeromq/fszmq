@@ -37,6 +37,13 @@ module Options =
     use socket = Context.newSocket context socketType
     setSocketOption socket option
 
+  let testGetter expected patternMatch =
+    test <@ use context = new Context()
+            use socket = Context.newSocket context ZMQ.PUB
+            let actual = (%patternMatch) socket
+            actual = expected @>
+
+
   [<Test>]
   let ``setting options and reading them are inverses: Affinity`` () =
     fun socket -> <@ let (Affinity actual) = socket in Affinity actual @>
@@ -68,14 +75,14 @@ module Options =
     |> testInverses <| ReceiveBuffer 123<B>
 
   [<Test>]
-  let ``setting options and reading them are inverses: MoreMessageFramesAvailable`` () =
-    fun socket -> <@ let (MoreMessageFramesAvailable actual) = socket in MoreMessageFramesAvailable actual @>
-    |> testInverses <| MoreMessageFramesAvailable true
+  let ``getting options does not throw: MoreMessageFramesAvailable`` () =
+    <@ fun (MoreMessageFramesAvailable moreMessages) -> moreMessages @>
+    |> testGetter false
 
   [<Test>]
-  let ``setting options and reading them are inverses: Events`` () =
-    fun socket -> <@ let (Events actual) = socket in Events actual @>
-    |> testInverses <| Events 123
+  let ``getting options does not throw: Events`` () =
+    <@ fun (Events polling) -> polling @>
+    |> testGetter ZMQ.POLLOUT
 
   [<Test>]
   let ``setting options and reading them are inverses: AuthenticationDomain`` () =
@@ -244,13 +251,12 @@ module Options =
     
   let parseSecurity socket = 
     <@ match socket with
-    | NullSecurity -> NullSecurity
-    | PlainServer -> PlainServer
-    | PlainClient (unm, pwd) -> PlainClient(unm, pwd)
-    | CurveServer secretKey -> CurveServer secretKey
-    | CurveClient (publicKey, secretKey, serverKey) -> CurveClient (publicKey, secretKey, serverKey)
-    | _ -> failwith "unknown security mechanism" @>
-    
+       | NullSecurity -> NullSecurity
+       | PlainServer -> PlainServer
+       | PlainClient (unm, pwd) -> PlainClient(unm, pwd)
+       | CurveServer secretKey -> CurveServer secretKey
+       | CurveClient (publicKey, secretKey, serverKey) -> CurveClient (publicKey, secretKey, serverKey)
+       | _ -> failwith "unknown security mechanism" @>  
 
   [<Test>]
   let ``setting options and reading them are inverses: NullSecurity`` () =

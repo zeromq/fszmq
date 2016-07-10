@@ -61,8 +61,8 @@ module Socket =
 
   /// Gets the value of the given option for the given Socket
   [<Extension;CompiledName("GetOption")>]
-  let getOption socket socketOption =
-    getOptionWithBufferSize socket socketOption None
+  let getOption<'t> socket socketOption =
+    getOptionWithBufferSize<'t> socket socketOption None
   
   /// Sets the given option value for the given Socket
   [<Extension;CompiledName("SetOption")>]
