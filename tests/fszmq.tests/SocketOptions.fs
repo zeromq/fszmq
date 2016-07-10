@@ -258,6 +258,11 @@ module Options =
   let ``setting options and reading them are inverses: TcpKeepaliveInterval`` () =
     fun socket -> <@ let (TcpKeepaliveInterval actual) = socket in TcpKeepaliveInterval actual @>
     |> testInverses <| TcpKeepaliveInterval 123<s>
+
+  [<Test>]
+  let ``setting options and reading them are inverses: HandshakeInterval`` () =
+    fun socket -> <@ let (HandshakeInterval actual) = socket in HandshakeInterval actual @>
+    |> testInverses <| HandshakeInterval 123<ms>
     
   let parseSecurity socket = 
     <@ match socket with

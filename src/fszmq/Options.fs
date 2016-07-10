@@ -98,7 +98,9 @@ module Options =
     | KeepLastMessageInQueue of keepMessage:bool
     /// Sets authentication domain
     | AuthenticationDomain of domain:string
-    
+    /// Sets the maximum handshake interval
+    | HandshakeInterval of delay:int<ms>
+
     //TODO: LAST_ENDPOINT
     //TODO: ROUTER_HANDOVER
     //TODO: TOS
@@ -107,7 +109,6 @@ module Options =
     //TODO: GSSAPI_PRINCIPAL
     //TODO: GSSAPI_SERVICE_PRINCIPAL
     //TODO: GSSAPI_PLAINTEXT
-    //TODO: HANDSHAKE_IVL
     //TODO: SOCKS_PROXY
     //TODO: XPUB_NODROP
   
@@ -149,6 +150,7 @@ module Options =
       | TcpKeepaliveCount           count           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_CNT   ,count            )
       | TcpKeepaliveIdle            idle            -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_IDLE  ,idle             )
       | TcpKeepaliveInterval        delay           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay            )
+      | HandshakeInterval           delay           -> Socket.setOption socket (ZMQ.HANDSHAKE_IVL       ,delay            )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
@@ -255,6 +257,9 @@ module Options =
     /// Override OS-level TCP keep-alive
     let (|TcpKeepaliveInterval|) socket : int<s> = getInt32WithMeasure ZMQ.TCP_KEEPALIVE_INTVL socket
   
+    /// Retrieve the maximum handshake interval
+    let (|HandshakeInterval|) socket : int<ms> = getInt32WithMeasure ZMQ.HANDSHAKE_IVL socket
+  
     /// limit queuing to only completed connections
     let (|Immediate|) socket = getBool ZMQ.IMMEDIATE socket
   
@@ -305,6 +310,5 @@ module Options =
     //TODO: GSSAPI_PRINCIPAL
     //TODO: GSSAPI_SERVICE_PRINCIPAL
     //TODO: GSSAPI_PLAINTEXT
-    //TODO: HANDSHAKE_IVL
     //TODO: SOCKS_PROXY
     //TODO: XPUB_NODROP
