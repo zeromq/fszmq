@@ -100,17 +100,8 @@ module Options =
     | AuthenticationDomain of domain:string
     /// Sets the maximum handshake interval
     | HandshakeInterval of delay:int<ms>
-
-    //TODO: LAST_ENDPOINT
-    //TODO: ROUTER_HANDOVER
-    //TODO: TOS
-    //TODO: CONNECT_RID
-    //TODO: GSSAPI_SERVER
-    //TODO: GSSAPI_PRINCIPAL
-    //TODO: GSSAPI_SERVICE_PRINCIPAL
-    //TODO: GSSAPI_PLAINTEXT
-    //TODO: SOCKS_PROXY
-    //TODO: XPUB_NODROP
+    /// If that option is set, the ROUTER socket shall hand-over the connection to the new client and disconnect the existing one.
+    | RouterHandover of bool
   
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
@@ -151,6 +142,7 @@ module Options =
       | TcpKeepaliveIdle            idle            -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_IDLE  ,idle             )
       | TcpKeepaliveInterval        delay           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay            )
       | HandshakeInterval           delay           -> Socket.setOption socket (ZMQ.HANDSHAKE_IVL       ,delay            )
+      | RouterHandover              handover        -> Socket.setOption socket (ZMQ.ROUTER_HANDOVER     ,handover         )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
@@ -301,14 +293,4 @@ module Options =
             let serverKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_SERVERKEY (Some 32)
             Some (publicKey, secretKey, serverKey)
         | _ -> None
-    
-    //TODO: LAST_ENDPOINT
-    //TODO: ROUTER_HANDOVER
-    //TODO: TOS
-    //TODO: CONNECT_RID
-    //TODO: GSSAPI_SERVER
-    //TODO: GSSAPI_PRINCIPAL
-    //TODO: GSSAPI_SERVICE_PRINCIPAL
-    //TODO: GSSAPI_PLAINTEXT
-    //TODO: SOCKS_PROXY
-    //TODO: XPUB_NODROP
+   

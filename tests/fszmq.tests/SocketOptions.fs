@@ -220,6 +220,16 @@ module Options =
     |> testSetter ZMQ.ROUTER
 
   [<Test>]
+  let ``setting options does not throw: RouterHandover false`` () =
+    RouterHandover false
+    |> testSetter ZMQ.ROUTER
+
+  [<Test>]
+  let ``setting options does not throw: RouterHandover true`` () =
+    RouterHandover true
+    |> testSetter ZMQ.ROUTER
+
+  [<Test>]
   let ``setting options and reading them are inverses: SendQueue`` () =
     fun socket -> <@ let (SendQueue actual) = socket in SendQueue actual @>
     |> testInverses <| SendQueue 123
