@@ -329,3 +329,8 @@ module Options =
   let ``setting options does not throw: ConnectPeerId`` () =
     ConnectPeerId "otherpeer"B
     |> testSetter ZMQ.ROUTER
+
+  [<Test>]
+  let ``setting options and reading them are inverses: SocksProxy`` () =
+    <@ fun (SocksProxy proxy) -> SocksProxy proxy @>
+    |> testInverses <| SocksProxy "1.2.3.4:5678"

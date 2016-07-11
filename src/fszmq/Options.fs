@@ -106,6 +106,8 @@ module Options =
     | TypeOfService of int
     /// Sets the peer id of the next connected host, and immediately readies that connection for data transfer with the named id.
     | ConnectPeerId of byte[]
+    /// Connect through a SOCKS proxy
+    | SocksProxy of string
   
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
@@ -149,6 +151,7 @@ module Options =
       | RouterHandover              handover        -> Socket.setOption socket (ZMQ.ROUTER_HANDOVER     ,handover         )
       | TypeOfService               tos             -> Socket.setOption socket (ZMQ.TOS                 ,tos              )
       | ConnectPeerId               peerId          -> Socket.setOption socket (ZMQ.CONNECT_RID         ,peerId           )
+      | SocksProxy                  proxy           -> Socket.setOption socket (ZMQ.SOCKS_PROXY         ,proxy            )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
@@ -303,5 +306,8 @@ module Options =
     /// Retrieves the last endpoint bound for TCP and IPC transports
     let (|LastEndpointAddress|) socket = getString ZMQ.LAST_ENDPOINT socket
    
-    /// Retrieve the TypeOfService option for the socket
+    /// Retrieves the TypeOfService option for the socket
     let (|TypeOfService|) socket = getInt32 ZMQ.TOS socket
+
+    /// Retrieves SOCKS proxy address
+    let (|SocksProxy|) socket = getString ZMQ.SOCKS_PROXY socket
