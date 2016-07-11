@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>SocketOption - fszmq</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Paulmichael Blasucci"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/fszmq/content/style.css" />
+    <script type="text/javascript" src="/fszmq/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://zeromq.org/" target="_blank">zeromq.org</a></li>
+          <li><a href="http://fsharp.org" target="_blank">fsharp.org</a></li>
+          <li><a href="http://github.com/zeromq/fszmq">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/fszmq/index.html">fszmq</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>SocketOption</h1>
+<p>
+  <span>Namespace: fszmq</span><br />
+  <span>Parent Module: <a href="fszmq-options.html">Options</a></span>
+</p>
+<div class="xmldoc">
+<p>Socket options</p>
+
+
+</div>
+  <h3>Union Cases</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Union Case</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '249', 249)" onmouseover="showTip(event, '249', 249)">
+            Affinity(bitmask)
+          </code>
+          <div class="tip" id="249">
+            <strong>Signature:</strong> uint64<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L30-30" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>I/O thread affinity bit-mask</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '250', 250)" onmouseover="showTip(event, '250', 250)">
+            AuthenticationDomain(domain)
+          </code>
+          <div class="tip" id="250">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L90-90" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets authentication domain</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '251', 251)" onmouseover="showTip(event, '251', 251)">
+            Backlog(length)
+          </code>
+          <div class="tip" id="251">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum number of queued peers</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '252', 252)" onmouseover="showTip(event, '252', 252)">
+            ConnectPeerId(byte [])
+          </code>
+          <div class="tip" id="252">
+            <strong>Signature:</strong> byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L98-98" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the peer id of the next connected host, and immediately readies that connection for data transfer with the named id.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '253', 253)" onmouseover="showTip(event, '253', 253)">
+            CurveClient(...)
+          </code>
+          <div class="tip" id="253">
+            <strong>Signature:</strong> byte [] * byte [] * byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L112-112" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Public and private keys for client using CURVE security</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '254', 254)" onmouseover="showTip(event, '254', 254)">
+            CurveServer(secretKey)
+          </code>
+          <div class="tip" id="254">
+            <strong>Signature:</strong> byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L110-110" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Make socket act as a server for CURVE security</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '255', 255)" onmouseover="showTip(event, '255', 255)">
+            DoNoSilentlyDropMessages(bool)
+          </code>
+          <div class="tip" id="255">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L102-102" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>do not silently drop messages if sending high water mark is reached</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '256', 256)" onmouseover="showTip(event, '256', 256)">
+            GssapiClient(principal,servicePrincipal)
+          </code>
+          <div class="tip" id="256">
+            <strong>Signature:</strong> string * string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L116-116" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Make socket act as a GSSAPI client.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '257', 257)" onmouseover="showTip(event, '257', 257)">
+            GssapiClientUnencripted(...)
+          </code>
+          <div class="tip" id="257">
+            <strong>Signature:</strong> string * string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L120-120" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Make socket act as a GSSAPI client, disabling encryption.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '258', 258)" onmouseover="showTip(event, '258', 258)">
+            GssapiServer(principal)
+          </code>
+          <div class="tip" id="258">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L114-114" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Make socket act as a GSSAPI server.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '259', 259)" onmouseover="showTip(event, '259', 259)">
+            GssapiServerUnencripted(principal)
+          </code>
+          <div class="tip" id="259">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L118-118" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Make socket act as a GSSAPI server, disabling encryption.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '260', 260)" onmouseover="showTip(event, '260', 260)">
+            HandshakeInterval(delay)
+          </code>
+          <div class="tip" id="260">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L92-92" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the maximum handshake interval</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '261', 261)" onmouseover="showTip(event, '261', 261)">
+            Identity(identifier)
+          </code>
+          <div class="tip" id="261">
+            <strong>Signature:</strong> byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L32-32" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Socket identifier</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
+            Immediate(queueCompletedOnly)
+          </code>
+          <div class="tip" id="262">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L76-76" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>limit queuing to only completed connections</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
+            Ipv6(ipv6)
+          </code>
+          <div class="tip" id="263">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L80-80" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>true to enable IPv6 on the socket, false to restrict to only IPv4</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
+            KeepLastMessageInQueue(keepMessage)
+          </code>
+          <div class="tip" id="264">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L88-88" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>keep last message in queue (ignores high-water mark options)</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
+            LingerDelay(delay)
+          </code>
+          <div class="tip" id="265">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L46-46" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Pause before shutdown</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '266', 266)" onmouseover="showTip(event, '266', 266)">
+            MaxMessageSize(size)
+          </code>
+          <div class="tip" id="266">
+            <strong>Signature:</strong> int64&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L54-54" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum inbound message size</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '267', 267)" onmouseover="showTip(event, '267', 267)">
+            MaxReconnectInterval(delay)
+          </code>
+          <div class="tip" id="267">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L52-52" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum reconnection interval</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '268', 268)" onmouseover="showTip(event, '268', 268)">
+            MulticastHops(hops)
+          </code>
+          <div class="tip" id="268">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;NetworkHop,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L60-60" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Time-to-live for each multicast packet</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '269', 269)" onmouseover="showTip(event, '269', 269)">
+            MulticastRecovery(time)
+          </code>
+          <div class="tip" id="269">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L40-40" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Multicast recovery period</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
+            NullSecurity
+          </code>
+          <div class="tip" id="270">
+            <strong>Signature:</strong> <br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L104-104" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>make socket act as server or client for NULL security</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
+            PlainClient(username,password)
+          </code>
+          <div class="tip" id="271">
+            <strong>Signature:</strong> string * string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L108-108" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set user name and password for client using PLAIN security</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
+            PlainServer
+          </code>
+          <div class="tip" id="272">
+            <strong>Signature:</strong> <br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L106-106" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>make socket act as server for PLAIN security</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '273', 273)" onmouseover="showTip(event, '273', 273)">
+            ProbeRouter(...)
+          </code>
+          <div class="tip" id="273">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L82-82" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>automatically send an empty message on new connection</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '274', 274)" onmouseover="showTip(event, '274', 274)">
+            Rate(dataRate)
+          </code>
+          <div class="tip" id="274">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;MeasureInverse&lt;s&gt;,MeasureProduct&lt;kb,MeasureOne&gt;&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L38-38" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Multicast data rate</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '275', 275)" onmouseover="showTip(event, '275', 275)">
+            ReceiveBuffer(...)
+          </code>
+          <div class="tip" id="275">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L44-44" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Receive-message buffer size in bytes</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '276', 276)" onmouseover="showTip(event, '276', 276)">
+            ReceiveQueue(size)
+          </code>
+          <div class="tip" id="276">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L58-58" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum number of inbound queued messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '277', 277)" onmouseover="showTip(event, '277', 277)">
+            ReceiveTimeout(timeout)
+          </code>
+          <div class="tip" id="277">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L62-62" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Timeout period for inbound messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '278', 278)" onmouseover="showTip(event, '278', 278)">
+            ReconnectDelay(delay)
+          </code>
+          <div class="tip" id="278">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L48-48" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Pause before reconnect</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '279', 279)" onmouseover="showTip(event, '279', 279)">
+            RelaxStrictAlternation(...)
+          </code>
+          <div class="tip" id="279">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>relax strict alternation between ZMQ.REQ and ZMQ.REP</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '280', 280)" onmouseover="showTip(event, '280', 280)">
+            RequestCorrelation(...)
+          </code>
+          <div class="tip" id="280">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L84-84" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>prefix messages with explicit request ID</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '281', 281)" onmouseover="showTip(event, '281', 281)">
+            ResendDuplicateMessages(resendDuplicate)
+          </code>
+          <div class="tip" id="281">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L78-78" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>resend duplicate messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '282', 282)" onmouseover="showTip(event, '282', 282)">
+            RouterHandover(bool)
+          </code>
+          <div class="tip" id="282">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L94-94" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>If that option is set, the ROUTER socket shall hand-over the connection to the new client and disconnect the existing one.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '283', 283)" onmouseover="showTip(event, '283', 283)">
+            RouterMandatory(errorOnUnroutable)
+          </code>
+          <div class="tip" id="283">
+            <strong>Signature:</strong> bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>true to error on unroutable messages, false to silently ignore</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '284', 284)" onmouseover="showTip(event, '284', 284)">
+            SendBuffer(size)
+          </code>
+          <div class="tip" id="284">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L42-42" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Send-message buffer size in bytes</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '285', 285)" onmouseover="showTip(event, '285', 285)">
+            SendQueue(size)
+          </code>
+          <div class="tip" id="285">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L56-56" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum number of outbound queued messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
+            SendTimeout(timeout)
+          </code>
+          <div class="tip" id="286">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L64-64" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Timeout period for outbound messages</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
+            SocksProxy(string)
+          </code>
+          <div class="tip" id="287">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L100-100" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Connect through a SOCKS proxy</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+            Subscribe(filter)
+          </code>
+          <div class="tip" id="288">
+            <strong>Signature:</strong> byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L34-34" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Add subscription filter</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
+            TcpKeepalive(enable)
+          </code>
+          <div class="tip" id="289">
+            <strong>Signature:</strong> bool option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Override OS-level TCP keep-alive</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
+            TcpKeepaliveCount(count)
+          </code>
+          <div class="tip" id="290">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L70-70" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Override OS-level TCP keep-alive</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
+            TcpKeepaliveIdle(idle)
+          </code>
+          <div class="tip" id="291">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;s,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L72-72" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Override OS-level TCP keep-alive</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
+            TcpKeepaliveInterval(delay)
+          </code>
+          <div class="tip" id="292">
+            <strong>Signature:</strong> int&lt;MeasureProduct&lt;s,MeasureOne&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L74-74" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Override OS-level TCP keep-alive</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
+            TypeOfService(int)
+          </code>
+          <div class="tip" id="293">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L96-96" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the ToS fields (Differentiated services (DS) and Explicit Congestion Notification (ECN) field of the IP header. The ToS field is typically used to specify a packets priority.</p>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '294', 294)" onmouseover="showTip(event, '294', 294)">
+            Unsubscribe(filter)
+          </code>
+          <div class="tip" id="294">
+            <strong>Signature:</strong> byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Options.fs#L36-36" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Remove subscription filter</p>
+
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/fszmq/img/fszmq_logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">fszmq</li>
+            <li><a href="/fszmq/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/fszmq">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/zeromq/fszmq">Source Code on GitHub</a></li>
+            <li><a href="/fszmq/release_notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/fszmq/tutorial.html" title="A simple client/server tutorial">Client/Server tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/fszmq/zguide/index.html" title="zguide examples in F#">F# zguide examples</a></li>
+            <li><a href="/fszmq/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/zeromq/fszmq"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
