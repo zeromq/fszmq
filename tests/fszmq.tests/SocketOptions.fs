@@ -319,3 +319,8 @@ module Options =
   let ``getting options does not throw: LastEndpointAddress`` () =
     <@ fun (LastEndpointAddress address) -> address @>
     |> testGetter ""
+
+  [<Test>]
+  let ``setting options and reading them are inverses: TypeOfService`` () =
+    <@ fun (TypeOfService tos) -> TypeOfService tos @>
+    |> testInverses <| TypeOfService 123

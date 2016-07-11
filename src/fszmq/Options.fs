@@ -102,6 +102,8 @@ module Options =
     | HandshakeInterval of delay:int<ms>
     /// If that option is set, the ROUTER socket shall hand-over the connection to the new client and disconnect the existing one.
     | RouterHandover of bool
+    /// Sets the ToS fields (Differentiated services (DS) and Explicit Congestion Notification (ECN) field of the IP header. The ToS field is typically used to specify a packets priority. 
+    | TypeOfService of int
   
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
@@ -143,6 +145,7 @@ module Options =
       | TcpKeepaliveInterval        delay           -> Socket.setOption socket (ZMQ.TCP_KEEPALIVE_INTVL ,delay            )
       | HandshakeInterval           delay           -> Socket.setOption socket (ZMQ.HANDSHAKE_IVL       ,delay            )
       | RouterHandover              handover        -> Socket.setOption socket (ZMQ.ROUTER_HANDOVER     ,handover         )
+      | TypeOfService               tos             -> Socket.setOption socket (ZMQ.TOS                 ,tos              )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
@@ -297,3 +300,5 @@ module Options =
     /// Retrieves the last endpoint bound for TCP and IPC transports
     let (|LastEndpointAddress|) socket = getString ZMQ.LAST_ENDPOINT socket
    
+    /// Retrieve the TypeOfService option for the socket
+    let (|TypeOfService|) socket = getInt32 ZMQ.TOS socket
