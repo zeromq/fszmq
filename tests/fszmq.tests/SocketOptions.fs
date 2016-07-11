@@ -42,6 +42,12 @@ module Options =
     use socket = Context.newSocket context ZMQ.PUB
     test <@ let actual = (%patternMatch) socket
             actual = expected @>
+  
+  let assertHas cap =
+    match ZMQ.has cap with
+    | Supported (_, true) -> ()
+    | Supported (_, false) -> sprintf "capability missing: %A" cap |> Assert.Ignore
+    | Unknown -> sprintf "Unable to confirm if the capability exists: %A" cap |> Assert.Inconclusive
 
   [<Test>]
   let ``setting options and reading them are inverses: Affinity`` () =
@@ -275,12 +281,21 @@ module Options =
     
   let parseSecurity = 
     <@ function
-       | NullSecurity -> NullSecurity
        | PlainServer -> PlainServer
        | PlainClient (unm, pwd) -> PlainClient(unm, pwd)
+       | GssapiServer (principal) -> GssapiServer (principal)
+       | GssapiServerUnencripted (principal) -> GssapiServerUnencripted (principal)
+       | GssapiClient (principal, servicePrincipal) -> GssapiClient (principal, servicePrincipal)
+       | GssapiClientUnencripted (principal, servicePrincipal) -> GssapiClientUnencripted (principal, servicePrincipal)
        | CurveServer secretKey -> CurveServer secretKey
        | CurveClient (publicKey, secretKey, serverKey) -> CurveClient (publicKey, secretKey, serverKey)
+       | NullSecurity -> NullSecurity
        | _ -> failwith "unknown security mechanism" @>  
+
+  [<Test>]
+  let ``getting the security mechanism does not throw`` () =
+    parseSecurity
+    |> testGetter NullSecurity  
 
   [<Test>]
   let ``setting options and reading them are inverses: NullSecurity`` () =
@@ -307,11 +322,13 @@ module Options =
 
   [<Test>]
   let ``setting options and reading them are inverses: CurveServer`` () =   
+    assertHas ZMQ.CAP_CURVE
     parseSecurity
     |> testInverses <| CurveServer CurveKeys.serverSecretKey
 
   [<Test>]
   let ``setting options and reading them are inverses: CurveClient`` () =   
+    assertHas ZMQ.CAP_CURVE
     parseSecurity
     |> testInverses <| CurveClient(CurveKeys.clientPublicKey, CurveKeys.clientSecretKey, CurveKeys.serverPublicKey)
 
@@ -344,3 +361,27 @@ module Options =
   let ``setting options does not throw: DoNoSilentlyDropMessages false`` () =
     DoNoSilentlyDropMessages false
     |> testSetter ZMQ.PUB
+
+  [<Test>]
+  let ``setting options and reading them are inverses: GssapiServer`` () =
+    assertHas ZMQ.CAP_GSSAPI
+    parseSecurity
+    |> testInverses <| GssapiServer "principal"
+
+  [<Test>]
+  let ``setting options and reading them are inverses: GssapiServerUnencrypted`` () =
+    assertHas ZMQ.CAP_GSSAPI
+    parseSecurity
+    |> testInverses <| GssapiServerUnencripted "principal"
+
+  [<Test>]
+  let ``setting options and reading them are inverses: GssapiClient`` () =
+    assertHas ZMQ.CAP_GSSAPI
+    parseSecurity
+    |> testInverses <| GssapiClient ("principal", "servicePrincipal")
+
+  [<Test>]
+  let ``setting options and reading them are inverses: GssapiClientUnencrypted`` () =
+    assertHas ZMQ.CAP_GSSAPI
+    parseSecurity
+    |> testInverses <| GssapiClientUnencripted ("principal", "servicePrincipal")
