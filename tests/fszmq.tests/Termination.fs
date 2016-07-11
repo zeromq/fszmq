@@ -53,10 +53,9 @@ module Termination =
     
     0 // OK
 
-  [<Test>]
+  [<Test; Ignore "Need to find a better way to test termination.">]
   let ``everything should shutdown cleanly`` () = 
     //NOTE: currently, limiting the number of tests seems to keep NUnit happy
     Check.One ({ Config.QuickThrowOnFailure with MaxTest = 10 }
               ,fun (PositiveInt delay) -> main delay = 0)
     //TODO: figure out why NUnit dislikes running this test 100 times
-    
