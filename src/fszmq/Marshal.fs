@@ -38,7 +38,7 @@ module internal Marshal =
     Marshal.Copy(pointer,value,0,length)
     value
 
-  let inline readString (length,pointer) = Encoding.UTF8.GetString(readBytes (length,pointer))
+  let inline readString (length,pointer) = Encoding.UTF8.GetString(readBytes (length,pointer)).TrimEnd '\000'
 
 (* writing native values *)
   let inline writeInt32 value pointer = Marshal.WriteInt32(pointer,value)

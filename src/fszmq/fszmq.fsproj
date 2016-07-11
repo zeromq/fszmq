@@ -77,6 +77,7 @@
     <Compile Include="Context.fs" />
     <Compile Include="Polling.fs" />
     <Compile Include="Utilities.fs" />
+    <Compile Include="Options.fs" />
     <None Include="Scratch.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
