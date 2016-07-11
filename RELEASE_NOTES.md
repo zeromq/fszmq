@@ -1,4 +1,4 @@
-### New in 21.2.0 (2016/07/11)
+### New in 12.2.0 (2016/07/11)
 * NEW API - safer, more discoverable API for socket options using a mixture of unions, active patterns (thanks to Daniel Fabian)
 * socket types (as part of context API) now safer with to units-of-measure (thanks to Daniel Fabian)
 
