@@ -1,3 +1,7 @@
+### New in 21.2.0 (2016/07/11)
+* NEW API - safer, more discoverable API for socket options using a mixture of unions, active patterns (thanks to Daniel Fabian)
+* socket types (as part of context API) now safer with to units-of-measure (thanks to Daniel Fabian)
+
 ### New in 12.1.1 (2015/08/21)
 * FIX (untracked) - corrected small issue with recieving EINTR during `Context` termination
 * FIX for Issue #121 - `Socket.sendAll` treats an empty container as an empty 1-frame message (patched by coconaut)

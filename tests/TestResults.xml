@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="/Users/pblasucci/Developer/fszmq/tests/fszmq.tests/bin/Release/fszmq.tests.dll" total="65" errors="0" failures="0" not-run="8" inconclusive="0" ignored="8" skipped="0" invalid="0" date="2016-07-11" time="17:11:29">
+  <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.42000" os-version="Unix 15.5.0.0" platform="Unix" cwd="/Users/pblasucci/Developer/fszmq" machine-name="GAERTH.fios-router.home" user="pblasucci" user-domain="GAERTH.fios-router.home" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="/Users/pblasucci/Developer/fszmq/tests/fszmq.tests/bin/Release/fszmq.tests.dll" executed="True" result="Success" success="True" time="0.800" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="fszmq" executed="True" result="Success" success="True" time="0.796" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="tests" executed="True" result="Success" success="True" time="0.796" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="Curve" executed="True" result="Inconclusive" success="False" time="0.075" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Curve.curveKeyPair generates 2 different evenly-divisible strings" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[CURVE not supported]]></message>
+                    </reason>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Message" executed="True" result="Success" success="True" time="0.235" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Message.after moving, target content should equal original content" executed="True" result="Success" success="True" time="0.119" asserts="0" />
+                  <test-case name="fszmq.tests.Message.both message should have the same content after copying" executed="True" result="Success" success="True" time="0.022" asserts="0" />
+                  <test-case name="fszmq.tests.Message.clone returns a new instance with the same data" executed="True" result="Success" success="True" time="0.012" asserts="0" />
+                  <test-case name="fszmq.tests.Message.copy requires two distinct message instances" executed="True" result="Success" success="True" time="0.071" asserts="0" />
+                  <test-case name="fszmq.tests.Message.move requires two distinct message instances" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Miscellany" executed="True" result="Success" success="True" time="0.062" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Miscellany.libzmq version should be at least 4" executed="True" result="Success" success="True" time="0.039" asserts="0" />
+                  <test-case name="fszmq.tests.Miscellany.recv throws TimeoutException if RCVTIMEO expires" executed="True" result="Success" success="True" time="0.022" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Options" executed="True" result="Success" success="True" time="0.329" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Options.getting options does not throw: Events" executed="True" result="Success" success="True" time="0.053" asserts="0" />
+                  <test-case name="fszmq.tests.Options.getting options does not throw: LastEndpointAddress" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.getting options does not throw: MoreMessageFramesAvailable" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.getting the security mechanism does not throw" executed="True" result="Success" success="True" time="0.007" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Affinity" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: AuthenticationDomain" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Backlog" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: CurveClient" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "curve"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: CurveServer" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "curve"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: GssapiClient" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "gssapi"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: GssapiClientUnencrypted" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "gssapi"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: GssapiServer" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "gssapi"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: GssapiServerUnencrypted" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[capability missing: "gssapi"]]></message>
+                    </reason>
+                  </test-case>
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: HandshakeInterval" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Identity" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Immediate false" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Immediate true" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Ipv6 false" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Ipv6 true" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: KeepLastMessageInQueue false" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: KeepLastMessageInQueue true" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: LingerDelay" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: MaxMessageSize" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: MaxReconnectInterval" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: MulticastHops" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: MulticastRecovery" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: NullSecurity" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: PlainClient" executed="True" result="Success" success="True" time="0.015" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: PlainServer" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: Rate" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: ReceiveBuffer" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: ReceiveQueue" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: ReceiveTimeout" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: ReconnectDelay" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: SendBuffer" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: SendQueue" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: SendTimeout" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: SocksProxy" executed="True" result="Success" success="True" time="0.009" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepalive (Some false)" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepalive (Some true)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepalive None" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepaliveCount" executed="True" result="Success" success="True" time="0.008" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepaliveIdle" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TcpKeepaliveInterval" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options and reading them are inverses: TypeOfService" executed="True" result="Success" success="True" time="0.008" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: ConnectPeerId" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: DoNoSilentlyDropMessages false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: DoNoSilentlyDropMessages true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: ProbeRouter false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: ProbeRouter true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RelaxStrictAlternation false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RelaxStrictAlternation true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RequestCorrelation false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RequestCorrelation true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: ResendDuplicateMessages false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: ResendDuplicateMessages true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RouterHandover false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RouterHandover true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RouterMandatory false" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: RouterMandatory true" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: Subscribe &quot;prefix&quot;B" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                  <test-case name="fszmq.tests.Options.setting options does not throw: Unsubscribe &quot;prefix&quot;B" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="fszmq.tests.Options.SocketType pattern should equal ZMQ.TYPE option" executed="True" result="Success" success="True" time="0.014" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Termination" executed="True" result="Inconclusive" success="False" time="0.001" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Termination.everything should shutdown cleanly" executed="False" result="Ignored">
+                    <reason>
+                      <message><![CDATA[Need to find a better way to test termination.]]></message>
+                    </reason>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Z85" executed="True" result="Success" success="True" time="0.083" asserts="0">
+                <results>
+                  <test-case name="fszmq.tests.Z85.encode-then-decode preserves data" executed="True" result="Success" success="True" time="0.083" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
