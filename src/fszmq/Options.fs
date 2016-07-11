@@ -104,6 +104,8 @@ module Options =
     | RouterHandover of bool
     /// Sets the ToS fields (Differentiated services (DS) and Explicit Congestion Notification (ECN) field of the IP header. The ToS field is typically used to specify a packets priority. 
     | TypeOfService of int
+    /// Sets the peer id of the next connected host, and immediately readies that connection for data transfer with the named id.
+    | ConnectPeerId of byte[]
   
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
@@ -146,6 +148,7 @@ module Options =
       | HandshakeInterval           delay           -> Socket.setOption socket (ZMQ.HANDSHAKE_IVL       ,delay            )
       | RouterHandover              handover        -> Socket.setOption socket (ZMQ.ROUTER_HANDOVER     ,handover         )
       | TypeOfService               tos             -> Socket.setOption socket (ZMQ.TOS                 ,tos              )
+      | ConnectPeerId               peerId          -> Socket.setOption socket (ZMQ.CONNECT_RID         ,peerId           )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )

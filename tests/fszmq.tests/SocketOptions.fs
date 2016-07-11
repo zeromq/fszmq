@@ -324,3 +324,8 @@ module Options =
   let ``setting options and reading them are inverses: TypeOfService`` () =
     <@ fun (TypeOfService tos) -> TypeOfService tos @>
     |> testInverses <| TypeOfService 123
+
+  [<Test>]
+  let ``setting options does not throw: ConnectPeerId`` () =
+    ConnectPeerId "otherpeer"B
+    |> testSetter ZMQ.ROUTER
