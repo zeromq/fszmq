@@ -293,4 +293,7 @@ module Options =
             let serverKey : byte[] = Socket.getOptionWithBufferSize socket ZMQ.CURVE_SERVERKEY (Some 32)
             Some (publicKey, secretKey, serverKey)
         | _ -> None
+
+    /// Retrieves the last endpoint bound for TCP and IPC transports
+    let (|LastEndpointAddress|) socket = getString ZMQ.LAST_ENDPOINT socket
    

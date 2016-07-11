@@ -29,7 +29,7 @@ module Options =
     use socket = Context.newSocket context ZMQ.PUB
     test <@ expected |> setSocketOption socket
 
-            let actual = %patternMatch socket
+            let actual = (%patternMatch) socket
             actual = expected @>
 
   let testSetter socketType option =
@@ -38,20 +38,19 @@ module Options =
     setSocketOption socket option
 
   let testGetter expected patternMatch =
-    test <@ use context = new Context()
-            use socket = Context.newSocket context ZMQ.PUB
-            let actual = (%patternMatch) socket
+    use context = new Context()
+    use socket = Context.newSocket context ZMQ.PUB
+    test <@ let actual = (%patternMatch) socket
             actual = expected @>
-
 
   [<Test>]
   let ``setting options and reading them are inverses: Affinity`` () =
-    fun socket -> <@ let (Affinity actual) = socket in Affinity actual @>
+    <@ fun (Affinity actual) -> Affinity actual @>
     |> testInverses <| Affinity 0x123UL
   
   [<Test>]
   let ``setting options and reading them are inverses: Identity`` () =
-    fun socket -> <@ let (Identity actual) = socket in Identity actual @>
+    <@ fun (Identity actual) -> Identity actual @>
     |> testInverses <| Identity "My Identity"B
 
   [<Test>]
@@ -66,22 +65,22 @@ module Options =
 
   [<Test>]
   let ``setting options and reading them are inverses: Rate`` () =
-    fun socket -> <@ let (Rate actual) = socket in Rate actual @>
+    <@ fun (Rate actual) -> Rate actual @>
     |> testInverses <| Rate 123<kb/s>
 
   [<Test>]
   let ``setting options and reading them are inverses: MulticastRecovery`` () =
-    fun socket -> <@ let (MulticastRecovery actual) = socket in MulticastRecovery actual @>
+    <@ fun (MulticastRecovery actual) -> MulticastRecovery actual @>
     |> testInverses <| MulticastRecovery 123<ms>
 
   [<Test>]
   let ``setting options and reading them are inverses: SendBuffer`` () =
-    fun socket -> <@ let (SendBuffer actual) = socket in SendBuffer actual @>
+    <@ fun (SendBuffer actual) -> SendBuffer actual @>
     |> testInverses <| SendBuffer 123<B>
 
   [<Test>]
   let ``setting options and reading them are inverses: ReceiveBuffer`` () =
-    fun socket -> <@ let (ReceiveBuffer actual) = socket in ReceiveBuffer actual @>
+    <@ fun (ReceiveBuffer actual) -> ReceiveBuffer actual @>
     |> testInverses <| ReceiveBuffer 123<B>
 
   [<Test>]
@@ -96,62 +95,62 @@ module Options =
 
   [<Test>]
   let ``setting options and reading them are inverses: AuthenticationDomain`` () =
-    fun socket -> <@ let (AuthenticationDomain actual) = socket in AuthenticationDomain actual @>
+    <@ fun (AuthenticationDomain actual) -> AuthenticationDomain actual @>
     |> testInverses <| AuthenticationDomain "my domain"
 
   [<Test>]
   let ``setting options and reading them are inverses: Backlog`` () =
-    fun socket -> <@ let (Backlog actual) = socket in Backlog actual @>
+    <@ fun (Backlog actual) -> Backlog actual @>
     |> testInverses <| Backlog 123
 
   [<Test>]
   let ``setting options and reading them are inverses: Immediate true`` () =
-    fun socket -> <@ let (Immediate actual) = socket in Immediate actual @>
+    <@ fun (Immediate actual) -> Immediate actual @>
     |> testInverses <| Immediate true
 
   [<Test>]
   let ``setting options and reading them are inverses: Immediate false`` () =
-    fun socket -> <@ let (Immediate actual) = socket in Immediate actual @>
+    <@ fun (Immediate actual) -> Immediate actual @>
     |> testInverses <| Immediate false
   
   [<Test>]
   let ``setting options and reading them are inverses: Ipv6 true`` () =
-    fun socket -> <@ let (Ipv6 actual) = socket in Ipv6 actual @>
+    <@ fun (Ipv6 actual) -> Ipv6 actual @>
     |> testInverses <| Ipv6 true
 
   [<Test>]
   let ``setting options and reading them are inverses: Ipv6 false`` () =
-    fun socket -> <@ let (Ipv6 actual) = socket in Ipv6 actual @>
+    <@ fun (Ipv6 actual) -> Ipv6 actual @>
     |> testInverses <| Ipv6 false
 
   [<Test>]
   let ``setting options and reading them are inverses: KeepLastMessageInQueue true`` () =
-    fun socket -> <@ let (KeepLastMessageInQueue actual) = socket in KeepLastMessageInQueue actual @>
+    <@ fun (KeepLastMessageInQueue actual) -> KeepLastMessageInQueue actual @>
     |> testInverses <| KeepLastMessageInQueue true
   
   [<Test>]
   let ``setting options and reading them are inverses: KeepLastMessageInQueue false`` () =
-    fun socket -> <@ let (KeepLastMessageInQueue actual) = socket in KeepLastMessageInQueue actual @>
+    <@ fun (KeepLastMessageInQueue actual) -> KeepLastMessageInQueue actual @>
     |> testInverses <| KeepLastMessageInQueue false
 
   [<Test>]
   let ``setting options and reading them are inverses: LingerDelay`` () =
-    fun socket -> <@ let (LingerDelay actual) = socket in LingerDelay actual @>
+    <@ fun (LingerDelay actual) -> LingerDelay actual @>
     |> testInverses <| LingerDelay 123<ms>
 
   [<Test>]
   let ``setting options and reading them are inverses: MaxMessageSize`` () =
-    fun socket -> <@ let (MaxMessageSize actual) = socket in MaxMessageSize actual @>
+    <@ fun (MaxMessageSize actual) -> MaxMessageSize actual @>
     |> testInverses <| MaxMessageSize 123L<B>
 
   [<Test>]
   let ``setting options and reading them are inverses: MaxReconnectInterval`` () =
-    fun socket -> <@ let (MaxReconnectInterval actual) = socket in MaxReconnectInterval actual @>
+    <@ fun (MaxReconnectInterval actual) -> MaxReconnectInterval actual @>
     |> testInverses <| MaxReconnectInterval 123<ms>
 
   [<Test>]
   let ``setting options and reading them are inverses: MulticastHops`` () =
-    fun socket -> <@ let (MulticastHops actual) = socket in MulticastHops actual @>
+    <@ fun (MulticastHops actual) -> MulticastHops actual @>
     |> testInverses <| MulticastHops 123<NetworkHop>
 
   [<Test>]
@@ -166,17 +165,17 @@ module Options =
   
   [<Test>]
   let ``setting options and reading them are inverses: ReceiveQueue`` () =
-    fun socket -> <@ let (ReceiveQueue actual) = socket in ReceiveQueue actual @>
+    <@ fun (ReceiveQueue actual) -> ReceiveQueue actual @>
     |> testInverses <| ReceiveQueue 123
 
   [<Test>]
   let ``setting options and reading them are inverses: ReceiveTimeout`` () =
-    fun socket -> <@ let (ReceiveTimeout actual) = socket in ReceiveTimeout actual @>
+    <@ fun (ReceiveTimeout actual) -> ReceiveTimeout actual @>
     |> testInverses <| ReceiveTimeout 123<ms>
   
   [<Test>]
   let ``setting options and reading them are inverses: ReconnectDelay`` () =
-    fun socket -> <@ let (ReconnectDelay actual) = socket in ReconnectDelay actual @>
+    <@ fun (ReconnectDelay actual) -> ReconnectDelay actual @>
     |> testInverses <| ReconnectDelay 123<ms>
 
   [<Test>]
@@ -231,51 +230,51 @@ module Options =
 
   [<Test>]
   let ``setting options and reading them are inverses: SendQueue`` () =
-    fun socket -> <@ let (SendQueue actual) = socket in SendQueue actual @>
+    <@ fun (SendQueue actual) -> SendQueue actual @>
     |> testInverses <| SendQueue 123
 
   [<Test>]
   let ``setting options and reading them are inverses: SendTimeout`` () =
-    fun socket -> <@ let (SendTimeout actual) = socket in SendTimeout actual @>
+    <@ fun (SendTimeout actual) -> SendTimeout actual @>
     |> testInverses <| SendTimeout 123<ms>
   
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepalive None`` () =
-    fun socket -> <@ let (TcpKeepalive actual) = socket in TcpKeepalive actual @>
+    <@ fun (TcpKeepalive actual) -> TcpKeepalive actual @>
     |> testInverses <| TcpKeepalive None
 
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepalive (Some false)`` () =
-    fun socket -> <@ let (TcpKeepalive actual) = socket in TcpKeepalive actual @>
+    <@ fun (TcpKeepalive actual) -> TcpKeepalive actual @>
     |> testInverses <| TcpKeepalive (Some false)
 
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepalive (Some true)`` () =
-    fun socket -> <@ let (TcpKeepalive actual) = socket in TcpKeepalive actual @>
+    <@ fun (TcpKeepalive actual) -> TcpKeepalive actual @>
     |> testInverses <| TcpKeepalive (Some true)
   
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepaliveCount`` () =
-    fun socket -> <@ let (TcpKeepaliveCount actual) = socket in TcpKeepaliveCount actual @>
+    <@ fun (TcpKeepaliveCount actual) -> TcpKeepaliveCount actual @>
     |> testInverses <| TcpKeepaliveCount 123
 
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepaliveIdle`` () =
-    fun socket -> <@ let (TcpKeepaliveIdle actual) = socket in TcpKeepaliveIdle actual @>
+    <@ fun (TcpKeepaliveIdle actual) -> TcpKeepaliveIdle actual @>
     |> testInverses <| TcpKeepaliveIdle 123<s>
 
   [<Test>]
   let ``setting options and reading them are inverses: TcpKeepaliveInterval`` () =
-    fun socket -> <@ let (TcpKeepaliveInterval actual) = socket in TcpKeepaliveInterval actual @>
+    <@ fun (TcpKeepaliveInterval actual) -> TcpKeepaliveInterval actual @>
     |> testInverses <| TcpKeepaliveInterval 123<s>
 
   [<Test>]
   let ``setting options and reading them are inverses: HandshakeInterval`` () =
-    fun socket -> <@ let (HandshakeInterval actual) = socket in HandshakeInterval actual @>
+    <@ fun (HandshakeInterval actual) -> HandshakeInterval actual @>
     |> testInverses <| HandshakeInterval 123<ms>
     
-  let parseSecurity socket = 
-    <@ match socket with
+  let parseSecurity = 
+    <@ function
        | NullSecurity -> NullSecurity
        | PlainServer -> PlainServer
        | PlainClient (unm, pwd) -> PlainClient(unm, pwd)
@@ -316,3 +315,7 @@ module Options =
     parseSecurity
     |> testInverses <| CurveClient(CurveKeys.clientPublicKey, CurveKeys.clientSecretKey, CurveKeys.serverPublicKey)
 
+  [<Test>]
+  let ``getting options does not throw: LastEndpointAddress`` () =
+    <@ fun (LastEndpointAddress address) -> address @>
+    |> testGetter ""
