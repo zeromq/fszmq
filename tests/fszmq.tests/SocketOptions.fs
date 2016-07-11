@@ -334,3 +334,13 @@ module Options =
   let ``setting options and reading them are inverses: SocksProxy`` () =
     <@ fun (SocksProxy proxy) -> SocksProxy proxy @>
     |> testInverses <| SocksProxy "1.2.3.4:5678"
+
+  [<Test>]
+  let ``setting options does not throw: DoNoSilentlyDropMessages true`` () =
+    DoNoSilentlyDropMessages true
+    |> testSetter ZMQ.PUB
+
+  [<Test>]
+  let ``setting options does not throw: DoNoSilentlyDropMessages false`` () =
+    DoNoSilentlyDropMessages false
+    |> testSetter ZMQ.PUB

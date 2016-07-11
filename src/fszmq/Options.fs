@@ -108,6 +108,8 @@ module Options =
     | ConnectPeerId of byte[]
     /// Connect through a SOCKS proxy
     | SocksProxy of string
+    /// do not silently drop messages if sending high water mark is reached
+    | DoNoSilentlyDropMessages of bool
   
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
@@ -152,6 +154,7 @@ module Options =
       | TypeOfService               tos             -> Socket.setOption socket (ZMQ.TOS                 ,tos              )
       | ConnectPeerId               peerId          -> Socket.setOption socket (ZMQ.CONNECT_RID         ,peerId           )
       | SocksProxy                  proxy           -> Socket.setOption socket (ZMQ.SOCKS_PROXY         ,proxy            )
+      | DoNoSilentlyDropMessages    noDrop          -> Socket.setOption socket (ZMQ.XPUB_NODROP         ,noDrop           )
       // security                                   
       | NullSecurity                                -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,false            ) // using PLAIN for resetting, as there is no explicit reset otherwise
       | PlainServer                                 -> Socket.setOption socket (ZMQ.PLAIN_SERVER        ,true             )
@@ -311,3 +314,4 @@ module Options =
 
     /// Retrieves SOCKS proxy address
     let (|SocksProxy|) socket = getString ZMQ.SOCKS_PROXY socket
+    
