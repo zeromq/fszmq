@@ -169,4 +169,4 @@ docs/output/
 temp/
 
 # Test results produced by build
-test/TestResults.xml
+tests/TestResults.xml
