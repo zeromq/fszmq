@@ -131,6 +131,8 @@ module Options =
     | GssapiClientUnencripted of principal:string * servicePrincipal:string
   
   /// Contains functions for configuring sockets and patterns for interogating sockets
+  ///
+  /// _(NOTE: this module is automatically opend when opening its parent module.)_
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
     /// Sets the given `SocketOption` on the given `Socket`
