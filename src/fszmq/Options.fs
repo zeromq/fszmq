@@ -8,23 +8,34 @@ namespace fszmq
 
 open System
 
-[<Experimental "This module is not properly compatible with languages other than F#">]
+/// Higher-level API for working with socket options
 module Options =
-
+  /// binary unit of information
   type [<Measure>] bit
+  /// abbreviation for `bit`
   type [<Measure>] b = bit
+  /// 100 bits
   type [<Measure>] kilobit
+  /// abbreviation for `kilobit`
   type [<Measure>] kb = kilobit
+  /// standard unit of time (1/60th of a minute)
   type [<Measure>] second = FSharp.Data.UnitSystems.SI.UnitNames.second
+  /// abbreviation for `second`
   type [<Measure>] s = second
+  /// 1/1000th of a second
   type [<Measure>] millisecond
+  /// abbreviation for `milliecond`
   type [<Measure>] ms = millisecond
+  /// 8 bits
   type [<Measure>] Byte
+  /// abbreviation for `Byte`
   type [<Measure>] B = Byte
+  /// unit of travel from one network switch to another
   type [<Measure>] NetworkHop
+  /// abbreviation for `NetworkHop`
   type [<Measure>] hop = NetworkHop
   
-  /// Socket options
+  /// Settable socket options
   type SocketOption =
     /// I/O thread affinity bit-mask
     | Affinity of bitmask:uint64
@@ -119,9 +130,10 @@ module Options =
     /// Make socket act as a GSSAPI client, disabling encryption.
     | GssapiClientUnencripted of principal:string * servicePrincipal:string
   
+  /// Contains functions for configuring sockets and patterns for interogating sockets
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
-        
+    /// Sets the given `SocketOption` on the given `Socket`
     let setSocketOption socket option =
       match option with
       // general options
@@ -186,7 +198,7 @@ module Options =
                                                                   Socket.setOption socket (ZMQ.GSSAPI_SERVICE_PRINCIPAL ,servicePrincipal )
                                                                   Socket.setOption socket (ZMQ.GSSAPI_PLAINTEXT         ,true             )
 
-  
+    /// Sets all the given `SocketOption`s on the given `Socket`
     let configureSocket socket socketOptions = 
       Seq.iter (setSocketOption socket) socketOptions
   
@@ -229,7 +241,7 @@ module Options =
     let (|MoreMessageFramesAvailable|) socket = getBool ZMQ.RCVMORE socket
   
     /// Socket event state, see all: Polling
-    let (|Events|) socket = getInt32 ZMQ.EVENTS socket |> int16 // ZMQ actually uses and int32 in the getOptions, even though, internally only an int16 is actually used
+    let (|Events|) socket = getInt32 ZMQ.EVENTS socket |> int16 // ZMQ actually uses an int32 in the getOptions, even though, internally only an int16 is actually used
   
     /// Socket type
     let (|SocketType|) socket : int<ZMQ.SocketType> = getInt32WithMeasure ZMQ.TYPE socket
