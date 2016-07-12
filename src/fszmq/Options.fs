@@ -132,7 +132,7 @@ module Options =
   
   /// Contains functions for configuring sockets and patterns for interogating sockets
   ///
-  /// _(NOTE: this module is automatically opend when opening its parent module.)_
+  /// _(NOTE: this module is automatically opened when its parent module is opened.)_
   [<AutoOpen;CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
   module SocketOption =
     /// Sets the given `SocketOption` on the given `Socket`

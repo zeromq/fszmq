@@ -183,6 +183,7 @@ module ZMQ =
 
 
 (* socket types *)
+  /// Distinguishes socket roles from other intergral values
   type [<Measure>] SocketType
   
   /// An exclusive pair of two sockets (primarily for use with inproc transport)
