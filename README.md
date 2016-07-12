@@ -34,10 +34,6 @@ At this point in time, fszmq has been tested on the following platform/architect
 Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
 there is a native libzmq port) and will be tested in due course..
 
-_Please note: comprehensive Unix testing has NOT been conducted, due to resource constraints._
-
-_Please note: comprehensive Linux testing has NOT been conducted, due to resource constraints._
-
 #### A note about versions
 
 In the past, several attempts were made (poorly) to keep the version of `fszmq` synchronized to the version of `libzmq`.
