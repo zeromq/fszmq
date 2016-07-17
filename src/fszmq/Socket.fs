@@ -44,11 +44,11 @@ module Socket =
   [<Extension;CompiledName("GetOption")>]
   let getOptionWithBufferSize<'t> (socket:Socket) socketOption bufferSize : 't =
     let size,read =
-      let t,z = typeof<'t>,Marshal.SizeOf typeof<'t>
-      if    t = typeof<int>     then defaultArg bufferSize   z, snd >> readInt32  >> box
-      elif  t = typeof<bool>    then defaultArg bufferSize   z, snd >> readBool   >> box
-      elif  t = typeof<int64>   then defaultArg bufferSize   z, snd >> readInt64  >> box
-      elif  t = typeof<uint64>  then defaultArg bufferSize   z, snd >> readUInt64 >> box
+      let t = typeof<'t>
+      if    t = typeof<int>     then defaultArg bufferSize (Marshal.SizeOf typeof<'t>), snd >> readInt32  >> box
+      elif  t = typeof<bool>    then defaultArg bufferSize (Marshal.SizeOf typeof<'t>), snd >> readBool   >> box
+      elif  t = typeof<int64>   then defaultArg bufferSize (Marshal.SizeOf typeof<'t>), snd >> readInt64  >> box
+      elif  t = typeof<uint64>  then defaultArg bufferSize (Marshal.SizeOf typeof<'t>), snd >> readUInt64 >> box
       elif  t = typeof<string>  then defaultArg bufferSize 255,        readString >> box
       elif  t = typeof<byte[]>  then defaultArg bufferSize 255,        readBytes  >> box
                                 else invalidOp "Invalid data type"
