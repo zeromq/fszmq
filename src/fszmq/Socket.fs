@@ -69,12 +69,12 @@ module Socket =
   let setOption (socket:Socket) (socketOption,value:'t) =
     let size,write =
       match box value with
-      | :? (int32 ) as v  -> sizeof<Int32>,(writeInt32  v)
-      | :? (bool  ) as v  -> sizeof<Int32>,(writeBool   v)
-      | :? (int64 ) as v  -> sizeof<Int64>,(writeInt64  v)
-      | :? (uint64) as v  -> sizeof<Int64>,(writeUInt64 v)
-      | :? (string) as v  -> v.Length     ,(writeString v)
-      | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
+      | :? (int32 ) as v  -> Marshal.SizeOf typeof<Int32>, writeInt32  v
+      | :? (bool  ) as v  -> Marshal.SizeOf typeof<Int32>, writeBool   v
+      | :? (int64 ) as v  -> Marshal.SizeOf typeof<Int64>, writeInt64  v
+      | :? (uint64) as v  -> Marshal.SizeOf typeof<Int64>, writeUInt64 v
+      | :? (string) as v  -> v.Length                    , writeString v
+      | :? (byte[]) as v  -> v.Length                    , writeBytes  v
       | _                 -> invalidOp "Invalid data type"
     let setter (size,buffer) =
       write buffer
