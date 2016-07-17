@@ -44,13 +44,13 @@ module Socket =
   [<Extension;CompiledName("GetOption")>]
   let getOptionWithBufferSize<'t> (socket:Socket) socketOption bufferSize : 't =
     let size,read =
-      let   t = typeof<'t>
-      if    t = typeof<int>     then defaultArg bufferSize sizeof<int>   , snd >> readInt32  >> box
-      elif  t = typeof<bool>    then defaultArg bufferSize sizeof<bool>  , snd >> readBool   >> box
-      elif  t = typeof<int64>   then defaultArg bufferSize sizeof<int64> , snd >> readInt64  >> box
-      elif  t = typeof<uint64>  then defaultArg bufferSize sizeof<uint64>, snd >> readUInt64 >> box
-      elif  t = typeof<string>  then defaultArg bufferSize 255           ,        readString >> box
-      elif  t = typeof<byte[]>  then defaultArg bufferSize 255           ,        readBytes  >> box
+      let t,z = typeof<'t>,Marshal.SizeOf typeof<'t>
+      if    t = typeof<int>     then defaultArg bufferSize   z, snd >> readInt32  >> box
+      elif  t = typeof<bool>    then defaultArg bufferSize   z, snd >> readBool   >> box
+      elif  t = typeof<int64>   then defaultArg bufferSize   z, snd >> readInt64  >> box
+      elif  t = typeof<uint64>  then defaultArg bufferSize   z, snd >> readUInt64 >> box
+      elif  t = typeof<string>  then defaultArg bufferSize 255,        readString >> box
+      elif  t = typeof<byte[]>  then defaultArg bufferSize 255,        readBytes  >> box
                                 else invalidOp "Invalid data type"
     let getter (size,buffer) =
       let mutable size' = unativeint size
@@ -69,12 +69,12 @@ module Socket =
   let setOption (socket:Socket) (socketOption,value:'t) =
     let size,write =
       match box value with
-      | :? (int32 ) as v  -> sizeof<Int32>,(writeInt32  v)
-      | :? (bool  ) as v  -> sizeof<Int32>,(writeBool   v)
-      | :? (int64 ) as v  -> sizeof<Int64>,(writeInt64  v)
-      | :? (uint64) as v  -> sizeof<Int64>,(writeUInt64 v)
-      | :? (string) as v  -> v.Length     ,(writeString v)
-      | :? (byte[]) as v  -> v.Length     ,(writeBytes  v)
+      | :? (int32 ) as v  -> Marshal.SizeOf typeof<Int32>, writeInt32  v
+      | :? (bool  ) as v  -> Marshal.SizeOf typeof<Int32>, writeBool   v
+      | :? (int64 ) as v  -> Marshal.SizeOf typeof<Int64>, writeInt64  v
+      | :? (uint64) as v  -> Marshal.SizeOf typeof<Int64>, writeUInt64 v
+      | :? (string) as v  -> v.Length                    , writeString v
+      | :? (byte[]) as v  -> v.Length                    , writeBytes  v
       | _                 -> invalidOp "Invalid data type"
     let setter (size,buffer) =
       write buffer
