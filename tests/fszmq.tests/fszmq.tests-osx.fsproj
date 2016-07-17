@@ -91,7 +91,6 @@
   <ItemGroup>
     <Compile Include="Miscellany.fs" />
     <Compile Include="Messages.fs" />
-    <Compile Include="Termination.fs" />
     <Compile Include="SocketOptions.fs" />
     <None Include="Scratch.fsx" />
     <None Include="app.config" />
