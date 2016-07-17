@@ -1,3 +1,6 @@
+### New in 12.2.1 (unreleased)
+* FIX (untracked) `Socket.getOptionWithBuffer`, `Socket.getOption` fail when reading boolean options
+
 ### New in 12.2.0 (2016/07/11)
 * NEW API - safer, more discoverable API for socket options using a mixture of unions, active patterns (thanks to Daniel Fabian)
 * socket types (as part of context API) now safer with units-of-measure (thanks to Daniel Fabian)
