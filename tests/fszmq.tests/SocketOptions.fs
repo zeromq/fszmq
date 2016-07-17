@@ -1,12 +1,11 @@
 ﻿namespace fszmq.tests
-#nowarn "57" (* Disable "experimental" warnings from Options module *)
+
 open FsCheck
 open fszmq
 open fszmq.Options
 open NUnit.Framework
 open Swensen.Unquote
 open System
-
 
 [<TestFixture>]
 module Options =
