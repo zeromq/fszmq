@@ -213,14 +213,6 @@ Target "GenerateDocsLocal"  DoNothing
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-(****************************************************************************************
-**
-** !!! WARNING !!!
-**  
-** Please be extremely careful with the following targets -- especially in a forked repo!
-**
-****************************************************************************************)
-
 Target "ReleaseDocs" (fun _ ->
   let tempDocsDir = "temp/gh-pages"
   CleanDir tempDocsDir
@@ -230,24 +222,6 @@ Target "ReleaseDocs" (fun _ ->
   StageAll tempDocsDir
   Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
   Branches.push tempDocsDir)
-
-#load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
-open Octokit
-
-Target "Release" (fun _ ->
-  StageAll ""
-  Git.Commit.Commit "" (sprintf "Bump version to %s" release.NugetVersion)
-  Branches.push ""
-
-  Branches.tag "" release.NugetVersion
-  Branches.pushTag "" "origin" release.NugetVersion
-
-  // release on github
-  createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
-  |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-  //TODO: |> uploadFile ("bin/fszmq-" + release.NugetVersion + ".zip")
-  |> releaseDraft
-  |> Async.RunSynchronously)
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
@@ -259,38 +233,24 @@ Target "All" DoNothing
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
-  ==> "GenerateDocs"
   ==> "All"
-  =?> ("ReleaseDocs",isLocalBuild)
 
 "All"
   ==> "Archive"
   ==> "NuGet"
   ==> "BuildPackage"
 
-"CleanDocs"
+"CopyBinaries"
+  ==> "CleanDocs" 
   ==> "GenerateHelp"
   ==> "GenerateRefDocs"
   ==> "GenerateDocs"
+  =?> ("ReleaseDocs",isLocalBuild)
 
 "CopyBinaries"
   ==> "CleanDocs"
   ==> "GenerateHelpLocal"
   ==> "GenerateRefDocsLocal"
   ==> "GenerateDocsLocal"
-
-(****************************************************************************************
-**
-** !!! WARNING !!!
-**  
-** Please be extremely careful with the following targets -- especially in a forked repo!
-**
-****************************************************************************************)
-
-"ReleaseDocs"
-  ==> "Release"
-
-"BuildPackage"
-  ==> "Release"
 
 RunTargetOrDefault "All"
