@@ -1,4 +1,4 @@
-### New in 12.2.1 (unreleased)
+### New in 12.2.1 (2016/07/18)
 * FIX (untracked) `Socket.getOptionWithBuffer`, `Socket.getOption` fail when reading boolean options
 
 ### New in 12.2.0 (2016/07/11)
