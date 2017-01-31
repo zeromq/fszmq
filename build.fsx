@@ -172,9 +172,7 @@ Target "Archive" (fun _ ->
   !! "lib/zeromq/WIN/x64/libzmq.*"  |> Copy (winDir + "/x64")
   // compress
   !! (rootDir + "/**/*.*") 
-    |> Zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip")
-  // clean up
-  DeleteDir rootDir)
+    |> Zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip"))
 
 Target "NuGet" (fun _ ->
   Paket.Pack(fun p ->

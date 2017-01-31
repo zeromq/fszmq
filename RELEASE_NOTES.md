@@ -1,3 +1,6 @@
+### New in 12.2.2 (2017/01/31)
+* Version bump (attempting to address NuGet.org issues)
+
 ### New in 12.2.1 (2016/07/18)
 * FIX (untracked) `Socket.getOptionWithBuffer`, `Socket.getOption` fail when reading boolean options
 
