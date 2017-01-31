@@ -159,6 +159,9 @@ $RECYCLE.BIN/
 # Exclude F# project specific directories and files
 # ===================================================
 
+# Paket stuff
+.paket/paket.exe
+
 # NuGet Packages Directory
 packages/
 
