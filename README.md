@@ -43,7 +43,7 @@ Instead, `fszmq` is versioned _independently_. The versions of `libzmq` supporte
 
 `fszmq` version | `libzmq` versions supported
 ---------------:|----------------------------:
-12.2.0          | 4.x.x
+12.2.x          | 4.1.x
 12.1.1          | 4.x.x
 12.1.0			    | 4.x.x
 12.0.1			    | 4.0.x
