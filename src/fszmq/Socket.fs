@@ -134,9 +134,17 @@ module Socket =
   /// Sends all frames of a given message
   /// If message is empty, sends a single empty frame for convenience
   [<Extension;CompiledName("SendAll")>]
-  let sendAll socket message =
-    message |> Seq.iter (sendMore socket >> ignore)
-    send socket Array.empty
+  let sendAll socket (message:byte[] seq) =
+      use e = message.GetEnumerator()
+
+      let rec internalSend previous = 
+          match previous, e.MoveNext () with
+          | None, false -> send socket Array.empty
+          | None, true -> internalSend (Some (e.Current, socket))
+          | Some (p,s), false -> send s p
+          | Some (p,s), true -> internalSend (Some (e.Current, sendMore s p))
+    
+      internalSend None
 (* message receiving *)
 
   /// Gets the next available frame from a socket, returning a frame option
