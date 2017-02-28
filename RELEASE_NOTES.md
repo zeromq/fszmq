@@ -1,3 +1,6 @@
+### New in 12.2.3 (unreleased)
+* FIX (untracked) `Socket.sendAll` no long enumerates the input sequence multiple times (thanks to cboudereau)
+
 ### New in 12.2.2 (2017/01/31)
 * Version bump (attempting to address NuGet.org issues)
 
