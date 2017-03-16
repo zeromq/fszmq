@@ -179,6 +179,7 @@ Target "NuGet" (fun _ ->
     { p with
         OutputPath = "bin"
         Version = release.NugetVersion
+        MinimumFromLockFile = true
         ReleaseNotes = toLines release.Notes}))
 
 Target "BuildPackage" DoNothing
