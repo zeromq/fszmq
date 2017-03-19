@@ -97,7 +97,7 @@ publish/
 *.Publish.xml
 
 # Enable nuget.exe in the .nuget folder (though normally executables are not tracked)
-!.nuget/NuGet.exe
+.nuget/NuGet.exe
 
 # Windows Azure Build Output
 csx
@@ -159,8 +159,12 @@ $RECYCLE.BIN/
 # Exclude F# project specific directories and files
 # ===================================================
 
+# FAKE stuff
+.fake/
+
 # Paket stuff
 .paket/paket.exe
+paket-files/
 
 # NuGet Packages Directory
 packages/
