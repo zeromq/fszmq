@@ -22,6 +22,14 @@ _Please note: the fszmq NuGet package **ONLY** provides the managed `fszmq.dll` 
 
 ---------------------------------------------------------------------------
 
+### Acquiring `libzmq`
+
+On Windows, the recommended solution is to [download a release from the official GitHub repo](https://github.com/zeromq/libzmq/releases) and then compile it in a recent version of Visual Studio (several versions are supported... check the release docs for more information).
+
+On macOS, the recommended solution is to install `zmq` from [Homebrew](https://brew.sh/) -- the missing package manager.
+
+_Please note: in a pinch, the `lib` folder in the root of this repo contains Windows and macOS binaries of `libzmq`. But they're not compiled with all available features and may not behave as expected._
+
 ### Platforms
 
 At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
