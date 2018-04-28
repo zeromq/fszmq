@@ -8,6 +8,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 #r "System.Xml.Linq"
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
+open Fake.Testing
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
@@ -144,17 +145,8 @@ Target "Build" (fun _ ->
 
 Target "RunTests" (fun _ ->
   !! testAssemblies
-  |> NUnit (fun p ->
-      { p with
-          DisableShadowCopy = true
-          ToolName          = if notWin
-                                then p.ToolName
-                                else "nunit-console-x86.exe"
-          Framework         = if notWin
-                                then p.Framework
-                                else "net-4.0"
-          TimeOut           = TimeSpan.FromMinutes 20.
-          OutputFile        = "tests/TestResults.xml" }))
+  |> Seq.iter (fun asm -> DotNetCli.RunCommand id (sprintf "%s --summary" asm))
+)
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts
