@@ -1,5 +1,4 @@
 FSharp.Core
 FsCheck
 Unquote
-NUnit
-NUnit.Runners
+Expecto

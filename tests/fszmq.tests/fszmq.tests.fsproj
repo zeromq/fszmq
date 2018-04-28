@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Logary.Adapters.Facade.Tests</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Miscellany.fs" />
+    <Compile Include="Messages.fs" />
+    <Compile Include="SocketOptions.fs" />
+    <None Include="Scratch.fsx" />
+    <None Include="app.config" />
+    <None Include="..\..\lib\zeromq\OSX\fszmq.dll.config">
+      <Link>fszmq.dll.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\lib\zeromq\OSX\lib\libzmq.dylib">
+      <Link>libzmq.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Program.fs" />
+    <None Include="paket.references" />
+    <ProjectReference Include="..\..\src\fszmq\fszmq.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

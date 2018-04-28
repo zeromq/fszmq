@@ -66,23 +66,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compat", "compat", "{A7777B8C-3AC4-4DFC-95C0-11D74FC6115B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs-osx", "tests\fszmq.compat.cs\fszmq.compat.cs-osx.csproj", "{2D33436B-A803-4B3D-A76D-A381BC7FC429}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs", "tests\fszmq.compat.cs\fszmq.compat.cs.csproj", "{2D33436B-A803-4B3D-A76D-A381BC7FC429}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "perf", "perf", "{F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_lat-osx", "tests\fszmq.perf.inproc_lat\fszmq.perf.inproc_lat-osx.fsproj", "{F9462E0C-847A-4AAD-844F-FA5FA538B543}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_lat", "tests\fszmq.perf.inproc_lat\fszmq.perf.inproc_lat.fsproj", "{F9462E0C-847A-4AAD-844F-FA5FA538B543}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_thr-osx", "tests\fszmq.perf.inproc_thr\fszmq.perf.inproc_thr-osx.fsproj", "{267CB036-120C-4457-9193-65DAA3CB34AB}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_thr", "tests\fszmq.perf.inproc_thr\fszmq.perf.inproc_thr.fsproj", "{267CB036-120C-4457-9193-65DAA3CB34AB}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_lat-osx", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat-osx.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_lat", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_lat-osx", "tests\fszmq.perf.remote_lat\fszmq.perf.remote_lat-osx.fsproj", "{B53FB44D-54E6-43B5-9590-E38A48A2490D}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_lat", "tests\fszmq.perf.remote_lat\fszmq.perf.remote_lat.fsproj", "{B53FB44D-54E6-43B5-9590-E38A48A2490D}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_thr-osx", "tests\fszmq.perf.local_thr\fszmq.perf.local_thr-osx.fsproj", "{2FB9221E-3695-429A-83A1-075DE00827A2}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_thr", "tests\fszmq.perf.local_thr\fszmq.perf.local_thr.fsproj", "{2FB9221E-3695-429A-83A1-075DE00827A2}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_thr-osx", "tests\fszmq.perf.remote_thr\fszmq.perf.remote_thr-osx.fsproj", "{9D0E4922-695E-4036-9928-00F528A8E183}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_thr", "tests\fszmq.perf.remote_thr\fszmq.perf.remote_thr.fsproj", "{9D0E4922-695E-4036-9928-00F528A8E183}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.tests-osx", "tests\fszmq.tests\fszmq.tests-osx.fsproj", "{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.tests", "tests\fszmq.tests\fszmq.tests.fsproj", "{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}"
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq", "src\fszmq\fszmq.fsproj", "{FDA50C33-B288-4E42-9141-D78BDDEF9466}"
 EndProject
