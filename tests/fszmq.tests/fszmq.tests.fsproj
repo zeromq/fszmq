@@ -11,7 +11,6 @@
     <Compile Include="Messages.fs" />
     <Compile Include="SocketOptions.fs" />
     <None Include="Scratch.fsx" />
-    <None Include="app.config" />
     <None Include="..\..\lib\zeromq\OSX\fszmq.dll.config">
       <Link>fszmq.dll.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
