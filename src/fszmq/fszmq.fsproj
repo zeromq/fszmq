@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>fszmq</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -12,8 +12,7 @@
     <Compile Include="Core.fs" />
     <Compile Include="Message.fs" />
     <Compile Include="Socket.fs" />
-    <Compile Include="Monitor.fs">
-    </Compile>
+    <Compile Include="Monitor.fs" />
     <Compile Include="Context.fs" />
     <Compile Include="Polling.fs" />
     <Compile Include="Utilities.fs" />

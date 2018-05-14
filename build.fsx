@@ -26,10 +26,10 @@ let project = "fszmq"
 let summary = "An MPLv2-licensed F# binding for the ZeroMQ distributed computing library."
 
 // File system information
-let solutionFile  = sprintf "fszmq-%s.sln" (if notWin then "osx" else "win")
+let solutionFile  = "fszmq.sln"
 
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = "tests/**/bin/Release/*tests*.dll"
+let testAssemblies = "tests/*.tests*/*.tests*.fsproj"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
@@ -145,7 +145,11 @@ Target "Build" (fun _ ->
 
 Target "RunTests" (fun _ ->
   !! testAssemblies
-  |> Seq.iter (fun asm -> DotNetCli.RunCommand id (sprintf "%s --summary" asm))
+  |> Seq.iter (fun proj -> DotNetCli.Test (fun p -> 
+    { p with 
+        Project = proj
+        Configuration = "Release"
+        AdditionalArgs = [ "--no-build" ] }))
 )
 
 // --------------------------------------------------------------------------------------
@@ -172,7 +176,7 @@ Target "NuGet" (fun _ ->
         OutputPath = "bin"
         Version = release.NugetVersion
         MinimumFromLockFile = true
-        ReleaseNotes = toLines release.Notes}))
+        ReleaseNotes = toLines release.Notes }))
 
 Target "BuildPackage" DoNothing
 
