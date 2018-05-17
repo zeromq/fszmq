@@ -28,19 +28,30 @@ On Windows, the recommended solution is to [download a release from the official
 
 On macOS, the recommended solution is to install `zmq` from [Homebrew](https://brew.sh/) -- the missing package manager.
 
-_Please note: in a pinch, the `lib` folder in the root of this repo contains Windows and macOS binaries of `libzmq`. But they're not compiled with all available features and may not behave as expected._
+On Linux, the recommended solution is install `libzmq` from your distro's package manager. Alternatively, you may [build from source](https://github.com/zeromq/libzmq).
+
+_Please note: in a pinch, the `lib` folder in the root of this repo contains Windows, macOS, and Linux binaries of `libzmq`. But they're not compiled with all available features for all platforms and may not behave as expected._
 
 ### Platforms
 
 At this point in time, fszmq has been tested on the following platform/architecture/runtime combinations:
-* 32-bit Windows XP (running against .NET)
-* 64-bit Windows Server 2008 R2 (running against .NET)
-* 32-bit and 64-bit Windows 7 (running against .NET or Mono)
-* 32-bit and 64-bit Windows 8 (running against .NET or Mono)
+* 32-bit Windows XP (running against .NET Framework)
+* 64-bit Windows Server 2008 R2 (running against .NET Framework)
+* 32-bit and 64-bit Windows 7 (running against .NET Framework or Mono)
+* 32-bit and 64-bit Windows 8 (running against .NET Framework or Mono)
+* 32-bit and 64-bit Windows 10 (running against .NET Framework, .NET Core, and Mono)
 * 32-bit and 64-bit OS X (running against Mono)
+* 64-bit Linux (Ubuntu 18.04 running against .NET Core)
 
-Other platform/architecture/runtime combinations should work (so long as .NET or Mono are supported and
-there is a native libzmq port) and will be tested in due course..
+Other platform/architecture/runtime combinations should work (so long as .NET Framework, .NET Core, or Mono are supported and
+there is a native libzmq port).
+
+---
+
+> **IMPORTANT NOTE:** starting with version 12.3, `fszmq` will only ship as a .NET Standard library (currently, .NET Standard 2). 
+> This _may_ have consequences (or limitations) for existing applications wishing to upgrade.
+
+---
 
 #### A note about versions
 
@@ -51,22 +62,23 @@ Instead, `fszmq` is versioned _independently_. The versions of `libzmq` supporte
 
 `fszmq` version | `libzmq` versions supported
 ---------------:|----------------------------:
+12.3.0          | 4.1.x (and a sub-set of 4.2.x)
 12.2.x          | 4.1.x
 12.1.1          | 4.1.x
-12.1.0			    | 4.1.x
-12.0.1			    | 4.0.x
+12.1.0          | 4.1.x
+12.0.1          | 4.0.x
 4.0.9           | 4.0.5
-4.0.8			      | 4.0.5
+4.0.8           | 4.0.5
 4.0.6           | 4.0.5
 4.0.5           | 4.0.5
 4.0.4           | 4.0.4
-3.2.7			      | 3.2.5
-3.2.5			      | 3.2.5
-2.2.1			      | 2.2.1
-2.2.0			      | 2.2.0
-2.1.11			    | 2.1.x
-2.1.10			    | 2.1.x
-2.1.6			      | 2.1.x
+3.2.7           | 3.2.5
+3.2.5           | 3.2.5
+2.2.1           | 2.2.1
+2.2.0           | 2.2.0
+2.1.11          | 2.1.x
+2.1.10          | 2.1.x
+2.1.6           | 2.1.x
 
 ---------------------------------------------------------------------------
 
