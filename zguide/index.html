@@ -35,81 +35,61 @@
         <div class="span9" id="main">
           
 <h1><a name="zguide" class="anchor" href="#zguide">zguide</a></h1>
-
 <p><a href="http://zguide.zeromq.org/page:all">The zguide</a> is a well-written, exhaustive explanation of the library.
 It should definitely be read. And then read again. Also, while the zguide features examples in many languages,
 the <a href="https://github.com/imatix/zguide/tree/master/examples/F%23">F#-specific zguide code samples</a> have been collected here as a convenience.</p>
-
 <p><em>Please note: the zguide covers version 3.2.x of ZeroMQ, while the examples below have been modified to run against version 4.0.x of ZeroMQ.</em></p>
-
 <hr />
-
 <p><strong>Chapter 1 examples</strong></p>
-
 <ul>
-<li><a href="hwserver.html">Hello World server</a> ... Expects "Hello" from client, replies with "World"</li>
+<li><p><a href="hwserver.html">Hello World server</a> ... Expects "Hello" from client, replies with "World"</p></li>
 <li><p><a href="hwclient.html">Hello World client</a> ... Sends "Hello" to server, expects "World" back</p></li>
 <li><p><a href="version.html">0MQ Version</a> ... Displays the version of 0MQ currently being used</p></li>
-<li><a href="wuserver.html">Weather Update server</a> ... Publishes random weather updates</li>
+<li><p><a href="wuserver.html">Weather Update server</a> ... Publishes random weather updates</p></li>
 <li><p><a href="wuclient.html">Weather Update client</a> ... Collects weather updates and finds avg temp in zipcode</p></li>
-<li><a href="taskwork.html">Task worker</a> ... Collects workloads from ventilator and sends results to sink</li>
-<li><a href="taskvent.html">Task ventillator</a> ... Sends batch of tasks to workers</li>
-<li><a href="tasksink.html">Task sink</a> ... Collects results from workers</li>
+<li><p><a href="taskwork.html">Task worker</a> ... Collects workloads from ventilator and sends results to sink</p></li>
+<li><p><a href="taskvent.html">Task ventillator</a> ... Sends batch of tasks to workers</p></li>
+<li><p><a href="tasksink.html">Task sink</a> ... Collects results from workers</p></li>
 </ul>
-
 <hr />
-
 <p><strong>Chapter 2 examples</strong></p>
-
 <ul>
-<li><a href="msreader.html">Multi-socket Reader</a> ... Reads from multiple sockets using a simple recv loop</li>
+<li><p><a href="msreader.html">Multi-socket Reader</a> ... Reads from multiple sockets using a simple recv loop</p></li>
 <li><p><a href="mspoller.html">Multi-socket Poller</a> ... Reads from multiple sockets using ZMQ's polling functionality</p></li>
-<li><a href="rrclient.html">Request-Reply Client</a> ... Sends "Hello" to a server (via a broker) and expects "World" back</li>
-<li><a href="rrworker.html">Request-Reply Worker</a> ... Expects "Hello" from clients (via a broker) and replies with "World"</li>
+<li><p><a href="rrclient.html">Request-Reply Client</a> ... Sends "Hello" to a server (via a broker) and expects "World" back</p></li>
+<li><p><a href="rrworker.html">Request-Reply Worker</a> ... Expects "Hello" from clients (via a broker) and replies with "World"</p></li>
 <li><p><a href="rrbroker.html">Request-Reply Broker</a> ... A simple broker for connecting client requests to server replies</p></li>
 <li><p><a href="msgqueue.html">Message Queue Broker</a> ... Like [Request-Reply Broker] but using device (i.e. a proxy)</p></li>
 <li><p><a href="wuproxy.html">Weather Update Proxy</a> ... A proxy device which does network bridging</p></li>
-<li><a href="taskwork2.html">Task Worker (2nd design)</a> ... Like <a href="taskwork.html">Task Worker</a>, but with a extra flow to receive and respond to a 'KILL' signal</li>
+<li><p><a href="taskwork2.html">Task Worker (2nd design)</a> ... Like <a href="taskwork.html">Task Worker</a>, but with a extra flow to receive and respond to a 'KILL' signal</p></li>
 <li><p><a href="tasksink2.html">Task Sink (2nd design)</a> ... Like <a href="tasksink.html">Task Sink</a>, but with a extra flow to receive and respond to a 'KILL' signal</p></li>
 <li><p><a href="interrupt.html">Interrupt Handling</a> ... Shows how to handle manual interrupt (i.e. CTRL+C) in a console application</p></li>
 <li><p><a href="mtserver.html">Multi-threaded Service</a> ... Passes actual handling of requests to workers on other threads</p></li>
 <li><p><a href="mtrelay.html">Signaling Between Threads</a> ... Demonstrates inter-thread coordination</p></li>
-<li><a href="syncpub.html">Synchronized Publisher</a> ... Synchronizes data distribution across a fixed number of clients</li>
+<li><p><a href="syncpub.html">Synchronized Publisher</a> ... Synchronizes data distribution across a fixed number of clients</p></li>
 <li><p><a href="syncsub.html">Synchronized Subscriber</a> ... Participates in node-coordinated data distribution</p></li>
-<li><a href="psenvpub.html">Pub-Sub Envelope Publisher</a> ... Sends multi-part messages where the first frame is the subscription topic</li>
-<li><a href="psenvsub.html">Pub-Sub Envelope Subscriber</a> ... Only receives messages with a specific topic frame</li>
+<li><p><a href="psenvpub.html">Pub-Sub Envelope Publisher</a> ... Sends multi-part messages where the first frame is the subscription topic</p></li>
+<li><p><a href="psenvsub.html">Pub-Sub Envelope Subscriber</a> ... Only receives messages with a specific topic frame</p></li>
 </ul>
-
 <hr />
-
 <p><strong>Chapter 3 examples</strong></p>
-
 <ul>
 <li><em>Coming soon.</em></li>
 </ul>
-
 <hr />
-
 <p><strong>Chapter 4 examples</strong></p>
-
 <ul>
 <li><em>Coming soon.</em></li>
 </ul>
-
 <hr />
-
 <p><strong>Chapter 5 examples</strong></p>
-
 <ul>
 <li><em>Coming soon.</em></li>
 </ul>
-
 <hr />
-
 <p>The documentation accompanying fszmq, and any sample code contained therein, is available under
 the MIT LICENSE which allows modification and reuse for both commercial non-commercial purposes.
 For more information see the <a href="https://github.com/zeromq/fszmq/blob/master/docs/files/LICENSE.txt">documentation license file</a> in the GitHub repository.</p>
-
 <hr />
 
 

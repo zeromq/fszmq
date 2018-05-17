@@ -35,9 +35,7 @@
         <div class="span9" id="main">
           
 <h1><a name="Multi-socket-Poller" class="anchor" href="#Multi-socket-Poller">Multi-socket Poller</a></h1>
-
 <p>Reading from multiple sockets. This version uses a uses ZMQ's polling functionality.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -72,27 +70,27 @@
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">Threading</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="f">main</span> () <span class="o">=</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="t">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
 
   <span class="c">// connect to task ventilator</span>
-  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="i">receiver</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="f">pull</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="f">connect</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">receiver</span> <span class="s">&quot;tcp://localhost:5557&quot;</span>
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="i">receiver</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">pull</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">connect</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">receiver</span> <span class="s">&quot;tcp://localhost:5557&quot;</span>
 
   <span class="c">// connect to weather server</span>
-  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">subscriber</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="f">sub</span> <span onmouseout="hideTip(event, 'fs8', 20)" onmouseover="showTip(event, 'fs8', 20)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="f">connect</span> <span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">subscriber</span> <span class="s">&quot;tcp://localhost:5556&quot;</span>
-  <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="f">subscribe</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">subscriber</span> [ <span class="s">&quot;10001&quot;B</span> ]
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="i">subscriber</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">sub</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">connect</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">subscriber</span> <span class="s">&quot;tcp://localhost:5556&quot;</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">subscribe</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">subscriber</span> [ <span class="s">&quot;10001&quot;B</span> ]
 
   <span class="c">// process messages from both sockets</span>
   <span class="k">while</span> <span class="k">true</span> <span class="k">do</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="i">items</span> <span class="o">=</span>
-      [ <span onmouseout="hideTip(event, 'fs10', 28)" onmouseover="showTip(event, 'fs10', 28)" class="i">receiver</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="t">Polling</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="f">pollIn</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="i">s</span> <span class="k">-&gt;</span> <span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="i">msg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 33)" onmouseover="showTip(event, 'fs12', 33)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="f">recv</span> <span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="i">s</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">items</span> <span class="o">=</span>
+      [ <span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="i">receiver</span>
+        <span class="o">|&gt;</span> <span class="i">Polling</span><span class="o">.</span><span class="i">pollIn</span> (<span class="k">fun</span> <span class="i">s</span> <span class="k">-&gt;</span> <span class="k">let</span> <span class="i">msg</span> <span class="o">=</span> <span class="i">Socket</span><span class="o">.</span><span class="i">recv</span> <span class="i">s</span>
                                     (<span class="c">(* process task *)</span>))
-        <span onmouseout="hideTip(event, 'fs14', 36)" onmouseover="showTip(event, 'fs14', 36)" class="i">subscriber</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 37)" onmouseover="showTip(event, 'fs18', 37)" class="t">Polling</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 38)" onmouseover="showTip(event, 'fs19', 38)" class="f">pollIn</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs20', 39)" onmouseover="showTip(event, 'fs20', 39)" class="i">s</span> <span class="k">-&gt;</span> <span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="i">msg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 41)" onmouseover="showTip(event, 'fs12', 41)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 42)" onmouseover="showTip(event, 'fs22', 42)" class="f">recv</span> <span onmouseout="hideTip(event, 'fs20', 43)" onmouseover="showTip(event, 'fs20', 43)" class="i">s</span>
+        <span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="i">subscriber</span>
+        <span class="o">|&gt;</span> <span class="i">Polling</span><span class="o">.</span><span class="i">pollIn</span> (<span class="k">fun</span> <span class="i">s</span> <span class="k">-&gt;</span> <span class="k">let</span> <span class="i">msg</span> <span class="o">=</span> <span class="i">Socket</span><span class="o">.</span><span class="i">recv</span> <span class="i">s</span>
                                     (<span class="c">(* process update *)</span>)) ]
-    <span onmouseout="hideTip(event, 'fs18', 44)" onmouseover="showTip(event, 'fs18', 44)" class="t">Polling</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 45)" onmouseover="showTip(event, 'fs23', 45)" class="f">pollForever</span> <span onmouseout="hideTip(event, 'fs17', 46)" onmouseover="showTip(event, 'fs17', 46)" class="i">items</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="f">ignore</span>
+    <span class="i">Polling</span><span class="o">.</span><span class="i">pollForever</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">items</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="f">ignore</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -106,24 +104,12 @@
 <div class="tip" id="fs5">namespace System</div>
 <div class="tip" id="fs6">namespace System.Threading</div>
 <div class="tip" id="fs7">val main : unit -&gt; int<br /><br />Full name: Mspoller.main</div>
-<div class="tip" id="fs8">val context : Context</div>
-<div class="tip" id="fs9">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs10">val receiver : Socket</div>
-<div class="tip" id="fs11">val pull : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.pull</div>
-<div class="tip" id="fs12">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
-<div class="tip" id="fs13">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
-<div class="tip" id="fs14">val subscriber : Socket</div>
-<div class="tip" id="fs15">val sub : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.sub</div>
-<div class="tip" id="fs16">val subscribe : socket:Socket -&gt; topics:seq&lt;byte []&gt; -&gt; unit<br /><br />Full name: fszmq.Socket.subscribe</div>
-<div class="tip" id="fs17">val items : Poll list</div>
-<div class="tip" id="fs18">module Polling<br /><br />from fszmq</div>
-<div class="tip" id="fs19">val pollIn : fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br /><br />Full name: fszmq.Polling.pollIn</div>
-<div class="tip" id="fs20">val s : Socket</div>
-<div class="tip" id="fs21">val msg : byte []</div>
-<div class="tip" id="fs22">val recv : socket:Socket -&gt; byte []<br /><br />Full name: fszmq.Socket.recv</div>
-<div class="tip" id="fs23">val pollForever : items:seq&lt;Poll&gt; -&gt; bool<br /><br />Full name: fszmq.Polling.pollForever</div>
-<div class="tip" id="fs24">val ignore : value:&#39;T -&gt; unit<br /><br />Full name: Microsoft.FSharp.Core.Operators.ignore</div>
-<div class="tip" id="fs25">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs8">val context : System.IDisposable</div>
+<div class="tip" id="fs9">val receiver : obj</div>
+<div class="tip" id="fs10">val subscriber : obj</div>
+<div class="tip" id="fs11">val items : obj list</div>
+<div class="tip" id="fs12">val ignore : value:&#39;T -&gt; unit<br /><br />Full name: Microsoft.FSharp.Core.Operators.ignore</div>
+<div class="tip" id="fs13">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

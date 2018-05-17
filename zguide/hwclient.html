@@ -35,11 +35,8 @@
         <div class="span9" id="main">
           
 <h1><a name="Hello-World-client" class="anchor" href="#Hello-World-client">Hello World client</a></h1>
-
 <p>Connects REQ socket to tcp://localhost:5555</p>
-
 <p>Sends "Hello" to server, expects "World" back</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -62,15 +59,15 @@
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="f">main</span> () <span class="o">=</span>
   <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="f">printfn</span> <span class="s">&quot;Connecting to hello world server...&quot;</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="t">Context</span> ()
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="i">requester</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="f">req</span> <span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="f">connect</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="i">requester</span> <span class="s">&quot;tcp://localhost:5555&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">requester</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">req</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">connect</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">requester</span> <span class="s">&quot;tcp://localhost:5555&quot;</span>
 
-  <span class="k">for</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="i">request_nbr</span> <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">9</span> <span class="k">do</span>
-    <span onmouseout="hideTip(event, 'fs6', 17)" onmouseover="showTip(event, 'fs6', 17)" class="f">printfn</span> <span class="s">&quot;Sending Hello </span><span class="pf">%d</span><span class="s">...&quot;</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="i">request_nbr</span>
-    <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="f">send</span> <span onmouseout="hideTip(event, 'fs9', 21)" onmouseover="showTip(event, 'fs9', 21)" class="i">requester</span> <span class="s">&quot;Hello&quot;B</span>
-    <span class="k">let</span> <span class="i">_buffer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 22)" onmouseover="showTip(event, 'fs11', 22)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="f">recv</span> <span onmouseout="hideTip(event, 'fs9', 24)" onmouseover="showTip(event, 'fs9', 24)" class="i">requester</span>
-    <span onmouseout="hideTip(event, 'fs6', 25)" onmouseover="showTip(event, 'fs6', 25)" class="f">printfn</span> <span class="s">&quot;Received World </span><span class="pf">%d</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">request_nbr</span>
+  <span class="k">for</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">request_nbr</span> <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">9</span> <span class="k">do</span>
+    <span onmouseout="hideTip(event, 'fs6', 12)" onmouseover="showTip(event, 'fs6', 12)" class="f">printfn</span> <span class="s">&quot;Sending Hello </span><span class="pf">%d</span><span class="s">...&quot;</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="i">request_nbr</span>
+    <span class="i">Socket</span><span class="o">.</span><span class="i">send</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="i">requester</span> <span class="s">&quot;Hello&quot;B</span>
+    <span class="k">let</span> <span class="i">_buffer</span> <span class="o">=</span> <span class="i">Socket</span><span class="o">.</span><span class="i">recv</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="i">requester</span>
+    <span onmouseout="hideTip(event, 'fs6', 16)" onmouseover="showTip(event, 'fs6', 16)" class="f">printfn</span> <span class="s">&quot;Received World </span><span class="pf">%d</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="i">request_nbr</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -83,16 +80,10 @@
 <div class="tip" id="fs4">namespace fszmq</div>
 <div class="tip" id="fs5">val main : unit -&gt; int<br /><br />Full name: Hwclient.main</div>
 <div class="tip" id="fs6">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs7">val context : Context</div>
-<div class="tip" id="fs8">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs9">val requester : Socket</div>
-<div class="tip" id="fs10">val req : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.req</div>
-<div class="tip" id="fs11">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
-<div class="tip" id="fs12">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
-<div class="tip" id="fs13">val request_nbr : int32</div>
-<div class="tip" id="fs14">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>
-<div class="tip" id="fs15">val recv : socket:Socket -&gt; byte []<br /><br />Full name: fszmq.Socket.recv</div>
-<div class="tip" id="fs16">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs7">val context : System.IDisposable</div>
+<div class="tip" id="fs8">val requester : System.IDisposable</div>
+<div class="tip" id="fs9">val request_nbr : int32</div>
+<div class="tip" id="fs10">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

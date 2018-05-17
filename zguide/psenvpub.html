@@ -35,9 +35,7 @@
         <div class="span9" id="main">
           
 <h1><a name="Pub-Sub-Message-Evelopes" class="anchor" href="#Pub-Sub-Message-Evelopes">Pub-Sub Message Evelopes</a></h1>
-
 <p>Publisher sends multi-part messages where the first frame is the subscription topic</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -66,17 +64,17 @@
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="f">main</span> () <span class="o">=</span>
   <span class="c">// prepare our context and publisher</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="i">context</span>   <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="t">Context</span> ()
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="i">publisher</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="f">pub</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs5', 16)" onmouseover="showTip(event, 'fs5', 16)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="f">bind</span> <span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="i">publisher</span> <span class="s">&quot;tcp://*:5563&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="i">context</span>   <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="i">publisher</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">pub</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">bind</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">publisher</span> <span class="s">&quot;tcp://*:5563&quot;</span>
 
   <span class="k">while</span> <span class="k">true</span> <span class="k">do</span>
     <span class="c">// write tow messages, each with an envelope and content</span>
-    <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">publisher</span> <span class="o">&lt;~|</span> <span class="s">&quot;A&quot;B</span>
+    <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">publisher</span> <span class="o">&lt;~|</span> <span class="s">&quot;A&quot;B</span>
               <span class="o">&lt;&lt;|</span> <span class="s">&quot;We don&#39;t want to see this.&quot;B</span>
-    <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="i">publisher</span> <span class="o">&lt;~|</span> <span class="s">&quot;B&quot;B</span>
+    <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">publisher</span> <span class="o">&lt;~|</span> <span class="s">&quot;B&quot;B</span>
               <span class="o">&lt;&lt;|</span> <span class="s">&quot;We would like to see this.&quot;B</span>
-    <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="t">Thread</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="f">Sleep</span> <span class="n">1</span>
+    <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="t">Thread</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="f">Sleep</span> <span class="n">1</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -87,18 +85,16 @@
 <div class="tip" id="fs2">module PATH<br /><br />from docs</div>
 <div class="tip" id="fs3">val hijack : unit -&gt; unit<br /><br />Full name: docs.PATH.hijack</div>
 <div class="tip" id="fs4">namespace fszmq</div>
-<div class="tip" id="fs5">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
+<div class="tip" id="fs5">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------</div>
 <div class="tip" id="fs6">namespace System</div>
 <div class="tip" id="fs7">namespace System.Threading</div>
 <div class="tip" id="fs8">val main : unit -&gt; int<br /><br />Full name: Psenvpub.main</div>
-<div class="tip" id="fs9">val context : Context</div>
-<div class="tip" id="fs10">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs11">val publisher : Socket</div>
-<div class="tip" id="fs12">val pub : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.pub</div>
-<div class="tip" id="fs13">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
-<div class="tip" id="fs14">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;member Interrupt : unit -&gt; unit<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
-<div class="tip" id="fs15">Thread.Sleep(timeout: System.TimeSpan) : unit<br />Thread.Sleep(millisecondsTimeout: int) : unit</div>
-<div class="tip" id="fs16">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs9">val context : &#39;a</div>
+<div class="tip" id="fs10">val publisher : fszmq.Socket</div>
+<div class="tip" id="fs11">val bind : socket:fszmq.Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
+<div class="tip" id="fs12">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member DisableComObjectEagerCleanup : unit -&gt; unit<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
+<div class="tip" id="fs13">Thread.Sleep(timeout: System.TimeSpan) : unit<br />Thread.Sleep(millisecondsTimeout: int) : unit</div>
+<div class="tip" id="fs14">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

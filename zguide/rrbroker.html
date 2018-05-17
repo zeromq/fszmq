@@ -35,9 +35,7 @@
         <div class="span9" id="main">
           
 <h1><a name="Request-Reply-Broker" class="anchor" href="#Request-Reply-Broker">Request-Reply Broker</a></h1>
-
 <p>Simple broker for connecting client requests to server replies.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -85,32 +83,32 @@
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="f">main</span> () <span class="o">=</span>
   <span class="c">// prepare our context and sockets</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="i">context</span>   <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="t">Context</span> ()
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">frontend</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="f">router</span> <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="i">context</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">backend</span>   <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="f">dealer</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="f">bind</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="i">frontend</span>  <span class="s">&quot;tcp://*:5559&quot;</span>
-  <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="f">bind</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">backend</span>   <span class="s">&quot;tcp://*:5560&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="i">context</span>   <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="i">frontend</span>  <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">router</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="i">context</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="i">backend</span>   <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">dealer</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">bind</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">frontend</span>  <span class="s">&quot;tcp://*:5559&quot;</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">bind</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">backend</span>   <span class="s">&quot;tcp://*:5560&quot;</span>
 
-  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="i">inbound</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="i">outbound</span> <span class="o">=</span>
-    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="i">message</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="t">Message</span> ()
-    <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="f">loop</span> () <span class="o">=</span>
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="i">inbound</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="i">outbound</span> <span class="o">=</span>
+    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="i">message</span> <span class="o">=</span> <span class="k">new</span> <span class="i">Message</span> ()
+    <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="f">loop</span> () <span class="o">=</span>
       <span class="c">// process all parts of the message</span>
-      <span onmouseout="hideTip(event, 'fs24', 37)" onmouseover="showTip(event, 'fs24', 37)" class="t">Message</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="f">recv</span> <span onmouseout="hideTip(event, 'fs23', 39)" onmouseover="showTip(event, 'fs23', 39)" class="i">message</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="i">inbound</span>
-      <span class="k">if</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="t">Message</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 42)" onmouseover="showTip(event, 'fs27', 42)" class="f">hasMore</span> <span onmouseout="hideTip(event, 'fs23', 43)" onmouseover="showTip(event, 'fs23', 43)" class="i">message</span>
-        <span class="k">then</span>  <span onmouseout="hideTip(event, 'fs24', 44)" onmouseover="showTip(event, 'fs24', 44)" class="t">Message</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="f">sendMore</span> <span onmouseout="hideTip(event, 'fs23', 46)" onmouseover="showTip(event, 'fs23', 46)" class="i">message</span> <span onmouseout="hideTip(event, 'fs22', 47)" onmouseover="showTip(event, 'fs22', 47)" class="i">outbound</span>
-              <span onmouseout="hideTip(event, 'fs25', 48)" onmouseover="showTip(event, 'fs25', 48)" class="f">loop</span> ()
+      <span class="i">Message</span><span class="o">.</span><span class="i">recv</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="i">message</span> <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="i">inbound</span>
+      <span class="k">if</span> <span class="i">Message</span><span class="o">.</span><span class="i">hasMore</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">message</span>
+        <span class="k">then</span>  <span class="i">Message</span><span class="o">.</span><span class="i">sendMore</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="i">message</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="i">outbound</span>
+              <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="f">loop</span> ()
         <span class="k">else</span>  <span class="c">// last message part</span>
-              <span onmouseout="hideTip(event, 'fs24', 49)" onmouseover="showTip(event, 'fs24', 49)" class="t">Message</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="f">send</span> <span onmouseout="hideTip(event, 'fs23', 51)" onmouseover="showTip(event, 'fs23', 51)" class="i">message</span> <span onmouseout="hideTip(event, 'fs22', 52)" onmouseover="showTip(event, 'fs22', 52)" class="i">outbound</span>
-      <span onmouseout="hideTip(event, 'fs6', 53)" onmouseover="showTip(event, 'fs6', 53)" class="f">dispose</span> <span onmouseout="hideTip(event, 'fs23', 54)" onmouseover="showTip(event, 'fs23', 54)" class="i">message</span>
-    <span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="f">loop</span> ()
+              <span class="i">Message</span><span class="o">.</span><span class="i">send</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="i">message</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="i">outbound</span>
+      <span onmouseout="hideTip(event, 'fs6', 35)" onmouseover="showTip(event, 'fs6', 35)" class="f">dispose</span> <span onmouseout="hideTip(event, 'fs18', 36)" onmouseover="showTip(event, 'fs18', 36)" class="i">message</span>
+    <span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="f">loop</span> ()
 
   <span class="c">// initialize poll set</span>
-  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 56)" onmouseover="showTip(event, 'fs30', 56)" class="i">items</span> <span class="o">=</span>
-    [ <span onmouseout="hideTip(event, 'fs14', 57)" onmouseover="showTip(event, 'fs14', 57)" class="i">frontend</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 58)" onmouseover="showTip(event, 'fs31', 58)" class="f">pollIn</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs14', 60)" onmouseover="showTip(event, 'fs14', 60)" class="i">frontend</span> <span onmouseout="hideTip(event, 'fs16', 61)" onmouseover="showTip(event, 'fs16', 61)" class="i">backend</span> )
-      <span onmouseout="hideTip(event, 'fs16', 62)" onmouseover="showTip(event, 'fs16', 62)" class="i">backend</span>  <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 63)" onmouseover="showTip(event, 'fs31', 63)" class="f">pollIn</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs20', 64)" onmouseover="showTip(event, 'fs20', 64)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs16', 65)" onmouseover="showTip(event, 'fs16', 65)" class="i">backend</span>  <span onmouseout="hideTip(event, 'fs14', 66)" onmouseover="showTip(event, 'fs14', 66)" class="i">frontend</span>) ]
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 38)" onmouseover="showTip(event, 'fs20', 38)" class="i">items</span> <span class="o">=</span>
+    [ <span onmouseout="hideTip(event, 'fs13', 39)" onmouseover="showTip(event, 'fs13', 39)" class="i">frontend</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="f">pollIn</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs15', 41)" onmouseover="showTip(event, 'fs15', 41)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs13', 42)" onmouseover="showTip(event, 'fs13', 42)" class="i">frontend</span> <span onmouseout="hideTip(event, 'fs14', 43)" onmouseover="showTip(event, 'fs14', 43)" class="i">backend</span> )
+      <span onmouseout="hideTip(event, 'fs14', 44)" onmouseover="showTip(event, 'fs14', 44)" class="i">backend</span>  <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 45)" onmouseover="showTip(event, 'fs21', 45)" class="f">pollIn</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs15', 46)" onmouseover="showTip(event, 'fs15', 46)" class="f">transfer</span> <span onmouseout="hideTip(event, 'fs14', 47)" onmouseover="showTip(event, 'fs14', 47)" class="i">backend</span>  <span onmouseout="hideTip(event, 'fs13', 48)" onmouseover="showTip(event, 'fs13', 48)" class="i">frontend</span>) ]
 
   <span class="c">// switch messages between sockets</span>
-  <span class="k">while</span> <span onmouseout="hideTip(event, 'fs30', 67)" onmouseover="showTip(event, 'fs30', 67)" class="i">items</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 68)" onmouseover="showTip(event, 'fs32', 68)" class="f">pollForever</span> <span class="k">do</span> (<span class="c">(* nothing *)</span>)
+  <span class="k">while</span> <span onmouseout="hideTip(event, 'fs20', 49)" onmouseover="showTip(event, 'fs20', 49)" class="i">items</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 50)" onmouseover="showTip(event, 'fs22', 50)" class="f">pollForever</span> <span class="k">do</span> (<span class="c">(* nothing *)</span>)
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -128,28 +126,18 @@
 <div class="tip" id="fs9">type IDisposable =<br />&#160;&#160;member Dispose : unit -&gt; unit<br /><br />Full name: System.IDisposable</div>
 <div class="tip" id="fs10">System.IDisposable.Dispose() : unit</div>
 <div class="tip" id="fs11">val main : unit -&gt; int<br /><br />Full name: Rrbroker.main</div>
-<div class="tip" id="fs12">val context : Context</div>
-<div class="tip" id="fs13">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs14">val frontend : Socket</div>
-<div class="tip" id="fs15">val router : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.router</div>
-<div class="tip" id="fs16">val backend : Socket</div>
-<div class="tip" id="fs17">val dealer : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.dealer</div>
-<div class="tip" id="fs18">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
-<div class="tip" id="fs19">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
-<div class="tip" id="fs20">val transfer : (Socket -&gt; Socket -&gt; unit)</div>
-<div class="tip" id="fs21">val inbound : Socket</div>
-<div class="tip" id="fs22">val outbound : Socket</div>
-<div class="tip" id="fs23">val message : Message</div>
-<div class="tip" id="fs24">Multiple items<br />module Message<br /><br />from fszmq<br /><br />--------------------<br />type Message =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Message<br />&#160;&#160;new : source:byte array -&gt; Message<br />&#160;&#160;private new : ?source:byte array -&gt; Message<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Message<br /><br />--------------------<br />new : unit -&gt; Message<br />new : source:byte array -&gt; Message</div>
-<div class="tip" id="fs25">val loop : (unit -&gt; unit)</div>
-<div class="tip" id="fs26">val recv : message:Message -&gt; socket:Socket -&gt; unit<br /><br />Full name: fszmq.Message.recv</div>
-<div class="tip" id="fs27">val hasMore : message:Message -&gt; bool<br /><br />Full name: fszmq.Message.hasMore</div>
-<div class="tip" id="fs28">val sendMore : message:Message -&gt; socket:Socket -&gt; unit<br /><br />Full name: fszmq.Message.sendMore</div>
-<div class="tip" id="fs29">val send : message:Message -&gt; socket:Socket -&gt; unit<br /><br />Full name: fszmq.Message.send</div>
-<div class="tip" id="fs30">val items : Poll list</div>
-<div class="tip" id="fs31">val pollIn : fn:(Socket -&gt; unit) -&gt; socket:Socket -&gt; Poll<br /><br />Full name: fszmq.Polling.pollIn</div>
-<div class="tip" id="fs32">val pollForever : items:seq&lt;Poll&gt; -&gt; bool<br /><br />Full name: fszmq.Polling.pollForever</div>
-<div class="tip" id="fs33">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs12">val context : &#39;a</div>
+<div class="tip" id="fs13">val frontend : fszmq.Socket</div>
+<div class="tip" id="fs14">val backend : fszmq.Socket</div>
+<div class="tip" id="fs15">val transfer : (&#39;a -&gt; &#39;b -&gt; unit)</div>
+<div class="tip" id="fs16">val inbound : &#39;a</div>
+<div class="tip" id="fs17">val outbound : &#39;a</div>
+<div class="tip" id="fs18">val message : &#39;a (requires &#39;a :&gt; System.IDisposable)</div>
+<div class="tip" id="fs19">val loop : (unit -&gt; unit)</div>
+<div class="tip" id="fs20">val items : fszmq.Poll list</div>
+<div class="tip" id="fs21">val pollIn : fn:(fszmq.Socket -&gt; unit) -&gt; socket:fszmq.Socket -&gt; fszmq.Poll<br /><br />Full name: fszmq.Polling.pollIn</div>
+<div class="tip" id="fs22">val pollForever : items:seq&lt;fszmq.Poll&gt; -&gt; bool<br /><br />Full name: fszmq.Polling.pollForever</div>
+<div class="tip" id="fs23">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

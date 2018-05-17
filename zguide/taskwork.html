@@ -35,15 +35,10 @@
         <div class="span9" id="main">
           
 <h1><a name="Task-Worker" class="anchor" href="#Task-Worker">Task Worker</a></h1>
-
 <p>Connects PULL socket to tcp://localhost:5557</p>
-
 <p>Collects workloads from ventilator via that socket</p>
-
 <p>Connects PUSH socket to tcp://localhost:5558</p>
-
 <p>Sends results to sink via that socket</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -86,27 +81,27 @@
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="f">decode</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="i">Text</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="t">Encoding</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="i">ASCII</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="f">GetString</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="f">main</span> () <span class="o">=</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="t">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
 
   <span class="c">// Socket to receive messages on</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="i">receiver</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 25)" onmouseover="showTip(event, 'fs19', 25)" class="f">pull</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 28)" onmouseover="showTip(event, 'fs21', 28)" class="f">connect</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="i">receiver</span> <span class="s">&quot;tcp://localhost:5557&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="i">receiver</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">pull</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">connect</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="i">receiver</span> <span class="s">&quot;tcp://localhost:5557&quot;</span>
 
   <span class="c">// Socket to send messages to</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="i">sender</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="f">push</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="f">connect</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="i">sender</span> <span class="s">&quot;tcp://localhost:5558&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="i">sender</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">push</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">connect</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="i">sender</span> <span class="s">&quot;tcp://localhost:5558&quot;</span>
 
   <span class="c">// Process tasks forever</span>
   <span class="k">while</span> <span class="k">true</span> <span class="k">do</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 37)" onmouseover="showTip(event, 'fs24', 37)" class="i">msg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="i">receiver</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 39)" onmouseover="showTip(event, 'fs20', 39)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 40)" onmouseover="showTip(event, 'fs25', 40)" class="f">recv</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 41)" onmouseover="showTip(event, 'fs13', 41)" class="f">decode</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="i">msg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 29)" onmouseover="showTip(event, 'fs17', 29)" class="i">receiver</span> <span class="o">|&gt;</span> <span class="i">Socket</span><span class="o">.</span><span class="i">recv</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="f">decode</span>
     <span class="c">// Simple progress indicator for the viewer</span>
-    <span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="f">printf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">.&quot;</span> <span onmouseout="hideTip(event, 'fs24', 43)" onmouseover="showTip(event, 'fs24', 43)" class="i">msg</span>
+    <span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="f">printf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">.&quot;</span> <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="i">msg</span>
 
     <span class="c">// Do the work</span>
-    <span onmouseout="hideTip(event, 'fs27', 44)" onmouseover="showTip(event, 'fs27', 44)" class="t">Thread</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="f">Sleep</span> (<span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="f">int</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="i">msg</span>)
+    <span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="t">Thread</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="f">Sleep</span> (<span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="f">int</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="i">msg</span>)
 
     <span class="c">// Send results to sink</span>
-    <span onmouseout="hideTip(event, 'fs20', 48)" onmouseover="showTip(event, 'fs20', 48)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="f">send</span> <span onmouseout="hideTip(event, 'fs22', 50)" onmouseover="showTip(event, 'fs22', 50)" class="i">sender</span> <span class="s">&quot;&quot;B</span>
+    <span class="i">Socket</span><span class="o">.</span><span class="i">send</span> <span onmouseout="hideTip(event, 'fs18', 37)" onmouseover="showTip(event, 'fs18', 37)" class="i">sender</span> <span class="s">&quot;&quot;B</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -126,24 +121,17 @@
 <div class="tip" id="fs11">property System.Text.Encoding.ASCII: System.Text.Encoding</div>
 <div class="tip" id="fs12">System.Text.Encoding.GetBytes(s: string) : byte []<br />System.Text.Encoding.GetBytes(chars: char []) : byte []<br />System.Text.Encoding.GetBytes(chars: char [], index: int, count: int) : byte []<br />System.Text.Encoding.GetBytes(chars: nativeptr&lt;char&gt;, charCount: int, bytes: nativeptr&lt;byte&gt;, byteCount: int) : int<br />System.Text.Encoding.GetBytes(s: string, charIndex: int, charCount: int, bytes: byte [], byteIndex: int) : int<br />System.Text.Encoding.GetBytes(chars: char [], charIndex: int, charCount: int, bytes: byte [], byteIndex: int) : int</div>
 <div class="tip" id="fs13">val decode : (byte [] -&gt; string)<br /><br />Full name: Taskwork.decode</div>
-<div class="tip" id="fs14">System.Text.Encoding.GetString(bytes: byte []) : string<br />System.Text.Encoding.GetString(bytes: nativeptr&lt;byte&gt;, byteCount: int) : string<br />System.Text.Encoding.GetString(bytes: byte [], index: int, count: int) : string</div>
+<div class="tip" id="fs14">System.Text.Encoding.GetString(bytes: byte []) : string<br />System.Text.Encoding.GetString(bytes: byte [], index: int, count: int) : string</div>
 <div class="tip" id="fs15">val main : unit -&gt; int<br /><br />Full name: Taskwork.main</div>
-<div class="tip" id="fs16">val context : Context</div>
-<div class="tip" id="fs17">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs18">val receiver : Socket</div>
-<div class="tip" id="fs19">val pull : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.pull</div>
-<div class="tip" id="fs20">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
-<div class="tip" id="fs21">val connect : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.connect</div>
-<div class="tip" id="fs22">val sender : Socket</div>
-<div class="tip" id="fs23">val push : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.push</div>
-<div class="tip" id="fs24">val msg : string</div>
-<div class="tip" id="fs25">val recv : socket:Socket -&gt; byte []<br /><br />Full name: fszmq.Socket.recv</div>
-<div class="tip" id="fs26">val printf : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printf</div>
-<div class="tip" id="fs27">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;member Interrupt : unit -&gt; unit<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
-<div class="tip" id="fs28">Thread.Sleep(timeout: System.TimeSpan) : unit<br />Thread.Sleep(millisecondsTimeout: int) : unit</div>
-<div class="tip" id="fs29">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
-<div class="tip" id="fs30">val send : socket:Socket -&gt; frame:byte [] -&gt; unit<br /><br />Full name: fszmq.Socket.send</div>
-<div class="tip" id="fs31">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs16">val context : System.IDisposable</div>
+<div class="tip" id="fs17">val receiver : System.IDisposable</div>
+<div class="tip" id="fs18">val sender : System.IDisposable</div>
+<div class="tip" id="fs19">val msg : string</div>
+<div class="tip" id="fs20">val printf : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printf</div>
+<div class="tip" id="fs21">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member DisableComObjectEagerCleanup : unit -&gt; unit<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />Thread(start: ThreadStart) : unit<br />Thread(start: ParameterizedThreadStart) : unit<br />Thread(start: ThreadStart, maxStackSize: int) : unit<br />Thread(start: ParameterizedThreadStart, maxStackSize: int) : unit</div>
+<div class="tip" id="fs22">Thread.Sleep(timeout: System.TimeSpan) : unit<br />Thread.Sleep(millisecondsTimeout: int) : unit</div>
+<div class="tip" id="fs23">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
+<div class="tip" id="fs24">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

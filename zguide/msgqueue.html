@@ -35,9 +35,7 @@
         <div class="span9" id="main">
           
 <h1><a name="Message-Queue-Broker" class="anchor" href="#Message-Queue-Broker">Message Queue Broker</a></h1>
-
 <p>Simple message queuing broker, same as request-reply broker but using device.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -63,18 +61,18 @@
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">fszmq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">Proxying</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">main</span> () <span class="o">=</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="t">Context</span> ()
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">context</span> <span class="o">=</span> <span class="k">new</span> <span class="i">Context</span> ()
 
   <span class="c">// socket facing clients</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="i">frontend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="f">router</span> <span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="f">bind</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="i">frontend</span> <span class="s">&quot;tcp://*:5559&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="i">frontend</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">router</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">bind</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="i">frontend</span> <span class="s">&quot;tcp://*:5559&quot;</span>
 
   <span class="c">// socket facing services</span>
-  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="i">backend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="t">Context</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 19)" onmouseover="showTip(event, 'fs10', 19)" class="f">router</span> <span onmouseout="hideTip(event, 'fs7', 20)" onmouseover="showTip(event, 'fs7', 20)" class="i">context</span>
-  <span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="t">Socket</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="f">bind</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="i">backend</span> <span class="s">&quot;tcp://*:5560&quot;</span>
+  <span class="k">use</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">backend</span> <span class="o">=</span> <span class="i">Context</span><span class="o">.</span><span class="i">router</span> <span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="i">context</span>
+  <span class="i">Socket</span><span class="o">.</span><span class="i">bind</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">backend</span> <span class="s">&quot;tcp://*:5560&quot;</span>
 
   <span class="c">// start the proxy</span>
-  <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="f">proxy</span> <span onmouseout="hideTip(event, 'fs9', 25)" onmouseover="showTip(event, 'fs9', 25)" class="i">frontend</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">backend</span> <span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="p">None</span>
+  <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="f">proxy</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="i">frontend</span> <span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="i">backend</span> <span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="p">None</span>
 
   <span class="n">0</span> <span class="c">// return code</span>
 </code></pre></td>
@@ -87,16 +85,12 @@
 <div class="tip" id="fs4">namespace fszmq</div>
 <div class="tip" id="fs5">module Proxying<br /><br />from fszmq</div>
 <div class="tip" id="fs6">val main : unit -&gt; int<br /><br />Full name: Msgqueue.main</div>
-<div class="tip" id="fs7">val context : Context</div>
-<div class="tip" id="fs8">Multiple items<br />module Context<br /><br />from fszmq<br /><br />--------------------<br />type Context =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;new : unit -&gt; Context<br />&#160;&#160;private new : __:obj -&gt; Context<br />&#160;&#160;member private Attach : socket:Socket -&gt; unit<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Context<br /><br />--------------------<br />new : unit -&gt; Context</div>
-<div class="tip" id="fs9">val frontend : Socket</div>
-<div class="tip" id="fs10">val router : context:Context -&gt; Socket<br /><br />Full name: fszmq.Context.router</div>
-<div class="tip" id="fs11">Multiple items<br />module Socket<br /><br />from fszmq<br /><br />--------------------<br />type Socket =<br />&#160;&#160;interface IDisposable<br />&#160;&#160;private new : context:HANDLE * socketType:int -&gt; Socket<br />&#160;&#160;override Equals : obj:obj -&gt; bool<br />&#160;&#160;override Finalize : unit -&gt; unit<br />&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;member Handle : nativeint<br /><br />Full name: fszmq.Socket</div>
-<div class="tip" id="fs12">val bind : socket:Socket -&gt; address:string -&gt; unit<br /><br />Full name: fszmq.Socket.bind</div>
-<div class="tip" id="fs13">val backend : Socket</div>
-<div class="tip" id="fs14">val proxy : frontend:Socket -&gt; backend:Socket -&gt; capture:Socket option -&gt; unit<br /><br />Full name: fszmq.Proxying.proxy</div>
-<div class="tip" id="fs15">union case Option.None: Option&lt;&#39;T&gt;</div>
-<div class="tip" id="fs16">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
+<div class="tip" id="fs7">val context : &#39;a</div>
+<div class="tip" id="fs8">val frontend : fszmq.Socket</div>
+<div class="tip" id="fs9">val backend : fszmq.Socket</div>
+<div class="tip" id="fs10">val proxy : frontend:fszmq.Socket -&gt; backend:fszmq.Socket -&gt; capture:fszmq.Socket option -&gt; unit<br /><br />Full name: fszmq.Proxying.proxy</div>
+<div class="tip" id="fs11">union case Option.None: Option&lt;&#39;T&gt;</div>
+<div class="tip" id="fs12">val release : unit -&gt; unit<br /><br />Full name: docs.PATH.release</div>
 
         </div>
         <div class="span3">

@@ -33,21 +33,26 @@
       <div class="row">
         <div class="span9" id="main">
           
+<h3><a name="New-in-12-3-0-2018-05-17" class="anchor" href="#New-in-12-3-0-2018-05-17">New in 12.3.0 (2018/05/17)</a></h3>
+<ul>
+<li>IMPORTANT! <code>fszmq</code> is now shipped as a .NET Standard library only (currently .NET Standard 2)!</li>
+<li>FIX (untracked) <code>Socket.sendAll</code> no long enumerates the input sequence multiple times (thanks to cboudereau)</li>
+<li>NuGet package now specifies the minimum required version of its dependencies</li>
+</ul>
+<h3><a name="New-in-12-2-2-2017-01-31" class="anchor" href="#New-in-12-2-2-2017-01-31">New in 12.2.2 (2017/01/31)</a></h3>
+<ul>
+<li>Version bump (attempting to address NuGet.org issues)</li>
+</ul>
 <h3><a name="New-in-12-2-1-2016-07-18" class="anchor" href="#New-in-12-2-1-2016-07-18">New in 12.2.1 (2016/07/18)</a></h3>
-
 <ul>
 <li>FIX (untracked) <code>Socket.getOptionWithBuffer</code>, <code>Socket.getOption</code> fail when reading boolean options</li>
 </ul>
-
 <h3><a name="New-in-12-2-0-2016-07-11" class="anchor" href="#New-in-12-2-0-2016-07-11">New in 12.2.0 (2016/07/11)</a></h3>
-
 <ul>
 <li>NEW API - safer, more discoverable API for socket options using a mixture of unions, active patterns (thanks to Daniel Fabian)</li>
 <li>socket types (as part of context API) now safer with units-of-measure (thanks to Daniel Fabian)</li>
 </ul>
-
 <h3><a name="New-in-12-1-1-2015-08-21" class="anchor" href="#New-in-12-1-1-2015-08-21">New in 12.1.1 (2015/08/21)</a></h3>
-
 <ul>
 <li>FIX (untracked) - corrected small issue with recieving EINTR during <code>Context</code> termination</li>
 <li>FIX for Issue #121 - <code>Socket.sendAll</code> treats an empty container as an empty 1-frame message (patched by coconaut)</li>
@@ -55,9 +60,7 @@
 <li>FIX for Issue #124 - Improved a few vague error messages</li>
 <li>FIX for Issue #93 - <code>Z85.encode</code> and <code>Z85.decode</code> no longer fail on empty inputs</li>
 </ul>
-
 <h3><a name="New-in-12-1-0-2015-07-21" class="anchor" href="#New-in-12-1-0-2015-07-21">New in 12.1.0 (2015/07/21)</a></h3>
-
 <ul>
 <li>Added support for <code>zmq_proxy_steerable</code>; see the <code>Proxying</code> and <code>ProxyingExtensions</code> modules</li>
 <li>Switched native handles on <code>Context</code>, <code>Socket</code>, and <code>Message</code> types (back) to public visibility</li>
@@ -71,9 +74,7 @@
 <li>Support for libzmq-4.1.x ... various constants related to socket options, context options, and message options</li>
 <li>Support for libzmq-4.1.x ... addressed errors caused by <code>zmq_msg_t</code> allocation size</li>
 </ul>
-
 <h3><a name="New-in-12-0-1-2015-07-01" class="anchor" href="#New-in-12-0-1-2015-07-01">New in 12.0.1 (2015/07/01)</a></h3>
-
 <ul>
 <li>Core types (<code>Message</code>, <code>Socket</code>, and <code>Context</code>) now support referential equality based on underlying native handle</li>
 <li>Calling <code>ToString()</code> on core types (<code>Message</code>, <code>Socket</code>, and <code>Context</code>) now includes the value of the native handle</li>
@@ -85,16 +86,12 @@
 <li>!BREAKING! <code>Message.tryRecv</code> and <code>Message.recv</code> now take a <code>Message</code> instance as an argument</li>
 <li>!BREAKING! Order of arguments has been reversed on <code>Message.send</code> and <code>Message.sendMore</code></li>
 </ul>
-
 <h3><a name="New-in-4-0-9-prerelease-2015-05-06" class="anchor" href="#New-in-4-0-9-prerelease-2015-05-06">New in 4.0.9-prerelease (2015/05/06)</a></h3>
-
 <ul>
 <li>Split project into Mac-friendly and Windows-friendly solutions</li>
 <li>Removed the need for compiling with <code>--define:BSD_EAGAIN</code></li>
 </ul>
-
 <h3><a name="New-in-4-0-8-2015-01-16" class="anchor" href="#New-in-4-0-8-2015-01-16">New in 4.0.8 (2015/01/16)</a></h3>
-
 <ul>
 <li>Fixed bugs related to LINGER being set during <code>Socket</code> disposal</li>
 <li><code>Context</code> now tracks and disposes any <code>Socket</code> instances associated with it</li>
@@ -102,26 +99,20 @@
 <li>!BREAKING! The <code>Handle</code> property on <code>Message</code>, <code>Socket</code>, and <code>Context</code> instances is now internal</li>
 <li>Updated bundled libzmq.dll to version 4.0.6</li>
 </ul>
-
 <h3><a name="New-in-4-0-7-prerelease-2015-01-16" class="anchor" href="#New-in-4-0-7-prerelease-2015-01-16">New in 4.0.7-prerelease (2015/01/16)</a></h3>
-
 <ul>
 <li>Fixed bugs related to LINGER being set during <code>Socket</code> disposal</li>
 <li><code>Context</code> now tracks and disposes any <code>Socket</code> instances associated with it</li>
 <li>Improved <code>Message</code> constructor usage from languages other than F#</li>
 <li>!BREAKING! The <code>Handle</code> property on <code>Message</code>, <code>Socket</code>, and <code>Context</code> instances is now internal</li>
 </ul>
-
 <h3><a name="New-in-4-0-6-2014-06-10" class="anchor" href="#New-in-4-0-6-2014-06-10">New in 4.0.6 (2014/06/10)</a></h3>
-
 <ul>
 <li>Added assembly-level Extension attribute</li>
 <li>Removed unused P/Invoke functions (last vestiges of Timing module)</li>
 <li>Refactored monitoring API to include convenience functions (also extension methods)</li>
 </ul>
-
 <h3><a name="New-in-4-0-5-2014-04-27" class="anchor" href="#New-in-4-0-5-2014-04-27">New in 4.0.5 (2014/04/27)</a></h3>
-
 <ul>
 <li>updated libzmq to 4.0.5</li>
 <li>Fixed working-directory pathing in <code>Scratch.fsx</code> to be properly relative</li>
@@ -133,9 +124,7 @@
 <li>!BREAKING! Changed <code>Proxingy.proxy</code> to return <code>unit</code></li>
 <li>Fixed potential memory leak in <code>Message.tryRecv</code></li>
 </ul>
-
 <h3><a name="New-in-4-0-4-Released-2013-12-08" class="anchor" href="#New-in-4-0-4-Released-2013-12-08">New in 4.0.4 (Released 2013/12/08)</a></h3>
-
 <ul>
 <li>Tracked against zeromq4x (stable repo)</li>
 <li>Message type now has a corresponding suite of functions in the Message module</li>
@@ -149,17 +138,13 @@
 <li>NuGet package now installs either x86 or x64 version of libzmq.dll (based on project configuration)</li>
 <li>NuGet package now has proper uninstaller</li>
 </ul>
-
 <h3><a name="New-in-4-0-1-beta" class="anchor" href="#New-in-4-0-1-beta">New in 4.0.1-beta</a></h3>
-
 <ul>
 <li>Experimental message-passing functions</li>
 <li>Migrated code license to LGPLv3</li>
 <li>Migrated documentation license to MIT/X11</li>
 </ul>
-
 <h3><a name="New-in-4-0-0-beta" class="anchor" href="#New-in-4-0-0-beta">New in 4.0.0-beta</a></h3>
-
 <ul>
 <li>Enhanced solution structure (tests, deployment, docs, et cetera)</li>
 <li>Upgraded to latest libzmq.dll</li>
