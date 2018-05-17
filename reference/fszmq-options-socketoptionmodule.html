@@ -43,9 +43,7 @@
 </p>
 <div class="xmldoc">
 <p>Contains functions for configuring sockets and patterns for interogating sockets</p>
-
 <p><em>(NOTE: this module is automatically opened when its parent module is opened.)</em></p>
-
 
 </div>
 
@@ -60,10 +58,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
+          <code onmouseout="hideTip(event, '2', 2)" onmouseover="showTip(event, '2', 2)">
             configureSocket socket socketOptions
           </code>
-          <div class="tip" id="45">
+          <div class="tip" id="2">
             <strong>Signature:</strong> socket:Socket -&gt; socketOptions:seq&lt;SocketOption&gt; -&gt; unit<br />
                       </div>
         </td>
@@ -72,8 +70,7 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Sets all the given <code>SocketOption</code>s on the given <code>Socket</code></p>
-
+          <p>Sets all the given <a href="fszmq-options-socketoption.html" title="SocketOption"><code>SocketOption</code></a>s on the given <a href="fszmq-socket.html" title="Socket"><code>Socket</code></a></p>
 
 
         </td>
@@ -81,10 +78,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '46', 46)" onmouseover="showTip(event, '46', 46)">
+          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
             setSocketOption socket option
           </code>
-          <div class="tip" id="46">
+          <div class="tip" id="3">
             <strong>Signature:</strong> socket:Socket -&gt; option:SocketOption -&gt; unit<br />
                       </div>
         </td>
@@ -93,8 +90,7 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Sets the given <code>SocketOption</code> on the given <code>Socket</code></p>
-
+          <p>Sets the given <a href="fszmq-options-socketoption.html" title="SocketOption"><code>SocketOption</code></a> on the given <a href="fszmq-socket.html" title="Socket"><code>Socket</code></a></p>
 
 
         </td>
@@ -110,10 +106,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
             ( |Affinity| ) socket
           </code>
-          <div class="tip" id="47">
+          <div class="tip" id="4">
             <strong>Signature:</strong> socket:Socket -&gt; uint64<br />
                       </div>
         </td>
@@ -125,16 +121,16 @@
           <p>I/O thread affinity bit-mask</p>
 
 
-
+              <p>CompiledName: <code>|Affinity|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
+          <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
             ( |AuthenticationDomain| ) socket
           </code>
-          <div class="tip" id="48">
+          <div class="tip" id="5">
             <strong>Signature:</strong> socket:Socket -&gt; string<br />
                       </div>
         </td>
@@ -146,16 +142,16 @@
           <p>Sets authentication domain</p>
 
 
-
+              <p>CompiledName: <code>|AuthenticationDomain|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
+          <code onmouseout="hideTip(event, '6', 6)" onmouseover="showTip(event, '6', 6)">
             ( |Backlog| ) socket
           </code>
-          <div class="tip" id="49">
+          <div class="tip" id="6">
             <strong>Signature:</strong> socket:Socket -&gt; int32<br />
                       </div>
         </td>
@@ -167,16 +163,16 @@
           <p>Maximum number of queued peers</p>
 
 
-
+              <p>CompiledName: <code>|Backlog|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '50', 50)" onmouseover="showTip(event, '50', 50)">
+          <code onmouseout="hideTip(event, '7', 7)" onmouseover="showTip(event, '7', 7)">
             ( |CurveClient|_| ) socket
           </code>
-          <div class="tip" id="50">
+          <div class="tip" id="7">
             <strong>Signature:</strong> socket:Socket -&gt; (byte [] * byte [] * byte []) option<br />
                       </div>
         </td>
@@ -188,16 +184,16 @@
           <p>true if the current security mechanism is CURVE and the socket is acting as a client</p>
 
 
-
+              <p>CompiledName: <code>|CurveClient|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '51', 51)" onmouseover="showTip(event, '51', 51)">
+          <code onmouseout="hideTip(event, '8', 8)" onmouseover="showTip(event, '8', 8)">
             ( |CurveServer|_| ) socket
           </code>
-          <div class="tip" id="51">
+          <div class="tip" id="8">
             <strong>Signature:</strong> socket:Socket -&gt; byte [] option<br />
                       </div>
         </td>
@@ -209,16 +205,16 @@
           <p>true if the current security mechanism is CURVE and the socket is acting as a server</p>
 
 
-
+              <p>CompiledName: <code>|CurveServer|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
+          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
             ( |Events| ) socket
           </code>
-          <div class="tip" id="52">
+          <div class="tip" id="9">
             <strong>Signature:</strong> socket:Socket -&gt; int16<br />
                       </div>
         </td>
@@ -230,16 +226,16 @@
           <p>Socket event state, see all: Polling</p>
 
 
-
+              <p>CompiledName: <code>|Events|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '53', 53)" onmouseover="showTip(event, '53', 53)">
+          <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
             ( |GssapiClient|_| ) socket
           </code>
-          <div class="tip" id="53">
+          <div class="tip" id="10">
             <strong>Signature:</strong> socket:Socket -&gt; (string * string) option<br />
                       </div>
         </td>
@@ -251,16 +247,16 @@
           <p>true if the current security mechanism is GSSAPI and the socket is acting as a Client</p>
 
 
-
+              <p>CompiledName: <code>|GssapiClient|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '54', 54)" onmouseover="showTip(event, '54', 54)">
+          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
             ( |GssapiClientUnencripted|_| ) socket
           </code>
-          <div class="tip" id="54">
+          <div class="tip" id="11">
             <strong>Signature:</strong> socket:Socket -&gt; (string * string) option<br />
                       </div>
         </td>
@@ -272,16 +268,16 @@
           <p>true if the current security mechanism is GSSAPI and the socket is acting as a Client</p>
 
 
-
+              <p>CompiledName: <code>|GssapiClientUnencripted|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '55', 55)" onmouseover="showTip(event, '55', 55)">
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
             ( |GssapiServer|_| ) socket
           </code>
-          <div class="tip" id="55">
+          <div class="tip" id="12">
             <strong>Signature:</strong> socket:Socket -&gt; string option<br />
                       </div>
         </td>
@@ -293,16 +289,16 @@
           <p>true if the current security mechanism is GSSAPI and the socket is acting as a server</p>
 
 
-
+              <p>CompiledName: <code>|GssapiServer|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
             ( |GssapiServerUnencripted|_| ) socket
           </code>
-          <div class="tip" id="56">
+          <div class="tip" id="13">
             <strong>Signature:</strong> socket:Socket -&gt; string option<br />
                       </div>
         </td>
@@ -314,16 +310,16 @@
           <p>true if the current security mechanism is GSSAPI and the socket is acting as a server</p>
 
 
-
+              <p>CompiledName: <code>|GssapiServerUnencripted|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
             ( |HandshakeInterval| ) socket
           </code>
-          <div class="tip" id="57">
+          <div class="tip" id="14">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -335,16 +331,16 @@
           <p>Retrieve the maximum handshake interval</p>
 
 
-
+              <p>CompiledName: <code>|HandshakeInterval|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
             ( |Identity| ) socket
           </code>
-          <div class="tip" id="58">
+          <div class="tip" id="15">
             <strong>Signature:</strong> socket:Socket -&gt; byte []<br />
                       </div>
         </td>
@@ -356,16 +352,16 @@
           <p>Socket identifier</p>
 
 
-
+              <p>CompiledName: <code>|Identity|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
             ( |Immediate| ) socket
           </code>
-          <div class="tip" id="59">
+          <div class="tip" id="16">
             <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
@@ -377,16 +373,16 @@
           <p>limit queuing to only completed connections</p>
 
 
-
+              <p>CompiledName: <code>|Immediate|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
             ( |Ipv6| ) socket
           </code>
-          <div class="tip" id="60">
+          <div class="tip" id="17">
             <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
@@ -398,16 +394,16 @@
           <p>true to enable IPv6 on the socket, false to restrict to only IPv4</p>
 
 
-
+              <p>CompiledName: <code>|Ipv6|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
             ( |KeepLastMessageInQueue| ) socket
           </code>
-          <div class="tip" id="61">
+          <div class="tip" id="18">
             <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
@@ -419,16 +415,16 @@
           <p>keep last message in queue (ignores high-water mark options)</p>
 
 
-
+              <p>CompiledName: <code>|KeepLastMessageInQueue|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '62', 62)" onmouseover="showTip(event, '62', 62)">
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
             ( |LastEndpointAddress| ) socket
           </code>
-          <div class="tip" id="62">
+          <div class="tip" id="19">
             <strong>Signature:</strong> socket:Socket -&gt; string<br />
                       </div>
         </td>
@@ -440,16 +436,16 @@
           <p>Retrieves the last endpoint bound for TCP and IPC transports</p>
 
 
-
+              <p>CompiledName: <code>|LastEndpointAddress|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '63', 63)" onmouseover="showTip(event, '63', 63)">
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
             ( |LingerDelay| ) socket
           </code>
-          <div class="tip" id="63">
+          <div class="tip" id="20">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -461,16 +457,16 @@
           <p>Pause before shutdown</p>
 
 
-
+              <p>CompiledName: <code>|LingerDelay|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '64', 64)" onmouseover="showTip(event, '64', 64)">
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
             ( |MaxMessageSize| ) socket
           </code>
-          <div class="tip" id="64">
+          <div class="tip" id="21">
             <strong>Signature:</strong> socket:Socket -&gt; int64&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -482,16 +478,16 @@
           <p>Maximum inbound message size</p>
 
 
-
+              <p>CompiledName: <code>|MaxMessageSize|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '65', 65)" onmouseover="showTip(event, '65', 65)">
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
             ( |MaxReconnectInterval| ) socket
           </code>
-          <div class="tip" id="65">
+          <div class="tip" id="22">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -503,16 +499,16 @@
           <p>Maximum reconnection interval</p>
 
 
-
+              <p>CompiledName: <code>|MaxReconnectInterval|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '66', 66)" onmouseover="showTip(event, '66', 66)">
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
             ( |MoreMessageFramesAvailable| ) socket
           </code>
-          <div class="tip" id="66">
+          <div class="tip" id="23">
             <strong>Signature:</strong> socket:Socket -&gt; bool<br />
                       </div>
         </td>
@@ -524,16 +520,16 @@
           <p>More message frames available</p>
 
 
-
+              <p>CompiledName: <code>|MoreMessageFramesAvailable|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '67', 67)" onmouseover="showTip(event, '67', 67)">
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
             ( |MulticastHops| ) socket
           </code>
-          <div class="tip" id="67">
+          <div class="tip" id="24">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;NetworkHop,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -545,16 +541,16 @@
           <p>Time-to-live for each multicast packet</p>
 
 
-
+              <p>CompiledName: <code>|MulticastHops|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '68', 68)" onmouseover="showTip(event, '68', 68)">
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
             ( |MulticastRecovery| ) socket
           </code>
-          <div class="tip" id="68">
+          <div class="tip" id="25">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -566,16 +562,16 @@
           <p>Multicast recovery period</p>
 
 
-
+              <p>CompiledName: <code>|MulticastRecovery|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
+          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
             ( |NullSecurity|_| ) socket
           </code>
-          <div class="tip" id="69">
+          <div class="tip" id="26">
             <strong>Signature:</strong> socket:Socket -&gt; unit option<br />
                       </div>
         </td>
@@ -587,16 +583,16 @@
           <p>true if the current security mechanism is NULL</p>
 
 
-
+              <p>CompiledName: <code>|NullSecurity|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
+          <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
             ( |PlainClient|_| ) socket
           </code>
-          <div class="tip" id="70">
+          <div class="tip" id="27">
             <strong>Signature:</strong> socket:Socket -&gt; (string * string) option<br />
                       </div>
         </td>
@@ -608,16 +604,16 @@
           <p>true if the current security mechanism is PLAIN and the socket is acting as a client</p>
 
 
-
+              <p>CompiledName: <code>|PlainClient|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
             ( |PlainServer|_| ) socket
           </code>
-          <div class="tip" id="71">
+          <div class="tip" id="28">
             <strong>Signature:</strong> socket:Socket -&gt; unit option<br />
                       </div>
         </td>
@@ -629,16 +625,16 @@
           <p>true if the current security mechanism is PLAIN and the socket is acting as a server</p>
 
 
-
+              <p>CompiledName: <code>|PlainServer|_|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
             ( |Rate| ) socket
           </code>
-          <div class="tip" id="72">
+          <div class="tip" id="29">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;MeasureInverse&lt;s&gt;,MeasureProduct&lt;kb,MeasureOne&gt;&gt;&gt;<br />
                       </div>
         </td>
@@ -650,16 +646,16 @@
           <p>Multicast data rate</p>
 
 
-
+              <p>CompiledName: <code>|Rate|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
             ( |ReceiveBuffer| ) socket
           </code>
-          <div class="tip" id="73">
+          <div class="tip" id="30">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -671,16 +667,16 @@
           <p>Receive-message buffer size in bytes</p>
 
 
-
+              <p>CompiledName: <code>|ReceiveBuffer|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
+          <code onmouseout="hideTip(event, '31', 31)" onmouseover="showTip(event, '31', 31)">
             ( |ReceiveQueue| ) socket
           </code>
-          <div class="tip" id="74">
+          <div class="tip" id="31">
             <strong>Signature:</strong> socket:Socket -&gt; int32<br />
                       </div>
         </td>
@@ -692,16 +688,16 @@
           <p>Maximum number of inbound queued messages</p>
 
 
-
+              <p>CompiledName: <code>|ReceiveQueue|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
+          <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
             ( |ReceiveTimeout| ) socket
           </code>
-          <div class="tip" id="75">
+          <div class="tip" id="32">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -713,16 +709,16 @@
           <p>Timeout period for inbound messages</p>
 
 
-
+              <p>CompiledName: <code>|ReceiveTimeout|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
+          <code onmouseout="hideTip(event, '33', 33)" onmouseover="showTip(event, '33', 33)">
             ( |ReconnectDelay| ) socket
           </code>
-          <div class="tip" id="76">
+          <div class="tip" id="33">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -734,16 +730,16 @@
           <p>Pause before reconnect</p>
 
 
-
+              <p>CompiledName: <code>|ReconnectDelay|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
+          <code onmouseout="hideTip(event, '34', 34)" onmouseover="showTip(event, '34', 34)">
             ( |SendBuffer| ) socket
           </code>
-          <div class="tip" id="77">
+          <div class="tip" id="34">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;Byte,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -755,16 +751,16 @@
           <p>Send-message buffer size in bytes</p>
 
 
-
+              <p>CompiledName: <code>|SendBuffer|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '78', 78)" onmouseover="showTip(event, '78', 78)">
+          <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
             ( |SendQueue| ) socket
           </code>
-          <div class="tip" id="78">
+          <div class="tip" id="35">
             <strong>Signature:</strong> socket:Socket -&gt; int32<br />
                       </div>
         </td>
@@ -776,16 +772,16 @@
           <p>Maximum number of outbound queued messages</p>
 
 
-
+              <p>CompiledName: <code>|SendQueue|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '79', 79)" onmouseover="showTip(event, '79', 79)">
+          <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
             ( |SendTimeout| ) socket
           </code>
-          <div class="tip" id="79">
+          <div class="tip" id="36">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -797,16 +793,16 @@
           <p>Timeout period for outbound messages</p>
 
 
-
+              <p>CompiledName: <code>|SendTimeout|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '80', 80)" onmouseover="showTip(event, '80', 80)">
+          <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
             ( |SocketType| ) socket
           </code>
-          <div class="tip" id="80">
+          <div class="tip" id="37">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;SocketType,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -818,16 +814,16 @@
           <p>Socket type</p>
 
 
-
+              <p>CompiledName: <code>|SocketType|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '81', 81)" onmouseover="showTip(event, '81', 81)">
+          <code onmouseout="hideTip(event, '38', 38)" onmouseover="showTip(event, '38', 38)">
             ( |SocksProxy| ) socket
           </code>
-          <div class="tip" id="81">
+          <div class="tip" id="38">
             <strong>Signature:</strong> socket:Socket -&gt; string<br />
                       </div>
         </td>
@@ -839,16 +835,16 @@
           <p>Retrieves SOCKS proxy address</p>
 
 
-
+              <p>CompiledName: <code>|SocksProxy|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
+          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
             ( |TcpKeepalive| ) socket
           </code>
-          <div class="tip" id="82">
+          <div class="tip" id="39">
             <strong>Signature:</strong> socket:Socket -&gt; bool option<br />
                       </div>
         </td>
@@ -857,20 +853,20 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p><code>bool option</code> indicating state of TCP_KEEPALIVE; 
+          <p><code>bool option</code> indicating state of TCP_KEEPALIVE;
 <code>None</code> indicates system default value</p>
 
 
-
+              <p>CompiledName: <code>|TcpKeepalive|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '83', 83)" onmouseover="showTip(event, '83', 83)">
+          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
             ( |TcpKeepaliveCount| ) socket
           </code>
-          <div class="tip" id="83">
+          <div class="tip" id="40">
             <strong>Signature:</strong> socket:Socket -&gt; int32<br />
                       </div>
         </td>
@@ -882,16 +878,16 @@
           <p>Override OS-level TCP keep-alive</p>
 
 
-
+              <p>CompiledName: <code>|TcpKeepaliveCount|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
+          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
             ( |TcpKeepaliveIdle| ) socket
           </code>
-          <div class="tip" id="84">
+          <div class="tip" id="41">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;s,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -903,16 +899,16 @@
           <p>Override OS-level TCP keep-alive</p>
 
 
-
+              <p>CompiledName: <code>|TcpKeepaliveIdle|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '85', 85)" onmouseover="showTip(event, '85', 85)">
+          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
             ( |TcpKeepaliveInterval| ) socket
           </code>
-          <div class="tip" id="85">
+          <div class="tip" id="42">
             <strong>Signature:</strong> socket:Socket -&gt; int&lt;MeasureProduct&lt;s,MeasureOne&gt;&gt;<br />
                       </div>
         </td>
@@ -924,16 +920,16 @@
           <p>Override OS-level TCP keep-alive</p>
 
 
-
+              <p>CompiledName: <code>|TcpKeepaliveInterval|</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '86', 86)" onmouseover="showTip(event, '86', 86)">
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
             ( |TypeOfService| ) socket
           </code>
-          <div class="tip" id="86">
+          <div class="tip" id="43">
             <strong>Signature:</strong> socket:Socket -&gt; int32<br />
                       </div>
         </td>
@@ -945,7 +941,7 @@
           <p>Retrieves the TypeOfService option for the socket</p>
 
 
-
+              <p>CompiledName: <code>|TypeOfService|</code></p>
         </td>
       </tr>
     </tbody>

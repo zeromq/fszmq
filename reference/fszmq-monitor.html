@@ -43,105 +43,10 @@
 <div class="xmldoc">
 <p>Contains methods for working with Socket diagnostics</p>
 
-
 </div>
 
 <!-- Render nested types and modules, if there are any -->
 
-  <h3>Functions and values</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Function or value</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
-            buildEvent message
-          </code>
-          <div class="tip" id="41">
-            <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L101-101" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Constructs a ZMQEvent from a raw (binary) message;
-will raise exception if message format is incorrect</p>
-
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
-            recvEvent socket
-          </code>
-          <div class="tip" id="42">
-            <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L116-116" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Receives the next ZMQEvent from a monitor socket;
-will raise exception if called on a non-monitor socket</p>
-
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
-            tryBuildEvent message
-          </code>
-          <div class="tip" id="43">
-            <strong>Signature:</strong> message:byte [] [] -&gt; ZMQEvent option<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L84-84" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Constructs a ZMQEvent option from a raw (binary) message</p>
-
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
-            tryRecvEvent socket
-          </code>
-          <div class="tip" id="44">
-            <strong>Signature:</strong> socket:Socket -&gt; ZMQEvent option<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Monitor.fs#L108-108" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Tries to receive the next ZMQEvent from a monitor socket</p>
-
-
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
         </div>
         <div class="span3">
