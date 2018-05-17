@@ -1,11 +1,15 @@
 source https://nuget.org/api/v2
+framework: net461, netstandard2.0, netcoreapp2.0
 
 nuget FSharp.Core
 nuget FSharp.Formatting
-nuget NUnit 
-nuget NUnit.Runners
 nuget FAKE
 nuget FsCheck
+nuget Microsoft.NET.Test.Sdk
+nuget NuGet.CommandLine
+nuget nunit
+nuget nunit.runners
+nuget NUnit3TestAdapter
 nuget Unquote
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx

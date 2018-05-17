@@ -8,6 +8,7 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 #r "System.Xml.Linq"
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
+open Fake.Testing
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
@@ -25,10 +26,10 @@ let project = "fszmq"
 let summary = "An MPLv2-licensed F# binding for the ZeroMQ distributed computing library."
 
 // File system information
-let solutionFile  = sprintf "fszmq-%s.sln" (if notWin then "osx" else "win")
+let solutionFile  = "fszmq.sln"
 
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = "tests/**/bin/Release/*tests*.dll"
+let testAssemblies = "tests/*.tests*/*.tests*.fsproj"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
@@ -135,8 +136,7 @@ Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
 // Build library & test project
 
 Target "Build" (fun _ ->
-  !! solutionFile
-  |> MSBuildRelease "" "Rebuild"
+  DotNetCli.Build (fun p -> { p with Configuration = "Release" }) 
   |> ignore)
 
 // --------------------------------------------------------------------------------------
@@ -144,17 +144,12 @@ Target "Build" (fun _ ->
 
 Target "RunTests" (fun _ ->
   !! testAssemblies
-  |> NUnit (fun p ->
-      { p with
-          DisableShadowCopy = true
-          ToolName          = if notWin
-                                then p.ToolName
-                                else "nunit-console-x86.exe"
-          Framework         = if notWin
-                                then p.Framework
-                                else "net-4.0"
-          TimeOut           = TimeSpan.FromMinutes 20.
-          OutputFile        = "tests/TestResults.xml" }))
+  |> Seq.iter (fun proj -> DotNetCli.Test (fun p -> 
+    { p with 
+        Project = proj
+        Configuration = "Release"
+        AdditionalArgs = [ "--no-build" ] }))
+)
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts
@@ -180,7 +175,7 @@ Target "NuGet" (fun _ ->
         OutputPath = "bin"
         Version = release.NugetVersion
         MinimumFromLockFile = true
-        ReleaseNotes = toLines release.Notes}))
+        ReleaseNotes = toLines release.Notes }))
 
 Target "BuildPackage" DoNothing
 

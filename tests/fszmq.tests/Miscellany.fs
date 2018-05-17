@@ -6,7 +6,6 @@ open NUnit.Framework
 open Swensen.Unquote
 open System
 
-
 [<TestFixture>]
 module Miscellany = 
 
@@ -65,4 +64,4 @@ module Curve =
     match ZMQ.has ZMQ.CAP_CURVE with
     | Supported (_,true ) ->  Check.QuickThrowOnFailure CurveKeyPairProperties
     | Supported (_,false) ->  Assert.Ignore "CURVE not supported"
-    | Unknown             ->  Assert.Inconclusive "Unable to determine CURVE support"
+    | Unknown -> Assert.Inconclusive "Unable to determine CURVE support"

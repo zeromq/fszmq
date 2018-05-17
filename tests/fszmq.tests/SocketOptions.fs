@@ -1,11 +1,9 @@
 ﻿namespace fszmq.tests
 
-open FsCheck
 open fszmq
 open fszmq.Options
 open NUnit.Framework
 open Swensen.Unquote
-open System
 
 [<TestFixture>]
 module Options =

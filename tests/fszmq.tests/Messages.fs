@@ -5,7 +5,6 @@ open fszmq
 open fszmq.Message
 open NUnit.Framework
 open Swensen.Unquote
-open System
 
 [<TestFixture>]
 module Message =
@@ -52,4 +51,4 @@ module Message =
                               && data1 = Message.data msg2 
                               && Message.data msg1 = [||]
 
-              precheck && postcheck))
+precheck && postcheck))

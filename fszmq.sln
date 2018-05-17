@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
@@ -6,8 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175-43B1-4C90-A1EE-8E351C33435D}"
 	ProjectSection(SolutionItems) = preProject
@@ -66,25 +64,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compat", "compat", "{A7777B8C-3AC4-4DFC-95C0-11D74FC6115B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs-osx", "tests\fszmq.compat.cs\fszmq.compat.cs-osx.csproj", "{2D33436B-A803-4B3D-A76D-A381BC7FC429}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fszmq.compat.cs", "tests\fszmq.compat.cs\fszmq.compat.cs.csproj", "{2D33436B-A803-4B3D-A76D-A381BC7FC429}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "perf", "perf", "{F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_lat-osx", "tests\fszmq.perf.inproc_lat\fszmq.perf.inproc_lat-osx.fsproj", "{F9462E0C-847A-4AAD-844F-FA5FA538B543}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_lat", "tests\fszmq.perf.inproc_lat\fszmq.perf.inproc_lat.fsproj", "{F9462E0C-847A-4AAD-844F-FA5FA538B543}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_thr-osx", "tests\fszmq.perf.inproc_thr\fszmq.perf.inproc_thr-osx.fsproj", "{267CB036-120C-4457-9193-65DAA3CB34AB}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.inproc_thr", "tests\fszmq.perf.inproc_thr\fszmq.perf.inproc_thr.fsproj", "{267CB036-120C-4457-9193-65DAA3CB34AB}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_lat-osx", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat-osx.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_lat", "tests\fszmq.perf.local_lat\fszmq.perf.local_lat.fsproj", "{D9B70E39-A90B-4BC0-9413-33D375F23BF7}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_lat-osx", "tests\fszmq.perf.remote_lat\fszmq.perf.remote_lat-osx.fsproj", "{B53FB44D-54E6-43B5-9590-E38A48A2490D}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_lat", "tests\fszmq.perf.remote_lat\fszmq.perf.remote_lat.fsproj", "{B53FB44D-54E6-43B5-9590-E38A48A2490D}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_thr-osx", "tests\fszmq.perf.local_thr\fszmq.perf.local_thr-osx.fsproj", "{2FB9221E-3695-429A-83A1-075DE00827A2}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.local_thr", "tests\fszmq.perf.local_thr\fszmq.perf.local_thr.fsproj", "{2FB9221E-3695-429A-83A1-075DE00827A2}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_thr-osx", "tests\fszmq.perf.remote_thr\fszmq.perf.remote_thr-osx.fsproj", "{9D0E4922-695E-4036-9928-00F528A8E183}"
-EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.tests-osx", "tests\fszmq.tests\fszmq.tests-osx.fsproj", "{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq.perf.remote_thr", "tests\fszmq.perf.remote_thr\fszmq.perf.remote_thr.fsproj", "{9D0E4922-695E-4036-9928-00F528A8E183}"
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "fszmq", "src\fszmq\fszmq.fsproj", "{FDA50C33-B288-4E42-9141-D78BDDEF9466}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fszmq.tests", "tests\fszmq.tests\fszmq.tests.fsproj", "{E6B638D2-D91B-4E89-956D-92B067F26E35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,18 +130,6 @@ Global
 		{2FB9221E-3695-429A-83A1-075DE00827A2}.Release|x64.Build.0 = Release|x64
 		{2FB9221E-3695-429A-83A1-075DE00827A2}.Release|x86.ActiveCfg = Release|x86
 		{2FB9221E-3695-429A-83A1-075DE00827A2}.Release|x86.Build.0 = Release|x86
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|x64.ActiveCfg = Debug|x64
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|x64.Build.0 = Debug|x64
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|x86.ActiveCfg = Debug|x86
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Debug|x86.Build.0 = Debug|x86
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|x64.ActiveCfg = Release|x64
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|x64.Build.0 = Release|x64
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|x86.ActiveCfg = Release|x86
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3}.Release|x86.Build.0 = Release|x86
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D0E4922-695E-4036-9928-00F528A8E183}.Debug|x64.ActiveCfg = Debug|x64
@@ -204,14 +190,22 @@ Global
 		{FDA50C33-B288-4E42-9141-D78BDDEF9466}.Release|x64.Build.0 = Release|Any CPU
 		{FDA50C33-B288-4E42-9141-D78BDDEF9466}.Release|x86.ActiveCfg = Release|Any CPU
 		{FDA50C33-B288-4E42-9141-D78BDDEF9466}.Release|x86.Build.0 = Release|Any CPU
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|x64.ActiveCfg = Debug|x64
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|x64.Build.0 = Debug|x64
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|x86.ActiveCfg = Debug|x86
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Debug|x86.Build.0 = Debug|x86
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|x64.ActiveCfg = Release|x64
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|x64.Build.0 = Release|x64
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|x86.ActiveCfg = Release|x86
+		{E6B638D2-D91B-4E89-956D-92B067F26E35}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
-		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
-		{007DAB23-B6A5-4F2E-B1EA-9DF9118B2780} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
 		{A7777B8C-3AC4-4DFC-95C0-11D74FC6115B} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 		{F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
-		{9CA8C753-EB2E-40E5-BEAF-09F51B2601F3} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 		{2D33436B-A803-4B3D-A76D-A381BC7FC429} = {A7777B8C-3AC4-4DFC-95C0-11D74FC6115B}
 		{F9462E0C-847A-4AAD-844F-FA5FA538B543} = {F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}
 		{267CB036-120C-4457-9193-65DAA3CB34AB} = {F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}
@@ -219,6 +213,7 @@ Global
 		{B53FB44D-54E6-43B5-9590-E38A48A2490D} = {F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}
 		{2FB9221E-3695-429A-83A1-075DE00827A2} = {F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}
 		{9D0E4922-695E-4036-9928-00F528A8E183} = {F3DD00B0-1075-472A-B0B1-F5FB67FF2B4C}
+		{E6B638D2-D91B-4E89-956D-92B067F26E35} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

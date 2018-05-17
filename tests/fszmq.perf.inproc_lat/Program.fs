@@ -21,7 +21,7 @@ let worker (state:obj) =
 
 let processMessages messageSize roundtripCount socket =
   use msg' = new Message(Array.zeroCreate messageSize)
-  for i in 1L .. roundtripCount do
+  for _ in 1L .. roundtripCount do
     use msg = clone msg'
     msg ->> socket
     socket |> Message.recv msg |> ignore

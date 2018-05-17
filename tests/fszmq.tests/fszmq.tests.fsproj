@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Miscellany.fs" />
+    <Compile Include="Messages.fs" />
+    <Compile Include="SocketOptions.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\fszmq\fszmq.fsproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND '$(ProcessorArchitecture)'=='x86' ">
+    <None Include="..\..\lib\zeromq\WIN\x86\libzmq.dll">
+      <Link>libzmq.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND '$(ProcessorArchitecture)'!='x86' ">
+    <None Include="..\..\lib\zeromq\WIN\x64\libzmq.dll">
+      <Link>libzmq.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>
