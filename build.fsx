@@ -136,8 +136,7 @@ Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
 // Build library & test project
 
 Target "Build" (fun _ ->
-  !! solutionFile
-  |> MSBuildRelease "" "Rebuild"
+  DotNetCli.Build (fun p -> { p with Configuration = "Release" }) 
   |> ignore)
 
 // --------------------------------------------------------------------------------------
