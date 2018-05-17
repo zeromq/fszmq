@@ -1,4 +1,4 @@
-### New in 12.3.0 (unreleased)
+### New in 12.3.0 (2018/05/17)
 * IMPORTANT! `fszmq` is now shipped as a .NET Standard library only (currently .NET Standard 2)!
 * FIX (untracked) `Socket.sendAll` no long enumerates the input sequence multiple times (thanks to cboudereau)
 * NuGet package now specifies the minimum required version of its dependencies

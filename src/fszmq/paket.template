@@ -13,7 +13,7 @@ licenseUrl
 requireLicenseAcceptance
     true
 copyright
-    Copyright 2011-2015 Paulmichael Blasucci
+    Copyright 2011-2018 Paulmichael Blasucci
 tags
     F# fsharp zeromq zmq 0MQ distributed concurrent parallel messaging transport
 summary
