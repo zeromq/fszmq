@@ -116,14 +116,15 @@ Target "AssemblyInfo" (fun _ ->
 // Copies binaries from default VS location to exepcted bin folder
 Target "CopyBinaries" (fun _ ->
   // managed libraries
-  !! "src/fszmq/bin/Release/fszmq.*"
-    // support tooling
-    ++ "tests/**/bin/Release/*.exe" |> CopyTo "bin"
+  !! "src/fszmq/bin/Release/netstandard2.0/fszmq.*" |> CopyTo "bin"
+  // support tooling
+  !! "tests/*perf*/bin/Release/net461/*.exe" |> CopyTo "bin/net461"
+  !! "tests/*perf*/bin/Release/netcoreapp2.0/*.exe" |> CopyTo "bin/netcoreapp2.0"
   // native dependencies
-  if notWin
-    then  !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin"
-    else  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/x86"
-          !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/x64")
+  !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin/OSX"
+  !! "lib/zeromq/LIN/**/*.*" |> CopyTo "bin/LIN"
+  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/WIN/x86"
+  !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/WIN/x64")
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -156,15 +157,12 @@ Target "RunTests" (fun _ ->
 
 Target "Archive" (fun _ ->
   let rootDir = "temp/fszmq-" + release.NugetVersion
-  let winDir  = rootDir + "/WIN"
   // set up desired file structure
-  !! "bin/*.dll"
-    ++ "bin/*.xml" 
-    ++ "bin/*.exe" 
-    -- "bin/*.compat.*"             |> Copy rootDir 
+  !! "bin/*.dll" ++ "bin/*.xml"     |> Copy  rootDir    
   !! "lib/zeromq/OSX/**/*.*"        |> Copy (rootDir + "/OSX")
-  !! "lib/zeromq/WIN/x86/libzmq.*"  |> Copy (winDir + "/x86")
-  !! "lib/zeromq/WIN/x64/libzmq.*"  |> Copy (winDir + "/x64")
+  !! "lib/zeromq/LIN/**/*.*"        |> Copy (rootDir + "/LIN")
+  !! "lib/zeromq/WIN/x86/libzmq.*"  |> Copy (rootDir + "/WIN/x86")
+  !! "lib/zeromq/WIN/x64/libzmq.*"  |> Copy (rootDir + "/WIN/x64")
   // compress
   !! (rootDir + "/**/*.*") 
     |> Zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip"))

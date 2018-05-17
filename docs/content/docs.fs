@@ -33,9 +33,9 @@ module PATH =
   let private zmqFolder =
     match Environment.OSVersion.Platform with
     | PlatformID.Unix
-    | PlatformID.MacOSX ->  sprintf "%s/../../bin" __SOURCE_DIRECTORY__
-    | _                 ->  //NOTE: for now, WIN docs are 32-bit only
-                            sprintf "%s/../../bin/x86" __SOURCE_DIRECTORY__
+    | PlatformID.MacOSX ->  sprintf "%s/../../bin/OSX" __SOURCE_DIRECTORY__
+    | _                 ->  let arch = if Environment.Is64BitProcess then "x64" else "x86"
+                            sprintf "%s/../../bin/WIN/%s" __SOURCE_DIRECTORY__ arch
   let private oldPATH = ref ""
   // temporarily add location of native libs to global environment
   let hijack () =
