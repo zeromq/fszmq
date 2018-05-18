@@ -1,3 +1,6 @@
+### New in 12.3.1 (2018/05/18)
+* FIX (untracked) NuGet package now includes XMLDocs (`fszmq.xml`), which were accidentally omitted from last release
+
 ### New in 12.3.0 (2018/05/17)
 * IMPORTANT! `fszmq` is now shipped as a .NET Standard library only (currently .NET Standard 2)!
 * FIX (untracked) `Socket.sendAll` no long enumerates the input sequence multiple times (thanks to cboudereau)

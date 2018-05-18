@@ -1,6 +1,8 @@
 source https://nuget.org/api/v2
 framework: net461, netstandard2.0, netcoreapp2.0
 
+clitool dotnet-proj-info
+
 nuget FSharp.Core
 nuget FSharp.Formatting
 nuget FAKE

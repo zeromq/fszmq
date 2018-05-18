@@ -8,14 +8,11 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 #r "System.Xml.Linq"
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
-open Fake.Testing
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open System
 open System.IO
-
-let notWin = isUnix || isLinux || isMacOS
 
 // The name of the project
 // (used by attributes in AssemblyInfo, name of a NuGet package and directory in 'src')
@@ -186,7 +183,7 @@ let generateDocs (refDocs,helpDocs) debug =
   // configure formatting options
   let args = [ (if not debug then "--define:RELEASE"   else "")
                (if refDocs   then "--define:REFERENCE" else "")
-               (if helpDocs  then "--define:HELP"      else "") ]
+               (if helpDocs  then "--define:HELP"      else "") ] 
   // do it!
   if executeFSIWithArgs "docs/tools" "generate.fsx" args []
     then  traceImportant "Help generated"

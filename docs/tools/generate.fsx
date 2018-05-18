@@ -35,8 +35,25 @@ open Fake
 open Fake.FileHelper
 open FSharp.Literate
 open FSharp.MetadataFormat
+open System
 open System.Collections.Generic
 open System.IO
+
+//HACK: Get .NET Standard reference path
+let netStandardRef = 
+  let result = ExecProcessAndReturnMessages 
+                  (fun p -> p.FileName  <- "dotnet"
+                            p.Arguments <- "proj-info --fsc-args"
+                            p.WorkingDirectory <- "../../src/fszmq")
+                  (TimeSpan.FromSeconds 5.0)
+  if not result.OK
+    then  ""
+    else  result.Messages 
+          |> Seq.filter (fun s -> s.StartsWith "-r:" && s.Contains "netstandard2.0")
+          |> Seq.tryHead
+          |> function
+              | Some s  -> DirectoryName (s.TrimStart [|'-'; 'r'; ':'; |])
+              | None    -> ""
 
 // When called from 'build.fsx', use the public project URL as <root>
 // otherwise, use the current 'output' directory.
@@ -91,7 +108,7 @@ let libDirs =
                                 |> Array.map (fun d -> d.FullName)
                                 |> List.ofArray
 
-  conventionBasedbinDirs @ [bin]
+  conventionBasedbinDirs @ [ netStandardRef; bin; ]
 
 // Build API reference from XML comments
 let buildReference () =
