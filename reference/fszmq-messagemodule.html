@@ -47,6 +47,509 @@
 
 <!-- Render nested types and modules, if there are any -->
 
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
+            ( |&lt;&lt; ) message socket
+          </code>
+          <div class="tip" id="18">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.recv</code></p>
+
+
+              <p>CompiledName: <code>op_BarLessLess</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
+            ( +&gt;&gt; ) message socket
+          </code>
+          <div class="tip" id="19">
+            <strong>Signature:</strong> message:Socket -&gt; socket:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L151-151" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.sendMore</code> (with arguments reversed)</p>
+
+
+              <p>CompiledName: <code>op_PlusGreaterGreater</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+            ( &lt;&lt;- ) socket message
+          </code>
+          <div class="tip" id="20">
+            <strong>Signature:</strong> socket:Socket -&gt; message:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L144-144" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.send</code></p>
+
+
+              <p>CompiledName: <code>op_LessLessMinus</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            ( &lt;&lt;+ ) socket message
+          </code>
+          <div class="tip" id="21">
+            <strong>Signature:</strong> socket:Message -&gt; message:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L146-146" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.sendMore</code></p>
+
+
+              <p>CompiledName: <code>op_LessLessPlus</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            ( -&gt;&gt; ) message socket
+          </code>
+          <div class="tip" id="22">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L149-149" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.send</code> (with arguments reversed)</p>
+
+
+              <p>CompiledName: <code>op_MinusGreaterGreater</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+            ( &gt;&gt;| ) socket message
+          </code>
+          <div class="tip" id="23">
+            <strong>Signature:</strong> socket:Socket -&gt; message:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L174-174" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Operator equivalent to <code>Message.recv</code> (with arguments reversed)</p>
+
+
+              <p>CompiledName: <code>op_GreaterGreaterBar</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+            clone source
+          </code>
+          <div class="tip" id="24">
+            <strong>Signature:</strong> source:Message -&gt; Message<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L105-105" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Makes a new instance of the Message type, with an independent copy of the source content.</p>
+
+
+              <p>CompiledName: <code>Clone</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+            configure message options
+          </code>
+          <div class="tip" id="25">
+            <strong>Signature:</strong> message:Message -&gt; options:seq&lt;int * int&gt; -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L33-33" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the given block of option values for the given Message</p>
+
+
+              <p>CompiledName: <code>Configure</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
+            copy source target
+          </code>
+          <div class="tip" id="26">
+            <strong>Signature:</strong> source:Message -&gt; target:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L88-88" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Copies the content from one message to another message.
+Avoid modifying message content after a message has been copied,
+as this can result in undefined behavior.</p>
+
+
+              <p>CompiledName: <code>Copy</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
+            data message
+          </code>
+          <div class="tip" id="27">
+            <strong>Signature:</strong> message:Message -&gt; byte []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L38-38" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the content of the given Message</p>
+
+
+              <p>CompiledName: <code>Data</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
+            getOption message messageOption
+          </code>
+          <div class="tip" id="28">
+            <strong>Signature:</strong> message:Message -&gt; messageOption:int -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L21-21" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Gets the value of the given option for the given Message</p>
+
+
+              <p>CompiledName: <code>GetOption</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            hasMore message
+          </code>
+          <div class="tip" id="29">
+            <strong>Signature:</strong> message:Message -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L51-51" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns true if the given message is a frame in a multi-part message and more frames are available</p>
+
+
+              <p>CompiledName: <code>HasMore</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
+            isMatch left right
+          </code>
+          <div class="tip" id="30">
+            <strong>Signature:</strong> left:Message -&gt; right:Message -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L55-55" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Tests if two <a href="fszmq-message.html" title="Message"><code>Message</code></a> instances have the same size and data</p>
+
+
+              <p>CompiledName: <code>IsMatch</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '31', 31)" onmouseover="showTip(event, '31', 31)">
+            move source target
+          </code>
+          <div class="tip" id="31">
+            <strong>Signature:</strong> source:Message -&gt; target:Message -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L99-99" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Moves the content from one message to another message.
+No actual copying of message content is performed, target is simply updated to reference the new content.
+source becomes an empty message after calling <code>Message.move()</code>. The original content of target, if any,
+shall be released. To preseve the content of source, see <code>Message.copy()</code>.</p>
+
+
+              <p>CompiledName: <code>Move</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
+            recv message socket
+          </code>
+          <div class="tip" id="32">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L167-167" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Updates the given <a href="fszmq-message.html" title="Message"><code>Message</code></a> instance with the next available message from a socket;
+If no message is received before RCVTIMEO expires, throws a TimeoutException</p>
+
+
+              <p>CompiledName: <code>Recv</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '33', 33)" onmouseover="showTip(event, '33', 33)">
+            send message socket
+          </code>
+          <div class="tip" id="33">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L135-135" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sends a message, indicating no more messages will follow</p>
+
+
+              <p>CompiledName: <code>Send</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '34', 34)" onmouseover="showTip(event, '34', 34)">
+            sendMore message socket
+          </code>
+          <div class="tip" id="34">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L140-140" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sends a message, indicating more messages will follow</p>
+
+
+              <p>CompiledName: <code>SendMore</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
+            setOption message (messageOption, value)
+          </code>
+          <div class="tip" id="35">
+            <strong>Signature:</strong> message:Message -&gt; (messageOption:int * value:int) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L28-28" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the given option value for the given Message</p>
+
+
+              <p>CompiledName: <code>SetOption</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
+            size message
+          </code>
+          <div class="tip" id="36">
+            <strong>Signature:</strong> message:Message -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L47-47" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the size (in bytes) of the given Message</p>
+
+
+              <p>CompiledName: <code>Size</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
+            tryGetMetadata message name
+          </code>
+          <div class="tip" id="37">
+            <strong>Signature:</strong> message:Message -&gt; name:string -&gt; string option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L60-60" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>For a given message, returns the metadata associated with the given name
+as an <code>Option&lt;string&gt;</code> where <code>None</code> indicates no metadata is present</p>
+
+
+              <p>CompiledName: <code>TryGetMetadata</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '38', 38)" onmouseover="showTip(event, '38', 38)">
+            tryLoadMetadata message name value
+          </code>
+          <div class="tip" id="38">
+            <strong>Signature:</strong> message:Message -&gt; name:string -&gt; value:byref&lt;string&gt; -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L74-74" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>For a given message, extracts the metadata associated with the given name,
+returning false if no metadata is present (for the given name)</p>
+<p>This function is named TryGetMetadata in compiled assemblies.
+If you are accessing the function from a language other than F#, or through reflection, use this name.</p>
+
+
+              <p>CompiledName: <code>TryGetMetadata</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
+            tryRecv message socket flags
+          </code>
+          <div class="tip" id="39">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; flags:int -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L158-158" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Updates the given <a href="fszmq-message.html" title="Message"><code>Message</code></a> instance with the next available message from a socket,
+returning true (or false) if the recv was successful (or should be re-tried)</p>
+
+
+              <p>CompiledName: <code>TryRecv</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
+            trySend message socket flags
+          </code>
+          <div class="tip" id="40">
+            <strong>Signature:</strong> message:Message -&gt; socket:Socket -&gt; flags:int -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/zeromq/fszmq/tree/master/src/fszmq/Message.fs#L127-127" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sends a message, with the given flags, returning true (or false)
+if the send was successful (or should be re-tried)</p>
+
+
+              <p>CompiledName: <code>TrySend</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
         </div>
         <div class="span3">
