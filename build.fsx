@@ -114,9 +114,6 @@ Target "AssemblyInfo" (fun _ ->
 Target "CopyBinaries" (fun _ ->
   // managed libraries
   !! "src/fszmq/bin/Release/netstandard2.0/fszmq.*" |> CopyTo "bin"
-  // support tooling
-  !! "tests/*perf*/bin/Release/net461/*.exe" |> CopyTo "bin/net461"
-  !! "tests/*perf*/bin/Release/netcoreapp2.0/*.exe" |> CopyTo "bin/netcoreapp2.0"
   // native dependencies
   !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin/OSX"
   !! "lib/zeromq/LIN/**/*.*" |> CopyTo "bin/LIN"
@@ -146,8 +143,7 @@ Target "RunTests" (fun _ ->
     { p with 
         Project = proj
         Configuration = "Release"
-        AdditionalArgs = [ "--no-build" ] }))
-)
+        AdditionalArgs = [ "--no-build" ] })))
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts

@@ -1,3 +1,6 @@
+### New in 12.3.2 (2018/05/23)
+* FIX for Issue #161 - fixed regression in .NET 4.6.1 support
+
 ### New in 12.3.1 (2018/05/18)
 * FIX (untracked) NuGet package now includes XMLDocs (`fszmq.xml`), which were accidentally omitted from last release
 

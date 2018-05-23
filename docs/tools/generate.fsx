@@ -44,7 +44,7 @@ let netStandardRef =
   let result = ExecProcessAndReturnMessages 
                   (fun p -> p.FileName  <- "dotnet"
                             p.Arguments <- "proj-info --fsc-args"
-                            p.WorkingDirectory <- "../../src/fszmq")
+                            p.WorkingDirectory <- ".")
                   (TimeSpan.FromSeconds 5.0)
   if not result.OK
     then  ""
