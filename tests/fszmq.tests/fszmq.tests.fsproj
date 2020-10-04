@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -9,7 +9,6 @@
     <Compile Include="Miscellany.fs" />
     <Compile Include="Messages.fs" />
     <Compile Include="SocketOptions.fs" />
-    <Compile Include="Program.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

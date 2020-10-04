@@ -1,17 +1,35 @@
-source https://nuget.org/api/v2
-framework: net461, netstandard2.0, netcoreapp2.0
+version 5.249.0
+storage: none
+framework: netstandard2.0, netstandard2.1, netcoreapp3.1
 
-clitool dotnet-proj-info
+source https://api.nuget.org/v3/index.json
 
 nuget FSharp.Core
-nuget FSharp.Formatting
-nuget FAKE
-nuget FsCheck
-nuget Microsoft.NET.Test.Sdk
-nuget NuGet.CommandLine
-nuget nunit
-nuget nunit.runners
-nuget NUnit3TestAdapter
-nuget Unquote
 
-github fsharp/FAKE modules/Octokit/Octokit.fsx
+group Test
+    storage: none
+    framework: netstandard2.0, netstandard2.1, netcoreapp3.1
+
+    source https://api.nuget.org/v3/index.json
+
+    nuget FSharp.Core
+    nuget FsCheck
+    nuget Microsoft.NET.Test.Sdk
+    nuget nunit
+    nuget nunit.runners
+    nuget NUnit3TestAdapter
+    nuget Unquote
+
+group Build
+    storage: none
+    framework: netstandard2.0, netstandard2.1, netcoreapp3.1
+
+    source https://api.nuget.org/v3/index.json
+
+    nuget FSharp.Core
+    nuget FSharp.Formatting
+    nuget NuGet.CommandLine
+
+    github fsharp/FAKE modules/Octokit/Octokit.fsx
+
+    clitool dotnet-proj-info

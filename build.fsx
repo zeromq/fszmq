@@ -1,3 +1,4 @@
+open Fake.DotNet.Testing
 (* ------------------------------------------------------------------------
 This file is part of fszmq.
 
@@ -6,11 +7,32 @@ If a copy of the MPL was not distributed with this file, You can obtain one at h
 ------------------------------------------------------------------------ *)
 
 #r "System.Xml.Linq"
-#r @"packages/FAKE/tools/FakeLib.dll"
-open Fake
-open Fake.Git
-open Fake.AssemblyInfoFile
-open Fake.ReleaseNotesHelper
+#r "paket:
+nuget Fake.Api.GitHub
+nuget Fake.Core.Environment
+nuget Fake.Core.ReleaseNotes
+nuget Fake.Core.Target
+nuget Fake.Core.Trace
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Cli
+nuget Fake.DotNet.Paket
+nuget Fake.IO.FileSystem
+nuget Fake.IO.Zip
+nuget Fake.Tools.Git //"
+#load ".fake/build.fsx/intellisense.fsx"
+
+open Fake.Core
+open Fake.Core.TargetOperators
+open Fake.DotNet
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.IO.Globbing.Operators
+open Fake.Tools.Git
+
+Target.initEnvironment()
+
+// open Fake.Git
+// open Fake.AssemblyInfoFile
 open System
 open System.IO
 
@@ -37,7 +59,7 @@ let gitHome = "https://github.com/" + gitOwner
 let gitName = "fszmq"
 
 // The url for the raw files hosted
-let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/zeromq"
+let gitRaw = Environment.environVarOrDefault "gitRaw" "https://raw.github.com/zeromq"
 
 // Standard file header
 let [<Literal>] HEADER = """This file is part of fszmq.
@@ -59,7 +81,7 @@ let vbHeader =  String.Join ( Environment.NewLine
                               |> Array.map (fun l -> "' " + l) )
 
 // Read additional information from the release notes document
-let release = LoadReleaseNotes "RELEASE_NOTES.md"
+let release = ReleaseNotes.load "RELEASE_NOTES.md"
 
 // Helper active pattern for project types
 let (|Fsproj|Csproj|Vbproj|) (projFileName:string) =
@@ -72,15 +94,15 @@ let (|Fsproj|Csproj|Vbproj|) (projFileName:string) =
           |> failwith
 
 // Generate assembly info files with the right version & up-to-date information
-Target "AssemblyInfo" (fun _ ->
+Target.create "AssemblyInfo" (fun _ ->
   let getAssemblyInfoAttributes projectName =
-    [ Attribute.Title (projectName)
-      Attribute.Product project
-      Attribute.Description summary
-      Attribute.Version release.AssemblyVersion
-      Attribute.FileVersion release.AssemblyVersion ]
+    [ AssemblyInfo.Title (projectName)
+      AssemblyInfo.Product project
+      AssemblyInfo.Description summary
+      AssemblyInfo.Version release.AssemblyVersion
+      AssemblyInfo.FileVersion release.AssemblyVersion ]
 
-  let getProjectDetails projectPath =
+  let getProjectDetails (projectPath:string) =
     let projectName = Path.GetFileNameWithoutExtension projectPath
     (projectPath
     ,projectName
@@ -97,121 +119,128 @@ Target "AssemblyInfo" (fun _ ->
   |> Seq.map getProjectDetails
   |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
       match projFileName with
-      | Fsproj -> writeFile CreateFSharpAssemblyInfo
+      | Fsproj -> writeFile AssemblyInfoFile.createFSharp
                             attributes
                             fsHeader
                             (folderName @@ "AssemblyInfo.fs")
-      | Csproj -> writeFile CreateCSharpAssemblyInfo
+      | Csproj -> writeFile AssemblyInfoFile.createCSharp
                             attributes
                             csHeader
                             ((folderName @@ "Properties") @@ "AssemblyInfo.cs")
-      | Vbproj -> writeFile CreateVisualBasicAssemblyInfo
+      | Vbproj -> writeFile AssemblyInfoFile.createVisualBasic
                             attributes
                             vbHeader
                             ((folderName @@ "My Project") @@ "AssemblyInfo.vb")))
 
 // Copies binaries from default VS location to exepcted bin folder
-Target "CopyBinaries" (fun _ ->
+Target.create "CopyBinaries" (fun _ ->
   // managed libraries
-  !! "src/fszmq/bin/Release/netstandard2.0/fszmq.*" |> CopyTo "bin"
+  !! "src/fszmq/bin/Release/netstandard2.0/fszmq.*" |> Shell.copyTo "bin"
   // native dependencies
-  !! "lib/zeromq/OSX/**/*.*" |> CopyTo "bin/OSX"
-  !! "lib/zeromq/LIN/**/*.*" |> CopyTo "bin/LIN"
-  !! "lib/zeromq/WIN/x86/libzmq.*" |> CopyTo "bin/WIN/x86"
-  !! "lib/zeromq/WIN/x64/libzmq.*" |> CopyTo "bin/WIN/x64")
+  !! "lib/zeromq/OSX/**/*.*" |> Shell.copyTo "bin/OSX"
+  !! "lib/zeromq/LIN/**/*.*" |> Shell.copyTo "bin/LIN"
+  !! "lib/zeromq/WIN/x86/libzmq.*" |> Shell.copyTo "bin/WIN/x86"
+  !! "lib/zeromq/WIN/x64/libzmq.*" |> Shell.copyTo "bin/WIN/x64")
 
 // --------------------------------------------------------------------------------------
 // Clean build results
 
-Target "Clean"      (fun _ -> CleanDirs ["bin"; "temp"])
-Target "CleanDocs"  (fun _ -> CleanDirs ["docs/output"])
-Target "CleanGuide" (fun _ -> CleanDirs ["docs/content/zguide"])
+Target.create "Clean"      (fun _ -> Shell.cleanDirs ["bin"; "temp"])
+Target.create "CleanDocs"  (fun _ -> Shell.cleanDirs ["docs/output"])
+Target.create "CleanGuide" (fun _ -> Shell.cleanDirs ["docs/content/zguide"])
 
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
-Target "Build" (fun _ ->
-  DotNetCli.Build (fun p -> { p with Configuration = "Release" }) 
+Target.create "Build" (fun _ ->
+  DotNet.build (fun p -> { p with Configuration = DotNet.BuildConfiguration.Release })
   |> ignore)
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
-Target "RunTests" (fun _ ->
+Target.create "RunTests" (fun _ ->
   !! testAssemblies
-  |> Seq.iter (fun proj -> DotNetCli.Test (fun p -> 
-    { p with 
-        Project = proj
-        Configuration = "Release"
-        AdditionalArgs = [ "--no-build" ] })))
+  |> Seq.iter (fun proj ->
+      DotNet.test
+        (fun p -> { p with Configuration = DotNet.BuildConfiguration.Release })
+        proj))
 
 // --------------------------------------------------------------------------------------
 // Build a deployment artifacts
 
-Target "Archive" (fun _ ->
+Target.create "Archive" (fun _ ->
   let rootDir = "temp/fszmq-" + release.NugetVersion
   // set up desired file structure
-  !! "bin/*.dll" ++ "bin/*.xml"     |> Copy  rootDir    
-  !! "lib/zeromq/OSX/**/*.*"        |> Copy (rootDir + "/OSX")
-  !! "lib/zeromq/LIN/**/*.*"        |> Copy (rootDir + "/LIN")
-  !! "lib/zeromq/WIN/x86/libzmq.*"  |> Copy (rootDir + "/WIN/x86")
-  !! "lib/zeromq/WIN/x64/libzmq.*"  |> Copy (rootDir + "/WIN/x64")
+  !! "bin/*.dll" ++ "bin/*.xml"     |> Shell.copy rootDir
+  !! "lib/zeromq/OSX/**/*.*"        |> Shell.copy (rootDir + "/OSX")
+  !! "lib/zeromq/LIN/**/*.*"        |> Shell.copy (rootDir + "/LIN")
+  !! "lib/zeromq/WIN/x86/libzmq.*"  |> Shell.copy (rootDir + "/WIN/x86")
+  !! "lib/zeromq/WIN/x64/libzmq.*"  |> Shell.copy (rootDir + "/WIN/x64")
   // compress
-  !! (rootDir + "/**/*.*") 
-    |> Zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip"))
+  !! (rootDir + "/**/*.*")
+    |> Zip.zip rootDir ("bin/fszmq-" + release.NugetVersion + ".zip"))
 
-Target "NuGet" (fun _ ->
-  Paket.Pack(fun p ->
+Target.create "NuGet" (fun _ ->
+  Paket.pack(fun p ->
     { p with
         OutputPath = "bin"
         Version = release.NugetVersion
         MinimumFromLockFile = true
-        ReleaseNotes = toLines release.Notes }))
+        ReleaseNotes = String.toLines release.Notes }))
 
-Target "BuildPackage" DoNothing
+Target.create "BuildPackage" ignore
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
 
 let generateDocs (refDocs,helpDocs) debug =
   // stage release notes for formatting
-  CopyFile "docs/content/release_notes.md" "RELEASE_NOTES.md"
+  Shell.copyFile "docs/content/release_notes.md" "RELEASE_NOTES.md"
   // configure formatting options
   let args = [ (if not debug then "--define:RELEASE"   else "")
                (if refDocs   then "--define:REFERENCE" else "")
-               (if helpDocs  then "--define:HELP"      else "") ] 
+               (if helpDocs  then "--define:HELP"      else "") ]
   // do it!
-  if executeFSIWithArgs "docs/tools" "generate.fsx" args []
-    then  traceImportant "Help generated"
-    else  traceImportant "generating help documentation failed"
+  let result =
+    DotNet.exec
+      (fun o -> {o with WorkingDirectory = "docs/tools"})
+      "fsi"
+      "generate.fsx"
+  if result.OK then
+    Trace.traceImportant "Help generated"
+  else
+      Trace.traceError "generating help documentation failed..."
+      for x in result.Errors do Trace.traceErrorfn "%s" x
+
   // clean up
-  DeleteFile "docs/content/release_notes.md"
+  File.delete "docs/content/release_notes.md"
 
-Target "GenerateRefDocs"      (fun _ -> generateDocs (true ,false) false)
-Target "GenerateHelp"         (fun _ -> generateDocs (false,true ) false)
-Target "GenerateRefDocsLocal" (fun _ -> generateDocs (true ,false) true )
-Target "GenerateHelpLocal"    (fun _ -> generateDocs (false,true ) true )
+Target.create "GenerateRefDocs"      (fun _ -> generateDocs (true ,false) false)
+Target.create "GenerateHelp"         (fun _ -> generateDocs (false,true ) false)
+Target.create "GenerateRefDocsLocal" (fun _ -> generateDocs (true ,false) true )
+Target.create "GenerateHelpLocal"    (fun _ -> generateDocs (false,true ) true )
 
-Target "GenerateDocs"       DoNothing
-Target "GenerateDocsLocal"  DoNothing
+Target.create "GenerateDocs"       ignore
+Target.create "GenerateDocsLocal"  ignore
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-Target "ReleaseDocs" (fun _ ->
+Target.create "ReleaseDocs" (fun _ ->
   let tempDocsDir = "temp/gh-pages"
-  CleanDir tempDocsDir
+  Shell.cleanDir tempDocsDir
   Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
 
-  CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
-  StageAll tempDocsDir
-  Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+  Shell.copyRecursive "docs/output" tempDocsDir true |> Trace.tracefn "%A"
+  Staging.stageAll tempDocsDir
+  Commit.exec tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
   Branches.push tempDocsDir)
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
-Target "All" DoNothing
+Target.create "All" ignore
 
 "Clean"
   ==> "AssemblyInfo"
@@ -226,11 +255,11 @@ Target "All" DoNothing
   ==> "BuildPackage"
 
 "CopyBinaries"
-  ==> "CleanDocs" 
+  ==> "CleanDocs"
   ==> "GenerateHelp"
   ==> "GenerateRefDocs"
   ==> "GenerateDocs"
-  =?> ("ReleaseDocs",isLocalBuild)
+  =?> ("ReleaseDocs", BuildServer.isLocalBuild)
 
 "CopyBinaries"
   ==> "CleanDocs"
@@ -238,4 +267,4 @@ Target "All" DoNothing
   ==> "GenerateRefDocsLocal"
   ==> "GenerateDocsLocal"
 
-RunTargetOrDefault "All"
+Target.runOrDefault "All"

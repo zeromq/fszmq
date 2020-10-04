@@ -1,2 +1,3 @@
-FSharp.Core
-dotnet-proj-info
+group Build
+    FSharp.Core
+    dotnet-proj-info

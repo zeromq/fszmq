@@ -161,6 +161,7 @@ $RECYCLE.BIN/
 
 # VS Code
 .vscode/
+*.binlog
 
 # JetBrain's
 .idea/
@@ -171,9 +172,10 @@ $RECYCLE.BIN/
 
 # FAKE stuff
 .fake/
+build.fsx.lock
 
 # Paket stuff
-.paket/paket.exe
+.paket/
 paket-files/
 
 # NuGet Packages Directory
@@ -187,3 +189,6 @@ temp/
 
 # Test results produced by build
 tests/TestResults.xml
+
+# Ionide stuff
+.ionide/

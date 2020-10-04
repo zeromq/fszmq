@@ -11,7 +11,8 @@ let inline dispose (d:#IDisposable) = match d with null -> () | _ -> d.Dispose (
 
 // text helpers
 let inline encode value = value |> string |> System.Text.Encoding.ASCII.GetBytes
-let inline decode value = System.Text.Encoding.ASCII.GetString value
+let inline decode (value:byte[]) = System.Text.Encoding.ASCII.GetString value
+
 let hexstr (frame:frame) =
   frame
   |> Array.fold (fun b f -> bprintf b "%02x" f; b)

@@ -1,6 +1,7 @@
-FSharp.Core
-FsCheck
-Unquote
-nunit
-Microsoft.NET.Test.Sdk
-NUnit3TestAdapter
+group Test
+    FSharp.Core
+    FsCheck
+    Unquote
+    nunit
+    Microsoft.NET.Test.Sdk
+    NUnit3TestAdapter
