@@ -192,3 +192,7 @@ tests/TestResults.xml
 
 # Ionide stuff
 .ionide/
+
+# DocGen
+.fsdocs/
+

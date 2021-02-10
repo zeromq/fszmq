@@ -48,7 +48,7 @@ there is a native libzmq port).
 
 ---
 
-> **IMPORTANT NOTE:** starting with version 12.3, `fszmq` will only ship as a .NET Standard library (currently, .NET Standard 2). 
+> **IMPORTANT NOTE:** starting with version 12.3, `fszmq` will only ship as a .NET Standard library (currently, .NET Standard 2).
 > This _may_ have consequences (or limitations) for existing applications wishing to upgrade.
 
 ---
@@ -56,7 +56,7 @@ there is a native libzmq port).
 #### A note about versions
 
 In the past, several attempts were made (poorly) to keep the version of `fszmq` synchronized to the version of `libzmq`.
-Starting with verion `12.0.0` (which is the _twelth_ release... version 4.0.9 was the eleventh release), this is no longer done. 
+Starting with verion `12.0.0` (which is the _twelth_ release... version 4.0.9 was the eleventh release), this is no longer done.
 Instead, `fszmq` is versioned _independently_. The versions of `libzmq` supported by each version of `fszmq` are as follows
 (where 'x' means any number >= 0):
 
