@@ -1,6 +1,14 @@
 fszmq
 =======================
 
+---
+> ## ATTENTION!
+>
+> This repository has been archived and is no longer being maintained. For a suitable replacement, please consider:
+> https://github.com/zeromq/netmq
+---
+
+
 ### An F# binding for the ZeroMQ distributed computing library.
 
 fszmq is an MPLv2-licensed F# binding for the ZeroMQ distributed computing library.
